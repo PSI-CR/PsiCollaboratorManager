@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "_doubleSmallMedium";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Css/Layouts/_basicSmall.css" rel="stylesheet" />
+<link href="~/Content/Css/Layouts/_basicMedium.css" rel="stylesheet" />
+<link href="~/Content/Css/Layouts/_doubleSmallMedium.css" rel="stylesheet" />
+
+<section class="doubleSmallMediumSection">
+    <div class="basicSmallMain">
+        <div class="basicSmallMainHeader">
+            <h3>Small</h3>
+            <img id="SectionHeaderCrown" src="~/Images/crownWhite.png" />
+        </div>
+        <div class="basicSmallMainContent">
+            @RenderSection("LeftContent", required: false)
+        </div>
+    </div>
+    <div class="basicMediumMain">
+        <div class="basicMediumMainHeader">
+            <h3>Medium</h3>
+            <img id="SectionHeaderCrown" src="~/Images/crownWhite.png" />
+        </div>
+        <div class="basicMediumMainContent">
+            @RenderSection("RightContent", required: false)
+        </div>
+    </div>
+    @RenderBody()
+</section>

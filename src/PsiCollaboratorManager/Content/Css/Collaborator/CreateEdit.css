@@ -1,0 +1,322 @@
+﻿#FormCollaboratorContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 99%;
+    gap: 5px;
+}
+
+#CollaboratorCreateEditContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#CollaboratorFieldCreateContainer {
+    margin: 5px;
+    padding: 5px;
+    height: calc(100% - 90px);
+    width: 99%;
+    overflow-y: auto;
+    display: grid;
+    grid-template-areas:
+        'CP CP'
+        'PI PI'
+        'D C'
+        'PSII UA'
+        'HC HC'
+        'BA BA'
+        'EC EC'
+}
+
+#CollaboratorFieldEditContainer {
+    margin: 5px;
+    padding: 5px;
+    height: calc(100% - 90px);
+    width: 99%;
+    overflow-y: auto;
+    display: grid;
+    grid-template-areas:
+        'CP CP'
+        'PI PI'
+        'D C'
+        'PSII UA'
+        'HC HC'
+        'BA BA'
+        'IC IC'
+        'EC EC'
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #c1c1c1;
+}
+
+.border-right {
+    border-right: 1px solid #c1c1c1;
+}
+
+.border-both {
+    border-bottom: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+}
+
+#CollaboratorFieldContainer > div:last-child {
+    border-bottom: none; 
+}
+
+#CapturePhoto {
+    grid-area: CP;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding: 25px 25px 0px 25px;
+}
+
+#PersonalInformationSection {
+    grid-area: PI;
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #c1c1c1;
+    padding: 25px;
+}
+
+.personalInformationSectionFlex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+.personalInformationSectionFlexRadioButton {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    text-align: left;
+}
+
+#DirectionSection {
+    grid-area: D;
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    align-items: center;
+    gap: 20px;
+    border-right: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+    padding: 25px;
+}
+
+.directionSectionFlex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+    .directionSectionFlex > div {
+        flex: 1; 
+        margin-right: 10px; 
+    }
+
+    .directionSectionFlex select.form-control {
+        width: 100%; 
+        max-width: 400px; 
+    }
+
+#ContactSection {
+    grid-area: C;
+    display: grid;
+    grid-template-rows: repeat(3, auto);
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #c1c1c1;
+    padding: 25px;
+}
+
+.contactSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+#PSIInformationSection {
+    grid-area: PSII;
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    align-items: center;
+    gap: 20px;
+    border-right: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+    padding: 25px;
+}
+
+.psiInformationSection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+    .psiInformationSection > div {
+        flex: 1; 
+    }
+
+    .psiInformationSection .form-control {
+        width: 100%;
+        max-width: 400px;
+    }
+
+#UserAccountSection {
+    grid-area: UA;
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #c1c1c1;
+    padding: 25px;
+}
+
+.userAccountSection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    border-right: none;
+}
+
+#HealthConditionSection {
+    grid-area: HC;
+    display: grid;
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #c1c1c1;
+}
+
+.healthConditionSection {
+   display: grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   
+}
+    .healthConditionSection .form-control {
+        width: 100%; 
+        max-width: 100%; 
+    }
+
+.healthConditionSectionCheckBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#BankAccountSection {
+    grid-area: BA;
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #c1c1c1;
+    padding: 25px;
+}
+
+.bankAccountSection {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    border-right: none;
+}
+
+    .bankAccountSection > div {
+        flex: 1; 
+    }
+
+    .bankAccountSection .form-control {
+        width: 100%; 
+        max-width: 400px;
+    }
+
+#InactiveCollaborator {
+    grid-area: IC;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #c1c1c1;
+    padding: 25px;
+}
+
+#EmergencyContactSection {
+    grid-area: EC;
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+    align-items: start;
+    gap: 20px;
+    padding: 25px;
+}
+
+.emergencyContactSectionFlex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+    border-right: none;
+}
+
+#CollaboratorFieldFooter {
+    height: 60px;
+    width: 99%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.description {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction:column;
+}
+
+    .description textarea {
+        resize: none;
+        height: 40px;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

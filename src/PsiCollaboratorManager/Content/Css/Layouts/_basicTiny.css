@@ -1,0 +1,32 @@
+﻿.basicTinySection {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+}
+
+.basicTinyMain {
+    display: grid;
+    grid-template-rows: 90px 35%;
+    width: 30%;
+    height: 100%;
+    align-content: center;
+}
+
+.basicTinyMainHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #be2126;
+    color: aliceblue;
+    padding-left: 30px;
+}
+
+#SectionHeaderCrown {
+    width: 80px;
+    height: 80px;
+}
+
+.basicTinyMainContent {
+    background-color: var(--section-background-color);
+    overflow: auto;
+}

@@ -1,0 +1,32 @@
+﻿.modalSectionContainerMedium {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    height: 100%;
+}
+
+.modalSectionMedium {
+    display: grid;
+    grid-template-rows: 90px 50%;
+    width: 60%;
+    height: 100%;
+    align-content: center;
+}
+
+.modalSectionMediumHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #be2126;
+    color: aliceblue;
+}
+
+.modalHeaderCrown {
+    width: 80px;
+    height: 80px;
+}
+
+.modalSectionMediumContent {
+    background-color: var(--body-background-color);
+    overflow: auto;
+}

@@ -1,0 +1,42 @@
+﻿.basicLongSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.basicLongMain {
+    display: grid;
+    grid-template-rows: 90px 70%;
+    width: 50%;
+    height: 100%;
+    align-content: center;
+}
+
+.basicLongMainHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #be2126;
+    color: white;
+    padding-left: 30px;
+}
+
+#SectionHeaderCrown {
+    width: 80px;
+    height: 80px;
+}
+
+.basicLongMainContent {
+    overflow: auto;
+    background-color: var(--section-background-color);
+}
+
+#SecionHeaderPicture {
+    position: relative;
+    width: 150px;
+    border-radius: 100px;
+}
+
+#SectionHeaderTitle {
+    margin-left: 30px;
+}

@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "AnnotationByCollaboratorModal";
+    Layout = "~/Views/Shared/_modalSmallPhoto.cshtml";
+}
+
+<link href="~/Content/Css/Annotation/AnnotationByCollaboratorModal.css" rel="stylesheet" />
+
+<div id="AnnotationByCollaboratorModalContent">
+    <div id="AnnotationByCollaboratorModalCollaborator" class="fieldset">
+        <strong>Nombre:</strong>
+        <div id="modal-fullname"></div>
+        <strong>Cédula:</strong>
+        <div id="modal-DNICollaborator"></div>
+    </div>
+    <div id="AnnotationByCollaboratorModalAnnotation" class="fieldset">
+        <div id="AnnotationByCollaboratorModalAnnotationType">
+            <strong>Tipo de Anotación:</strong>
+            <div id="modal-AnnotationType"></div>
+            <strong>Fecha:</strong>
+            <div id="modal-AnnotationDate"></div>
+        </div>
+        <strong>Anotación:</strong>
+        <div id="modal-Annotation"></div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+﻿.modalSectionContainerSmall {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+    height: 100%;
+}
+.modalSectionSmall {
+    display: grid;
+    grid-template-rows: 90px 30%;
+    width: 40%;
+    height: 100%;
+    align-content: center;
+}
+.modalSectionSmallHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #be2126;
+    color: aliceblue;
+    padding:20px;
+    overflow:visible !important;
+}
+.modalHeaderCrown {
+    width: 80px;
+    height: 80px;
+}
+.modalHeaderPhoto {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+}
+.modalSectionSmallContent {
+    background-color: var(--body-background-color);
+    overflow: auto;
+}

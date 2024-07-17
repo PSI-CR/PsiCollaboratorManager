@@ -1,0 +1,82 @@
+﻿@model PSIEmployeeManagement.Models.ScheduleeModel
+@{
+    ViewBag.Title = "Create Schedule";
+    Layout = "~/Views/Shared/_basicLong.cshtml";
+}
+<link href="~/Content/Css/Schedule/CreateEdit.css" rel="stylesheet" />
+@using (Html.BeginForm("CreateSchedule", "Schedule", FormMethod.Post, new { id = "FormCreateSchedule", @class = "scheduleForm" }))
+{
+    <div id="ScheduleInfoSection" class="fieldset">
+        <h3>Información Horario</h3>          
+        <div>
+            @Html.LabelFor(model => model.scheduleName, htmlAttributes: new { @class = "control-label required" })
+            @Html.TextBoxFor(model => model.scheduleName, new { @class = "form-control", type = "text", required = "required" })
+        </div>
+        <div>
+            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label required" })
+            @Html.TextBoxFor(model => model.description, new { @class = "form-control", type = "text", required = "required" })
+        </div>
+        <div>
+            <div>@Html.LabelFor(model => model.workingdayid, htmlAttributes: new { @class = "control-label required" })</div>
+            <div>@Html.DropDownList("workingDayId", (List<SelectListItem>)ViewBag.WorkingDay, "- Seleccione una jornada -", htmlAttributes: new { required = "required" })</div>
+        </div>        
+    </div>
+       
+    <div id="ScheduleSelectionSection" class="fieldset">
+        <h3>Selección Días/Horas</h3>
+        <div class="scheduleSectionFlex">
+            <div>
+                @Html.LabelFor(model => model.dayid, htmlAttributes: new { @class = "control-label required" })
+                @Html.DropDownList("DayIdScheduleCreate", (List<SelectListItem>)ViewBag.Days, htmlAttributes: new { @class = "form-control formFieldHour", required = "required" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.workingdaystarttime, htmlAttributes: new { @class = "control-label required" })
+                @Html.TextBoxFor(model => model.workingdaystarttime, new { @class = "form-control formFieldHour", placeholder = "Hora Inicial", type = "time", id = "inputHourInicial", value = "00:00", required = "required" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.workingdayendtime, htmlAttributes: new { @class = "control-label required" })
+                @Html.TextBoxFor(model => model.workingdayendtime, new { @class = "form-control formFieldHour", placeholder = "Hora Final", type = "time", id = "inputHourFinaly", value = "00:00", required = "required" })
+            </div>   
+            <div>
+                <button type="button" class="btn btn-primary" id="btnAddScheduleCreate" title="Agregar">
+                    +
+                </button>
+            </div>           
+        </div>
+    </div>
+
+    <div id="CreateScheduleTable" class="fieldset"> 
+        <table id="tableScheduleCreate">
+            <thead>
+                <tr>
+                    <th>Día</th>
+                    <th>Hora Inicio</th>
+                    <th>Hora Final</th>
+                    <th>Diferencia</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+                   
+        <div id="ScheduleFooterSection">
+            <h6>Total de horas:</h6>
+            <input type="text" id="totalHoras" class="form-control" readonly />
+            <input type="hidden" id="tablaHorariosData" name="ListRecords" />
+        </div>
+    </div>
+
+    <div>
+        <div id="CreateScheduleFooter" class="scheduleFooter fieldset">
+            <button type="button" onclick="window.location.href='/Schedule/Index/'" class="btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi-arrow-bar-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z" />
+                </svg>
+                Regresar
+            </button>
+            <input type="submit" value="Guardar" class="btn btn-success">
+        </div>
+    </div>
+}
+<script src="~/Scripts/Schedule/ScheduleProcess.js"></script>

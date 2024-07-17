@@ -1,0 +1,44 @@
+﻿@model  PSIEmployeeManagement.Models.UserAccountViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_basicTiny.cshtml";
+}
+<link href="~/Content/Css/UserAccount/Details.css" rel="stylesheet" />
+<div id="UserDetailsContent">
+    <div id="UserDetailsPersonal" class="fieldset">
+        <h4>Información Personal</h4>
+        <div class="userDetailsContentSection">
+            <div>
+                @Html.LabelFor(model => model.FirstName)
+               <p>@Html.DisplayFor(model => model.NameFull)</p>
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Email)
+                <p>@Html.DisplayFor(model => model.Email)</p>
+            </div>
+        </div>
+    </div>
+    <div id="UserDetailsAccount" class="fieldset">
+        <h4>Información Cuenta</h4>
+        <div class="userDetailsContentSection">
+            <div>
+                @Html.LabelFor(model => model.UserName)
+                <p>@Html.DisplayFor(model => model.UserName)</p>
+            </div>
+            <div>
+                @Html.LabelFor(model => model.CategoryName)
+                <p>@Html.DisplayFor(model => model.CategoryName)</p>
+            </div>
+        </div>
+    </div>
+    <div id="UserDetailsFooter" class="fieldset">
+        <button type="button" onclick="window.location.href='/LoginUserAccount/Index/'" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="25" height="25" fill="currentColor" class="bi-arrow-bar-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z" />
+            </svg>
+            Regresar
+        </button>
+    </div>
+</div>

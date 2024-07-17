@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSI Collaborator Manager</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="~/Content/Sidebar.css" rel="stylesheet" />
+    <link href="~/Content/Css/Layouts/_layout.css" rel="stylesheet" />
+    <link href="~/Content/Css/Common/Elements.css" rel="stylesheet" />
+    <link href="~/Content/Css/Common/Structure.css" rel="stylesheet" />
+
+    @Styles.Render("~/Content/Bootstrap")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <link href="~/Content/MessiJS/messi.min.css" rel="stylesheet" />
+    <script src="~/Scripts/MessiJS/messi.min.js"></script>
+    @RenderSection("scripts", required: false)
+
+</head>
+    <body>
+        <header>
+            <div id="HeaderLeft">
+                <img id="PathwayCrown" src="/Images/PathwayIcon.ico">
+            </div>
+            <div id="HeaderCenter">
+                <h4>PSI Collaborator Manager</h4>
+            </div>
+            <div id="HeaderRight">
+                <h6>@Session["FullName"]</h6>
+                @using (Html.BeginForm("Logout", "LoginUserAccount", FormMethod.Post, new { id = "logoutForm", @class = "" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <i class='bx bx-log-out' onclick="logout()"></i>
+                }
+            </div>
+        </header>
+        <nav class="sidebar" id="sidebar">
+            <div class="logo-details">
+                <i class='bx bx-menu'></i>
+                <span class="logo_name">Servicios PSI</span>
+            </div>
+            <ul class="nav-links">
+                <li class="dropMenuOption">
+                    <a href="/Home/Index">
+                        <i class='bx bx-grid-alt'></i>
+                        <span class="link_name">Inicio</span>
+                    </a>
+                    <ul class="sub-menu blank">
+                        <li><a class="link_name" href="/Home/Index">Inicio</a></li>
+                    </ul>
+                </li>
+                <li class="dropMenuOption">
+                    <div class="iocn-link">
+                        <a>
+                            <i class='bx bxs-user-detail'></i>
+                            <span class="link_name">Colaboradores</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name">Colaboradores</a></li>
+                        <li><a href="/Collaborator/Index">• Colaboradores Activos</a></li>
+                        <li><a href="@Url.Action("InactiveCollaboratores", "Collaborator")">• Colaboradores Inactivos</a></li>
+                        <li><a href="@Url.Action("AssignSchedule", "AssignSchedule")">• Asignar Horarios</a></li>
+                    </ul>
+                </li>
+                <li class="dropMenuOption">
+                    <div class="iocn-link">
+                        <a>
+                            <i class='bx bx-message-detail'></i>
+                            <span class="link_name">Anotaciones</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name">Anotaciones</a></li>
+                        <li><a href="@Url.Action("Index", "Annotation")">• Anotaciones</a></li>
+                        <li><a href="@Url.Action("NewAnnotation", "Annotation")">• Nueva Anotacion</a></li>
+                        <li><a href="@Url.Action("Index", "AnnotationType")">• Tipos de Anotacion</a></li>
+                    </ul>
+                </li>
+                <li class="dropMenuOption">
+                    <div class="iocn-link">
+                        <a>
+                            <i class='bx bxs-user'></i>
+                            <span class="link_name">Usuarios</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name">Usuarios</a></li>
+                        <li><a href="/LoginUserAccount/Index">• Administradores</a></li>
+                    </ul>
+
+                </li>
+                <li class="dropMenuOption">
+                    <div class="iocn-link">
+                        <a>
+                            <i class='bx bx-calendar'></i>
+                            <span class="link_name">Horarios</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name">Horarios</a></li>
+                        <li><a href="/WorkingDay/Index">• Jornada</a></li>
+                        <li><a href="/Schedule/Index">• Horario</a></li>
+                        <li><a href="/Schedule/CheckSchedule">• Revisión</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropMenuOption">
+                    <div class="iocn-link">
+                        <a>
+                            <i class='bx bx-image'></i>
+                            <span class="link_name">Imagenes</span>
+                        </a>
+                        <i class='bx bxs-chevron-down arrow'></i>
+                    </div>
+                    <ul class="sub-menu">
+                        <li><a class="link_name">Imagenes</a></li>
+                        <li><a href="@Url.Action("Index", "AnnouncementArt")">• Anuncios</a></li>
+                    </ul>
+                </li>              
+            </ul>
+        </nav>
+        @RenderBody()
+        <footer>
+            &copy; PSI Collaborator Manager - Version: @Session["AppVersion"]
+        </footer>
+    </body>
+</html>
+
+<script>
+    let dropMenuOption = document.querySelectorAll(".dropMenuOption");
+    let maxAttempts = 5;
+    for (var i = 0; i < dropMenuOption.length; i++) {
+        dropMenuOption[i].addEventListener("click", (e) => {
+            let target = e.target;
+            let attempts = 0;
+            while (!target.classList.contains("dropMenuOption") && attempts < maxAttempts) {
+                attempts++;
+                target = target.parentElement;
+            }
+            if (attempts != 5) target.classList.toggle("showMenu");
+        });
+    }
+    let sidebar = document.querySelector(".sidebar");
+    let sidebarBtn = document.querySelector(".bx-menu");
+
+    $(document).ready(function () {
+        sidebarBtn.addEventListener("click", () => {
+            sidebar.addEventListener('transitionend', transitionEnded);
+            sidebar.classList.toggle("close");
+            sidebar.classList.toggle("toogle-nav");
+            document.body.classList.toggle("toogle-nav");
+            function transitionEnded(event) {
+                if (event.target === sidebar) {
+                    $(window).trigger("resize");
+                    sidebar.removeEventListener('transitionend', transitionEnded);
+                }
+            }
+        });
+    });
+    function logout() {
+        document.getElementById('logoutForm').submit();
+    }
+    function handleSidebarResponsive() {
+        const sidebar = document.getElementById('sidebar');
+        const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+        if (windowWidth < 500) {
+            sidebar.classList.add("close");
+        }
+    }
+    window.addEventListener('resize', handleSidebarResponsive);
+</script>

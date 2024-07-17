@@ -1,0 +1,188 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_basicMedium.cshtml";
+}
+
+<link href="~/Content/JQGridTheme/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/ui.multiselect.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/ui.jqgrid.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/JqGridStyle.css" rel="stylesheet" />
+
+<link href="~/Content/Css/Annotation/Index.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+
+<div id="AnnotationContent">
+    <div id="AnnotationSearchOptions" class="fieldset annotationSection">
+        <h4>Filtrar Anotación</h4>
+        <div class="annotationFieldset">
+            <div>
+                <label for="_lblName">Nombre:</label>
+                <input type="text" id="_txtName" name="campoString1">
+            </div>
+            <div>
+                <label for="_lblLastName">Apellido:</label>
+                <input type="text" id="_txtLastName" name="campoString2">
+            </div>
+            <div>
+                <label for="_lblOpNumber">Operador:</label>
+                <input type="number" id="_txtOpNumber" name="campoNumero">
+            </div>
+        </div>
+        <div class="annotationFieldset">
+            <div>
+                <label for="campoNumero">Fecha Inicio:</label>
+                <input type="date" name="StartDate" id="_dtpStartDate">
+            </div>
+            <div>
+                <label for="fechaFin">Fecha Fin:</label>
+                <input type="date" name="EndDate" id="_dtpEndDate">
+            </div>
+            <div>
+                <button id="btnBuscar" class="btn btn-primary" onclick="Search()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                    </svg>
+                </button>
+                <button id="btnRefresh" class="btn btn-primary" onclick="Refresh()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z" />
+                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="AnnotationTable" class="fieldset annotationSection">
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+</div>
+
+<div id="AnnotationByCollaboratorModal" , class="modalContainer">
+    @Html.Partial("AnnotationByCollaboratorModal")
+</div>
+
+<script src="~/Scripts/JqGrid/jquery.min.js"></script>
+<script src="~/Scripts/JqGrid/jquery-ui.min.js"></script>
+<script src="~/Scripts/JqGrid/ui.multiselect.js"></script>
+<script src="~/Scripts/JqGrid/grid.locale-es.js"></script>
+<script src="~/Scripts/JqGrid/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/Lib/Modal.js"></script>
+<script src="~/Scripts/Annotations/AnnotationsByCollaborator.js"></script>
+
+<script>
+    $(function () {
+
+        $grid = $("#jqGrid").jqGrid({
+            url: '@Url.Action("GetAnnotations", "Annotation")',
+            mtype: 'GET',
+            datatype: 'json',
+            shrinkToFit: false,
+            colModel: [
+                {label: 'Anotacion Id', name: 'AnnotationId', width: 100, minWidth: 20, editable: false, key: true, hidden: true, align: 'center'},
+                {label: 'Tipo de anotación', name: 'AnnotationTypeModel.TypeName', width: 200, minWidth: 200, editable: false, align: 'center' },
+                {label: 'Fecha', name: 'AnnotationDate', formatter: 'date', align: 'center', width: 200, minWidth: 200, formatoptions: { newformat: 'd/m/Y' },
+                    searchoptions: {
+                        dataInit: function (element) {
+                            $(element).datepicker({
+                                id: 'orderDate_datePicker',
+                                dateFormat: 'yy-mm-dd',
+                                maxDate: new Date(2030, 0, 1),
+                                showOn: 'focus'
+                            });
+                        }
+                    }
+                },
+                {label: 'Nombre', name: 'Collaborators.FirstName', width: 200, minWidth: 200, editable: false,align: 'center', headerClasses: 'my-column', cellattr: function () { return 'class="my-column"'; }},
+                {label: 'Apellidos', name: 'Collaborators.LastName', width: 200, minWidth: 200   },
+                {label: 'Cédula', name: 'Collaborators.DNICollaborator', width: 200, minWidth: 200, hidden: true   },
+                {label: 'Operador', name: 'Collaborators.OperatorNumber', align: 'center', width: 100, minWidth: 200  },
+                {label: 'E-mail', name: 'Collaborators.Email', width: 200, minWidth: 200,formatter: 'email'}
+            ],
+
+            onInitGrid: function () {
+                $("<div class='alert-info-grid'>Sin registros</div>").insertAfter($(this).parent());
+            },
+
+            loadComplete: function () {
+                var $this = $(this), p = $this.jqGrid("getGridParam");
+                if (p.reccount === 0) {
+                    $this.hide();
+                    $this.parent().siblings(".alert-info-grid").show();
+                } else {
+                    $this.show();
+                    $this.parent().siblings(".alert-info-grid").hide();
+                }
+                resizeGrid();
+            },
+
+            resizeStop: function (newWidth, index) {
+                var colModel = $(this).jqGrid('getGridParam', 'colModel');
+                var column = colModel[index];
+
+                console.log(newWidth);
+                if (column.width < column.minWidth) {
+                    $(this).jqGrid('setGridParam', {
+                        colModel: colModel
+                    }).trigger('resize');
+                }
+            },
+
+            ondblClickRow: function (rowId) {
+                var rowData = jQuery(this).getRowData(rowId);
+                var id = rowData['AnnotationId'];
+                getAnnotationsDetails(id, "AnnotationByCollaboratorModal");
+            },
+
+            loadonce: true,
+            shrinkToFit: true,
+            autowidth: true,
+            autoresizeOnLoad: true,
+            autoresizeOnResize: true,
+            height: '100%',
+            altRows: true,
+            pager: '#jqGridPager',
+            rowNum: 20,
+            rowList: [10, 20, 30, 50],
+            viewrecords: true,
+            rownumbers: true,
+            sortable: true
+        });
+
+
+        $(window).on("resize", function () {
+            resizeGrid();
+        });
+        function resizeGrid() {
+            $("#jqGrid").jqGrid("setGridWidth", $("#jqGrid").closest(".ui-jqgrid").parent().width());
+        }
+
+        $('#jqGrid').navGrid('#jqGridPager',
+            { edit: false, add: false, del: false, search: true, refresh: true, view: false, position: "left", cloneToTop: true }, { multipleSearch: true, multipleGroup: true }
+        );
+
+        $('#jqGrid').navButtonAdd('#jqGridPager',
+            {buttonicon: "ui-icon-calculator", title: "Column chooser", caption: "Columnas", position: "last",
+                onClickButton: function () {
+                    jQuery("#jqGrid").jqGrid('columnChooser', {
+                        done: function (numColumn) {
+                            $("#jqGrid").jqGrid('setGridParam', {
+                            }).trigger('resize');
+                        }
+                    });
+                }
+            }
+        );
+    });
+
+    function resizeJqGridWidth(grid_id, div_id, width) {
+        $(window).bind('resize', function () {
+            $('#' + grid_id).setGridWidth(width, true);
+            $('#' + grid_id).setGridWidth($('#' + div_id).width(), true);
+        }).trigger('resize');
+    }
+
+    resizeJqGridWidth("jqGrid", "divTableEmployees", "500");
+</script>
+

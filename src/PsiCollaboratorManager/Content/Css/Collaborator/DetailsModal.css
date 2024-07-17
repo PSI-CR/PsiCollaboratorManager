@@ -1,0 +1,62 @@
+﻿.detailsContent{
+    display:grid;
+    grid-template-rows: 50px 250px;
+    padding:10px;
+    justify-content:center;
+    align-content:center;
+    height:100%;
+    gap:10px;
+}
+
+.tab-nav {
+    display: flex;
+    align-items: center;
+    background-color: var(--section-background-color);
+}
+.nav-tabs{
+    justify-content:center;
+    width:100%;
+}
+.nav li {
+    background-color: #be2126;
+    color: #ffffff;
+    border: 1px solid var(--section-background-color);
+}
+.nav li:hover {
+    background-color: #e64549;
+}
+.nav li.active {
+    background-color: #8e181b;
+}
+.nav li a{
+    color:#ffffff;
+}
+.nav div{
+    padding:5px;
+}
+.tab-content {
+    background-color: var(--section-background-color);
+}
+.tab-pane{
+    height:100%;
+}
+.contentTitle {
+    border-bottom: 1px solid #555555;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding-left:20px;
+}
+.contentInformation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap:30px;
+    height: calc(100% - 50px);
+    padding: 10px;
+    overflow-y:auto;
+}
+.emergencyContactsTable{
+    width:100%;
+}

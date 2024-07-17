@@ -1,0 +1,60 @@
+﻿.basicBigSection {
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+}
+
+.basicBigMain {
+    display: grid;
+    grid-template-rows: 90px 80%;
+    width: 60%;
+    height: 100%;
+    align-content: center;
+}
+
+.basicBigMainHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #be2126;
+    color: aliceblue;
+    padding-left: 30px;
+    overflow: visible !important;
+}
+.basicBigMainHeaderPhoto{
+    display:grid;
+    grid-template-areas:'E1 I E2'
+        'T I C'
+        'E3 I E4';
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0px 90px 0px;
+    align-items:center;
+    justify-items:center;
+    padding:0px;
+    overflow:visible;
+}
+
+#SectionHeaderCrown {
+    grid-area: C;
+    width: 80px;
+    height: 80px;
+}
+
+.basicBigMainContent {
+    overflow: auto;
+    background-color: var(--section-background-color);
+}
+
+#SectionHeaderTitle {
+    grid-area: T;
+    margin-left: 30px;
+}
+
+#SectionHeaderPicture {
+    grid-area: I;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 80px;
+    background-color:white;
+}

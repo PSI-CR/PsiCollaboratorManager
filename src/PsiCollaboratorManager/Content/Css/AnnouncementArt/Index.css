@@ -1,0 +1,68 @@
+﻿#AnnouncementArtContainer{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+    width:100%;
+}
+    #AnnouncementArtContainer button {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+    }
+#AddAnnouncementArtContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items:center;
+    gap:10px;
+    margin:5px;
+    padding:5px;
+    height:60px;
+    width: 99%;
+}
+
+#AnnouncementArtCardContainer {
+    margin: 5px;
+    padding: 5px;
+    height: calc(100% - 90px);
+    width: 99%;
+    overflow-y:auto;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+.announcementArtCard{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding: 5px;
+    background-color:#f7f7f7;
+    width: 462px;
+    height:308px;
+}
+.announcementArtCard img {
+    width: 450px;
+    height: 150px;
+}
+.announcementArtCardDates {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.announcementArtCardDates input {
+    width: 150px;
+}
+.announcementArtCardButtons{
+    display:flex;
+    gap:5px;
+}
+.announcementArtCardDescription {
+    display: flex;
+    flex-direction: column;
+}
+    .announcementArtCardDescription textarea {
+        resize: none;
+    }

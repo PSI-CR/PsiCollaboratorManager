@@ -1,0 +1,163 @@
+﻿@model PSIEmployeeManagement.Models.Annotations.AnnotationModelDB
+@{
+    ViewBag.Title = "CreateAnnotation";
+    Layout = "~/Views/Shared/_basicLong.cshtml";
+}
+<link href="~/Content/Css/Annotation/CreateAnnotation.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+
+@using (Html.BeginForm("Create", "Annotation", FormMethod.Post, new { enctype = "multipart/form-data", id = "CreateAnnotationForm" }))
+{
+    <div id="CreateAnnotationCollaborator" class="fieldset">
+        <h4>Colaborador(es)</h4>
+        <div id="CollaboratorButtonSection">
+            @for (var i = 0; i < Model.Collaborators.Count; i++)
+            {
+                <div class="collaboratorButton alert-secondary fade show" role="alert">
+                    <strong>@Model.Collaborators[i].FirstName</strong>
+                    <input type="hidden" name="Collaborators[@i].FirstName" value="@Model.Collaborators[i].FirstName" />
+                    <input type="hidden" name="Collaborators[@i].CollaboratorId" value="@Model.Collaborators[i].CollaboratorId" />
+                    <input type="hidden" name="Collaborators[@i].LastName" value="@Model.Collaborators[i].LastName" />
+                    <input type="hidden" name="Collaborators[@i].DNICollaborator" value="@Model.Collaborators[i].DNICollaborator" />
+                    <button type="button" class="collaboratorButtonClose close" data-dismiss="alert" aria-label="Close" data-id="@Model.Collaborators[i].CollaboratorId" onclick="removeCollaborator(this)">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+    <div id="CreateAnnotationAssign" class="fieldset">
+        <h4>Asignar Anotación</h4>
+        @Html.LabelFor(model => model.AnnotationTypeModel, htmlAttributes: new { @for = "MessageTypeDropDown" })
+        @Html.DropDownListFor(model => model.AnnotationTypeModel.AnnotationTypeId, (SelectList)ViewBag.AnnotationTypes, "-- Seleccionar Tipo de Anotación --", new { @class = "form-select", id = "MessageTypeDropDown" })
+        <span id="MessageTypeError" style="color: red; display: none;">Debe seleccionar un tipo de anotación</span>
+        @Html.LabelFor(model => model.AnnotationDate, htmlAttributes: new { @for = "MessageDateInput" })
+        @Html.TextBoxFor(model => model.AnnotationDate, "{0:yyyy-MM-dd}", new { type = "date", id = "MessageDateInput" })
+        <span id="MessageDateError" style="color: red; display: none;">La fecha es requerida</span>
+        @Html.LabelFor(model => model.Note, htmlAttributes: new { @for = "NoteTextArea" })
+        @Html.TextAreaFor(model => model.Note, new { rows = 10, id = "NoteTextArea" })
+        <span id="NoteError" style="color: red; display: none;">La nota es requerida</span>
+        @Html.LabelFor(model => model.AttachmentModel.FileData, htmlAttributes: new { @for = "archivoAdjunto" })
+        <input type="file" id="archivoAdjunto" name="archivoAdjunto" class="form-control" accept=".pdf,.doc,.docx,.txt" />
+        <span id="FileError" style="color: red; display: none;">Debe seleccionar un archivo</span>
+        <input type="hidden" id="FileBytes" name="File" />
+        @Html.HiddenFor(model => model.AttachmentModel.FileName)
+        @Html.HiddenFor(model => model.UserId)
+    </div>
+    <div id="CreateAnnotationFooter" class="fieldset">
+        <button type="button" onclick="window.location.href='/Annotation/NewAnnotation/'" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="25" height="25" fill="currentColor" class="bi-arrow-bar-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z" />
+            </svg>
+            Regresar
+        </button>
+        <input type="button" onclick="submitForm()" value="Guardar" class="btn btn-success">
+    </div>
+}
+<script>
+
+    function removeCollaborator(button) {
+        $(button).closest('.collaboratorButton').remove();
+    }
+
+    function submitForm() {
+        const isMessageTypeValid = validateMessageType();
+        const isNoteValid = validateNote();
+        const isMessageDateValid = validateMessageDate();
+
+        if (isMessageTypeValid && isNoteValid && isMessageDateValid) {
+            var formData = new FormData($('#CreateAnnotationForm')[0]);
+
+            $.ajax({
+                url: '/Annotation/Create',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    window.location.replace('../Annotation/Index');
+                },
+                error: function (error) {
+                    console.log('Error al enviar el formulario:', error);
+                }
+            });
+        }
+        else {
+            return isMessageTypeValid && isNoteValid && isEmitterValid && isMessageDateValid && isFileValid;
+        }
+    }
+
+    function validateMessageType() {
+        const messageTypeDropdown = $("#MessageTypeDropDown");
+        const selectedValue = messageTypeDropdown.val();
+
+        if (selectedValue === "") {
+            $("#MessageTypeError").show();
+            messageTypeDropdown.addClass("is-invalid");
+            return false;
+        } else {
+            $("#MessageTypeError").hide();
+            messageTypeDropdown.removeClass("is-invalid");
+            return true;
+        }
+    }
+    function validateNote() {
+        const noteTextArea = $("#NoteTextArea");
+        const note = noteTextArea.val().trim();
+
+        if (note === "") {
+            $("#NoteError").show();
+            noteTextArea.addClass("is-invalid");
+            return false;
+        } else {
+            $("#NoteError").hide();
+            noteTextArea.removeClass("is-invalid");
+            return true;
+        }
+    }
+
+    function validateMessageDate() {
+        const messageDateInput = $("#MessageDateInput");
+        const messageDate = messageDateInput.val().trim();
+
+        if (messageDate === "") {
+            $("#MessageDateError").show();
+            messageDateInput.addClass("is-invalid");
+            return false;
+        } else {
+            $("#MessageDateError").hide();
+            messageDateInput.removeClass("is-invalid");
+            return true;
+        }
+    }
+
+    $(document).ready(function () {
+
+
+        $("#MessageTypeDropDown").on("change", function () {
+            validateMessageType();
+        });
+
+        $("#NoteTextArea").on("input", function () {
+            validateNote();
+        });
+
+        $("#MessageDateInput").on("input", function () {
+            validateMessageDate();
+        });
+
+
+        $("form.contact_form").on("submit", function () {
+            const isMessageTypeValid = validateMessageType();
+            const isNoteValid = validateNote();
+            const isMessageDateValid = validateMessageDate();
+
+            // Puedes agregar más validaciones para otros campos si es necesario
+
+            return isMessageTypeValid && isNoteValid && isMessageDateValid;
+        });
+    });
+</script>
+
+

@@ -1,0 +1,183 @@
+﻿@model PSIEmployeeManagement.Models.AnnouncementArtModel
+
+@{
+    Layout = "~/Views/Shared/_basicSmall.cshtml";
+}
+<link href="~/Content/Css/AnnouncementArt/Edit.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Edit", "AnnouncementArt", FormMethod.Post, new { enctype = "multipart/form-data", id = "EditAnnouncementArtForm" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.AnnouncementId)
+    <div id="EditAnnouncementArtContent" class="fieldset">
+        <div id="EditAnnouncementArtImage">
+            <img id="Image" alt="Imagen" src="@Html.Raw("data:image/png;base64," + @Html.DisplayFor(model => model.ImageAnnouncement))" />
+            <div><input type="file" id="imageUpload" title="Favor seleccione una imagen" /></div>
+            @Html.HiddenFor(model => model.ImageAnnouncement, htmlAttributes: new { id = "imageBase64" })
+        </div>
+        <div id="EditAnnouncementArtFields">
+            @Html.LabelFor(model => model.BeginDatePublication, htmlAttributes: new { })
+            @Html.TextBoxFor(model => model.BeginDatePublication, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", title = "Favor seleccione una fecha", required = "", id = "BeginDateInput" })
+            @Html.LabelFor(model => model.EndDatePublication, htmlAttributes: new { })
+            @Html.TextBoxFor(model => model.EndDatePublication, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date", title = "Favor seleccione una fecha", required = "", id = "EndDateInput" })
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { })
+            @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+
+        </div>
+    </div>
+    <div id="EditAnnouncementArtFooter" class="fieldset">
+        <button type="button" onclick="window.location.href='/AnnouncementArt/Index/'" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi-arrow-bar-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z" />
+            </svg>
+            Regresar
+        </button>
+        <input type="submit" value="Guardar" class="btn btn-success">
+    </div>
+}
+
+@*<head>
+        <link href="~/Scripts/MessiJS/messi.min.css" rel="stylesheet" />
+        <script src="~/Scripts/MessiJS/messi.min.js"></script>
+    </head>
+
+
+    @using (Html.BeginForm("Edit", "AnnouncementArt", FormMethod.Post, new { enctype = "multipart/form-data", @class = "contact_form", id = "EditAnnouncementArtForm" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div id="divFramework" class="border shadow bg-light" style="height: 630px; width: 1000px; margin-left: 31%; position: fixed; margin-top: 320px;">
+            <div class="modal-header messi-titlebox anim error" style=" height: 7%; width: 1000px; position: fixed; margin-top: -100px">
+                <h4 class="modal-title" style="margin-left:2%; color: #FFF">
+                    Cargar imagenes
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-card-image" viewBox="0 0 16 16">
+                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                        <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z" />
+                    </svg>
+                </h4>
+                <div>
+                    <img src="~/images/crownWhite.png" style="height:55px; margin-top:-13%;">
+                </div>
+            </div>
+
+            <div id="tableContainer" style="width:1015px; position:relative; margin-left:10px; margin-top: -14px;">
+                <fieldset style="margin-left: 3%; margin-right: 6%; margin-top: 5%; border: 1px solid #ccc; padding: 10px; border-radius: 5px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); max-height: 1078px; overflow-y: auto; overflow-x: hidden;">
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.AnnouncementId)
+
+                        <div class="form-group">
+                            <div class="col-md-10">
+                                <img id="Image" alt="Imagen" src="@Html.Raw("data:image/png;base64," + @Html.DisplayFor(model => model.ImageAnnouncement))" />
+                                <input type="file" id="imageUpload" class="form-control" title="Favor seleccione una imagen" />
+                                @Html.HiddenFor(model => model.ImageAnnouncement, htmlAttributes: new { id = "imageBase64" })
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                @Html.LabelFor(model => model.BeginDatePublication, htmlAttributes: new { @class = "control-label col-md-2", @style = "width: 105px; margin-top: 15px;" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(model => model.BeginDatePublication, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", title = "Favor seleccione una fecha", required = "", id = "BeginDateInput" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-6" style="margin-left: -77px;">
+                                @Html.LabelFor(model => model.EndDatePublication, htmlAttributes: new { @class = "control-label col-md-2", @style = "width: 105px; margin-top: 15px;" })
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(model => model.EndDatePublication, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control", title = "Favor seleccione una fecha", required = "", id = "EndDateInput" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2", @style = "margin-top: 20px;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="modal-footer" style="margin-top: 55px; height: 14%; background-color: #e5e3e38a; box-shadow: 0px 2px 13px rgba(0, 0, 0, 0.2); ">
+                <div style="text-align:center">
+                    <div style="margin-left: -1247%; color: black; margin-top: 4%;">
+                        <button type="button" onclick="window.location.href='../AnnouncementArt/Index'" class="btn btn-secondary" style="color: white; position: relative; padding: 10px 28px;">
+                            <svg style="margin-left: -60px;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z" />
+                            </svg><div style="margin-top: -42%; margin-left: 19%;">Regresar</div>
+                        </button>
+                    </div>
+
+                    <div style="margin-top:-35%; margin-left:-800%;">
+                        <input type="submit" value="Guardar" class="btn btn-success" style="text-align: right; padding: 8px 15px; margin-left: 83%; width: -23%; height: 3%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <link href="~/Scripts/MessiJS/messi.min.css" rel="stylesheet" />
+    <script src="~/Scripts/MessiJS/messi.min.js"></script>*@
+<script>
+    let imageUpload = document.getElementById('imageUpload');
+    let hiddenImageInput = document.getElementById('imageBase64');
+    imageUpload.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = function () {
+                hiddenImageInput.value = reader.result.split(',')[1];
+            }
+            reader.readAsDataURL(file);
+            let tempImage = new Image();
+            tempImage.src = URL.createObjectURL(file);
+            tempImage.onload = () => {
+                let image = document.getElementById("Image");
+                if (tempImage.width == 900 && tempImage.height == 300) {
+                    image.src = URL.createObjectURL(file);
+                }
+                else {
+                    hiddenImageInput.value = "";
+                    imageUpload.value = "";
+                    image.src = "../../Images/900px-300px-webticket-NMW.jpg";
+                    new Messi("Dimensiones incorrectas.\n El ancho debe ser de 900 y el alto de 300",
+                        {
+                            title: 'Error',
+                            titleClass: 'anim error',
+                            buttons: [{ id: 0, label: 'Close', val: 'X' }]
+                        });
+                }
+            };
+        }
+    });
+
+    let form = document.getElementById('EditAnnouncementArtForm');
+    form.addEventListener('submit', function (event) {
+        let beginDate = new Date(document.getElementById('BeginDateInput').value);
+        let endDate = new Date(document.getElementById('EndDateInput').value);
+
+        console.log(hiddenImageInput);
+        if (beginDate > endDate) {
+            event.preventDefault();
+            displayError("La fecha inicial debe ser menor a la fecha final.");
+            return;
+        }
+        if (hiddenImageInput.value === "") {
+            event.preventDefault();
+            displayError("Se debe cargar una imagen.");
+            return;
+        }
+    });
+    function displayError(msj) {
+        var dialog = new Messi(msj,
+            {
+                title: 'Error',
+                titleClass: 'anim error',
+                buttons: [{ id: 0, label: 'Close', val: 'X' }]
+            }
+        );
+    }
+</script>

@@ -1,0 +1,33 @@
+﻿#EditAssistanceModalContent {
+    display: grid;
+    grid-template-areas: 'D S'
+        'C C'
+        'F F';
+    grid-template-rows: 4fr 3fr 60px;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+.editAssistanceModalSection {
+    display: flex;
+    flex-direction:column;
+    gap: 5px;
+    padding: 10px;
+}
+#EditAssistanceModalDate {
+    grid-area: D;
+}
+#EditAssistanceModalState {
+    grid-area: S;
+}
+#EditAssistanceModalComent {
+    grid-area: C;
+}
+#EditAssistanceModalFooter {
+    grid-area: F;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}

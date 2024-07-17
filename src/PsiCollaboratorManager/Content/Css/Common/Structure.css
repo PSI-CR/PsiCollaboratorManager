@@ -1,0 +1,9 @@
+﻿.fieldset {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 5px rgba(64 , 0, 0, 0.3);
+    border-radius: 5px
+}
+
+svg{
+    margin-right:0px !important;
+}

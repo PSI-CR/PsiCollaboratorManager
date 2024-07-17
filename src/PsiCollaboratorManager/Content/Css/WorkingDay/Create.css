@@ -1,0 +1,53 @@
+﻿#CreateWorkingDayForm {
+    display: grid;
+    grid-template-areas:
+        'I I'
+        'H M'
+        'F F';
+    grid-template-rows: 1fr 1fr 60px;
+    grid-template-columns: 1fr 1fr ;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    padding:10px;
+}
+
+#CreateWorkingDayInformation {
+    grid-area: I;
+    padding:5px;
+    display:flex;
+    align-items:center;
+    flex-direction:column;
+    gap:10px;
+}
+.formField{
+    width:80%;
+}
+.formFieldHour{
+    width:140px;
+}
+.formFieldSmall{
+    width:100px;
+}
+#CreateWorkingDayHours {
+    grid-area: H;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+#CreateWorkingDayMax {
+    grid-area: M;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+#CreateWorkingDayFooter {
+    grid-area: F;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 50px 5px 50px;
+}

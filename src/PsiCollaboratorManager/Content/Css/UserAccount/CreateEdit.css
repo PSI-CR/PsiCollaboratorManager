@@ -1,0 +1,46 @@
+﻿#CollaboratorCreateEditContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#FormUserContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 99%;
+    gap: 5px;
+}
+
+#UserFieldCreateContainer {
+    margin: 5px;
+    padding: 5px;
+    height: calc(100% - 90px);
+    width: 99%;
+    overflow-y: auto;
+    display: grid;
+    grid-template-areas:
+        'US'
+}
+
+#UserSection {
+    grid-area: US;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+#UserFieldFooter {
+    height: 70px;
+    width: 99%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+

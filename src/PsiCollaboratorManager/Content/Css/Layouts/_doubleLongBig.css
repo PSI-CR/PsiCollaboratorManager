@@ -1,0 +1,6 @@
+﻿.doubleLongBigSection {
+    display: flex;
+    align-items: center;
+    column-gap: 3%;
+    padding: 3%;
+}

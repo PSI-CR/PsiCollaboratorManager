@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Css/Layouts/_basicSmall.css" rel="stylesheet" />
+<link href="~/Content/Css/Layouts/_basicLarge.css" rel="stylesheet" />
+<link href="~/Content/Css/Layouts/_doubleSmallLarge.css" rel="stylesheet" />
+
+<section class="doubleSmallLargeSection">
+    <div class="basicSmallMain">
+        <div class="basicSmallMainHeader">
+            <h3>Small</h3>
+            <img id="SectionHeaderCrown" src="~/Images/crownWhite.png" />
+        </div>
+        <div class="basicSmallMainContent">
+            @RenderSection("LeftContent", required:false)
+        </div>
+    </div>
+    <div class="basicLargeMain">
+        <div class="basicLargeMainHeader">
+            <h3>Large</h3>
+            <img id="SectionHeaderCrown" src="~/Images/crownWhite.png" />
+        </div>
+        <div class="basicLargeMainContent">
+            @RenderSection("RightContent", required: false)
+        </div>
+    </div>
+    @RenderBody()
+</section>
+
+

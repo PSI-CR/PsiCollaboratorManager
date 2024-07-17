@@ -1,0 +1,46 @@
+﻿#CreateAnnotationForm {
+    display: grid;
+    grid-template-rows: auto 1fr 60px;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+#CreateAnnotationCollaborator {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding:10px;
+}
+#CollaboratorButtonSection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 20px;
+}
+.collaboratorButton{
+    padding:5px;
+    border:1px solid #bbbbbb;
+    border-radius: 5px;
+}
+.collaboratorButtonClose{
+    width:20px;
+    height:20px;
+    border:1px hidden black;
+    background-color:#eeeeee;
+}
+    .collaboratorButtonClose:hover {
+        background-color: #dddddd;
+    }
+#CreateAnnotationAssign {
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    padding:10px;
+}
+
+#CreateAnnotationFooter {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 50px 5px 50px;
+}

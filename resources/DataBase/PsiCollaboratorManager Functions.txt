@@ -1,0 +1,2184 @@
+---------------------------------------------------------------------------------------
+-----Funciones-WorkingDay--------------------------------------------------------------
+---------------------------------------------------------------------------------------
+-----Delete-------------
+
+CREATE OR REPLACE FUNCTION public.delete_working_day(
+	param_working_day_id integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    DELETE FROM Schedule_WorkingDay WHERE WorkingDayId = param_working_day_id;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Insert----------------
+
+CREATE OR REPLACE FUNCTION public.insert_working_day(
+    param_name character varying,
+    param_description character varying,
+    param_maxdays integer,
+    param_maxhours integer,
+    param_starttime time without time zone,
+    param_endtime time without time zone,
+    param_recordtime timestamp without time zone,
+    param_accumulative boolean,
+    param_assigned boolean)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    INSERT INTO public.schedule_workingday(
+        workingdayname, 
+        description, 
+        workingdaymaxdays, 
+        workingdaymaxhours, 
+        workingdaystarttime, 
+        workingdayendtime, 
+        workingdayrecordtime, 
+        workingdayaccumulative, 
+        workingdayassigned
+    ) VALUES (
+        param_name, 
+        param_description, 
+        param_maxdays, 
+        param_maxhours, 
+        param_starttime, 
+        param_endtime, 
+        param_recordtime, 
+        param_accumulative, 
+        param_assigned
+    );
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----GetAll------------
+
+CREATE OR REPLACE FUNCTION public.select_working_day_all()
+    RETURNS TABLE(
+        workingdayid integer, 
+        workingdayname character varying, 
+        description character varying, 
+        workingdaymaxdays integer, 
+        workingdaymaxhours integer, 
+        workingdaystarttime timestamp without time zone, 
+        workingdayendtime timestamp without time zone, 
+        workingdayrecordtime timestamp without time zone, 
+        workingdayaccumulative boolean
+    ) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+AS $BODY$
+BEGIN
+    RETURN QUERY 
+    SELECT 
+        hjl.workingdayid, 
+        hjl.workingdayname, 
+        hjl.description, 
+        hjl.workingdaymaxdays, 
+        hjl.workingdaymaxhours,  
+        (CURRENT_DATE + hjl.workingdaystarttime)::timestamp without time zone, 
+        (CURRENT_DATE + hjl.workingdayendtime)::timestamp without time zone, 
+        hjl.workingdayrecordtime, 
+        hjl.workingdayaccumulative
+    FROM 
+        public.schedule_workingday as hjl;         
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Funciones-Schedule----------------------------------------------------------------
+---------------------------------------------------------------------------------------
+-----update_schedule-------------
+
+CREATE OR REPLACE FUNCTION public.update_schedule(
+    param_scheduleid integer,
+    param_workingdayid integer,
+    param_schedulename character varying,
+    param_assignedschedule boolean)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    UPDATE public.schedule
+    SET 
+        workingdayid = param_workingdayid,
+        schedulename = param_schedulename,
+        assignedschedule = param_assignedschedule
+    WHERE 
+        scheduleid = param_scheduleid;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Get_By_Id-------------
+
+CREATE OR REPLACE FUNCTION public.select_schedule_by_id(
+    param_scheduleid integer)
+    RETURNS TABLE(scheduleid integer, workingdayid integer, schedulename character varying, assignedschedule boolean) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+AS $BODY$
+BEGIN
+    RETURN QUERY
+    SELECT
+        s.scheduleid,
+        s.workingdayid,
+        s.schedulename,
+        s.assignedschedule
+    FROM
+        public.schedule s
+    WHERE
+        s.scheduleid = param_scheduleid;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Insert-------------
+
+CREATE OR REPLACE FUNCTION public.insert_schedule(
+    param_workingdayid integer,
+    param_schedulename character varying,
+    param_assignedschedule boolean)
+    RETURNS integer  -- Retorna el scheduleid del registro insertado
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE
+    inserted_id integer;
+BEGIN
+    INSERT INTO public.schedule (workingdayid, schedulename, assignedschedule)
+    VALUES (param_workingdayid, param_schedulename, param_assignedschedule)
+    RETURNING scheduleid INTO inserted_id;
+
+    RETURN inserted_id;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Get_All-------------
+
+CREATE OR REPLACE FUNCTION public.select_schedule_all(
+	)
+    RETURNS TABLE
+	(
+		scheduleid integer, 
+		schedulename character varying, 
+		workingdayname character varying,
+		workingdaydescription character varying,
+		assignedschedule boolean
+	) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+    RETURN QUERY
+    SELECT
+        s.scheduleid,
+        s.schedulename as name,
+        w.workingdayname,
+        w.description as workingdaydescription,
+        s.assignedschedule as assigned
+    FROM
+        public.schedule s
+    LEFT JOIN
+        public.schedule_workingday w ON s.workingdayid = w.workingdayid;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Get_All_Basic-------------
+
+CREATE OR REPLACE FUNCTION public.select_schedule_all_basic(
+	)
+    RETURNS TABLE
+	(
+		scheduleid integer, 
+		schedulename character varying
+	) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+    RETURN QUERY
+    SELECT
+        s.scheduleid,
+        s.schedulename as name
+    FROM
+        public.schedule s;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Get_By_Schedule_Id-------------
+
+CREATE OR REPLACE FUNCTION select_schedule_daily_by_scheduleid(param_scheduleid integer)
+RETURNS TABLE(
+    scheduledailyid integer,
+    scheduledayname character varying,
+    begintime timestamp,
+    endtime timestamp
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        sd.scheduledailyid,
+        d.dayname AS scheduledayname,
+        sd.begintime,
+        sd.endtime
+    FROM
+        public.schedule_daysbyschedule ds
+    INNER JOIN
+        public.schedule_daily sd ON ds.scheduledailyid = sd.scheduledailyid
+    INNER JOIN
+        public.schedule_days d ON sd.dayid = d.dayid
+    WHERE
+        ds.scheduleid = param_scheduleid;
+END;
+$$ LANGUAGE plpgsql;
+
+---------------------------------------------------------------------------------------
+-----Dismiss_schedule-------------
+
+CREATE OR REPLACE FUNCTION Dismiss_schedule(param_collaboratorid integer)
+RETURNS void AS $$
+BEGIN
+    UPDATE public.collaborator_schedule_history
+    SET active = FALSE,
+        dismissdate = NOW()
+    WHERE collaboratorschedulehistoryid = (
+        SELECT collaboratorschedulehistoryid
+        FROM public.collaborator_schedule_history
+        WHERE collaboratorid = param_collaboratorid
+          AND active = TRUE
+        ORDER BY assigndate DESC
+        LIMIT 1
+    );
+END;
+$$ LANGUAGE plpgsql;
+
+---------------------------------------------------------------------------------------
+-----Assign_schedule-------------
+
+CREATE OR REPLACE FUNCTION Assign_schedule(param_scheduleid integer, param_collaboratorid integer)
+RETURNS void AS $$
+BEGIN
+    INSERT INTO public.collaborator_schedule_history (collaboratorid, scheduleid, active, assigndate, dismissdate)
+    VALUES (param_collaboratorid, param_scheduleid, TRUE, NOW(), '0001-01-01 00:00:00 AD');
+END;
+$$ LANGUAGE plpgsql;
+
+---------------------------------------------------------------------------------------
+-----Get_By_CollaboratorId-------------
+
+CREATE OR REPLACE FUNCTION select_schedule_daily_by_collaboratorid(param_collaboratorid integer)
+RETURNS TABLE(
+    scheduledailyid integer,
+    scheduledayname character varying,
+    begintime timestamp,
+    endtime timestamp
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        sd.scheduledailyid,
+        d.dayname AS scheduledayname,
+        sd.begintime,
+        sd.endtime
+    FROM
+        public.schedule_daysbyschedule ds
+    INNER JOIN
+        public.schedule_daily sd ON ds.scheduledailyid = sd.scheduledailyid
+    INNER JOIN
+        public.schedule_days d ON sd.dayid = d.dayid
+    WHERE
+        ds.scheduleid = (
+            SELECT scheduleid
+            FROM public.collaborator_schedule_history
+            WHERE collaboratorid = param_collaboratorid
+              AND active = TRUE
+            ORDER BY assigndate DESC
+            LIMIT 1
+        );
+END;
+$$ LANGUAGE plpgsql;
+
+---------------------------------------------------------------------------------------
+-----SaveSchedule-------------
+
+CREATE OR REPLACE FUNCTION public.save_schedule(
+    param_scheduleid integer,
+    param_schedulename character varying,
+    param_workingdayid integer,
+    param_scheduledailys text[]
+)
+RETURNS void
+LANGUAGE 'plpgsql'
+COST 100
+VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE
+    schedule_id INTEGER;
+    daily_row text;
+    daily_id INTEGER;
+BEGIN
+    BEGIN
+        IF param_scheduleid <> 0 THEN
+            UPDATE public.schedule
+            SET 
+                schedulename = param_schedulename,
+                workingdayid = param_workingdayid
+            WHERE scheduleid = param_scheduleid;
+            schedule_id := param_scheduleid;
+        ELSE
+            INSERT INTO public.schedule(
+                schedulename, workingdayid)
+            VALUES (
+                param_schedulename, param_workingdayid)
+            RETURNING scheduleid INTO schedule_id;
+        END IF;
+        
+        DELETE FROM public.schedule_daysbyschedule WHERE scheduleid = schedule_id;
+        
+        FOR i IN 1..array_length(param_scheduledailys, 1) LOOP
+            daily_row := param_scheduledailys[i];
+            INSERT INTO public.schedule_daily(
+                dayid, begintime, endtime)
+            VALUES (
+                (string_to_array(daily_row, ','))[1]::integer,
+                (string_to_array(daily_row, ','))[2]::timestamp,
+                (string_to_array(daily_row, ','))[3]::timestamp)
+            RETURNING scheduledailyid INTO daily_id;
+            
+            INSERT INTO public.schedule_daysbyschedule(
+                scheduleid, scheduledailyid)
+            VALUES (
+                schedule_id, daily_id);
+        END LOOP;
+    EXCEPTION
+        WHEN OTHERS THEN
+            RAISE EXCEPTION 'An error occurred: %', SQLERRM;
+    END;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----GetScheduleById-------------
+
+CREATE OR REPLACE FUNCTION public.select_schedule_info(
+	param_scheduleid integer)
+    RETURNS TABLE(scheduleid integer, workingdayid integer, workingdayname character varying, workingdaymaxhours integer, schedulename character varying, dayname character varying, begintime timestamp without time zone, endtime timestamp without time zone) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+    RETURN QUERY
+    SELECT SC.scheduleid, SW.workingdayid, SW.workingdayname, SW.workingdaymaxhours, SC.schedulename, SDS.dayname, SD.begintime, SD.endtime
+    FROM public.schedule_daily AS SD
+    INNER JOIN public.schedule_days AS SDS ON SDS.dayid = SD.dayid
+    INNER JOIN public.schedule_daysbyschedule AS DS ON DS.scheduledailyid = SD.scheduledailyid
+    INNER JOIN public.schedule AS SC ON SC.scheduleid = DS.scheduleid
+    INNER JOIN public.schedule_workingday AS SW ON SW.workingdayid = SC.workingdayid
+    WHERE DS.scheduleid = param_scheduleid
+    ORDER BY SD.dayid ASC;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Funciones-Attend-------------------------------------------------------------
+---------------------------------------------------------------------------------------
+-----GetById-------------
+
+CREATE OR REPLACE FUNCTION public.select_attend_by_id(
+	param_attendid integer)
+    RETURNS TABLE(attendanceid integer, collaboratorid integer, checkin timestamp without time zone, checkout timestamp without time zone, checkinstatus integer, checkoutstatus integer, commentcheckin character varying, isopencheckin boolean, ipaddress character varying, physicaladdressequipment character varying) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+    RETURN QUERY 
+    SELECT 
+        collaborator_attend.attendanceid, 
+        collaborator_attend.collaboratorid, 
+        collaborator_attend.checkin, 
+        collaborator_attend.checkout, 
+        collaborator_attend.checkinstatus, 
+        collaborator_attend.checkoutstatus, 
+        collaborator_attend.commentcheckin, 
+        collaborator_attend.isopencheckin, 
+        collaborator_attend.ipaddress, 
+        collaborator_attend.physicaladdressequipment
+    FROM 
+        public.collaborator_attend
+    WHERE 
+        collaborator_attend.attendanceid = param_attendid;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----GetByCollaboratorId-------------
+
+CREATE OR REPLACE FUNCTION public.select_attend_by_collaboratorid(
+	param_collaboratorid integer)
+    RETURNS TABLE(attendanceid integer, collaboratorid integer, checkin timestamp without time zone, checkout timestamp without time zone, checkinstatus integer, checkoutstatus integer, commentcheckin character varying, isopencheckin boolean, ipaddress character varying, physicaladdressequipment character varying) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+    RETURN QUERY 
+    SELECT 
+        collaborator_attend.attendanceid, 
+        collaborator_attend.collaboratorid, 
+        collaborator_attend.checkin, 
+        collaborator_attend.checkout, 
+        collaborator_attend.checkinstatus, 
+        collaborator_attend.checkoutstatus, 
+        collaborator_attend.commentcheckin, 
+        collaborator_attend.isopencheckin, 
+        collaborator_attend.ipaddress, 
+        collaborator_attend.physicaladdressequipment
+    FROM 
+        public.collaborator_attend
+    WHERE 
+        collaborator_attend.collaboratorid = param_collaboratorid;
+END;
+$BODY$;
+
+
+---------------------------------------------------------------------------------------
+-----Funciones-ScheduleDay-------------------------------------------------------------
+---------------------------------------------------------------------------------------
+-----GetAll_Function-------------
+
+CREATE OR REPLACE FUNCTION public.select_all_days(
+    )
+    RETURNS TABLE(dayid integer, dayname character varying) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+AS $BODY$
+BEGIN
+    RETURN QUERY SELECT schedule_days.dayid, schedule_days.dayname FROM schedule_days;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Funciones-Attend------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+-----GetAll-------------
+
+CREATE OR REPLACE FUNCTION public.select_all_attend()
+    RETURNS TABLE(
+        attendanceid integer, 
+        collaboratorid integer, 
+        checkin timestamp without time zone, 
+        checkout timestamp without time zone, 
+        checkinstatus integer, 
+        checkoutstatus integer, 
+        commentcheckin character varying, 
+        isopencheckin boolean, 
+        ipaddress character varying(20), 
+        physicaladdressequipment character varying(50)
+    ) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+AS $BODY$
+BEGIN
+    RETURN QUERY 
+    SELECT 
+        collaborator_attend.attendanceid, 
+        collaborator_attend.collaboratorid, 
+        collaborator_attend.checkin, 
+        collaborator_attend.checkout, 
+        collaborator_attend.checkinstatus, 
+        collaborator_attend.checkoutstatus, 
+        collaborator_attend.commentcheckin, 
+        collaborator_attend.isopencheckin, 
+        collaborator_attend.ipaddress, 
+        collaborator_attend.physicaladdressequipment
+    FROM 
+        public.collaborator_attend;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Delete-------------
+
+CREATE OR REPLACE FUNCTION public.delete_attend_by_id(
+    param_attendanceid integer
+)
+RETURNS void
+LANGUAGE 'plpgsql'
+COST 100
+VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    DELETE FROM public.collaborator_attend
+    WHERE attendanceid = param_attendanceid;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Insert-------------
+
+CREATE OR REPLACE FUNCTION public.insert_attend(
+    param_collaboratorid integer,
+    param_checkin timestamp without time zone,
+    param_checkout timestamp without time zone,
+    param_checkinstatus integer,
+    param_checkoutstatus integer,
+    param_commentcheckin character varying,
+    param_isopencheckin boolean,
+    param_ipaddress character varying(20),
+    param_physicaladdressequipment character varying(50)
+)
+RETURNS integer
+LANGUAGE 'plpgsql'
+COST 100
+VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE
+    new_attendanceid integer;
+BEGIN
+    INSERT INTO public.collaborator_attend (
+        collaboratorid,
+        checkin,
+        checkout,
+        checkinstatus,
+        checkoutstatus,
+        commentcheckin,
+        isopencheckin,
+        ipaddress,
+        physicaladdressequipment
+    ) VALUES (
+        param_collaboratorid,
+        param_checkin,
+        param_checkout,
+        param_checkinstatus,
+        param_checkoutstatus,
+        param_commentcheckin,
+        param_isopencheckin,
+        param_ipaddress,
+        param_physicaladdressequipment
+    ) RETURNING attendanceid INTO new_attendanceid;
+    
+    RETURN new_attendanceid;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Update-------------
+
+CREATE OR REPLACE FUNCTION public.update_attend(
+    param_attendanceid integer,
+    param_collaboratorid integer,
+    param_checkin timestamp without time zone,
+    param_checkout timestamp without time zone,
+    param_checkinstatus integer,
+    param_checkoutstatus integer,
+    param_commentcheckin character varying,
+    param_isopencheckin boolean,
+    param_ipaddress character varying(20),
+    param_physicaladdressequipment character varying(50)
+)
+RETURNS void
+LANGUAGE 'plpgsql'
+COST 100
+VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    UPDATE public.collaborator_attend
+    SET 
+        collaboratorid = param_collaboratorid,
+        checkin = param_checkin,
+        checkout = param_checkout,
+        checkinstatus = param_checkinstatus,
+        checkoutstatus = param_checkoutstatus,
+        commentcheckin = param_commentcheckin,
+        isopencheckin = param_isopencheckin,
+        ipaddress = param_ipaddress,
+        physicaladdressequipment = param_physicaladdressequipment
+    WHERE 
+        attendanceid = param_attendanceid;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Funciones-AnnouncementArt------------------------------------------------------------------
+---------------------------------------------------------------------------------------
+-----GetByDate-------------
+
+CREATE OR REPLACE FUNCTION public.select_announcement_art_by_date(
+	)
+    RETURNS TABLE(announcementid integer, image character varying, begindatepublication timestamp without time zone, enddatepublication timestamp without time zone, description character varying) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+    RETURN QUERY 
+    SELECT 
+        aa.announcementid,
+        aa.imageannouncement as image,
+        aa.begindatepublication,
+        aa.enddatepublication,
+        aa.description
+    FROM 
+        announcement_art aa
+    WHERE 
+        aa.begindatepublication::date <= NOW()::date AND
+        NOW()::date <= aa.enddatepublication::date;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Insert-------------
+
+CREATE OR REPLACE FUNCTION public.insert_announcement_art(
+	param_announcement_id integer,
+	param_image character varying,
+	param_begin_date_publication timestamp without time zone,
+	param_end_date_publication timestamp without time zone,
+	param_description character varying)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    IF param_announcement_id <> 0 THEN
+		UPDATE Announcement_Art
+		SET ImageAnnouncement = param_image,
+			BeginDatePublication = param_begin_date_publication,
+			EndDatePublication = param_end_date_publication,
+			Description = param_description
+		WHERE AnnouncementId = param_announcement_id;
+	ELSE 
+		INSERT INTO Announcement_Art (ImageAnnouncement, BeginDatePublication, EndDatePublication, Description)
+		VALUES (param_image, param_begin_date_publication, param_end_date_publication, param_description);
+	END IF;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----Delete-------------
+
+CREATE OR REPLACE FUNCTION public.delete_announcement_art(
+	param_announcement_art_id integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    DELETE FROM Announcement_Art WHERE AnnouncementId = param_announcement_art_id;
+END;
+$BODY$;
+
+---------------------------------------------------------------------------------------
+-----GetById-------------
+
+CREATE OR REPLACE FUNCTION public.select_announcement_art_by_id(
+	param_announcement_art_id integer)
+    RETURNS TABLE(announcementid integer, imageannouncement character varying, begindatepublication timestamp without time zone, enddatepublication timestamp without time zone, description character varying) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+    RETURN QUERY SELECT * FROM Announcement_Art as aa WHERE aa.AnnouncementId = param_announcement_art_id;
+END;
+$BODY$;
+
+
+---------------------------------------------------------------------------------------
+-----GetAll-------------
+
+CREATE OR REPLACE FUNCTION public.select_all_announcements_art(
+	)
+    RETURNS TABLE(announcementid integer, imageannouncement character varying, begindatepublication timestamp without time zone, enddatepublication timestamp without time zone, description character varying) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+    RETURN QUERY SELECT * FROM Announcement_Art;
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_Collaborator_LastWeek_Birthday()
+RETURNS TABLE (CollaboratorId INTEGER, FirstName VARCHAR, LastName VARCHAR, DateOfBirth DATE) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        c.CollaboratorId, 
+        c.FirstName, 
+        c.LastName, 
+        c.DateOfBirth
+    FROM 
+        Collaborator c
+    WHERE 
+        (
+            to_char(c.DateOfBirth, 'MM-DD') BETWEEN 
+            to_char(CURRENT_DATE - INTERVAL '7 day', 'MM-DD') 
+            AND 
+            to_char(CURRENT_DATE - INTERVAL '1 day', 'MM-DD')
+        );
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_Collaborator_Today_Birthday()
+RETURNS TABLE (CollaboratorId INTEGER, FirstName VARCHAR, LastName VARCHAR, DateOfBirth DATE) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        c.CollaboratorId, 
+        c.FirstName, 
+        c.LastName, 
+        c.DateOfBirth
+    FROM 
+        Collaborator c
+    WHERE 
+        to_char(c.DateOfBirth, 'MM-DD') = to_char(CURRENT_DATE, 'MM-DD');
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_Collaborator_NextWeek_Birthday()
+RETURNS TABLE (CollaboratorId INTEGER, FirstName VARCHAR, LastName VARCHAR, DateOfBirth DATE) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        c.CollaboratorId, 
+        c.FirstName, 
+        c.LastName, 
+        c.DateOfBirth
+    FROM 
+        Collaborator c
+    WHERE 
+        (
+            to_char(c.DateOfBirth, 'MM-DD') BETWEEN 
+            to_char(CURRENT_DATE + INTERVAL '1 day', 'MM-DD') 
+            AND 
+            to_char(CURRENT_DATE + INTERVAL '7 day', 'MM-DD')
+        );
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_All_Collaborators_By_IsActive(
+    param_isactive BOOLEAN
+)
+RETURNS TABLE (
+    collaboratorid INTEGER,
+    firstname VARCHAR,
+    lastname VARCHAR,
+    dnicollaborator VARCHAR,
+    operatornumber INTEGER,
+    dateofbirth DATE,
+    telephone1 VARCHAR,
+    telephone2 VARCHAR,
+    email VARCHAR,
+    parent BOOLEAN,
+    maritalstatusid INTEGER,
+    provinceName VARCHAR,
+    cantonName VARCHAR,
+    districtName VARCHAR,
+    addressLine VARCHAR,
+    gender INTEGER
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        c.CollaboratorId AS collaboratorid,
+        c.FirstName AS firstname,
+        c.LastName AS lastname,
+        c.DNICollaborator AS dnicollaborator,
+        c.OperatorNumber AS operatornumber,
+        c.DateOfBirth AS dateofbirth,
+        c.Telephone1 AS telephone1,
+        c.Telephone2 AS telephone2,
+        c.Email AS email,
+        c.Parent AS parent,
+        c.MaritalStatusId AS maritalstatusid,
+        ap.ProvinceName AS provinceName,
+        ac.CantonName AS cantonName,
+        ad.DistrictName AS districtName,
+        c.AddressLine AS addressLine,
+        c.Gender AS gender
+    FROM 
+        Collaborator c
+        LEFT JOIN Address_Province ap ON c.ProvinceId = ap.ProvinceId
+        LEFT JOIN Address_Canton ac ON c.CantonId = ac.CantonId
+        LEFT JOIN Address_District ad ON c.DistrictId = ad.DistrictId
+    WHERE 
+        c.IsActive = param_isactive;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_All_Collaborators_Name()
+RETURNS TABLE (
+    collaboratorid INTEGER,
+    firstname VARCHAR,
+    lastname VARCHAR
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        c.CollaboratorId,
+        c.FirstName,
+        c.LastName
+    FROM 
+        Collaborator c;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_All_Collaborators_Operator()
+RETURNS TABLE (
+    collaboratorid INTEGER,
+    firstname VARCHAR,
+    lastname VARCHAR,
+	operatornumber integer
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        c.CollaboratorId,
+        c.FirstName,
+        c.LastName,
+		c.OperatorNumber
+    FROM 
+        Collaborator c;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Select_Collaborator_Details_By_Id(
+    param_collaboratorId integer
+) 
+RETURNS TABLE (
+    collaboratorid integer,
+    operatornumber integer,
+    firstname character varying,
+    lastname character varying,
+    email character varying,
+    dnicollaborator character varying,
+    dateofbirth date,
+    gender integer,
+    parent boolean,
+    maritalstatusid integer,
+    telephone1 character varying,
+    telephone2 character varying,
+    rfidcode character varying,
+	districtname character varying,
+	cantonname character varying,
+	provincename character varying,
+    addressline character varying,
+    bankname character varying,
+	currencytypename character varying,
+    numberbankaccount character varying,
+    ibanaccount character varying,
+    diseases character varying,
+    takingmedications boolean,
+    note character varying,
+    picture text,
+    emergencycontacts text[]
+) 
+LANGUAGE plpgsql 
+COST 100 
+VOLATILE PARALLEL UNSAFE 
+ROWS 1000 
+AS $BODY$
+BEGIN
+    RETURN QUERY 
+    SELECT 
+        c.CollaboratorId,
+        c.OperatorNumber,
+        c.FirstName,
+        c.LastName,
+        c.Email,
+        c.DNICollaborator,
+        c.DateOfBirth,
+        c.Gender,
+        c.Parent,
+        c.MaritalStatusId,
+        c.Telephone1,
+        c.Telephone2,
+        c.RFIDCode,
+		ad.DistrictName,
+		ac.CantonName,
+		ap.ProvinceName,
+        c.AddressLine,
+        b.Name,
+        ct.Name,
+        cb.NumberBankAccount,
+        cb.IBANAccount,
+        chc.Diseases,
+        chc.TakingMedications,
+        chc.Note,
+        cp.Picture,
+        array_agg(cec.FirstName || ',' || cec.LastName || ',' || cec.Relationship || ',' || cec.Telephone1 || ',' || cec.Telephone2) AS EmergencyContacts
+    FROM Collaborator c
+	LEFT JOIN Address_Province ap ON c.provinceId = ap.provinceId
+	LEFT JOIN Address_Canton ac ON c.cantonId = ac.cantonId
+	LEFT JOIN Address_District ad ON c.districtId = ad.districtId
+    LEFT JOIN Collaborator_BankAccount cb ON c.CollaboratorId = cb.CollaboratorId
+    LEFT JOIN Bank b ON cb.BankId = b.BankId
+	LEFT JOIN CurrencyType ct ON ct.CurrencyTypeId = cb.CurrencyTypeId	
+    LEFT JOIN Collaborator_HealthCondition chc ON c.CollaboratorId = chc.CollaboratorId
+    LEFT JOIN Collaborator_Picture cp ON c.CollaboratorId = cp.CollaboratorId
+    LEFT JOIN Collaborator_EmergencyContact cec ON c.CollaboratorId = cec.CollaboratorId
+    WHERE c.CollaboratorId = param_collaboratorId
+	GROUP BY 
+        c.CollaboratorId,
+        c.OperatorNumber,
+        c.FirstName,
+        c.LastName,
+        c.Email,
+        c.DNICollaborator,
+        c.DateOfBirth,
+        c.Gender,
+        c.Parent,
+        c.MaritalStatusId,
+        c.Telephone1,
+        c.Telephone2,
+        c.RFIDCode,
+		ad.DistrictName,
+		ac.CantonName,
+		ap.ProvinceName,
+        c.AddressLine,
+		b.Name,
+		ct.Name,
+        cb.NumberBankAccount,
+        cb.IBANAccount,
+        chc.Diseases,
+        chc.TakingMedications,
+        chc.Note,
+        cp.Picture;
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Select_Collaborator_Full_By_Id(
+    param_collaboratorId integer
+) 
+RETURNS TABLE (
+    collaboratorid integer,
+    operatornumber integer,
+    firstname character varying,
+    lastname character varying,
+    email character varying,
+    dnicollaborator character varying,
+    dateofbirth date,
+    gender integer,
+    parent boolean,
+    maritalstatusid integer,
+    telephone1 character varying,
+    telephone2 character varying,
+    curriculumfile text,
+    rfidcode character varying,
+    needpasswordchange boolean,
+    islockedout boolean,
+    lockoutendtime timestamp without time zone,
+	createuseraccount boolean,
+    isactive boolean,
+    districtid integer,
+    cantonid integer,
+    provinceid integer,
+    addressline character varying,
+	bankid integer,
+	currencytypeid integer,
+    numberbankaccount character varying,
+    ibanaccount character varying,
+    diseases character varying,
+    takingmedications boolean,
+    note character varying,
+    picture text,
+    emergencycontacts text[]
+) 
+LANGUAGE plpgsql 
+COST 100 
+VOLATILE PARALLEL UNSAFE 
+ROWS 1000 
+AS $BODY$
+BEGIN
+    RETURN QUERY 
+    SELECT 
+        c.CollaboratorId,
+        c.OperatorNumber,
+        c.FirstName,
+        c.LastName,
+        c.Email,
+        c.DNICollaborator,
+        c.DateOfBirth,
+        c.Gender,
+        c.Parent,
+        c.MaritalStatusId,
+        c.Telephone1,
+        c.Telephone2,
+        c.CurriculumFile,
+        c.RFIDCode,
+        c.NeedPasswordChange,
+        c.IsLockedOut,
+        c.LockOutEndTime,
+		NOT EXISTS(SELECT 1 FROM Collaborator_PasswordHistory cph WHERE param_collaboratorId = cph.collaboratorId),
+        c.IsActive,
+        c.DistrictId,
+        c.CantonId,
+        c.ProvinceId,
+        c.AddressLine,
+		b.BankId,
+        ct.CurrencyTypeId,
+        cb.NumberBankAccount,
+        cb.IBANAccount,
+        chc.Diseases,
+        chc.TakingMedications,
+        chc.Note,
+        cp.Picture,
+        array_agg(cec.FirstName || ',' || cec.LastName || ',' || cec.Relationship || ',' || cec.Telephone1 || ',' || cec.Telephone2) AS EmergencyContacts
+    FROM Collaborator c
+	LEFT JOIN Address_Province ap ON c.provinceId = ap.provinceId
+	LEFT JOIN Address_Canton ac ON c.cantonId = ac.cantonId
+	LEFT JOIN Address_District ad ON c.districtId = ad.districtId
+    LEFT JOIN Collaborator_BankAccount cb ON c.CollaboratorId = cb.CollaboratorId
+    LEFT JOIN Bank b ON cb.BankId = b.BankId
+	LEFT JOIN CurrencyType ct ON ct.CurrencyTypeId = cb.CurrencyTypeId	
+    LEFT JOIN Collaborator_HealthCondition chc ON c.CollaboratorId = chc.CollaboratorId
+    LEFT JOIN Collaborator_Picture cp ON c.CollaboratorId = cp.CollaboratorId
+    LEFT JOIN Collaborator_EmergencyContact cec ON c.CollaboratorId = cec.CollaboratorId
+    WHERE c.CollaboratorId = param_collaboratorId
+	GROUP BY 
+        c.CollaboratorId,
+        c.OperatorNumber,
+        c.FirstName,
+        c.LastName,
+        c.Email,
+        c.DNICollaborator,
+        c.DateOfBirth,
+        c.Gender,
+        c.Parent,
+        c.MaritalStatusId,
+        c.Telephone1,
+        c.Telephone2,
+        c.CurriculumFile,
+        c.RFIDCode,
+        c.NeedPasswordChange,
+        c.IsLockedOut,
+        c.LockOutEndTime,
+        c.IsActive,
+        c.DistrictId,
+        c.CantonId,
+        c.ProvinceId,
+        c.AddressLine,
+		b.BankId,
+		ct.CurrencyTypeId,
+        cb.NumberBankAccount,
+        cb.IBANAccount,
+        chc.Diseases,
+        chc.TakingMedications,
+        chc.Note,
+        cp.Picture;
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.delete_collaborator(param_collaboratorId integer)
+RETURNS void AS
+$$
+BEGIN
+    DELETE FROM Collaborator_BankAccount WHERE CollaboratorId = param_collaboratorId;
+    DELETE FROM Collaborator_HealthCondition WHERE CollaboratorId = param_collaboratorId;
+    DELETE FROM Collaborator_Picture WHERE CollaboratorId = param_collaboratorId;
+    DELETE FROM Collaborator_EmergencyContact WHERE CollaboratorId = param_collaboratorId;
+	DELETE FROM Collaborator_passwordhistory WHERE CollaboratorId = param_collaboratorId;
+    DELETE FROM Collaborator WHERE CollaboratorId = param_collaboratorId;
+END;
+$$
+LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Save_Collaborator(
+	param_collaboratorId integer,
+	param_operatornumber integer,
+	param_firstname character varying,
+	param_lastname character varying,
+	param_email character varying,
+	param_dnicollaborator character varying,
+	param_dateofbirth timestamp without time zone,
+	param_gender integer,
+	param_parent boolean,
+	param_maritalstatusid integer,
+	param_telephone1 character varying,
+	param_telephone2 character varying,
+	param_curriculumfile text,
+	param_rfidcode character varying,
+	param_needpasswordchange boolean,
+	param_islockedout boolean,
+	param_lockoutendtime timestamp without time zone,
+	param_password text,
+	param_createuseraccount boolean,
+	param_isactive boolean,
+	param_districtid integer,
+	param_cantonid integer,
+	param_provinceid integer,
+	param_addressline character varying,
+	param_bankid integer,
+	param_currencytypeid integer,
+	param_numberbankaccount character varying,
+	param_ibanaccount character varying,
+	param_diseases character varying,
+	param_takingmedications boolean,
+	param_note character varying,
+	param_picture text,
+	param_emergency_contacts text[])
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE
+    collaborator_id INTEGER;
+    bank_account_id INTEGER;
+    health_condition_id INTEGER;
+    picture_id INTEGER;
+    contact_row text;
+BEGIN
+    BEGIN
+        IF param_collaboratorId <> 0 THEN
+            UPDATE Collaborator
+            SET 
+                OperatorNumber = param_operatornumber,
+                FirstName = param_firstname,
+                LastName = param_lastname,
+                Email = param_email,
+                DNICollaborator = param_dnicollaborator,
+                DateOfBirth = param_dateofbirth,
+                Gender = param_gender,
+                Parent = param_parent,
+                MaritalStatusId = param_maritalstatusid,
+                Telephone1 = param_telephone1,
+                Telephone2 = param_telephone2,
+                CurriculumFile = param_curriculumfile,
+                RFIDCode = param_rfidcode,
+                NeedPasswordChange = param_needpasswordchange,
+                IsLockedOut = param_islockedout,
+                LockOutEndTime = param_lockoutendtime,
+                IsActive = param_isactive,
+                DistrictId = param_districtid,
+                CantonId = param_cantonid,
+                ProvinceId = param_provinceid,
+                AddressLine = param_addressline
+            WHERE CollaboratorId = param_collaborator_id;
+            collaborator_id := param_collaborator_id;
+        ELSE
+            INSERT INTO Collaborator(
+                OperatorNumber, FirstName, LastName, Email, DNICollaborator, DateOfBirth, Gender, Parent, MaritalStatusId, Telephone1, Telephone2,
+                CurriculumFile, RFIDCode, NeedPasswordChange, IsLockedOut, LockOutEndTime, IsActive, DistrictId, CantonId, ProvinceId, AddressLine)
+            VALUES (
+                param_operatornumber, param_firstname, param_lastname, param_email, param_dnicollaborator, param_dateofbirth, param_gender, param_parent, param_maritalstatusid, param_telephone1, param_telephone2,
+                param_curriculumfile, param_rfidcode, param_needpasswordchange, param_islockedout, param_lockoutendtime, param_isactive, param_districtid, param_cantonid, param_provinceid, param_addressline)
+            RETURNING CollaboratorId INTO collaborator_id;
+        END IF;
+        IF EXISTS (SELECT 1 FROM Collaborator_BankAccount WHERE CollaboratorId = collaborator_id) THEN
+            UPDATE Collaborator_BankAccount
+            SET 
+                BankId = param_bankid,
+                CurrencyTypeId = param_currencytypeid,
+                NumberBankAccount = param_numberbankaccount,
+                IbanAccount = param_ibanaccount
+            WHERE CollaboratorId = collaborator_id;
+        ELSE
+            INSERT INTO Collaborator_BankAccount(
+                CollaboratorId, BankId, CurrencyTypeId, NumberBankAccount, IbanAccount)
+            VALUES (
+                collaborator_id, param_bankid, param_currencytypeid, param_numberbankaccount, param_ibanaccount)
+            RETURNING BankAccountId INTO bank_account_id;
+        END IF;
+        IF EXISTS (SELECT 1 FROM Collaborator_HealthCondition WHERE CollaboratorId = collaborator_id) THEN
+            UPDATE Collaborator_HealthCondition
+            SET 
+                Diseases = param_diseases,
+                TakingMedications = param_takingmedications,
+                Note = param_note
+            WHERE CollaboratorId = collaborator_id;
+        ELSE
+            INSERT INTO Collaborator_HealthCondition(
+                CollaboratorId, Diseases, TakingMedications, Note)
+            VALUES (
+                collaborator_id, param_diseases, param_takingmedications, param_note)
+            RETURNING HealthConditionId INTO health_condition_id;
+        END IF;
+        IF EXISTS (SELECT 1 FROM Collaborator_Picture WHERE CollaboratorId = collaborator_id) THEN
+            UPDATE Collaborator_Picture
+            SET 
+                Picture = param_picture
+            WHERE CollaboratorId = collaborator_id;
+            picture_id := collaborator_id;
+        ELSE
+            INSERT INTO Collaborator_Picture(
+                CollaboratorId, Picture)
+            VALUES (
+                collaborator_id, param_picture)
+            RETURNING CollaboratorPictureId INTO picture_id;
+        END IF;
+		Delete from Collaborator_EmergencyContact where CollaboratorId = collaborator_id;
+        FOR i IN 1..array_length(_emergency_contacts, 1) LOOP
+            contact_row := param_emergency_contacts[i];
+			INSERT INTO Collaborator_EmergencyContact (
+				CollaboratorId, FirstName, LastName, Relationship, Telephone1, Telephone2)
+			VALUES (
+				collaborator_id,
+				(string_to_array(contact_row, ','))[1],
+				(string_to_array(contact_row, ','))[2],
+				(string_to_array(contact_row, ','))[3],
+				(string_to_array(contact_row, ','))[4],
+				(string_to_array(contact_row, ','))[5]
+			);
+        END LOOP;
+		IF(param_createUserAccount) THEN
+			UPDATE collaborator_passwordhistory Set isActual = false where CollaboratorId = collaborator_id;
+			INSERT INTO collaborator_passwordhistory(CollaboratorId, PasswordHash, passwordchangedate, IsActual) VALUES (collaborator_id, param_password, now(), true);
+		END IF;
+    EXCEPTION
+        WHEN OTHERS THEN
+            RAISE NOTICE 'An error occurred, rolling back the transaction';
+            ROLLBACK;
+    END;
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_Collaborator_Schedule_Info()
+RETURNS TABLE (
+    CollaboratorId integer,
+    FirstName character varying(50),
+    LastName character varying(50),
+    DNICollaborator character varying(50),
+    OperatorNumber integer,
+    Email character varying(255),
+	CollaboratorScheduleHistoryId integer,
+    AssignDate timestamp without time zone,
+    ScheduleName character varying(50)
+)
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        c.CollaboratorId,
+        c.FirstName,
+        c.LastName,
+        c.DNICollaborator,
+        c.OperatorNumber,
+        c.Email,
+		sch.CollaboratorScheduleHistoryId,
+        sch.AssignDate,
+        s.ScheduleName
+    FROM Collaborator c
+    INNER JOIN Collaborator_Schedule_History sch ON c.CollaboratorId = sch.CollaboratorId
+    INNER JOIN Schedule s ON sch.ScheduleId = s.ScheduleId
+	WHERE sch.Active = true;
+
+    RETURN;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Select_Collaborator_Without_Active_Schedule()
+RETURNS TABLE (
+    collaboratorid INTEGER, 
+    firstname VARCHAR, 
+    lastname VARCHAR, 
+    operatornumber INTEGER
+) 
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        c.CollaboratorId AS collaboratorid,
+        c.FirstName AS firstname,
+        c.LastName AS lastname,
+        c.OperatorNumber AS operatornumber
+    FROM
+        Collaborator c
+    WHERE NOT EXISTS (
+        SELECT 1
+        FROM Collaborator_Schedule_History sch
+        WHERE c.CollaboratorId = sch.CollaboratorId AND sch.Active = true
+    );
+END;
+$$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Select_Collaborator_Account(
+    param_operatorNumber integer
+)
+RETURNS TABLE (
+    CollaboratorId integer,
+    OperatorNumber integer,
+    password text,
+    needpasswordchange boolean,
+    islockedout boolean,
+    lockoutendtime timestamp with time zone,
+    isactive boolean
+) 
+LANGUAGE 'plpgsql'
+COST 100
+VOLATILE PARALLEL UNSAFE
+ROWS 1000
+AS $BODY$
+BEGIN
+    RETURN QUERY SELECT * FROM (
+        SELECT
+            col.collaboratorid,  
+            col.operatornumber,
+            Cph.PasswordHash,
+            col.NeedPasswordChange,
+            col.IsLockedOut,
+            Cph.PasswordChangeDate AT TIME ZONE 'UTC' AS lockoutendtime,
+            col.IsActive
+        FROM Collaborator AS col                    
+        LEFT JOIN Collaborator_PasswordHistory AS Cph ON col.collaboratorid = Cph.collaboratorid
+        ORDER BY Cph.PasswordChangeDate DESC
+    ) As col
+    WHERE col.operatornumber = param_operatorNumber LIMIT 1;
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Select_Collaborator_Last_Passwords(
+	param_collaboratorid integer)
+    RETURNS TABLE(password text) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+	RETURN QUERY 
+	SELECT uph.passwordHash FROM Collaborator_PasswordHistory AS UPH
+	WHERE collaboratorid = param_collaboratorid
+	ORDER BY uph.PasswordChangeDate DESC LIMIT 10;
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Verify_Collaborator_Unlock(
+    param_collaboratorid INTEGER,
+    param_maxinvalidattempts INTEGER,
+    param_invalidattemptstime INTERVAL,
+    param_loginlockouttime INTERVAL
+) RETURNS TABLE (
+    IsLockedOut BOOLEAN,
+    LockOutEndTime TIMESTAMP
+) LANGUAGE 'plpgsql'
+AS $$
+BEGIN
+    IF ((SELECT COUNT (*)
+        FROM (SELECT *
+              FROM Collaborator_ConnectionAttempt
+              WHERE collaboratorid = param_collaboratorid
+              ORDER BY logintime DESC LIMIT param_maxinvalidattempts) AS logins
+        WHERE issuccess = FALSE) >= param_maxinvalidattempts) 
+      AND (SELECT (SELECT MAX(logintime) - MIN(logintime)
+                 FROM (SELECT *
+                       FROM Collaborator_ConnectionAttempt
+                       WHERE issuccess = FALSE AND collaboratorid = param_collaboratorid
+                       ORDER BY logintime DESC LIMIT param_maxinvalidattempts) AS logins) < param_invalidattemptstime) 
+      AND (SELECT NOT issuccess
+           FROM Collaborator_ConnectionAttempt
+           WHERE collaboratorid = param_collaboratorid
+           ORDER BY logintime DESC LIMIT 1)
+      AND (SELECT CURRENT_TIMESTAMP AT TIME ZONE 'America/Costa_Rica' - (SELECT MIN(logintime)
+                            FROM (SELECT *
+                                FROM Collaborator_ConnectionAttempt
+                                WHERE issuccess = FALSE AND collaboratorid = param_collaboratorid
+                                ORDER BY logintime DESC LIMIT param_maxinvalidattempts) AS LOGINS) < param_invalidattemptstime) 
+    THEN 
+        UPDATE Collaborator 
+        SET IsLockedOut = TRUE, LockOutEndTime = (timezone('America/Costa_Rica', now()) + param_loginlockouttime) 
+        WHERE collaboratorid = param_collaboratorid;
+    END IF;
+
+    RETURN QUERY
+    SELECT IsLockedOut, LockOutEndTime
+    FROM Collaborator
+    WHERE collaboratorid = param_collaboratorid;
+END;
+$$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Update_Collaborator_Password(
+	param_collaboratorid integer,
+	param_password character varying)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+	UPDATE collaborator_passwordhistory Set isActual = false where CollaboratorId = param_collaboratorid;
+	INSERT INTO collaborator_passwordhistory(CollaboratorId, PasswordHash, passwordchangedate, IsActual) VALUES (param_collaboratorid, param_password, now(), true);
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_All_Provinces()
+RETURNS TABLE (
+    ProvinceId INTEGER,
+    ProvinceName VARCHAR,
+    Description VARCHAR
+) 
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        ap.ProvinceId,
+        ap.ProvinceName,
+        ap.Description
+    FROM
+        Address_Province ap;
+END;
+$$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_All_Cantons_By_Province(
+    param_ProvinceId INTEGER
+)
+RETURNS TABLE (
+    CantonId INTEGER,
+    CantonName VARCHAR,
+    Description VARCHAR
+) 
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        ac.CantonId,
+        ac.CantonName,
+        ac.Description
+    FROM
+        Address_Canton ac
+    WHERE
+        ac.ProvinceId = param_ProvinceId;
+END;
+$$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_All_Districts_By_Canton(
+    param_CantonId INTEGER
+)
+RETURNS TABLE (
+    DistrictId INTEGER,
+    DistrictName VARCHAR,
+    Description VARCHAR,
+    PostalCode VARCHAR
+) 
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        ad.DistrictId,
+        ad.DistrictName,
+        ad.Description,
+        ad.PostalCode
+    FROM
+        Address_District ad
+    WHERE
+        ad.CantonId = param_CantonId;
+END;
+$$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION GetAllAnnotationTypes()
+RETURNS TABLE (
+    AnnotationTypeId INTEGER,
+    TypeName VARCHAR,
+    ValueInScore BOOLEAN,
+    VisibleToCollaborator BOOLEAN,
+    Percentage DOUBLE PRECISION
+) 
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        at.AnnotationTypeId,
+        at.TypeName,
+        at.ValueInScore,
+        at.VisibleToCollaborator,
+        at.Percentage
+    FROM
+        AnnotationType at;
+END;
+$$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION SaveAnnotationType(
+    param_AnnotationTypeId INTEGER,
+    param_TypeName VARCHAR,
+    param_ValueInScore BOOLEAN,
+    param_VisibleToCollaborator BOOLEAN,
+    param_Percentage DOUBLE PRECISION
+)
+RETURNS VOID 
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM AnnotationType WHERE AnnotationTypeId = param_AnnotationTypeId) THEN
+        -- Update existing record
+        UPDATE AnnotationType
+        SET
+            TypeName = param_TypeName,
+            ValueInScore = param_ValueInScore,
+            VisibleToCollaborator = param_VisibleToCollaborator,
+            Percentage = param_Percentage
+        WHERE
+            AnnotationTypeId = param_AnnotationTypeId;
+    ELSE
+        -- Insert new record
+        INSERT INTO AnnotationType (TypeName, ValueInScore, VisibleToCollaborator, Percentage)
+        VALUES (param_TypeName, param_ValueInScore, param_VisibleToCollaborator, param_Percentage);
+    END IF;
+END;
+$$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION GetAnnotationTypeById(
+    param_AnnotationTypeId INTEGER
+)
+RETURNS TABLE (
+    AnnotationTypeId INTEGER,
+    TypeName VARCHAR,
+    ValueInScore BOOLEAN,
+    VisibleToCollaborator BOOLEAN,
+    Percentage DOUBLE PRECISION
+) 
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        at.AnnotationTypeId,
+        at.TypeName,
+        at.ValueInScore,
+        at.VisibleToCollaborator,
+        at.Percentage
+    FROM
+        AnnotationType at
+    WHERE
+        at.AnnotationTypeId = param_AnnotationTypeId;
+END;
+$$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_Annotation_By_Id(param_annotationId INT)
+RETURNS TABLE (
+    AnnotationId INT,
+    CollaboratorId INT,
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    DNICollaborator VARCHAR(255),
+    OperatorNumber INT,
+    Email VARCHAR(255),
+    IsActive BOOLEAN,
+    AnnotationTypeId INT,
+    TypeName VARCHAR(255),
+    ValueInScore BOOLEAN,
+    VisibleToCollaborator BOOLEAN,
+    Percentage DOUBLE PRECISION,
+    UserAccountId INT,
+    AttachmentId INT,
+    FileData TEXT,
+    FileName VARCHAR(255),
+    FileType VARCHAR(255),
+    Note TEXT,
+    AnnotationDate DATE,
+	CollaboratorPictureId INT,
+	Picture TEXT
+)
+AS $$
+BEGIN
+    RETURN QUERY 
+    SELECT 
+        A.AnnotationId,
+        C.CollaboratorId,
+        C.FirstName,
+        C.LastName,
+        C.DNICollaborator,
+        C.OperatorNumber,
+        C.Email,
+        C.IsActive,
+        AT.AnnotationTypeId,
+        AT.TypeName,
+        AT.ValueInScore,
+        AT.VisibleToCollaborator,
+        AT.Percentage,
+        A.UserAccountId,
+        A.AttachmentId,
+        AA.FileData,
+        AA.FileName,
+        AA.FileType,
+        A.Note,
+        A.AnnotationDate,
+		CP.CollaboratorPictureId,
+		CP.Picture
+    FROM 
+        Annotation A
+    INNER JOIN 
+        Collaborator C ON A.CollaboratorId = C.CollaboratorId
+	INNER JOIN 
+		Collaborator_Picture CP ON A.CollaboratorId = CP.CollaboratorId
+    INNER JOIN 
+        AnnotationType AT ON A.AnnotationTypeId = AT.AnnotationTypeId
+    LEFT JOIN 
+        Annotation_Attachment AA ON A.AttachmentId = AA.AttachmentId
+    WHERE 
+        A.AnnotationId = param_annotationId;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_All_Annotations(
+    param_minAnnotationDate TIMESTAMP without time zone,
+    param_maxAnnotationDate TIMESTAMP without time zone,
+    param_firstNameFilter VARCHAR(255),
+    param_lastNameFilter VARCHAR(255),
+    param_operatorNumberFilter INT
+)
+RETURNS TABLE (
+    AnnotationId INT,
+    CollaboratorId INT,
+    FirstName VARCHAR(255),
+    LastName VARCHAR(255),
+    DNICollaborator VARCHAR(255),
+    OperatorNumber INT,
+    Email VARCHAR(255),
+    IsActive BOOLEAN,
+    AnnotationTypeId INT,
+    TypeName VARCHAR(255),
+    ValueInScore BOOLEAN,
+    VisibleToCollaborator BOOLEAN,
+    Percentage DOUBLE PRECISION,
+    UserAccountId INT,
+    AttachmentId INT,
+    FileData TEXT,
+    FileName VARCHAR(255),
+    FileType VARCHAR(255),
+    Note TEXT,
+    AnnotationDate DATE
+)
+AS $$
+BEGIN
+    RETURN QUERY 
+    SELECT 
+        A.AnnotationId,
+        C.CollaboratorId,
+        C.FirstName,
+        C.LastName,
+        C.DNICollaborator,
+        C.OperatorNumber,
+        C.Email,
+        C.IsActive,
+        AT.AnnotationTypeId,
+        AT.TypeName,
+        AT.ValueInScore,
+        AT.VisibleToCollaborator,
+        AT.Percentage,
+        A.UserAccountId,
+        A.AttachmentId,
+        AA.FileData,
+        AA.FileName,
+        AA.FileType,
+        A.Note,
+        A.AnnotationDate
+    FROM 
+        Annotation A
+    INNER JOIN 
+        Collaborator C ON A.CollaboratorId = C.CollaboratorId
+    INNER JOIN 
+        AnnotationType AT ON A.AnnotationTypeId = AT.AnnotationTypeId
+    LEFT JOIN 
+        Annotation_Attachment AA ON A.AttachmentId = AA.AttachmentId
+    WHERE
+        (A.AnnotationDate >= param_minAnnotationDate)
+        AND (A.AnnotationDate <= param_maxAnnotationDate )
+        AND (LOWER(C.FirstName) LIKE CONCAT('%', LOWER(param_firstNameFilter), '%') OR param_firstNameFilter IS NULL OR param_firstNameFilter = '')
+        AND (LOWER(C.LastName) LIKE CONCAT('%', LOWER(param_lastNameFilter), '%') OR param_lastNameFilter IS NULL OR param_lastNameFilter = '')
+        AND (param_operatorNumberFilter <= 0 OR C.OperatorNumber = param_operatorNumberFilter);
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Insert_Annotation(
+    param_collaboratorIds integer[],
+    param_annotationTypeId integer,
+    param_userAccountId integer,
+    param_attachmentFileData text,
+    param_attachmentFileName character varying(255),
+    param_attachmentFileType character varying(255),
+    param_noteText text,
+    param_annotationDate timestamp
+) RETURNS VOID AS $$
+DECLARE
+    collaborator_id integer;
+    new_attachment_id integer;
+BEGIN
+    IF COALESCE(param_attachmentFileData, '') <> '' THEN
+        INSERT INTO Annotation_Attachment (FileData, FileName, FileType)
+        VALUES (param_attachmentFileData, param_attachmentFileName, param_attachmentFileType)
+        RETURNING AttachmentId INTO new_attachment_id;
+    ELSE
+        new_attachment_id := NULL;
+    END IF;
+
+    FOREACH collaborator_id IN ARRAY param_collaboratorIds
+    LOOP
+        INSERT INTO Annotation (CollaboratorId, AnnotationTypeId, UserAccountId, AttachmentId, Note, AnnotationDate)
+        VALUES (collaborator_id, param_annotationTypeId, param_userAccountId, new_attachment_id, param_noteText, param_annotationDate);
+    END LOOP;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Insert_User_Account(
+    param_UserName VARCHAR,
+    param_FirstName VARCHAR,
+    param_LastName VARCHAR,
+    param_Email VARCHAR,
+    param_Telephone1 VARCHAR,
+    param_NeedPasswordChange BOOLEAN,
+    param_IsLockedOut BOOLEAN,
+    param_LockoutEndTime TIMESTAMP,
+    param_IsActive BOOLEAN,
+    param_PasswordHash TEXT
+) RETURNS VOID AS $$
+DECLARE
+    new_user_account_id INTEGER;
+    user_count INTEGER;
+BEGIN
+    -- Check for unique UserName
+    SELECT COUNT(*) INTO user_count
+    FROM UserAccount
+    WHERE UserName = param_UserName;
+    
+    IF user_count > 0 THEN
+        RAISE EXCEPTION 'UserName % is already in use', param_UserName;
+    END IF;
+    
+    -- Check for unique Email
+    SELECT COUNT(*) INTO user_count
+    FROM UserAccount
+    WHERE Email = param_Email;
+    
+    IF user_count > 0 THEN
+        RAISE EXCEPTION 'Email % is already in use', param_Email;
+    END IF;
+    
+    -- Check for unique Telephone1
+    SELECT COUNT(*) INTO user_count
+    FROM UserAccount
+    WHERE Telephone1 = param_Telephone1;
+    
+    IF user_count > 0 THEN
+        RAISE EXCEPTION 'Telephone1 % is already in use', param_Telephone1;
+    END IF;
+
+    -- Insert into UserAccount
+    INSERT INTO UserAccount (
+        UserName, 
+        FirstName, 
+        LastName, 
+        Email, 
+        Telephone1, 
+        NeedPasswordChange, 
+        IsLockedOut, 
+        LockoutEndTime, 
+        IsActive
+    ) VALUES (
+        param_UserName, 
+        param_FirstName, 
+        param_LastName, 
+        param_Email, 
+        param_Telephone1, 
+        param_NeedPasswordChange, 
+        param_IsLockedOut, 
+        param_LockoutEndTime, 
+        param_IsActive
+    ) RETURNING UserAccountId INTO new_user_account_id;
+    
+    -- Insert into User_PasswordHistory
+    INSERT INTO User_PasswordHistory (
+        UserAccountId, 
+        PasswordHash, 
+        PasswordChangeDate, 
+        IsActual
+    ) VALUES (
+        new_user_account_id, 
+        param_PasswordHash, 
+        NOW(), 
+        TRUE
+    );
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Update_User_Account(
+    param_UserAccountId INTEGER,
+    param_UserName VARCHAR,
+    param_FirstName VARCHAR,
+    param_LastName VARCHAR,
+    param_Email VARCHAR,
+    param_Telephone1 VARCHAR,
+    param_NeedPasswordChange BOOLEAN,
+    param_IsLockedOut BOOLEAN,
+    param_LockoutEndTime TIMESTAMP,
+    param_IsActive BOOLEAN
+) RETURNS VOID AS $$
+BEGIN
+    UPDATE UserAccount
+    SET
+        UserName = param_UserName,
+        FirstName = param_FirstName,
+        LastName = param_LastName,
+        Email = param_Email,
+        Telephone1 = param_Telephone1,
+        NeedPasswordChange = param_NeedPasswordChange,
+        IsLockedOut = param_IsLockedOut,
+        LockoutEndTime = param_LockoutEndTime,
+        IsActive = param_IsActive
+    WHERE
+        UserAccountId = param_UserAccountId;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Update_User_PasswordHistory(
+    param_UserAccountId INTEGER,
+    param_PasswordHash TEXT
+) RETURNS VOID AS $$
+BEGIN
+    -- Set IsActual to FALSE for all previous password history entries of the user
+    UPDATE User_PasswordHistory
+    SET IsActual = FALSE
+    WHERE UserAccountId = param_UserAccountId AND IsActual = TRUE;
+    
+    -- Insert the new password history entry
+    INSERT INTO User_PasswordHistory (
+        UserAccountId, 
+        PasswordHash, 
+        PasswordChangeDate, 
+        IsActual
+    ) VALUES (
+        param_UserAccountId, 
+        param_PasswordHash, 
+        NOW(), 
+        TRUE
+    );
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Select_User_Account_By_UserName(
+	param_username character varying)
+    RETURNS TABLE(
+		useraccountid integer, 
+		username character varying, 
+		firstname character varying, 
+		lastname character varying, 
+		email character varying, 
+		telephone1 character varying,  
+		needpasswordchange boolean, 
+		islockedout boolean, 
+		lockoutendtime timestamp without time zone, 
+		isactive boolean, 
+		passwordHash text,
+		passwordchangeddate timestamp without time zone, 
+		isactual boolean
+	) 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+        RETURN QUERY SELECT * FROM (SELECT
+        ua.UserAccountId,
+        ua.UserName,
+		ua.Firstname,
+		ua.Lastname,															
+        ua.email,
+		ua.telephone1,
+        ua.NeedPasswordChange,
+        ua.IsLockedOut,
+	    ua.LockOutEndTime,
+        ua.IsActive,
+        Uph.PasswordHash,
+        Uph.PasswordChangeDate,	
+		Uph.IsActual	
+        FROM UserAccount AS ua
+        LEFT JOIN User_PasswordHistory AS Uph ON ua.UserAccountId = Uph.UserAccountId ORDER BY Uph.PasswordChangeDate DESC) As us
+        WHERE us.UserName = param_username or us.email = param_username LIMIT 1;
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_User_Account_By_Id(
+    param_UserAccountId INTEGER
+) RETURNS TABLE (
+    UserAccountId INTEGER,
+    UserName VARCHAR(255),
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(255),
+    Telephone1 VARCHAR(20),
+    NeedPasswordChange BOOLEAN,
+    IsLockedOut BOOLEAN,
+    LockoutEndTime TIMESTAMP,
+    IsActive BOOLEAN
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        ua.UserAccountId,
+        ua.UserName,
+        ua.FirstName,
+        ua.LastName,
+        ua.Email,
+        ua.Telephone1,
+        ua.NeedPasswordChange,
+        ua.IsLockedOut,
+        ua.LockoutEndTime,
+        ua.IsActive
+    FROM
+        UserAccount ua
+    WHERE
+        ua.UserAccountId = param_UserAccountId;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION Select_All_User_Accounts()
+RETURNS TABLE (
+    UserAccountId INTEGER,
+    UserName VARCHAR(255),
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Email VARCHAR(255),
+    Telephone1 VARCHAR(20),
+    NeedPasswordChange BOOLEAN,
+    IsLockedOut BOOLEAN,
+    LockoutEndTime TIMESTAMP,
+    IsActive BOOLEAN
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT
+        ua.UserAccountId,
+        ua.UserName,
+        ua.FirstName,
+        ua.LastName,
+        ua.Email,
+        ua.Telephone1,
+        ua.NeedPasswordChange,
+        ua.IsLockedOut,
+        ua.LockoutEndTime,
+        ua.IsActive
+    FROM
+        UserAccount ua;
+END;
+$$ LANGUAGE plpgsql;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Verify_User_Unlock(
+    param_useraccountid INTEGER,
+    param_maxinvalidattempts INTEGER,
+    param_invalidattemptstime INTERVAL,
+    param_loginlockouttime INTERVAL
+) RETURNS TABLE (
+    IsLockedOut BOOLEAN,
+    LockOutEndTime TIMESTAMP
+) LANGUAGE 'plpgsql'
+AS $$
+BEGIN
+    IF ((SELECT COUNT (*)
+        FROM (SELECT *
+              FROM User_ConnectionAttempt
+              WHERE useraccountid = param_useraccountid
+              ORDER BY logintime DESC LIMIT param_maxinvalidattempts) AS logins
+        WHERE issuccess = FALSE) >= param_maxinvalidattempts) 
+      AND (SELECT (SELECT MAX(logintime) - MIN(logintime)
+                 FROM (SELECT *
+                       FROM User_ConnectionAttempt
+                       WHERE issuccess = FALSE AND useraccountid = param_useraccountid
+                       ORDER BY logintime DESC LIMIT param_maxinvalidattempts) AS logins) < param_invalidattemptstime) 
+      AND (SELECT NOT issuccess
+           FROM User_ConnectionAttempt
+           WHERE useraccountid = param_useraccountid
+           ORDER BY logintime DESC LIMIT 1)
+      AND (SELECT CURRENT_TIMESTAMP AT TIME ZONE 'America/Costa_Rica' - (SELECT MIN(logintime)
+                            FROM (SELECT *
+                                FROM User_ConnectionAttempt
+                                WHERE issuccess = FALSE AND useraccountid = param_useraccountid
+                                ORDER BY logintime DESC LIMIT param_maxinvalidattempts) AS LOGINS) < param_invalidattemptstime) 
+    THEN 
+        UPDATE UserAccount 
+        SET IsLockedOut = TRUE, LockOutEndTime = (timezone('America/Costa_Rica', now()) + param_loginlockouttime) 
+        WHERE useraccountid = param_useraccountid;
+    END IF;
+
+    RETURN QUERY
+    SELECT IsLockedOut, LockOutEndTime
+    FROM UserAccount
+    WHERE useraccountid = param_useraccountid;
+END;
+$$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Select_Password_Policy_By_Id(
+	param_passwordpolicyid integer)
+    RETURNS SETOF sessionpasswordpolicy 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+	RETURN QUERY SELECT * FROM SessionPasswordPolicy WHERE passwordpolicyid = param_passwordpolicyid;
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Select_Connection_Policy_By_Id(
+	param_loginattemptpolicyid integer)
+    RETURNS SETOF sessionaccessattemptpolicy 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+	RETURN QUERY SELECT * FROM sessionaccessattemptpolicy WHERE loginattemptpolicyid = param_loginattemptpolicyid;
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Insert_Login_Attempt_User(
+	param_useraccountid integer,
+	param_issuccess boolean,
+	param_ipaddress inet,
+	param_applicationname text)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    INSERT INTO user_connectionattempt(useraccountid,issuccess,logintime,ipaddress, applicationname) VALUES(param_useraccountid, param_issuccess, timezone('America/Costa_Rica', now()), param_ipaddress, param_applicationname);
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+
+CREATE OR REPLACE FUNCTION public.Insert_Login_Attempt_Collaborator(
+    param_CollaboratorId integer,
+    param_issuccess boolean,
+    param_ipaddress inet,
+    param_applicationname text)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    INSERT INTO collaborator_connectionattempt(collaboratorid,issuccess,logintime,ipaddress, applicationname) VALUES(param_CollaboratorId, param_issuccess, timezone('America/Costa_Rica', now()), param_ipaddress, param_applicationname);
+END;
+$BODY$;
+
+--------------------------------------------------------------------------------------------
+

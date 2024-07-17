@@ -1,0 +1,73 @@
+﻿@media only screen and (min-width:600px ) {
+    .container {
+        width: 600px;
+        overflow-x: auto;
+    }
+
+    .ui-jqgrid .ui-jqgrid-htable th {
+        height: 25px;
+        padding: 0 1px 0 1px;
+        font-weight: bold;
+    }
+
+    .ui-jqgrid table.ui-jqgrid-htable {
+        height: 25px;
+    }
+
+    .ui-jqgrid .ui-jqgrid-htable .ui-th-div {
+        height: 25px;
+        margin-top: 5px;
+    }
+
+    .ui-jqgrid {
+        width: 100% !important;
+        font-size: 13px;
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    }
+
+        .ui-jqgrid .ui-jqgrid-pager .ui-pager-control {
+            height: 35px;
+        }
+
+    .ui-state-default, .ui-widget-content .ui-state-default {
+        background: #e9ecef;
+    }
+
+    .ui-state-highlight, .ui-widget-content .ui-state-highlight {
+        background: #e6e6e6;
+        border: 2px solid #448346;
+        color: #363636;
+    }
+
+    .ui-jqgrid .ui-pg-selbox {
+        height: 25px;
+    }
+
+    .ui-jqgrid .ui-pg-input {
+        height: 25px;
+    }
+
+    #fbox_jqGrid tr {
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    #jqContextMenu ul {
+        width: 200px !important;
+        height: 80px !important;
+    }
+
+    .my-column {
+        height: 50px; 
+    }
+   
+    #divTableEmployees .ui-jqgrid .ui-jqgrid-view {
+        width: 100% !important;
+        height: 800px;
+    }
+
+    #divTableAttenmend .ui-jqgrid .ui-jqgrid-view {
+        width: 100% !important;
+        height: 450px;
+    }
+}

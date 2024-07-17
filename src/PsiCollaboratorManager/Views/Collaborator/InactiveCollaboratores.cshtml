@@ -1,0 +1,312 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_basicLarge.cshtml";
+}
+
+<link href="~/Content/Css/Collaborator/Index.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/ui.multiselect.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/ui.jqgrid.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/JqGridStyle.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+
+
+<div id="TableContainer" class="fieldset">
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+<div id="DetailsModal" class="modalContainer">
+    @Html.Partial("../Collaborator/DetailsModal")
+</div>
+<script src="~/Scripts/Lib/Modal.js"></script>
+
+<script src="~/Scripts/JqGrid/jquery.min.js"></script>
+<script src="~/Scripts/JqGrid/jquery-ui.min.js"></script>
+<script src="~/Scripts/JqGrid/ui.multiselect.js"></script>
+<script src="~/Scripts/JqGrid/grid.locale-es.js"></script>
+<script src="~/Scripts/JqGrid/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/JqGrid/context-menu.js"></script>
+<script src="~/Scripts/Collaborator/DetailsInfoCollaborator.js"></script>
+<script type="text/javascript" language="javascript" src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+
+<script>
+        $(function () {
+
+            $grid = $("#jqGrid").jqGrid({
+                url: '@Url.Action("GetData", "Collaborator", new { collaboratorActive = false})',
+                mtype: 'GET',
+                datatype: 'json',
+                shrinkToFit: false,
+                height: 770,
+                colModel: [
+                    {label: 'Id', name: 'CollaboratorId', width: 50, minWidth: 20, editable: false, key: true, hidden: true, align: 'center',},
+                    {label: 'Nombre', name: 'FirstName', width: 200, minWidth: 200, editable: false, key: true, align: 'center', headerClasses: 'my-column', cellattr: function () { return 'class="my-column"'; }},
+                    { label: 'Apellidos', name: 'LastName', width: 200, minWidth: 200   },
+                    { label: 'Cédula', name: 'DNICollaborator', width: 200, minWidth: 200   },
+                    { label: 'Operador', name: 'OperatorNumber', align: 'center', width: 200, minWidth: 200  },
+                    {label: 'Nacimiento', name: 'DateOfBirth', formatter: 'date', align: 'center', width: 200, minWidth: 200, formatoptions: { newformat: 'd/m/Y' },
+                        searchoptions: {
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    id: 'orderDate_datePicker',
+                                    dateFormat: 'yy-mm-dd',
+                                    maxDate: new Date(2030, 0, 1),
+                                    showOn: 'focus'
+                                });
+                            }
+                        }
+                    },
+                    {label: 'Dirección', name: 'AddressLine', width: 200, minWidth: 200, hidden: true},
+                    { label: 'Teléfono', name: 'Telephone1', align: 'center', width: 200, minWidth: 200 },
+                    { label: 'Teléfono 2', name: 'Telephone2', align: 'center', width: 200, minWidth: 200, hidden: true},
+                    { label: 'Genero', name: 'GenderName', width: 200, minWidth: 200 },
+                    { label: 'Provincia', name: 'ProvinceName', width: 200, minWidth: 200  },
+                    { label: 'Cantón', name: 'CantonName', width: 200, minWidth: 200  },
+                    { label: 'Distrito', name: 'DistrictName', width: 200, minWidth: 200  },
+                    {label: 'E-mail', name: 'Email', width: 200, minWidth: 200, formatter: 'email'},
+                    {label: "Hijos", name: 'Parent', width: 100, minWidth: 100, align: 'center', formatter: "checkbox", formatoptions: { disabled: true }},
+                ],
+
+                onInitGrid: function () {
+                    $("<div class='alert-info-grid'>No Record(s) Found</div>").insertAfter($(this).parent());
+                },
+
+                loadComplete: function () {
+                    var $this = $(this), p = $this.jqGrid("getGridParam");
+                    if (p.reccount === 0) {
+                        $this.hide();
+                        $this.parent().siblings(".alert-info-grid").show();
+                    } else {
+                        $this.show();
+                        $this.parent().siblings(".alert-info-grid").hide();
+                    }
+                },
+
+
+                resizeStop: function (newWidth, index) {
+                    var colModel = $(this).jqGrid('getGridParam', 'colModel');
+                    var column = colModel[index];
+
+                    console.log(newWidth);
+                    if (column.width < column.minWidth) {
+                        $(this).jqGrid('setGridParam', {
+                            colModel: colModel
+                        }).trigger('resize');
+                    }
+                },
+                ondblClickRow: function (rowId) {
+                    var rowData = jQuery(this).getRowData(rowId);
+                    var id = rowData['CollaboratorId'];
+                    GetCollaboratorDetails(id, "DetailsModal");
+                },
+
+                loadonce: true,
+                shrinkToFit: true,
+                altRows: true,
+                pager: '#jqGridPager',
+                rowNum: 33,
+                rowList: [10, 20, 30, 50],
+                viewrecords: true,
+                rownumbers: true,
+                sortable: true,
+                autowidth: true,
+                autoresizeOnLoad: true,
+                autoresizeOnResize: true,
+                gridComplete: initGrid,
+                height: '100%'
+            });
+
+            $(window).on("resize", function () {
+                $("#jqGrid").jqGrid("setGridWidth", $("#jqGrid").closest(".ui-jqgrid").parent().width());
+            });
+
+            $('#jqGrid').navGrid('#jqGridPager',
+                { edit: false, add: false, del: false, search: true, refresh: true, view: false, position: "left", cloneToTop: true }, { multipleSearch: true, multipleGroup: true }
+            );
+
+
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    buttonicon: "ui-icon-calculator",
+                    title: "Column chooser",
+                    caption: "Columnas",
+                    position: "last",
+                    onClickButton: function () {
+                        jQuery("#jqGrid").jqGrid('columnChooser', {
+                            done: function (numColumn) {
+                                $("#jqGrid").jqGrid('setGridParam', {
+                                }).trigger('resize');
+                            }
+                        });
+                    }
+                });
+
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    buttonicon: "ui-icon-mail-closed",
+                    title: "Send Mail",
+                    caption: "Enviar Correo",
+                    position: "last",
+
+                });
+
+
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    buttonicon: "ui-icon-pencil",
+                    title: "Edit",
+                    caption: "Editar",
+                    position: "last",
+                    onClickButton: editRow
+                });
+
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    buttonicon: "ui-icon-trash",
+                    title: "Delete",
+                    caption: "Eliminar",
+                    position: "last",
+                    onClickButton: deleteRow
+                });
+
+            $('#jqGrid').navButtonAdd('#jqGridPager',
+                {
+                    buttonicon: "ui-icon-document",
+                    title: "ExportExcel",
+                    caption: "Exp Excel",
+                    position: "last",
+                    onClickButton: expExel
+
+                });
+        });
+
+        function expExel() {
+            $("#jqGrid").jqGrid("exportToExcel", {
+                includeLabels: true,
+                includeGroupHeader: true,
+                includeFooter: true,
+                fileName: "jqGridExport.xlsx",
+                maxlength: 40
+            })
+        }
+
+        function resizeJqGridWidth(grid_id, div_id, width) {
+            $(window).bind('resize', function () {
+                $('#' + grid_id).setGridWidth(width, true);
+                $('#' + grid_id).setGridWidth($('#' + div_id).width(), true);
+            }).trigger('resize');
+        }
+
+        function initGrid() {
+            $(".jqgrow", "#jqGrid").contextMenu('contextMenu', {
+                bindings: {
+                    'edit': function (t) {
+                        editRow();
+                    },
+                    'delete': function (t) {
+                        deleteRow();
+                    }
+                    ,
+                    'details': function (t) {
+                        displayDetails();
+                    }
+                    ,
+                    'medicalCondition': function (t) {
+                        displayMedicalCondition();
+                    }
+                },
+                onContextMenu: function (event, menu) {
+                    var rowId = $(event.target).parent("tr").attr("id")
+                    var grid = $("#jqGrid");
+                    grid.setSelection(rowId);
+
+                    return true;
+                }
+            });
+        }
+
+        function addRow() {
+                var grid = $("#jqGrid");
+                var editUrl = '@Url.Action("Create", "Employee")';
+                    var fullUrl = window.location.protocol + '//' + window.location.host + editUrl;
+                    window.location.href = fullUrl;
+        }
+
+        function displayDetails() {
+            var grid = $("#jqGrid");
+            var rowKey = grid.getGridParam("selrow");
+            if (rowKey) {
+                var id = $("#jqGrid").jqGrid('getCell', rowKey, 'employeeid');
+                getEmployeeDetails(id);
+            }
+        }
+
+        function displayMedicalCondition() {
+            var grid = $("#jqGrid");
+            var rowKey = grid.getGridParam("selrow");
+            if (rowKey) {
+                var id = $("#jqGrid").jqGrid('getCell', rowKey, 'employeeid');
+                getEmergencyDeatils(id);
+            }
+        }
+
+        function editRow() {
+
+            var grid = $("#jqGrid");
+            var rowKey = grid.getGridParam("selrow");
+            if (rowKey) {
+
+                var key = $("#jqGrid").jqGrid('getCell', rowKey, 'CollaboratorId');
+                var editUrl = '@Url.Action("Edit", "Collaborator", new { id = "_rowId_" })';
+                editUrl = editUrl.replace("_rowId_", key);
+                var fullUrl = window.location.protocol + '//' + window.location.host + editUrl;
+                window.location.href = fullUrl;
+            }
+            else {
+                alert("No ha seleccionado ningún colaborador ");
+            }
+        }
+
+        function deleteRow() {
+            var grid = $("#jqGrid");
+            var rowKey = grid.getGridParam("selrow");
+            if (rowKey) {
+                var idCollaborator = grid.jqGrid('getCell', rowKey, 'CollaboratorId');
+                deleteCollaborator(idCollaborator);
+            } else {
+                alert("No ha seleccionado ningún colaborador");
+            }
+        }
+
+        function deleteCollaborator(id) {
+            $.ajax({
+                url: "/Collaborator/Delete",
+                type: "POST",
+                data: { id: id },
+                success: function (result) {
+                    if (result.success) {
+                        alert("Colaborador eliminado correctamente.");
+                        location.reload();
+                    } else {
+                        new Messi("Este colaborador tiene otras dependencias, por favor quitarlas para poder eliminar al colaborador", {
+                            modal: true,
+                            buttons: [
+                                { id: 0, label: 'Ok', val: 'X' }
+                            ]
+                        });
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert("Ocurrió un error al eliminar el empleado");
+                }
+            });
+        }
+
+        resizeJqGridWidth("jqGrid", "divTableEmployees", "500");
+</script>
+
+
+<link href="~/Scripts/MessiJS/messi.min.css" rel="stylesheet" />
+<script src="~/Scripts/MessiJS/messi.min.js"></script>
+<script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>

@@ -1,0 +1,7 @@
+﻿.required::after {
+    content: "*";
+    color: red;
+}
+textarea {
+    resize: none !important;
+}

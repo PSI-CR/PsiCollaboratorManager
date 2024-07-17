@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "_doubleMediumLarge";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Css/Layouts/_basicMedium.css" rel="stylesheet" />
+<link href="~/Content/Css/Layouts/_basicLarge.css" rel="stylesheet" />
+<link href="~/Content/Css/Layouts/_doubleMediumLarge.css" rel="stylesheet" />
+
+<section class="doubleMediumLargeSection">
+    <div class="basicMediumMain">
+        <div class="basicMediumMainHeader">
+            <h3>Medium</h3>
+            <img id="SectionHeaderCrown" src="~/Images/crownWhite.png" />
+        </div>
+        <div class="basicMediumMainContent">
+        </div>
+    </div>
+    <div class="basicLargeMain">
+        <div class="basicLargeMainHeader">
+            <h3>Large</h3>
+            <img id="SectionHeaderCrown" src="~/Images/crownWhite.png" />
+        </div>
+        <div class="basicLargeMainContent">
+            @RenderBody()
+        </div>
+    </div>
+</section>
+

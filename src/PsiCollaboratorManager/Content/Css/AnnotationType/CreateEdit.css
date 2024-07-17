@@ -1,0 +1,33 @@
+﻿#SaveAnnotationTypeForm{
+    width:100%;
+    height:100%;
+    padding: 10px;
+    display:grid;
+    grid-template-rows:1fr 60px;
+    gap:10px;
+}
+#SaveAnnotationTypeContent {
+    display: grid;
+    grid-template-rows: 40px 1fr;
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+    #SaveAnnotationTypeContent h6 {
+        color: red;
+    }
+#AnnotationTypeTitle {
+    display: flex;
+    justify-content: space-between;
+}
+#AnnotationTypeRow {
+    display: grid;
+    grid-template-rows: 80px 40px;
+    grid-template-columns: 69% 29%;
+    gap:10px;
+}
+#SaveAnnotationTypeFooter {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 50px 5px 50px;
+}

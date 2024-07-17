@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "_doubleLongBigPhoto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Css/Layouts/_basicLong.css" rel="stylesheet" />
+<link href="~/Content/Css/Layouts/_basicBig.css" rel="stylesheet" />
+<link href="~/Content/Css/Layouts/_doubleLongBig.css" rel="stylesheet" />
+
+<section class="doubleLongBigSection">
+    <div class="basicLongMain">
+        <div class="basicLongMainHeader messi-titlebox anim error">
+            <h3>@ViewBag.DoubleTitleLeft</h3>
+            <img id="SectionHeaderCrown" src="~/Images/crownWhite.png" />
+        </div>
+        <div class="basicLongMainContent">
+            @RenderSection("LeftContent", required: false)
+        </div>
+    </div>
+    <div class="basicBigMain">
+        <div class="basicBigMainHeader messi-titlebox anim error">
+            <h3 id="SectionHeaderTitle">@ViewBag.DoubleTitleRight</h3>
+            <img class="fieldset" id="SectionHeaderPicture" src="~/Images/DefaultCollaborator.jpg">
+        </div>
+        <div class="basicBigMainContent">
+            @RenderSection("RightContent", required: false)
+        </div>
+    </div>
+    @RenderBody()
+</section>

@@ -1,0 +1,142 @@
+﻿.scheduleForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+#ScheduleInfoSection {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#ScheduleSelectionSection {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.scheduleSectionFlex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
+}
+
+#ScheduleSelectionSectionFields {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+}
+
+#ScheduleSelectionSection .form-control {
+    height: 40px;
+}
+
+.formField {
+    width: 80%;
+}
+
+.formFieldHour {
+    width: 140px;
+}
+
+#ScheduleDaysHoursSection {
+    padding: 20px;
+    display: grid;
+    grid-template-rows: 1fr 40px;
+}
+
+    #ScheduleDaysHoursSection table {
+        text-align: center;
+    }
+
+    #ScheduleDaysHoursSection tr {
+        height: 40px;
+        padding: 10px;
+        border-bottom: 1px solid #aaaaaa;
+    }
+
+    #ScheduleDaysHoursSection th {
+        height: 40px;
+        padding: 10px;
+        border-bottom: 1px solid #444444;
+    }
+
+
+
+    #ScheduleDaysHoursSectionTotal input {
+        width: 90px;
+        margin-left: 5px;
+    }
+
+#tableScheduleCreate {
+    width: 100%;
+    font-size: 18px;
+    text-align: left;
+}
+
+    #tableScheduleCreate thead tr {
+        background-color: #7b7b7b;
+        color: #ffffff;
+        text-align: left;
+        font-weight: bold;
+    }
+
+    #tableScheduleCreate th,
+    #tableScheduleCreate td {
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+    }
+
+    #tableScheduleCreate tbody tr {
+        border-bottom: 1px solid #dddddd;
+        border-bottom: 1px solid #c1c1c1;
+    }
+
+        #tableScheduleCreate tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        #tableScheduleCreate tbody tr:last-of-type {
+            border-bottom: 2px solid #7b7b7b;
+        }
+
+        #tableScheduleCreate tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    #tableScheduleCreate th {
+        background-color: #7b7b7b;
+        color: white;
+    }
+
+    #tableScheduleCreate tbody tr td:last-child {
+        text-align: center;
+    }
+
+#ScheduleFooterSection {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    padding: 25px;
+    justify-content: end;
+}
+
+.scheduleFooter {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 50px 5px 50px;
+}
+
+#CreateScheduleTable {
+    padding: 10px;
+}

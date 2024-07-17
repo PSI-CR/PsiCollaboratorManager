@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "DetailsModal";
+    Layout = "~/Views/Shared/_modalSmallPhoto.cshtml";
+}
+<link href="~/Content/Css/Collaborator/DetailsModal.css" rel="stylesheet" />
+<div class="detailsContent">
+    <div class="fieldset tab-nav">
+        <ul class="nav nav-tabs" id="tabContent">
+            <li class="active"><a href="#informationPersonal" data-toggle="tab"><div>Personal</div></a></li>
+            <li><a href="#informationContact" data-toggle="tab"><div>Contacto</div></a></li>
+            <li><a href="#informationDirection" data-toggle="tab"><div>Dirección</div></a></li>
+            <li><a href="#informationBank" data-toggle="tab"><div>Bancaria</div></a></li>
+            <li><a href="#informationPsi" data-toggle="tab"><div>PSI</div></a></li>
+            <li><a href="#informationConditionHealth" data-toggle="tab"><div>Salud</div></a></li>
+            <li><a href="#informationContactEmergency" data-toggle="tab"><div>Contacto Emergencia</div></a></li>
+        </ul>
+    </div>
+    <div class="tab-content fieldset">
+        <div class="tab-pane active" id="informationPersonal">
+            <div class="contentTitle">
+                <h5>Informacion Personal</h5>
+            </div>
+            <div class="contentInformation">
+                <div>
+                    <strong>Cédula</strong>
+                    <div id="modal-DNICollaborator"></div>
+                </div>
+                <div>
+                    <strong>Fecha Nacimiento</strong>
+                    <div id="modal-dateofbirth"></div>
+                </div>
+                <div>
+                    <strong>Hijos</strong>
+                    <div id="modal-parent"></div>
+                </div>
+                <div>
+                    <strong>Casado</strong>
+                    <div id="modal-maritalstatusid"></div>
+                </div>
+                <div>
+                    <strong>Género</strong>
+                    <div id="modal-gender"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="informationContact">
+            <div class="contentTitle">
+                <h5>Contacto</h5>
+            </div>
+            <div class="contentInformation">
+                <div>
+                    <strong>Teléfono</strong>
+                    <div id="modal-telephone1"></div>
+                </div>
+                <div>
+                    <strong>Otro Teléfono</strong>
+                    <div id="modal-telephone2"></div>
+                </div>
+                <div>
+                    <strong>E-Mail</strong>
+                    <div id="modal-email"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="informationDirection">
+            <div class="contentTitle">
+                <h5>Direccion</h5>
+            </div>
+            <div class="contentInformation">
+                <div>
+                    <strong>Provincia</strong>
+                    <div id="modal-province"></div>
+                </div>
+                <div>
+                    <strong>Canton</strong>
+                    <div id="modal-canton"></div>
+                </div>
+                <div>
+                    <strong>Distrito</strong>
+                    <div id="modal-district"></div>
+                </div>
+                <div>
+                    <strong>Dirección</strong>
+                    <div id="modal-addressline"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="informationBank">
+            <div class="contentTitle">
+                <h5>Bancario</h5>
+            </div>
+            <div class="contentInformation">
+                <div>
+                    <strong>Banco</strong>
+                    <div id="modal-bankname"></div>
+                </div>
+                <div>
+                    <strong>Tipo de moneda</strong>
+                    <div id="modal-currencytypename"></div>
+                </div>
+                <div>
+                    <strong>Número de cuenta</strong>
+                    <div id="modal-numberbankaccount"></div>
+                </div>
+                <div>
+                    <strong>IBAN</strong>
+                    <div id="modal-ibanaccount"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="informationPsi">
+            <div class="contentTitle">
+                <h5>Informacion PSI</h5>
+            </div>
+            <div class="contentInformation">
+                <div>
+                    <strong>Número Operador</strong>
+                    <div id="modal-operatornum"></div>
+                </div>
+                <div>
+                    <strong>Código RFID</strong>
+                    <div id="modal-rfidcode"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="informationConditionHealth">
+            <div class="contentTitle">
+                <h5>Condición de salud</h5>
+            </div>
+            <div class="contentInformation">
+
+                <div>
+                    <strong>Padecimientos</strong>
+                    <div id="modal-diseases"></div>
+                </div>
+                <div>
+                    <strong>Medicación</strong>
+                    <div id="modal-takingmedications"></div>
+                </div>
+                <div>
+                    <strong>Nota médica</strong>
+                    <div id="modal-note"></div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="informationContactEmergency">
+            <div class="contentTitle">
+                <h5>Contactos de Emergencia</h5>
+            </div>
+            <div class="contentInformation">
+                <table class="emergencyContactsTable">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Relación</th>
+                            <th>Teléfono</th>
+                            <th>Teléfono2</th>
+                        </tr>
+                    </thead>
+                    <tbody class="emergencyContactsTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@*<script src="~/Scripts/Collaborator/DetailsInfoCollaborator.js"></script>*@

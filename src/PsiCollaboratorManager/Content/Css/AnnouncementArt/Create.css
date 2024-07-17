@@ -1,0 +1,53 @@
+﻿#CreateAnnouncementArtForm {
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+#CreateAnnouncementArtContent {
+    margin: 5px;
+    padding: 5px;
+    height: calc(100% - 90px);
+    width: 99%;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+#CreateAnnouncementArtImage {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap:5px;
+}
+#CreateAnnouncementArtImage img {
+    width: 600px;
+    height: 200px;
+}
+#CreateAnnouncementArtImage input {
+    width: 450px;
+    height:30px;
+    overflow:visible;
+}
+#CreateAnnouncementArtFields {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+    #CreateAnnouncementArtFields textarea {
+        resize: none;
+        width: 200px;
+    }
+    #CreateAnnouncementArtFields input {
+        width:200px;
+    }
+#CreateAnnouncementArtFooter {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    padding: 5px 50px 5px 50px;
+    height: 60px;
+    width: 99%;
+}

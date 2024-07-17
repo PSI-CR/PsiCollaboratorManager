@@ -1,0 +1,60 @@
+﻿#EditAnnouncementArtForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#EditAnnouncementArtContent {
+    margin: 5px;
+    padding: 5px;
+    height: calc(100% - 90px);
+    width: 99%;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+#EditAnnouncementArtImage {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#EditAnnouncementArtImage img {
+    width: 600px;
+    height: 200px;
+}
+
+#EditAnnouncementArtImage input {
+    width: 450px;
+    height: 30px;
+    overflow: visible;
+}
+
+#EditAnnouncementArtFields {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+#EditAnnouncementArtFields textarea {
+    resize: none;
+    width: 200px;
+}
+#EditAnnouncementArtFields input {
+    width: 200px;
+}
+
+#EditAnnouncementArtFooter {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    padding: 5px 50px 5px 50px;
+    height: 60px;
+    width: 99%;
+}

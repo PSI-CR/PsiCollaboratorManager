@@ -1,0 +1,128 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_basicSmall.cshtml";
+}
+<link href="~/Content/Css/Schedule/Index.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/ui.multiselect.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/ui.jqgrid.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/JqGridStyle.css" rel="stylesheet" />
+
+<div id="TableContainer" class="fieldset">
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+<script src="~/Scripts/JqGrid/jquery.min.js"></script>
+<script src="~/Scripts/JqGrid/jquery-ui.min.js"></script>
+<script src="~/Scripts/JqGrid/ui.multiselect.js"></script>
+<script src="~/Scripts/JqGrid/grid.locale-es.js"></script>
+<script src="~/Scripts/JqGrid/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/JqGrid/context-menu.js"></script>
+<script src="~/Scripts/Schedule/ScheduleProcess.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+
+<script>
+    $(function () {
+        $grid = $("#jqGrid").jqGrid({
+            url: '@Url.Action("GetData", "Schedule")',
+            mtype: 'GET',
+            datatype: 'json',
+            shrinkToFit: false,
+            colNames: ['Id', 'Nombre', 'Jornada', 'Descripcion', 'Jornada Acumulativa'],
+            colModel: [
+                { name: 'ScheduleId', index: 'Id', width: 36, hidden: true, align: 'center' },
+                { name: 'ScheduleName', index: 'Nombre', editable: true, align: 'center', editrules: { required: true }, width: 160 },
+                { name: 'workingdayname', index: 'Jornada', width: 160, editable: true, align: 'center', editrules: { required: true } },
+                { name: 'description', index: 'Descripcion', width: 461, editable: true, align: 'center', editrules: { required: true } },
+                { name: 'workingdayaccumulative', index: 'Jornada Acumulativa', width: 166, editable: true, align: 'center', editrules: { required: true } }
+            ],
+
+            onInitGrid: function () {
+                $("<div class='alert-info-grid'>No Record(s) Found</div>").insertAfter($(this).parent());
+            },
+
+            loadComplete: function () {
+                var $this = $(this), p = $this.jqGrid("getGridParam");
+                if (p.reccount === 0) {
+                    $this.hide();
+                    $this.parent().siblings(".alert-info-grid").show();
+                } else {
+                    $this.show();
+                    $this.parent().siblings(".alert-info-grid").hide();
+                }
+            },
+
+            resizeStop: function (newWidth, index) {
+                var colModel = $(this).jqGrid('getGridParam', 'colModel');
+                var column = colModel[index];
+
+                console.log(newWidth);
+                if (column.width < column.minWidth) {
+                    $(this).jqGrid('setGridParam', {
+                        colModel: colModel
+                    }).trigger('resize');
+                }
+            },
+
+            ondblClickRow: function (rowId) {
+                var rowData = jQuery(this).getRowData(rowId);
+                var id = rowData['ScheduleId'];
+                window.location.href = '/Schedule/Edit/?scheduleId=' + id;
+            },
+
+            loadonce: true,
+            shrinkToFit: true,
+            altRows: true,
+            pager: '#jqGridPager',
+            rowNum: 10,
+            rowList: [10, 20, 30, 50],
+            viewrecords: true,
+            rownumbers: true,
+            sortable: true,
+            autowidth: true,
+            autoresizeOnLoad: true,
+            autoresizeOnResize: true,
+            gridComplete: initGrid,
+            height: '100%'
+
+        });
+
+        $(window).on("resize", function () {
+            $("#jqGrid").jqGrid("setGridWidth", $("#jqGrid").closest(".ui-jqgrid").parent().width());
+        });
+
+        $('#jqGrid').navGrid('#jqGridPager',
+            { edit: false, add: false, del: false, search: true, refresh: true, view: false, position: "left", cloneToTop: true }, { multipleSearch: true, multipleGroup: true }
+        );
+
+        $('#jqGrid').navButtonAdd('#jqGridPager',
+            {
+                buttonicon: "ui-icon-calculator",
+                title: "Column chooser",
+                caption: "Columnas",
+                position: "last",
+                onClickButton: function () {
+                    jQuery("#jqGrid").jqGrid('columnChooser', {
+                        done: function (numColumn) {
+                            $("#jqGrid").jqGrid('setGridParam', {}).trigger('resize');
+                        }
+                    });
+                }
+            }
+        );
+
+        $('#jqGrid').navButtonAdd('#jqGridPager',
+            {
+                buttonicon: "ui-icon-plusthick",
+                title: "Add",
+                caption: "Agregar",
+                position: "last",
+                onClickButton: addRow
+            }
+        );
+        
+    });
+
+</script>

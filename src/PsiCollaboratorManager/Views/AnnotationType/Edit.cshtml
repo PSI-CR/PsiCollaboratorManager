@@ -1,0 +1,46 @@
+﻿@model PSIEmployeeManagement.Models.Annotations.AnnotationTypeModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_basicSmall.cshtml";
+}
+
+<link href="~/Content/Css/AnnotationType/CreateEdit.css" rel="stylesheet" />
+
+@using (Html.BeginForm("Edit", "AnnotationType", FormMethod.Post, new { enctype = "multipart/form-data", id = "SaveAnnotationTypeForm" }))
+{
+    @Html.HiddenFor(model => model.AnnotationTypeId);
+    <div id="SaveAnnotationTypeContent" class="fieldset">
+        <div id="AnnotationTypeTitle">
+            <h4>Anotación</h4>
+            <h6>* Datos requeridos</h6>
+        </div>
+        <div id="AnnotationTypeRow">
+            <div>
+                @Html.LabelFor(model => model.TypeName, htmlAttributes: new { @class = "required" })
+                @Html.TextBoxFor(model => model.TypeName, htmlAttributes: new { @class = "form-control", placeholder = "Nombre de anotación", title = "Favor ingrese el Nombre de la anotración", required = "" })
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Percentage, htmlAttributes: new { @class = "required" })
+                @Html.TextBoxFor(model => model.Percentage, htmlAttributes: new { @class = "form-control", placeholder = "Porcentaje", title = "Favor ingrese el Porcentaje", required = "" })
+            </div>
+            <div>
+                @Html.CheckBoxFor(model => model.VisibleToCollaborator, new { id = "rbtnYesTest123" })
+                <label for="rbtnYesTest123" title="Favor seleccione una opción">Visible para el colaborador</label>
+            </div>
+            <div>
+                @Html.CheckBoxFor(model => model.ValueInScore, new { id = "rbtnValueInScore" })
+                <label for="rbtnValueInScore" title="Favor seleccione una opción">Valor en la Nota</label>
+            </div>
+        </div>
+    </div>
+    <div id="SaveAnnotationTypeFooter" class="fieldset">
+        <button type="button" onclick="window.location.href='/AnnotationType/Index/'" class="btn btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 width="25" height="25" fill="currentColor" class="bi-arrow-bar-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z" />
+            </svg>
+            Regresar
+        </button>
+        <input type="submit" value="Guardar" class="btn btn-success">
+    </div>
+}

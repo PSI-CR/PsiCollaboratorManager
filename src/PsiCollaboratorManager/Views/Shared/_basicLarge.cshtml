@@ -1,0 +1,18 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/Css/Layouts/_basicLarge.css" rel="stylesheet" />
+
+<section class="basicLargeSection">
+    <div class="basicLargeMain">
+        <div class="basicLargeMainHeader messi-titlebox anim error">
+            <h3>@ViewBag.BasicTitle</h3>
+            <img id="SectionHeaderCrown" src="~/Images/crownWhite.png" />
+        </div>
+        <div class="basicLargeMainContent">
+            @RenderBody()
+        </div>
+    </div>
+</section>
