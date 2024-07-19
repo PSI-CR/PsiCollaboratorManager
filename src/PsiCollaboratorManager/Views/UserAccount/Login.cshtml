@@ -1,4 +1,4 @@
-﻿@model PsiCollaboratorManager.Models.LoginModel
+﻿@model PsiCollaboratorManager.Models.UserAccount.LoginModel
 @using PsiCollaboratorManager.Models;
 @{
     Layout = null;
@@ -52,7 +52,7 @@
                 var message = (MessageModel)TempData["UserMessage"];
                 <strong>@message.Title</strong>
                 <p>@message.Message</p>
-        }
+            }
         </div>
     </div>
 </body>

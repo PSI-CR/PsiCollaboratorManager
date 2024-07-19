@@ -1,13 +1,17 @@
-﻿using PsiCollaborator.Data;
+﻿using AutoMapper;
+using PsiCollaborator.Data;
 using PsiCollaborator.Data.LoginAttemptPolicy;
 using PsiCollaborator.Data.LoginAttemptUser;
 using PsiCollaborator.Data.PasswordPolicy;
 using PsiCollaborator.Data.PasswordUtilities;
 using PsiCollaborator.Data.UserAccount;
+using PsiCollaboratorManager.Mapping;
 using PsiCollaboratorManager.Models;
+using PsiCollaboratorManager.Models.UserAccount;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -21,14 +25,99 @@ namespace PsiCollaboratorManager.Controllers
         private IUserAccountRepository _userAccountRepository;
         private ILoginAttemptUserRepository _loginAttemptUserRepository;
         private ILoginAttemptPolicyRepository _loginAttemptPolicyRepository;
+        private UserAccountMapper _userAccountMapper;
+        private IMapper _mapper;
+        private const string DEFAULT_PASSWORD = "psi123";
         public UserAccountController()
         {
+            var configuration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<IUserAccount, UserAccountModel>();
+                cfg.CreateMap<UserAccountModel, IUserAccount>();
+            });
             _passwordPolicyRepository = new PasswordPolicyRepository();
             _loginAttemptPolicyRepository = new LoginAttemptPolicyRepository();
             _userAccountRepository = new UserAccountRepository();
             _loginAttemptUserRepository = new LoginAttemptUserRepository();
+            _userAccountMapper = new UserAccountMapper();
+            _mapper = configuration.CreateMapper();
         }
-        // GET: UserAccount
+        public ActionResult Index()
+        {
+            ViewBag.BasicTitle = "Usuarios";
+            return View();
+        }
+        public ActionResult GetAll()
+        {
+            IEnumerable<IUserAccount> userAccounts = _userAccountRepository.GetAll();
+            List<UserAccountModel> userAccountModels = _mapper.Map<List<UserAccountModel>>(userAccounts);
+            return Json(new { rows = userAccountModels }, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Details(int userAccountId)
+        {
+            ViewBag.BasicTitle = "Detalles Usuario";
+            IUserAccount userAccount = _userAccountRepository.GetById(userAccountId);
+            UserAccountModel userAccountModel = _mapper.Map<UserAccountModel>(userAccount);
+            return View(userAccountModel);
+        }
+        public ActionResult Create()
+        {
+            ViewBag.BasicTitle = "Agregar Usuario";
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(UserAccountModel userAccountModel)
+        {
+            try
+            {
+                string userName = getUserName(userAccountModel.FirstName, userAccountModel.LastName);
+                IUserAccountInsert userAccount = _userAccountMapper.Fill(userAccountModel, userName, DEFAULT_PASSWORD);
+                _userAccountRepository.Insert(userAccount);
+            }
+            catch (Exception ex)
+            {
+                TempData["UserMessage"] = new MessageModel() { CssClassName = "alert-danger", Title = "Error!", Message = ex.Message };
+                return RedirectToAction("Create");
+            }
+            return RedirectToAction("Index");
+        }
+        private string getUserName(string firstName, string lastName)
+        {
+            string fullLastName = lastName;
+            string[] names = fullLastName.Split(' ');
+            string firstLastName = names[0];
+            string word = firstName.ToLower();
+            char firstLetter = word[0];
+            var userN = firstLetter + firstLastName.ToLower();
+            IEnumerable<IUserAccount> users = _userAccountRepository.GetAll();
+
+            IEnumerable<IUserAccount> repeatedUsers = users.Where(x => x.UserName.ToLower().Contains(userN.ToLower()));
+            if(repeatedUsers.Count() == 0) return userN; //Es unico
+            userN += repeatedUsers.Count(); //agrega un contador para hacerlo unico
+            return userN;
+        }
+
+        public ActionResult Edit(int userAccountId)
+        {
+            ViewBag.BasicTitle = "Detalles Usuario";
+            IUserAccount userAccount = _userAccountRepository.GetById(userAccountId);
+            UserAccountModel userAccountModel = _mapper.Map<UserAccountModel>(userAccount);
+            return View(userAccountModel);
+        }
+        [HttpPost]
+        public ActionResult Edit(UserAccountModel userAccountModel)
+        {
+            if (userAccountModel.RestorePassword)
+            {
+                userAccountModel.NeedPasswordChange = true;
+                _userAccountRepository.UpdatePassword(userAccountModel.UserAccountId, DEFAULT_PASSWORD, true);
+            }
+            IUserAccount userAccount = _mapper.Map<IUserAccount>(userAccountModel);
+            _userAccountRepository.Update(userAccount);
+            return RedirectToAction("Index");
+        }
+        #region Login
+
         public ActionResult Login()
         {
             ViewData["AppVersion"] = getVersion();
@@ -57,16 +146,16 @@ namespace PsiCollaboratorManager.Controllers
                             }
                             else
                             {
-                                //if (userAccount.IsLockedOut)
-                                //{
-                                //    userAccount.IsLockedOut = false;
-                                //    _userAccountRepository.SaveLogin(userAccount);
-                                //}
+                                if (userAccount.IsLockedOut)
+                                {
+                                    userAccount.IsLockedOut = false;
+                                    _userAccountRepository.Update(_userAccountMapper.Map(userAccount));
+                                }
                                 IPAddress ipAddress = Request.ServerVariables["REMOTE_ADDR"] != null ? IPAddress.Parse(Request.ServerVariables["REMOTE_ADDR"]) : null;
                                 _loginAttemptUserRepository.Insert(new LoginAttemptUser { UserAccountId = userAccount.UserAccountId, IsSuccess = true, IpAddress = ipAddress, ApplicationName = "PSI Collaborator Manager." });
                                 IPasswordPolicy passwordPolicy = getPasswordPolicy();
                                 TimeSpan timeLastChangePassword = DateTime.UtcNow.AddHours(-6).Subtract(userAccount.PasswordChangedDate);
-                                if (userAccount.NeedPasswordChange || (passwordPolicy.PasswordDuration > 0 && timeLastChangePassword.TotalDays >= passwordPolicy.PasswordDuration)) return Redirect("/UserAccount/ChangePassword/" + userAccount.UserName);
+                                if (userAccount.NeedPasswordChange || (passwordPolicy.PasswordDuration > 0 && timeLastChangePassword.TotalDays >= passwordPolicy.PasswordDuration)) return Redirect("/UserAccount/ChangePassword?userName=" + userAccount.UserName);
                                 Session["UserAccount"] = userAccount.UserAccountId;
                                 Session["FullName"] = userAccount.FirstName + " " + userAccount.LastName;
                                 Session["AppVersion"] = getVersion();
@@ -108,12 +197,12 @@ namespace PsiCollaboratorManager.Controllers
                 }
                 catch (Exception ex)
                 {
-                    TempData["UserMessage"] = new MessageModel() { CssClassName = "alert-danger", Title = "Error!", Message = "No se ha podido iniciar sesión. " + ex.Message};
+                    TempData["UserMessage"] = new MessageModel() { CssClassName = "alert-danger", Title = "Error!", Message = "No se ha podido iniciar sesión. " + ex.Message };
                 }
             }
             return View("../UserAccount/Login");
         }
-        public ActionResult ChangePassword()
+        public ActionResult ChangePassword(string userName)
         {
             try
             {
@@ -129,22 +218,22 @@ namespace PsiCollaboratorManager.Controllers
             {
                 TempData["UserMessage"] = new MessageModel() { CssClassName = "alert-danger", Title = "Error!", Message = "No se ha podido cargar la política de contraseñas." + ex.Message };
             }
-            return View();
+            return View(new ChangePasswordModel() { UserName = userName, OldPassword = "", Password = "", ConfirmPassword = ""});
         }
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ChangePassword(ChangePasswordModel changePasswordModel, string userName)
+        public ActionResult ChangePassword(ChangePasswordModel changePasswordModel)
         {
             if (!ModelState.IsValid)
                 return View(changePasswordModel);
             try
             {
-                IUserAccountFull userAccount = _userAccountRepository.GetByUserName(userName);
+                IUserAccountFull userAccount = _userAccountRepository.GetByUserName(changePasswordModel.UserName);
                 if (userAccount != null)
                 {
                     if (!PBKDF2Converter.IsValidPassword(changePasswordModel.OldPassword, userAccount.PasswordHash))
-                        TempData["UserMessage"] = new MessageModel() { CssClassName = "alert-danger", Title = "Error!", Message = "La contraseña actual no es válida." };
+                            TempData["UserMessage"] = new MessageModel() { CssClassName = "alert-danger", Title = "Error!", Message = "La contraseña actual no es válida." };
                     else
                         return validatePasswordAndUpdate(changePasswordModel.Password, userAccount, "ChangePassword");
                 }
@@ -155,7 +244,7 @@ namespace PsiCollaboratorManager.Controllers
             {
                 TempData["UserMessage"] = new MessageModel() { CssClassName = "alert-danger", Title = "Error!", Message = "No se ha podido cambiar la contraseña. " + ex.Message };
             }
-            return View();
+            return View(changePasswordModel);
         }
         public ActionResult Logout()
         {
@@ -186,14 +275,14 @@ namespace PsiCollaboratorManager.Controllers
                 messageError = "La nueva contraseña está en una lista de contraseñas utilizadas habitualmente en otros sitios web.";
             if (string.IsNullOrEmpty(messageError))
             {
-                _userAccountRepository.UpdatePassword(userAccount.UserAccountId, newPassword);
+                _userAccountRepository.UpdatePassword(userAccount.UserAccountId, newPassword, false);
                 TempData["UserMessage"] = new MessageModel() { CssClassName = "alert-success", Title = "Éxito!", Message = "Su contraseña se ha actualizado correctamente." };
-                return Redirect("/LoginUserAccount/Login/");
+                return RedirectToAction("Login", "UserAccount");
             }
             else
             {
                 TempData["UserMessage"] = new MessageModel() { CssClassName = "alert-danger", Title = "Error!", Message = messageError };
-                return View(viewName);
+                return RedirectToAction("Login", viewName);
             }
         }
         private string getVersion()
@@ -213,6 +302,7 @@ namespace PsiCollaboratorManager.Controllers
             var passwordPolicy = getPasswordPolicy();
             var passwordValidator = new PasswordValidator(passwordPolicy.MinLength, passwordPolicy.UseLowerCase, passwordPolicy.UseUpperCase, passwordPolicy.UseNumbers, passwordPolicy.UseSymbols);
             return passwordValidator;
-        }
+        } 
+        #endregion
     }
 }

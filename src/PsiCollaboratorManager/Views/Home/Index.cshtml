@@ -6,21 +6,23 @@
 <link href="~/Content/JQGridTheme/ui.multiselect.css" rel="stylesheet" />
 <link href="~/Content/JQGridTheme/ui.jqgrid.css" rel="stylesheet" />
 <link href="~/Content/JQGridTheme/JqGridStyle.css" rel="stylesheet" />
+
 @section LeftContent{
     @Html.Partial("Carousel")
 }
+
 @section RightContent{
     <div id="BirthdaySection">
         <div class="birthdayItem fieldset">
-            <table id="birthdayLastWeekGrid"></table>
+            <table id="BirthdayLastWeekGrid"></table>
             <div id="jqGridPagerLast"></div>
         </div>
         <div class="birthdayItem fieldset">
-            <table id="birthdayTodayGrid"></table>
+            <table id="BirthdayTodayGrid"></table>
             <div id="jqGridPagerToday"></div>
         </div>
         <div class="birthdayItem fieldset">
-            <table id="birthdayNextWeekGrid"></table>
+            <table id="BirthdayNextWeekGrid"></table>
             <div id="jqGridPagerNext"></div>
         </div>
     </div>
@@ -38,201 +40,6 @@
 <script src="~/Scripts/JqGrid/jquery.jqGrid.min.js"></script>
 <script src="~/Scripts/JqGrid/context-menu.js"></script>
 
-<script>
-    $(function () {
-        // Birthday Today Grid
-        $("#birthdayTodayGrid").jqGrid({
-            url: '@Url.Action("GetBirthdayToday", "Home", new { employeeActive = true})',
-            datatype: "json",
-            colModel: [
-                {
-                    label: 'Id',
-                    name: 'CollaboratorId',
-                    width: 50,
-                    minWidth: 20,
-                    editable: false,
-                    key: true,
-                    hidden: true,
-                    align: 'center',
-                },
-                {
-                    label: 'Nombre',
-                    name: 'FirstName',
-                    width: 200,
-                    minWidth: 200,
-                    editable: false,
-                    align: 'center',
-                },
-                { label: 'Apellidos', name: 'LastName', width: 200, minWidth: 200, align: 'center' },
-                {
-                    label: 'Nacimiento', name: 'DateOfBirth', formatter: 'date', align: 'center', width: 200, minWidth: 200,
-                    formatoptions: { newformat: 'd/m/Y' },
-                    searchoptions: {
-                        dataInit: function (element) {
-                            $(element).datepicker({
-                                id: 'orderDate_datePicker',
-                                dateFormat: 'yy-mm-dd',
-                                maxDate: new Date(2030, 0, 1),
-                                showOn: 'focus'
-                            });
-                        }
-                    }
-                },
-            ],
-            pager: true,
-            shrinkToFit: true,
-            autowidth: true,
-            autoresizeOnLoad: true,
-            autoresizeOnResize: true,
-            height: '100%',
-            rowNum: 10,
-            rowList: [10, 20, 30],
-            viewrecords: true,
-            caption: "Cumpleaños de hoy ",
-            ondblClickRow: function (rowId) {
-                var rowData = jQuery(this).getRowData(rowId);
-                var id = rowData['CollaboratorId'];
-                GetCollaboratorDetails(id, "DetailsModal");
-            },
-            loadComplete: () => {
-                resizeGridT();
-            }
-        });
-
-        $("#birthdayLastWeekGrid").jqGrid({
-            url:'@Url.Action("GetBirthdayLastWeek", "Home", new { employeeActive = true})',
-            datatype: "json",
-            colModel: [
-                {
-                    label: 'Id',
-                    name: 'CollaboratorId',
-                    width: 50,
-                    minWidth: 20,
-                    editable: false,
-                    key: true,
-                    hidden: true,
-                    align: 'center',
-                },
-                {
-                    label: 'Nombre',
-                    name: 'FirstName',
-                    width: 200,
-                    minWidth: 200,
-                    editable: false,
-                    align: 'center',
-                },
-                { label: 'Apellidos', name: 'LastName', width: 200, minWidth: 200, align: 'center' },
-                {
-                    label: 'Nacimiento', name: 'DateOfBirth', formatter: 'date', align: 'center', width: 200, minWidth: 200,
-                    formatoptions: { newformat: 'd/m/Y' },
-                    searchoptions: {
-                        dataInit: function (element) {
-                            $(element).datepicker({
-                                id: 'orderDate_datePicker',
-                                dateFormat: 'yy-mm-dd',
-                                maxDate: new Date(2030, 0, 1),
-                                showOn: 'focus'
-                            });
-                        }
-                    }
-                },
-            ],
-            pager: true,
-            shrinkToFit: true,
-            autowidth: true,
-            autoresizeOnLoad: true,
-            autoresizeOnResize: true,
-            height: '100%',
-            rowNum: 10,
-            rowList: [10, 20, 30],
-            viewrecords: true,
-            caption: "Cumpleaños de la semana anterior",
-            ondblClickRow: function (rowId) {
-                var rowData = jQuery(this).getRowData(rowId);
-                var id = rowData['CollaboratorId'];
-                GetCollaboratorDetails(id, "DetailsModal");
-            },
-            loadComplete: () => {
-                resizeGridLw();
-            }
-        });
-
-        $("#birthdayNextWeekGrid").jqGrid({
-            url:'@Url.Action("GetBirthdayNextWeek", "Home", new { employeeActive = true})',
-            datatype: "json",
-            colModel: [
-                {
-                    label: 'Id',
-                    name: 'CollaboratorId',
-                    width: 50,
-                    minWidth: 20,
-                    editable: false,
-                    key: true,
-                    hidden: true,
-                    align: 'center',
-                },
-                {
-                    label: 'Nombre',
-                    name: 'FirstName',
-                    width: 200,
-                    minWidth: 200,
-                    editable: false,
-                    align: 'center',
-                },
-                {
-                    label: 'Apellidos', name: 'LastName', width: 200, minWidth: 200, align: 'center' },
-                {
-                    label: 'Nacimiento', name: 'DateOfBirth', formatter: 'date', align: 'center', width: 200, minWidth: 200,
-                    formatoptions: { newformat: 'd/m/Y' },
-                    searchoptions: {
-                        dataInit: function (element) {
-                            $(element).datepicker({
-                                id: 'orderDate_datePicker',
-                                dateFormat: 'yy-mm-dd',
-                                maxDate: new Date(2030, 0, 1),
-                                showOn: 'focus'
-                            });
-                        }
-                    }
-                },
-            ],
-            pager: true,
-            shrinkToFit: true,
-            autowidth: true,
-            autoresizeOnLoad: true,
-            autoresizeOnResize: true,
-            height: '100%',
-            rowNum: 10,
-            rowList: [10, 20, 30],
-            viewrecords: true,
-            caption: "Cumpleaños de la proxima semana ",
-            ondblClickRow: function (rowId) {
-                var rowData = jQuery(this).getRowData(rowId);
-                var id = rowData['CollaboratorId'];
-                GetCollaboratorDetails(id, "DetailsModal");
-            },
-            loadComplete: () => {
-                resizeGridNw();
-            }
-        });
-
-        function resizeGridT() {
-            $("#birthdayTodayGrid").jqGrid("setGridWidth", $("#birthdayTodayGrid").closest(".ui-jqgrid").parent().width());
-        }
-        $(window).on("resize", function () {
-            resizeGridT();
-        });
-        function resizeGridLw() {
-            $("#birthdayLastWeekGrid").jqGrid("setGridWidth", $("#birthdayLastWeekGrid").closest(".ui-jqgrid").parent().width());
-        }
-        $(window).on("resize", function () {
-            resizeGridLw();
-        });
-        function resizeGridNw() {
-            $("#birthdayNextWeekGrid").jqGrid("setGridWidth", $("#birthdayNextWeekGrid").closest(".ui-jqgrid").parent().width());
-        }
-        $(window).on("resize", function () {
-            resizeGridNw();
-        });
-    });
-</script>
+<script src="~/Scripts/Lib/Home/BirthdayLastWeekTable.js"></script>
+<script src="~/Scripts/Lib/Home/BirthdayNextWeekTable.js"></script>
+<script src="~/Scripts/Lib/Home/BirthdayTodayTable.js"></script>

@@ -1,4 +1,4 @@
-﻿@model PSIEmployeeManagement.Models.UserAccountViewModel
+﻿@model PsiCollaboratorManager.Models.UserAccount.UserAccountModel
 @{
     Layout = "~/Views/Shared/_basicTiny.cshtml";
 }
@@ -6,48 +6,40 @@
 <link href="~/Content/Css/UserAccount/CreateEdit.css" rel="stylesheet" />
 
 <div id="CollaboratorCreateEditContainer">
-    @using (Html.BeginForm("Create", "LoginUserAccount", FormMethod.Post, new { enctype = "multipart/form-data", id = "FormUserContainer" }))
+    @using (Html.BeginForm("Edit", "UserAccount", FormMethod.Post, new { enctype = "multipart/form-data", id = "FormUserContainer" }))
     {
         @Html.AntiForgeryToken()
-        //Conteiner
         <div class="fieldset" id="UserFieldCreateContainer">
             <div id="UserSection">
                 <div>
                     @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label required" })
                     @Html.TextBoxFor(model => model.FirstName, htmlAttributes: new { @class = "form-control", @style = "", placeholder = "Name", title = "Fill field with Name", required = "" })
                 </div>
-
                 <div>
                     @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label required" })
                     @Html.TextBoxFor(model => model.LastName, htmlAttributes: new { @class = "form-control", @style = "", placeholder = "LastName", title = "Fill field with LastName", required = "" })
                 </div>
-
                 <div>
                     @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label required" })
                     @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control", @style = "", placeholder = "user@gmail.com", title = "Example mail format 'user@gmail.com'", required = "" })
                 </div>
-
                 <div>
-                    @Html.LabelFor(model => model.CategoryId, htmlAttributes: new { @class = "control-label required" })
-                    @Html.DropDownListFor(model => model.CategoryId, (List<SelectListItem>)ViewData["typeCategory"], "-Seleccione la categoría-", new { @class = "form-control" })
-                </div>
-
-
-                <div>
-                    @Html.LabelFor(model => model.RestorePassword, htmlAttributes: new { @class = "control-label", @style = "width: 360px; " })
+                    @Html.LabelFor(model => model.RestorePassword, htmlAttributes: new { @class = "control-label" })
                     @Html.CheckBoxFor(model => model.RestorePassword, new { @class = "", title = "Marcar si desea restaurar la contraseña de este usuario." })
                 </div>
-
                 <div>
-                    @Html.Hidden("UserAccountId", Model.UserAccountId, new { htmlAttributes = new { @class = "form-control", @style = "margin-top:2%; margin-left:9%; text-align:-webkit-center; background-color: #ffffff;", @readonly = "true" } })
-                    @Html.ValidationMessageFor(model => model.UserAccountId, "", new { @class = "text-danger" })
-                </div>             
+                    @Html.Hidden("Telephone1", Model.Telephone1, new { })
+                    @Html.Hidden("NeedPasswordChange", Model.NeedPasswordChange, new { })
+                    @Html.Hidden("IsLockedOut", Model.IsLockedOut, new { })
+                    @Html.Hidden("LockOutEndTime", Model.LockOutEndTime, new { })
+                    @Html.Hidden("IsActive", Model.IsActive, new { })
+                    @Html.Hidden("UserName", Model.UserName, new { })
+                    @Html.Hidden("UserAccountId", Model.UserAccountId, new { })
+                </div>
             </div>
         </div>
-
-        //Footer
         <div class="fieldset" id="UserFieldFooter">
-            <button type="button" onclick="window.location.href='/LoginUserAccount/Index/'" class="btn btn-secondary">
+            <button type="button" onclick="window.location.href='/UserAccount/Index/'" class="btn btn-secondary">
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="25" height="25" fill="currentColor" class="bi-arrow-bar-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5ZM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5Z" />

@@ -91,7 +91,6 @@
                         carouselContent += '<div class="carousel-image-container"><img class="carousel-image" src="' + imageUrl + '"></div>';
                         dotsContent += '<span class="dot" id="dot' + index + id + '" indexTarget=" '+ index +'"></span> ';
                         scope.ImagesCount = index + 1;
-                        console.log("ImagesCount: " + scope.ImagesCount);
                     }
                     catch (e) {
                         console.error('Error decoding base64:', e);

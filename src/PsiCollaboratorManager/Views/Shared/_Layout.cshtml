@@ -29,7 +29,7 @@
             </div>
             <div id="HeaderRight">
                 <h6>@Session["FullName"]</h6>
-                @using (Html.BeginForm("Logout", "LoginUserAccount", FormMethod.Post, new { id = "logoutForm", @class = "" }))
+                @using (Html.BeginForm("Logout", "UserAccount", FormMethod.Post, new { id = "logoutForm", @class = "" }))
                 {
                     @Html.AntiForgeryToken()
                     <i class='bx bx-log-out' onclick="logout()"></i>
@@ -91,7 +91,7 @@
                     </div>
                     <ul class="sub-menu">
                         <li><a class="link_name">Usuarios</a></li>
-                        <li><a href="/LoginUserAccount/Index">• Administradores</a></li>
+                        <li><a href="/UserAccount/Index">• Administradores</a></li>
                     </ul>
 
                 </li>

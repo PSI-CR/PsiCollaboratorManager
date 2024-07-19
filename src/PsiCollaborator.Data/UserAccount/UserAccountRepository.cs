@@ -15,7 +15,7 @@ namespace PsiCollaborator.Data.UserAccount
             var userAccount = ExecuteSingle<UserAccountFull>("Select_User_Account_By_UserName", new List<DbParameter>() { new DbParameter("param_userName", ParameterDirection.Input, userName) });
             return userAccount;
         }
-        public void Insert(IUserAccountFull userAccount)
+        public void Insert(IUserAccountInsert userAccount)
         {
             ExecuteSqlMapObject("Insert_User_Account", userAccount);
         }
@@ -23,11 +23,12 @@ namespace PsiCollaborator.Data.UserAccount
         {
             ExecuteSqlMapObject("Update_User_Account", userAccount);
         }
-        public void UpdatePassword(int userAccountId, string newPassword)
+        public void UpdatePassword(int userAccountId, string newPassword, bool needPasswordChange)
         {
             ExecuteSql("Update_User_PasswordHistory", new List<DbParameter>() {
                 new DbParameter("param_UserAccountId", ParameterDirection.Input, userAccountId),
-                new DbParameter("param_PasswordHash", ParameterDirection.Input, PBKDF2Converter.GetHashPassword(newPassword))
+                new DbParameter("param_PasswordHash", ParameterDirection.Input, PBKDF2Converter.GetHashPassword(newPassword)),
+                new DbParameter("param_needPasswordChange", ParameterDirection.Input, needPasswordChange)
             });
         }
         public IUserAccount GetById(int userAccountId)

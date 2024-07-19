@@ -192,9 +192,11 @@
     <Compile Include="Schedule\WorkingDay\WorkingDayRepository.cs" />
     <Compile Include="UserAccount\IUserAccount.cs" />
     <Compile Include="UserAccount\IUserAccountFull.cs" />
+    <Compile Include="UserAccount\IUserAccountInsert.cs" />
     <Compile Include="UserAccount\IUserAccountRepository.cs" />
     <Compile Include="UserAccount\UserAccount.cs" />
     <Compile Include="UserAccount\UserAccountFull.cs" />
+    <Compile Include="UserAccount\UserAccountInsert.cs" />
     <Compile Include="UserAccount\UserAccountRepository.cs" />
   </ItemGroup>
   <ItemGroup>

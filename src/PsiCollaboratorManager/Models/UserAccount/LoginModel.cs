@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace PsiCollaboratorManager.Models
+namespace PsiCollaboratorManager.Models.UserAccount
 {
     public class LoginModel
     {

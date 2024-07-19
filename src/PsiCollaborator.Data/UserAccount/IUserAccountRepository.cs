@@ -9,9 +9,9 @@ namespace PsiCollaborator.Data.UserAccount
         IEnumerable<IUserAccount> GetAll();
         IUserAccount GetById(int userAccountId);
         IUserAccountFull GetByUserName(string userName);
-        void Insert(IUserAccountFull userAccount);
+        void Insert(IUserAccountInsert userAccount);
         void Update(IUserAccount userAccount);
-        void UpdatePassword(int userAccountId, string newPassword);
+        void UpdatePassword(int userAccountId, string newPassword, bool needPasswordChange);
         ILockOut VerifyAccountIsLockedOut(int userAccountId, int maxInvalidAttempts, TimeSpan invalidAttemptsTime, TimeSpan loginLockOutTime);
     }
 }

@@ -171,6 +171,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AnnouncementArtController.cs" />
+    <Compile Include="Controllers\CollaboratorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Global.asax.cs">
@@ -178,9 +179,15 @@
     </Compile>
     <Compile Include="Models\AnnouncementArtModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
+    <Compile Include="Mapping\CollaboratorMapper.cs" />
+    <Compile Include="Mapping\UserAccountMapper.cs" />
+    <Compile Include="Models\UserAccount\ChangePasswordModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorBirthdayModel.cs" />
-    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\Collaborator\CollaboratorDetailsModel.cs" />
+    <Compile Include="Models\Collaborator\EmergencyContactModel.cs" />
+    <Compile Include="Models\UserAccount\LoginModel.cs" />
     <Compile Include="Models\MessageModel.cs" />
+    <Compile Include="Models\UserAccount\UserAccountModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -297,7 +304,12 @@
     <Content Include="Scripts\Lib\AnnouncementArt\Edit.js" />
     <Content Include="Scripts\Lib\AnnouncementArt\Index.js" />
     <Content Include="Scripts\Lib\Carousel.js" />
+    <Content Include="Scripts\Lib\Collaborator\DetailsModal.js" />
+    <Content Include="Scripts\Lib\Home\BirthdayLastWeekTable.js" />
+    <Content Include="Scripts\Lib\Home\BirthdayNextWeekTable.js" />
     <Content Include="Scripts\Lib\Modal.js" />
+    <Content Include="Scripts\Lib\Home\BirthdayTodayTable.js" />
+    <Content Include="Scripts\Lib\UserAccount\IndexTable.js" />
     <Content Include="Scripts\MessiJS\messi.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
