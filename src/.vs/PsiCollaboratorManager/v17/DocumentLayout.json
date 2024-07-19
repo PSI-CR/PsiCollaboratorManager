@@ -1,34 +1,94 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\",
+  "WorkspaceRootPath": "E:\\GitHub\\PsiCollaboratorManager\\src\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|d:\\cristian\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\controllers\\announcementartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\controllers\\announcementartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaborator.data\\useraccount\\iuseraccountinsert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|solutionrelative:psicollaborator.data\\useraccount\\iuseraccountinsert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|d:\\cristian\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\announcementart\\edit.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\announcementart\\edit.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaborator.data\\useraccount\\useraccountinsert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|solutionrelative:psicollaborator.data\\useraccount\\useraccountinsert.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|d:\\cristian\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\announcementart\\create.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\announcementart\\create.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\mapping\\useraccountmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\mapping\\useraccountmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|d:\\cristian\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\announcementart\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\announcementart\\index.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\views\\useraccount\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\useraccount\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|d:\\cristian\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\views\\announcementart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\announcementart\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\models\\useraccount\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\models\\useraccount\\loginmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|d:\\cristian\\github\\psicollaboratormanager\\src\\psicollaborator.data\\announcementart\\announcementartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|solutionrelative:psicollaborator.data\\announcementart\\announcementartrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\connectionstring.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\connectionstring.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|d:\\cristian\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\views\\announcementart\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\announcementart\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\controllers\\useraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\controllers\\useraccountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\views\\useraccount\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\useraccount\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\models\\useraccount\\useraccountmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\models\\useraccount\\useraccountmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaborator.data\\useraccount\\iuseraccountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|solutionrelative:psicollaborator.data\\useraccount\\iuseraccountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaborator.data\\useraccount\\useraccountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|solutionrelative:psicollaborator.data\\useraccount\\useraccountrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaborator.data\\useraccount\\useraccountfull.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|solutionrelative:psicollaborator.data\\useraccount\\useraccountfull.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaborator.data\\useraccount\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|solutionrelative:psicollaborator.data\\useraccount\\useraccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\views\\useraccount\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\useraccount\\changepassword.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\models\\useraccount\\changepasswordmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\models\\useraccount\\changepasswordmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\views\\useraccount\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\useraccount\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\views\\useraccount\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\useraccount\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\scripts\\lib\\useraccount\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\useraccount\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\scripts\\lib\\home\\birthdaylastweektable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\home\\birthdaylastweektable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\views\\useraccount\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\useraccount\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -37,104 +97,277 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 114,
-          "SelectedChildIndex": 1,
+          "DockedWidth": 200,
+          "SelectedChildIndex": 21,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UserAccountModel.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Models\\UserAccount\\UserAccountModel.cs",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Models\\UserAccount\\UserAccountModel.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Models\\UserAccount\\UserAccountModel.cs",
+              "RelativeToolTip": "PsiCollaboratorManager\\Models\\UserAccount\\UserAccountModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAwAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T15:32:13.953Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Controllers\\HomeController.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "PsiCollaboratorManager\\Controllers\\HomeController.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABYAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T15:33:45.695Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Index.js",
-              "DocumentMoniker": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Index.js",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Index.js",
-              "ToolTip": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Index.js",
-              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Index.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-19T16:10:16.672Z",
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\Login.cshtml",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\UserAccount\\Login.cshtml",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\Login.cshtml",
+              "RelativeToolTip": "PsiCollaboratorManager\\Views\\UserAccount\\Login.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADAAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-19T15:37:26.682Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Edit.js",
-              "DocumentMoniker": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Edit.js",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Edit.js",
-              "ToolTip": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Edit.js",
-              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Edit.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 21,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "PsiCollaboratorManager\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAAF0AAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-19T15:38:23.51Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "IndexTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\UserAccount\\IndexTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\UserAccount\\IndexTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\UserAccount\\IndexTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\UserAccount\\IndexTable.js",
+              "ViewState": "AQIAAHAAAAAAAAAAAAAUwJMAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-19T16:10:15.101Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-19T15:42:32.956Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Create.js",
-              "DocumentMoniker": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Create.js",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Create.js",
-              "ToolTip": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Create.js",
-              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\AnnouncementArt\\Create.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAAXAAAA",
+              "Title": "UserAccountMapper.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Mapping\\UserAccountMapper.cs",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Mapping\\UserAccountMapper.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Mapping\\UserAccountMapper.cs",
+              "RelativeToolTip": "PsiCollaboratorManager\\Mapping\\UserAccountMapper.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAADwvx0AAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T17:31:35.525Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UserAccountRepository.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\UserAccountRepository.cs",
+              "RelativeDocumentMoniker": "PsiCollaborator.Data\\UserAccount\\UserAccountRepository.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\UserAccountRepository.cs",
+              "RelativeToolTip": "PsiCollaborator.Data\\UserAccount\\UserAccountRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAABJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T15:30:08.303Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\Index.cshtml",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\UserAccount\\Index.cshtml",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\Index.cshtml",
+              "RelativeToolTip": "PsiCollaboratorManager\\Views\\UserAccount\\Index.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABgAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-19T15:29:45.149Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "BirthdayLastWeekTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayLastWeekTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayLastWeekTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayLastWeekTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayLastWeekTable.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-19T16:10:13.719Z",
+              "WhenOpened": "2024-07-19T15:55:19.22Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\Details.cshtml",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\UserAccount\\Details.cshtml",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\Details.cshtml",
+              "RelativeToolTip": "PsiCollaboratorManager\\Views\\UserAccount\\Details.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-19T15:58:00.405Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\Edit.cshtml",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\UserAccount\\Edit.cshtml",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\Edit.cshtml",
+              "RelativeToolTip": "PsiCollaboratorManager\\Views\\UserAccount\\Edit.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-19T16:15:36.01Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\Create.cshtml",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\UserAccount\\Create.cshtml",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\Create.cshtml",
+              "RelativeToolTip": "PsiCollaboratorManager\\Views\\UserAccount\\Create.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAB0AAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-19T16:06:54.477Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ChangePasswordModel.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Models\\UserAccount\\ChangePasswordModel.cs",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Models\\UserAccount\\ChangePasswordModel.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Models\\UserAccount\\ChangePasswordModel.cs",
+              "RelativeToolTip": "PsiCollaboratorManager\\Models\\UserAccount\\ChangePasswordModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwBsAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T17:04:43.237Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UserAccountFull.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\UserAccountFull.cs",
+              "RelativeDocumentMoniker": "PsiCollaborator.Data\\UserAccount\\UserAccountFull.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\UserAccountFull.cs",
+              "RelativeToolTip": "PsiCollaborator.Data\\UserAccount\\UserAccountFull.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T17:30:15.652Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UserAccount.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\UserAccount.cs",
+              "RelativeDocumentMoniker": "PsiCollaborator.Data\\UserAccount\\UserAccount.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\UserAccount.cs",
+              "RelativeToolTip": "PsiCollaborator.Data\\UserAccount\\UserAccount.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T17:30:18.809Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IUserAccountRepository.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\IUserAccountRepository.cs",
+              "RelativeDocumentMoniker": "PsiCollaborator.Data\\UserAccount\\IUserAccountRepository.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\IUserAccountRepository.cs",
+              "RelativeToolTip": "PsiCollaborator.Data\\UserAccount\\IUserAccountRepository.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T17:34:47.287Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ChangePassword.cshtml",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\ChangePassword.cshtml",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\UserAccount\\ChangePassword.cshtml",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\UserAccount\\ChangePassword.cshtml",
+              "RelativeToolTip": "PsiCollaboratorManager\\Views\\UserAccount\\ChangePassword.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAD0AAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-17T18:19:36.821Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UserAccountInsert.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\UserAccountInsert.cs",
+              "RelativeDocumentMoniker": "PsiCollaborator.Data\\UserAccount\\UserAccountInsert.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\UserAccountInsert.cs",
+              "RelativeToolTip": "PsiCollaborator.Data\\UserAccount\\UserAccountInsert.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T18:29:20.763Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\AnnouncementArt\\Create.cshtml",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\AnnouncementArt\\Create.cshtml",
-              "ToolTip": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\AnnouncementArt\\Create.cshtml",
-              "RelativeToolTip": "PsiCollaboratorManager\\Views\\AnnouncementArt\\Create.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAA/AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-19T15:35:29.94Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\AnnouncementArt\\Index.cshtml",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\AnnouncementArt\\Index.cshtml",
-              "ToolTip": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\AnnouncementArt\\Index.cshtml",
-              "RelativeToolTip": "PsiCollaboratorManager\\Views\\AnnouncementArt\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACsAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-19T13:52:08.566Z",
-              "EditorCaption": ""
-            }
-          ]
-        },
-        {
-          "DockedWidth": 179,
-          "SelectedChildIndex": 0,
-          "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AnnouncementArtController.cs",
-              "DocumentMoniker": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\AnnouncementArtController.cs",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Controllers\\AnnouncementArtController.cs",
-              "ToolTip": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\AnnouncementArtController.cs",
-              "RelativeToolTip": "PsiCollaboratorManager\\Controllers\\AnnouncementArtController.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAIwBgAAAAPAAAA",
+              "Title": "UserAccountController.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\UserAccountController.cs",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Controllers\\UserAccountController.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\UserAccountController.cs",
+              "RelativeToolTip": "PsiCollaboratorManager\\Controllers\\UserAccountController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACgAAABLAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T13:48:04.773Z",
+              "WhenOpened": "2024-07-19T15:27:56.111Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "AnnouncementArtRepository.cs",
-              "DocumentMoniker": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\AnnouncementArt\\AnnouncementArtRepository.cs",
-              "RelativeDocumentMoniker": "PsiCollaborator.Data\\AnnouncementArt\\AnnouncementArtRepository.cs",
-              "ToolTip": "D:\\Cristian\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\AnnouncementArt\\AnnouncementArtRepository.cs",
-              "RelativeToolTip": "PsiCollaborator.Data\\AnnouncementArt\\AnnouncementArtRepository.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAACUAAAAAAAAA",
+              "Title": "ConnectionString.config",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\ConnectionString.config",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\ConnectionString.config",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\ConnectionString.config",
+              "RelativeToolTip": "PsiCollaboratorManager\\ConnectionString.config",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAABHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-07-19T19:50:44.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoginModel.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Models\\UserAccount\\LoginModel.cs",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Models\\UserAccount\\LoginModel.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Models\\UserAccount\\LoginModel.cs",
+              "RelativeToolTip": "PsiCollaboratorManager\\Models\\UserAccount\\LoginModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T14:07:49.497Z",
+              "WhenOpened": "2024-07-19T19:55:30.764Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IUserAccountInsert.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\IUserAccountInsert.cs",
+              "RelativeDocumentMoniker": "PsiCollaborator.Data\\UserAccount\\IUserAccountInsert.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\UserAccount\\IUserAccountInsert.cs",
+              "RelativeToolTip": "PsiCollaborator.Data\\UserAccount\\IUserAccountInsert.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-19T19:56:23.411Z",
               "EditorCaption": ""
             }
           ]

@@ -178,7 +178,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AnnouncementArtModel.cs" />
-    <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Mapping\CollaboratorMapper.cs" />
     <Compile Include="Mapping\UserAccountMapper.cs" />
     <Compile Include="Models\UserAccount\ChangePasswordModel.cs" />
