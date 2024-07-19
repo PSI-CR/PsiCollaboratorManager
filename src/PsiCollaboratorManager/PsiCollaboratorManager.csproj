@@ -170,11 +170,13 @@
     <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AnnouncementArtController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AnnouncementArtModel.cs" />
     <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorBirthdayModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -261,6 +263,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\CrownWhite.png" />
+    <Content Include="Images\DefaultAnnouncement.jpg" />
     <Content Include="Images\DefaultCollaborator.jpg" />
     <Content Include="Images\NoPhotoImg.png" />
     <Content Include="Images\PathwayIcon.ico" />
@@ -290,6 +293,9 @@
     <Content Include="Scripts\JQuery\jquery.validate.min.js" />
     <Content Include="Scripts\JQuery\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\JQuery\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Lib\AnnouncementArt\Create.js" />
+    <Content Include="Scripts\Lib\AnnouncementArt\Edit.js" />
+    <Content Include="Scripts\Lib\AnnouncementArt\Index.js" />
     <Content Include="Scripts\Lib\Carousel.js" />
     <Content Include="Scripts\Lib\Modal.js" />
     <Content Include="Scripts\MessiJS\messi.min.js" />

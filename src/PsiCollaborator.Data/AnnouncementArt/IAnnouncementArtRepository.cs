@@ -8,6 +8,6 @@ namespace PsiCollaborator.Data.AnnouncementArt
         IEnumerable<IAnnouncementArt> GetAll();
         List<AnnouncementArt> GetByDate();
         IAnnouncementArt GetById(int announcementArtId);
-        void Insert(IAnnouncementArt announcementArt);
+        void Save(IAnnouncementArt announcementArt);
     }
 }

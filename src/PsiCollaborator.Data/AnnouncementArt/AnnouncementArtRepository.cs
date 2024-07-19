@@ -14,9 +14,9 @@ namespace PsiCollaborator.Data.AnnouncementArt
             return ExecuteListWithParameters<AnnouncementArt>("select_announcement_art_by_date", new List<DbParameter>()).ToList();
         }
 
-        public void Insert(IAnnouncementArt announcementArt)
+        public void Save(IAnnouncementArt announcementArt)
         {
-            ExecuteSqlMapObject("insert_announcement_art", announcementArt);
+            ExecuteSqlMapObject("save_announcement_art", announcementArt);
         }
 
         public int Delete(int announcementArtId)
