@@ -1,4 +1,4 @@
-﻿@model PSIEmployeeManagement.Models.Annotations.AnnotationTypeModel
+﻿@model PsiCollaboratorManager.Models.Annotation.AnnotationTypeModel
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_basicSmall.cshtml";
@@ -6,7 +6,7 @@
 
 <link href="~/Content/Css/AnnotationType/CreateEdit.css" rel="stylesheet" />
 
-@using (Html.BeginForm("CreateAnnotationType", "AnnotationType", FormMethod.Post, new { enctype = "multipart/form-data", id = "SaveAnnotationTypeForm" }))
+@using (Html.BeginForm("Save", "AnnotationType", FormMethod.Post, new { enctype = "multipart/form-data", id = "SaveAnnotationTypeForm" }))
 {
     <div id="SaveAnnotationTypeContent" class="fieldset">
         <div id="AnnotationTypeTitle">

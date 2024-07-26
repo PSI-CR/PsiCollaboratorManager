@@ -171,6 +171,7 @@
     <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Annotation\AnnotationTypeController.cs" />
     <Compile Include="Controllers\AnnouncementArtController.cs" />
     <Compile Include="Controllers\CollaboratorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Annotation\AnnotationTypeModel.cs" />
     <Compile Include="Models\AnnouncementArtModel.cs" />
     <Compile Include="Mapping\CollaboratorMapper.cs" />
     <Compile Include="Mapping\UserAccountMapper.cs" />
@@ -226,6 +228,7 @@
     <Content Include="Content\Css\Collaborator\DetailsModal.css" />
     <Content Include="Content\Validation.css" />
     <Content Include="Scripts\Camera.js" />
+    <Content Include="Scripts\Lib\Annotation\AnnotationTypeTable.js" />
     <Content Include="Scripts\Lib\Collaborator\CollaboratorFull.js" />
     <Content Include="Scripts\Lib\Collaborator\EmergencyContact\EmergencyContact.js" />
     <Content Include="Scripts\Lib\Collaborator\EmergencyContact\EmergencyContactExtension.js" />
