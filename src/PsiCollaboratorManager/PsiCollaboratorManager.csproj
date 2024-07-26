@@ -166,6 +166,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Annotations\CheckSessionTimeOut.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -180,6 +181,10 @@
     <Compile Include="Models\AnnouncementArtModel.cs" />
     <Compile Include="Mapping\CollaboratorMapper.cs" />
     <Compile Include="Mapping\UserAccountMapper.cs" />
+    <Compile Include="Models\Collaborator\CantonModel.cs" />
+    <Compile Include="Models\Collaborator\CollaboratorBaseModel.cs" />
+    <Compile Include="Models\Collaborator\CollaboratorFullModel.cs" />
+    <Compile Include="Models\Collaborator\DistrictModel.cs" />
     <Compile Include="Models\UserAccount\ChangePasswordModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorBirthdayModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorDetailsModel.cs" />
@@ -216,8 +221,14 @@
     <Content Include="Content\Css\AnnouncementArt\Edit.css" />
     <Content Include="Content\Css\AnnouncementArt\Index.css" />
     <Content Include="Content\Css\AssignSchedule\AssignSchedule.css" />
+    <Content Include="Content\Css\Collaborator\CameraModal.css" />
     <Content Include="Content\Css\Collaborator\CreateEdit.css" />
     <Content Include="Content\Css\Collaborator\DetailsModal.css" />
+    <Content Include="Content\Validation.css" />
+    <Content Include="Scripts\Camera.js" />
+    <Content Include="Scripts\Lib\Collaborator\CollaboratorFull.js" />
+    <Content Include="Scripts\Lib\Collaborator\EmergencyContact\EmergencyContact.js" />
+    <Content Include="Scripts\Lib\Collaborator\EmergencyContact\EmergencyContactExtension.js" />
     <Content Include="Content\Css\Collaborator\Index.css" />
     <Content Include="Content\Css\Common\Carousel.css" />
     <Content Include="Content\Css\Common\Elements.css" />
@@ -303,7 +314,12 @@
     <Content Include="Scripts\Lib\AnnouncementArt\Edit.js" />
     <Content Include="Scripts\Lib\AnnouncementArt\Index.js" />
     <Content Include="Scripts\Lib\Carousel.js" />
+    <Content Include="Scripts\Lib\Collaborator\Address.js" />
     <Content Include="Scripts\Lib\Collaborator\DetailsModal.js" />
+    <Content Include="Scripts\Lib\Collaborator\EmergencyContact\EmergencyContactManager.js" />
+    <Content Include="Scripts\Lib\Collaborator\InnactiveTable.js" />
+    <Content Include="Scripts\Lib\Collaborator\IndexTable.js" />
+    <Content Include="Scripts\Lib\Collaborator\Loader.js" />
     <Content Include="Scripts\Lib\Home\BirthdayLastWeekTable.js" />
     <Content Include="Scripts\Lib\Home\BirthdayNextWeekTable.js" />
     <Content Include="Scripts\Lib\Modal.js" />
@@ -336,7 +352,7 @@
     <Content Include="Views\Collaborator\Create.cshtml" />
     <Content Include="Views\Collaborator\DetailsModal.cshtml" />
     <Content Include="Views\Collaborator\Edit.cshtml" />
-    <Content Include="Views\Collaborator\InactiveCollaboratores.cshtml" />
+    <Content Include="Views\Collaborator\InactiveCollaborators.cshtml" />
     <Content Include="Views\Collaborator\Index.cshtml" />
     <Content Include="Views\Home\Carousel.cshtml" />
     <Content Include="Views\Schedule\CheckSchedule.cshtml" />
@@ -369,6 +385,7 @@
     <Content Include="Views\WorkingDay\Create.cshtml" />
     <Content Include="Views\WorkingDay\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Collaborator\CameraModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

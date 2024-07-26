@@ -1,0 +1,19 @@
+﻿#CameraModalContent{
+    display:grid;
+    grid-template-columns: 320px 320px 100px;
+    grid-template-rows:320px;
+    gap:20px;
+    padding:20px;
+    justify-content:center;
+}
+#theVideo{
+    border:1px solid #DDDDDD;
+}
+#theCanvas {
+    border: 1px solid #DDDDDD;
+}
+#CameraButtons{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-evenly;
+}

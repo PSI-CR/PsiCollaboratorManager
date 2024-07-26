@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_basicLarge.cshtml";
+}
+
+<link href="~/Content/Css/Collaborator/Index.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/ui.multiselect.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/ui.jqgrid.css" rel="stylesheet" />
+<link href="~/Content/JQGridTheme/JqGridStyle.css" rel="stylesheet" />
+
+<div id="TableContainer" class="fieldset">
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+</div>
+
+<div id="DetailsModal" class="modalContainer">
+    @Html.Partial("../Collaborator/DetailsModal")
+</div>
+<script src="~/Scripts/Lib/Modal.js"></script>
+
+<script src="~/Scripts/JqGrid/jquery.min.js"></script>
+<script src="~/Scripts/JqGrid/jquery-ui.min.js"></script>
+<script src="~/Scripts/JqGrid/ui.multiselect.js"></script>
+<script src="~/Scripts/JqGrid/grid.locale-es.js"></script>
+<script src="~/Scripts/JqGrid/jquery.jqGrid.min.js"></script>
+<script src="~/Scripts/JqGrid/context-menu.js"></script>
+
+<script src="~/Scripts/Lib/Collaborator/InnactiveTable.js"></script>

@@ -23,7 +23,7 @@ namespace PsiCollaborator.Data.Collaborator
         }
         public List<CollaboratorUniqueData> GetCollaboratorUniqueData()
         {
-            return ExecuteList<CollaboratorUniqueData>("Select_Unique_Collaborator_Data").ToList();
+            return ExecuteList<CollaboratorUniqueData>("Select_Collaborator_Unique_Data").ToList();
         }
 
         public List<CollaboratorBirthday> GetLastWeekBirthday()
@@ -100,6 +100,14 @@ namespace PsiCollaborator.Data.Collaborator
                 new DbParameter("param_password", ParameterDirection.Input, PBKDF2Converter.GetHashPassword(password))
             });
             return result;
+        }
+
+        public int GetHighestOperatorNumber()
+        {
+            var operatorNum = 0;
+            ExecuteSql("Select_Highest_OperatorNumber", new List<DbParameter>() { new DbParameter("highest_operator_number", ParameterDirection.Output, operatorNum) });
+            operatorNum = OutParameters.Count > 0 ? (int)OutParameters[0].Value : 0;
+            return operatorNum;
         }
     }
 }

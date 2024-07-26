@@ -20,9 +20,9 @@ namespace PsiCollaborator.Data.Collaborator
         public int? MaritalStatusId { get; set; }
         public string Telephone1 { get; set; }
         public string Telephone2 { get; set; }
-        public int ProvinceName { get; set; }
-        public int CantonName { get; set; }
-        public int DistrictName { get; set; }
+        public string ProvinceName { get; set; }
+        public string CantonName { get; set; }
+        public string DistrictName { get; set; }
         public string AddressLine { get; set; }
     }
 }

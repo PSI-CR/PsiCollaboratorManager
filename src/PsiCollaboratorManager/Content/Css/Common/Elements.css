@@ -5,3 +5,6 @@
 textarea {
     resize: none !important;
 }
+.messi-closebtn:before{
+    top:-2px !important;
+}

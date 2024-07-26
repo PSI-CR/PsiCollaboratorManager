@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PsiCollaborator.Data.AnnouncementArt;
 using PsiCollaborator.Data.Collaborator;
+using PsiCollaboratorManager.Annotations;
 using PsiCollaboratorManager.Models.Collaborator;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ using System.Web.Mvc;
 
 namespace PsiCollaboratorManager.Controllers
 {
+    [CheckSessionTimeOut]
+    [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
     public class HomeController : Controller
     {
         private ICollaboratorRepository _collaboratorRepository;

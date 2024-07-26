@@ -1,65 +1,34 @@
-﻿@model PSIEmployeeManagement.Models.CollaboratorModel
-@using PSIEmployeeManagement.Data.EmergencyContactbyCollaborators
+﻿@model PsiCollaboratorManager.Models.Collaborator.CollaboratorFullModel
 
 @{
     Layout = "~/Views/Shared/_basicBigPhoto.cshtml";
 }
 
 <link href="~/Content/Css/Collaborator/CreateEdit.css" rel="stylesheet" />
-<script src="~/Scripts/Employees.js"></script>
-
-<script type="text/javascript">
-       var parameters = {
-              @if (Model.CantonId.HasValue) {
-                  @Html.Raw("cantonid:" + @Model.CantonId + ",\n");
-              }
-              else {
-                  @Html.Raw("cantonid:" + 0 + ",\n");
-              }
-              @if (Model.DistrictId.HasValue) {
-                   @Html.Raw("districtid:" + @Model.DistrictId + ",\n");
-              }
-              else {
-                  @Html.Raw("districtid:" + 0 + ",\n");
-              }
-              @if (Model.ProvinceId.HasValue) {
-                   @Html.Raw("provinceid:" + @Model.ProvinceId + ",\n");
-              }
-              else {
-                  @Html.Raw("provinceid:" + 0 + ",\n");
-              }
-      }
-      $(document).ready(function () {
-          var employeeManagement = new window.EmployeeManagement(0,
-              parameters.cantonid == 0 ? null : parameters.cantonid,
-              parameters.provinceid == 0 ? null : parameters.provinceid,
-              parameters.districtid == 0 ? null : parameters.districtid);
-          employeeManagement.Build();
-      });
-</script>
+<link href="~/Content/Validation.css" rel="stylesheet" />
 
 <div id="CollaboratorCreateEditContainer">
-    @using (Html.BeginForm("Create", "Collaborator", FormMethod.Post, new { enctype = "multipart/form-data", id = "FormCollaboratorContainer" }))
-     {
-     
-        @Html.HiddenFor(model => model.Picture)
+    <form enctype="multipart/form-data" id="FormCollaboratorContainer" class="contact_form" method="post">
         <div class="fieldset" id="CollaboratorFieldEditContainer">
             <div id="CapturePhoto">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#capturePhotoModal">
+                <button type="button" class="btn btn-primary" onclick="OpenModal('CameraModal', 'Capturar Foto')">
                     Capturar Fotografía
                 </button>
+                <input type="file" name="ImageFile" class="uploadFile img" value="" style="width: 0px; height: 0px; overflow: hidden; " id="file_input">
             </div>
 
             <div id="PersonalInformationSection">
                 <div class="title">
                     <h3>Información Personal</h3>
                     <div>
-                        <div style="color:red; ">
+                        <div class="requiredInfo">
                             <h6>Datos requeridos*</h6>
                         </div>
                     </div>
                 </div>
                 <div class="personalInformationSectionFlex">
+                    @Html.HiddenFor(model => model.CollaboratorId)
+                    @Html.HiddenFor(model => model.Picture)
                     <div>
                         @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "required" })
                         @Html.TextBoxFor(model => model.FirstName, htmlAttributes: new { @class = "form-control", placeholder = "Nombre", title = "Favor ingrese el Nombre", required = "" })
@@ -80,38 +49,42 @@
                 </div>
                 <div class="personalInformationSectionFlexRadioButton">
                     <div>
-                        @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "required" })
+                        <label>Género</label>
                         <div class="radio-buttons">
                             <div>
-                                @Html.RadioButtonFor(model => model.Gender, 1, new { id = "rbtnFemale", required = "" }) <label for="rbtnFemale" title="Favor seleccione una opción">Mujer</label>
+                                @Html.RadioButtonFor(model => model.Gender, 1, new { id = "rbtnFemale", required = "" })
+                                <label for="rbtnFemale" title="Favor seleccione una opción">Femenino</label>
                             </div>
                             <div>
-                                @Html.RadioButtonFor(model => model.Gender, 2, new { id = "rbtnMale", required = "" }) <label for="rbtnMale" title="Favor seleccione una opción">Hombre</label>
+                                @Html.RadioButtonFor(model => model.Gender, 2, new { id = "rbtnMale", required = "" })
+                                <label for="rbtnMale" title="Favor seleccione una opción">Masculino</label>
                             </div>
                         </div>
                     </div>
-                    @Html.HiddenFor(model => model.Gender, new { id = "GenderValue" })
-
                     <div>
-                        @Html.LabelFor(model => model.MaritalStatusId, htmlAttributes: new { @class = "required" })
+                        <label>Casado</label>
                         <div class="radio-buttons">
                             <div>
-                                @Html.RadioButtonFor(model => model.MaritalStatusId, "yes", new { id = "rbtnYesMarital", required = "" }) <label for="rbtnYesMarital" title="Favor seleccione una opción">Si</label>
+                                @Html.RadioButtonFor(model => model.MaritalStatus, true, new { id = "rbtnYesMarital", required = "" })
+                                <label for="rbtnYesMarital" title="Favor seleccione una opción">Si</label>
                             </div>
                             <div>
-                                @Html.RadioButtonFor(model => model.MaritalStatusId, "no", new { id = "rbtnNoMarital", required = "" }) <label for="rbtnNoMarital" title="Favor seleccione una opción">No</label>
+                                @Html.RadioButtonFor(model => model.MaritalStatus, false, new { id = "rbtnNoMarital", required = "" })
+                                <label for="rbtnNoMarital" title="Favor seleccione una opción">No</label>
                             </div>
                         </div>
                     </div>
 
                     <div>
-                        @Html.LabelFor(model => model.Parent, htmlAttributes: new { @class = "required" })
+                        <label>Hijos</label>
                         <div class="radio-buttons">
                             <div>
-                                @Html.RadioButtonFor(model => model.Parent, true, new { id = "rbtnYesParent", required = "" }) <label for="rbtnYesParent" title="Please select an option">Si</label>
+                                @Html.RadioButtonFor(model => model.Parent, true, new { id = "rbtnYesParent", required = "" })
+                                <label for="rbtnYesParent" title="Please select an option">Si</label>
                             </div>
                             <div>
-                                @Html.RadioButtonFor(model => model.Parent, false, new { id = "rbtnNoParent", required = "" }) <label for="rbtnNoParent" title="Please select an option">No</label>
+                                @Html.RadioButtonFor(model => model.Parent, false, new { id = "rbtnNoParent", required = "" })
+                                <label for="rbtnNoParent" title="Please select an option">No</label>
                             </div>
                         </div>
                     </div>
@@ -124,18 +97,18 @@
                 </div>
                 <div class="directionSectionFlex">
                     <div>
-                        @Html.LabelFor(model => model.ProvinceName, htmlAttributes: new { @class = "required" })
-                        @Html.DropDownListFor(model => model.ProvinceId, ViewBag.Provinces as List<SelectListItem>, "-Provincia-", new { @class = "form-control", @title = "Favor seleccione una opción", required = "" })
+                        @Html.LabelFor(model => model.ProvinceId, htmlAttributes: new { @class = "required" })
+                        @Html.DropDownListFor(model => model.ProvinceId, ViewBag.Provinces as List<SelectListItem>, new { @class = "form-control", @title = "Favor seleccione una opción", required = "" })
                     </div>
 
                     <div>
-                        @Html.LabelFor(model => model.CantonName, htmlAttributes: new { @class = "required" })
-                        @Html.DropDownListFor(model => model.CantonId, new List<SelectListItem>(), "-Cantón-", new { @class = "form-control", @title = "Favor seleccione una opción", required = "" })
+                        @Html.LabelFor(model => model.CantonId, htmlAttributes: new { @class = "required" })
+                        @Html.DropDownListFor(model => model.CantonId, ViewBag.Cantons as List<SelectListItem>, new { @class = "form-control", @title = "Favor seleccione una opción", required = "" })
                     </div>
 
                     <div>
-                        @Html.LabelFor(model => model.DistrictName, htmlAttributes: new { @class = "control-label required" })
-                        @Html.DropDownListFor(model => model.DistrictId, new List<SelectListItem>(), "-Distrito-", new { @class = "form-control", @title = "Favor seleccione una opción", required = "" })
+                        @Html.LabelFor(model => model.DistrictId, htmlAttributes: new { @class = "control-label required" })
+                        @Html.DropDownListFor(model => model.DistrictId, ViewBag.Districts as List<SelectListItem>, new { @class = "form-control", @title = "Favor seleccione una opción", required = "" })
                     </div>
                 </div>
                 <div class="description">
@@ -188,8 +161,17 @@
                         @Html.TextBoxFor(model => model.Password, new { type = "text", @class = "form-control", @title = "Este campo no es editable", @readonly = "readonly" })
                     </div>
                     <div>
-                        @Html.CheckBoxFor(model => model.CreateUserAccount, htmlAttributes: new { @class = "form-check-input" })
-                        @Html.LabelFor(model => model.CreateUserAccount)
+                        @if (Model.CreateUserAccount)
+                        {
+                            Model.CreateUserAccount = false;
+                            @Html.CheckBoxFor(model => model.CreateUserAccount, htmlAttributes: new { @class = "form-check-input" })
+                            @Html.LabelFor(model => model.CreateUserAccount)
+                        }
+                        else
+                        {
+                            @Html.CheckBoxFor(model => model.CreateUserAccount, htmlAttributes: new { @class = "form-check-input" })
+                            <label for="CreateUserAccount">Restaurar Contraseña</label>
+                        }
                     </div>
                 </div>
             </div>
@@ -204,8 +186,8 @@
                         @Html.TextAreaFor(model => model.Diseases, new { type = "text", @class = "form-control", placeholder = "Padecimientos ó enfermedades", title = "Ingrese la lista de padecimientos o enfermedades diagnosticados" })
                     </div>
                     <div class="healthConditionSectionCheckBox">
-                        @Html.CheckBoxFor(model => model.TakingMedications, htmlAttributes: new { title = "Marcar si el colaborador actualmente se encuentra bajo un tratamiento medico" })
                         @Html.LabelFor(model => model.TakingMedications)
+                        @Html.CheckBoxFor(model => model.TakingMedications, htmlAttributes: new { title = "Marcar si el colaborador actualmente se encuentra bajo un tratamiento medico" })
                     </div>
                     <div class="description">
                         @Html.LabelFor(model => model.Note)
@@ -220,12 +202,12 @@
                 </div>
                 <div class="bankAccountSection">
                     <div>
-                        <label class="required">Banco</label>
-                        @Html.DropDownListFor(model => model.BankId, ViewBag.Banks as List<SelectListItem>, "-Banco-", new { @class = "form-control", required = "", title = "Favor elija una entidad bancaria." })
+                        @Html.LabelFor(model => model.BankId, htmlAttributes: new { @class = "required" })
+                        @Html.DropDownListFor(model => model.BankId, ViewBag.Banks as List<SelectListItem>, new { @class = "form-control", required = "", title = "Favor elija una entidad bancaria." })
                     </div>
                     <div>
-                        <label class="required">Tipo de moneda</label>
-                        @Html.DropDownListFor(model => model.CurrencyTypeId, ViewBag.CurrencyTypes as List<SelectListItem>, "-Moneda-", new { @class = "form-control", required = "", title = "Favor elija un tipo de moneda." })
+                        @Html.LabelFor(model => model.CurrencyTypeId, htmlAttributes: new { @class = "required" })
+                        @Html.DropDownListFor(model => model.CurrencyTypeId, ViewBag.CurrencyTypes as List<SelectListItem>, new { @class = "form-control", required = "", title = "Favor elija un tipo de moneda." })
                     </div>
                     <div>
                         @Html.LabelFor(model => model.NumberBankAccount, htmlAttributes: new { @class = "required" })
@@ -237,50 +219,48 @@
                     </div>
                 </div>
             </div>
-
-            <div id="InactiveCollaborator">           
+            <div id="InactiveCollaborator">
                 <h5>Empleado Activo</h5>
-                    <label for="IsActive">Si desea inactivar este empleado desmarcar la siguiente casilla</label>
-                @Html.CheckBox("IsActive", Model.IsActive, htmlAttributes: new { @class = "form-check-input js-checkbox", id = "IsActive"})
+                <label for="IsActive">Si desea inactivar este empleado desmarcar la siguiente casilla</label>
+                @Html.CheckBoxFor(model => model.IsActive, htmlAttributes: new { @class = "form-check-input", id = "IsActive" })
             </div>
 
             <div id="EmergencyContactSection">
                 <div class="title">
                     <h3>Contactos Emergencia</h3>
-                    <div style="color:red; ">
-                        <h8 style="color:red">Registre mínimo un contacto de emergencia.</h8>
+                    <div class="requiredInfo">
+                        <h8>Registre al menos un contacto de emergencia.</h8>
                         <h6>Datos requeridos*</h6>
                     </div>
                 </div>
 
                 <div class="emergencyContactSectionFlex">
                     <div>
-                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label required" })
-                        @Html.Hidden("employeeContactid")
-                        @Html.TextBox("firstnameContact", "", new { @class = "form-control", @id = "firstnameContact" })
+                        <label class="control-label required">Nombre</label>
+                        <input id="EmergencyContactFirstName" class="form-control" type="text" />
                     </div>
 
                     <div>
-                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label required" })
-                        @Html.TextBox("lastnameContact", "", new { @class = "form-control", @id = "lastnameContact" })
+                        <label class="control-label required">Apellido</label>
+                        <input id="EmergencyContactLastName" class="form-control" type="text" />
                     </div>
 
                     <div>
-                        @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "control-label required" })
-                        @Html.DropDownListFor(model => model.Relationship, Enum.GetValues(typeof(RelationshipEmergenyContactType)).Cast<RelationshipEmergenyContactType>().Select(e => new SelectListItem { Text = e.ToString(), Value = e.ToString() }), "Seleccione Parentesco", new { @class = "form-control", @id = "relationship" })
+                        <label class="control-label required">Parentezco</label>
+                        @Html.DropDownList("EmergencyContactRelationship", (List<SelectListItem>)ViewData["Relationships"], htmlAttributes: new { @class = "form-control", required = "", title = "Favor elija un parentezco." })
                     </div>
 
                     <div>
-                        @Html.LabelFor(model => model.Telephone1, htmlAttributes: new { @class = "control-label required" })
-                        @Html.TextBox("telephone1Contact", "", new { @class = "form-control", @id = "telephone1Contact" })
+                        <label class="control-label required">Teléfono</label>
+                        <input id="EmergencyContactTelephone" class="form-control" type="text" />
                     </div>
 
                     <div>
-                        @Html.LabelFor(model => model.Telephone2, htmlAttributes: new { @class = "control-label required" })
-                        @Html.TextBox("telephone2Contact", "", new { @class = "form-control", @id = "telephone2Contact" })
+                        <label class="control-label">Teléfono 2</label>
+                        <input id="EmergencyContactTelephone2" class="form-control" type="text" />
                     </div>
 
-                    <a id="btnSaveContact" class="btn btn-success" title="Agregar contacto emergencia.">
+                    <a id="AddContactButton" class="btn btn-success" title="Agregar contacto emergencia.">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
                             <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                             <path d="M2 13c0 1 1 1 1 1h5.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.544-3.393C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4Z" />
@@ -288,28 +268,23 @@
                     </a>
                 </div>
 
-                <div>
-                    <div clase="contenedor" style=" margin-top: 34%; margin-left: -4%;">
-                        <div clase="fila justificar-contenido-md-centro">
-                            <div clase="col-md-8">
-                                <div class=" ajax-loader"></div>
-                                <table class="table table-bordered" id="tblContactList">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="7">Lista Contactos Emergencia</th>
-                                        </tr>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Relación</th>
-                                            <th>Teléfono</th>
-                                            <th>Otro Teléfono</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                <div id="EmergencyContactTableSection">
+                    <h5>Lista Contactos Emergencia</h5>
+                    <table id="EmergencyContactTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Relación</th>
+                                <th>Teléfono</th>
+                                <th>Otro Teléfono</th>
+                                <th>Editar</th>
+                                <th>Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -324,7 +299,25 @@
             </button>
             <input type="submit" value="Guardar" class="btn btn-success">
         </div>
-    }
+        <div id="CameraModal" class="modalContainer">
+            @Html.Partial("../Collaborator/CameraModal")
+        </div>
+    </form>
 </div>
 
+<script src="~/Scripts/Lib/Modal.js"></script>
 
+<script src="~/Scripts/Lib/Collaborator/Address.js"></script>
+<script src="~/Scripts/Lib/Collaborator/EmergencyContact/EmergencyContact.js"></script>
+<script src="~/Scripts/Lib/Collaborator/EmergencyContact/EmergencyContactExtension.js"></script>
+<script src="~/Scripts/Lib/Collaborator/EmergencyContact/EmergencyContactManager.js"></script>
+
+<script>
+    let emergencyContactsObjects = @Html.Raw(Json.Encode(Model.EmergencyContacts));
+    let extension = new EmergencyContactExtension([]);
+    emergencyContactsObjects.forEach(x => { extension.AddContact(x.FirstName, x.LastName, x.Relationship, x.Telephone, x.Telephone2) });
+    DisplayEmergencyContacts();
+</script>
+
+<script src="~/Scripts/Lib/Collaborator/CollaboratorFull.js"></script>
+<script src="~/Scripts/Lib/Collaborator/Loader.js"></script>

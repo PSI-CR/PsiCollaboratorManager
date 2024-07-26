@@ -145,6 +145,7 @@
     <Compile Include="Collaborator\ICollaboratorRepository.cs" />
     <Compile Include="Collaborator\ICollaboratorSchedule.cs" />
     <Compile Include="Collaborator\ICollaboratorUniqueData.cs" />
+    <Compile Include="Collaborator\RelationshipEnum.cs" />
     <Compile Include="Common\LockOut\ILockOut.cs" />
     <Compile Include="Common\LockOut\LockOut.cs" />
     <Compile Include="Common\Password\IPassword.cs" />

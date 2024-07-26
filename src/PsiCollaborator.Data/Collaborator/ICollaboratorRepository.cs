@@ -22,5 +22,6 @@ namespace PsiCollaborator.Data.Collaborator
         void Save(CollaboratorFull collaborator);
         int UpdatePassword(int collaboratorId, string password);
         ILockOut VerifyCollaboratorAccountIsLockedOut(int collaboratorId, int maxInvalidAttempts, TimeSpan invalidAttemptsTime, TimeSpan loginLockOutTime);
+        int GetHighestOperatorNumber();
     }
 }

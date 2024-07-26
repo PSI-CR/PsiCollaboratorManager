@@ -4,6 +4,6 @@
     {
         string Description { get; set; }
         int ProvinceId { get; set; }
-        string ProvinceName { get; set; }
+        string Name { get; set; }
     }
 }

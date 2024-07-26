@@ -10,7 +10,7 @@ namespace PsiCollaborator.Data.Address
     {
         public int DistrictId { get; set; }
         public int CantonId { get; set; }
-        public string DistrictName { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
     }
 }

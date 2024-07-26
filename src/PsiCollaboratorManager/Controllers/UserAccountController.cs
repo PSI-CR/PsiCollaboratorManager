@@ -5,6 +5,7 @@ using PsiCollaborator.Data.LoginAttemptUser;
 using PsiCollaborator.Data.PasswordPolicy;
 using PsiCollaborator.Data.PasswordUtilities;
 using PsiCollaborator.Data.UserAccount;
+using PsiCollaboratorManager.Annotations;
 using PsiCollaboratorManager.Mapping;
 using PsiCollaboratorManager.Models;
 using PsiCollaboratorManager.Models.UserAccount;
@@ -42,6 +43,8 @@ namespace PsiCollaboratorManager.Controllers
             _userAccountMapper = new UserAccountMapper();
             _mapper = configuration.CreateMapper();
         }
+        [CheckSessionTimeOut]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Index()
         {
             ViewBag.BasicTitle = "Usuarios";
@@ -53,6 +56,8 @@ namespace PsiCollaboratorManager.Controllers
             List<UserAccountModel> userAccountModels = _mapper.Map<List<UserAccountModel>>(userAccounts);
             return Json(new { rows = userAccountModels }, JsonRequestBehavior.AllowGet);
         }
+        [CheckSessionTimeOut]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Details(int userAccountId)
         {
             ViewBag.BasicTitle = "Detalles Usuario";
@@ -60,6 +65,8 @@ namespace PsiCollaboratorManager.Controllers
             UserAccountModel userAccountModel = _mapper.Map<UserAccountModel>(userAccount);
             return View(userAccountModel);
         }
+        [CheckSessionTimeOut]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Create()
         {
             ViewBag.BasicTitle = "Agregar Usuario";
@@ -97,6 +104,8 @@ namespace PsiCollaboratorManager.Controllers
             return userN;
         }
 
+        [CheckSessionTimeOut]
+        [OutputCache(NoStore = true, Duration = 0, VaryByParam = "*")]
         public ActionResult Edit(int userAccountId)
         {
             ViewBag.BasicTitle = "Detalles Usuario";

@@ -7,18 +7,18 @@
             OpenModal(modalId);
 
             if (data.Picture) {
-                $('#' + modalId + ' .modalHeaderPhoto').attr('src', 'data:image/jpeg;base64,' + data.Picture);
+                if (data.Picture.startsWith('data:image/jpeg;base64,')) $('#' + modalId + ' .modalHeaderPhoto').attr('src', data.Picture);
+                else $('#' + modalId + ' .modalHeaderPhoto').attr('src', 'data:image/jpeg;base64,' + data.Picture);
             } else {
-                $('#' + modalId + '  .modalHeaderPhoto').attr('src', '/Images/istockphoto-1300845620-612x612.jpg');
+                $('#' + modalId + '  .modalHeaderPhoto').attr('src', '/Images/DefaultCollaborator.jpg');
             }
 
-            $('#' + modalId + '  .modalHeaderTitle').html(data.NameFull);
+            $('#' + modalId + '  .modalHeaderTitle').html(data.FirstName + ' ' + data.LastName);
             $('#' + modalId + '  #modal-DNICollaborator').html(data.DNICollaborator);
             $('#' + modalId + '  #modal-dateofbirth').html(data.DateOfBirth = new Date(data.DateOfBirth.match(/\d+/)[0] * 1).toLocaleDateString("en-US"));
             $('#' + modalId + '  #modal-parent').html(data.Parent ? "Si" : "No");
-            $('#' + modalId + '  #modal-maritalstatusid').html(data.MaritalStatusName == "Yes" ? "Si" : "No");
-            var gender = data.GenderName === "Male" ? "Hombre" : (data.GenderName === "Female" ? "Mujer" : data.GenderName);
-            $('#' + modalId + '  #modal-gender').html(gender);
+            $('#' + modalId + '  #modal-maritalstatusid').html(data.MaritalStatusId == 1 ? "Si" : "No");
+            $('#' + modalId + '  #modal-gender').html(data.Gender == 1 ? "Femenino" : "Masculino");
             $('#' + modalId + '  #modal-telephone1').html(data.Telephone1);
             $('#' + modalId + '  #modal-telephone2').html(data.Telephone2);
             $('#' + modalId + '  #modal-email').html(data.Email);
@@ -29,7 +29,7 @@
             $('#' + modalId + '  #modal-operatornum').html(data.OperatorNumber);
             $('#' + modalId + '  #modal-rfidcode').html(data.RFIDCode);
             $('#' + modalId + '  #modal-diseases').html(data.Diseases);
-            $('#' + modalId + '  #modal-takingmedications').html(data.TakingMedications == true ? "Si" : "No");
+            $('#' + modalId + '  #modal-takingmedications').html(data.TakingMedications ? "Si" : "No");
             $('#' + modalId + '  #modal-note').html(data.Note);
             $('#' + modalId + '  #modal-bankname').html(data.BankName);
             $('#' + modalId + '  #modal-currencytypename').html(data.CurrencyTypeName);
@@ -52,7 +52,7 @@ function displayEmergencyContacts(modalId, emergencyContacts) {
         var row = "<tr>";
         row += "<td>" + emergencyContact.FirstName + "</td>";
         row += "<td>" + emergencyContact.LastName + "</td>";
-        row += "<td>" + emergencyContact.Relationship + "</td>";
+        row += "<td>" + GetRelationshipName(emergencyContact.Relationship) + "</td>";
         row += "<td>" + emergencyContact.Telephone + "</td>";
         row += "<td>" + emergencyContact.Telephone2 + "</td>";
         row += "</tr>";
@@ -60,7 +60,22 @@ function displayEmergencyContacts(modalId, emergencyContacts) {
     }
 }
 
-//Funtion varmenu modal details collaborator
+function GetRelationshipName(relationship) {
+    const RelationshipEnum = {
+        0: 'Otro',
+        1: 'Madre',
+        2: 'Padre',
+        3: 'Hermana',
+        4: 'Hermano',
+        5: 'Hijo',
+        6: 'Hija',
+        7: 'Esposo',
+        8: 'Esposa',
+        9: 'Abuelo',
+        10: 'Abuela'
+    };
+    return RelationshipEnum[relationship];
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     var tabs = document.querySelectorAll('ul.nav.nav-tabs li a');

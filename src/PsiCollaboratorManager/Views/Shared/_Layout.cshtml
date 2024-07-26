@@ -61,9 +61,9 @@
                     </div>
                     <ul class="sub-menu">
                         <li><a class="link_name">Colaboradores</a></li>
-                        <li><a href="/Collaborator/Index">• Colaboradores Activos</a></li>
-                        <li><a href="@Url.Action("InactiveCollaboratores", "Collaborator")">• Colaboradores Inactivos</a></li>
-                        <li><a href="@Url.Action("AssignSchedule", "AssignSchedule")">• Asignar Horarios</a></li>
+                        <li><a href="@Url.Action("Index", "Collaborator")">• Colaboradores Activos</a></li>
+                        <li><a href="@Url.Action("InactiveCollaborators", "Collaborator")">• Colaboradores Inactivos</a></li>
+                        <li><a href="@Url.Action("AssignSchedule", "Collaborator")">• Asignar Horarios</a></li>
                     </ul>
                 </li>
                 <li class="dropMenuOption">
@@ -91,7 +91,7 @@
                     </div>
                     <ul class="sub-menu">
                         <li><a class="link_name">Usuarios</a></li>
-                        <li><a href="/UserAccount/Index">• Administradores</a></li>
+                        <li><a href="@Url.Action("Index", "UserAccount")">• Administradores</a></li>
                     </ul>
 
                 </li>

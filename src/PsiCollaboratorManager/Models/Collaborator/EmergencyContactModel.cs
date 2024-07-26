@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace PsiCollaboratorManager.Models.Collaborator
 {
@@ -20,5 +21,16 @@ namespace PsiCollaboratorManager.Models.Collaborator
             Telephone = fields[3];
             Telephone2 = fields[4];
         }
+        public string GetRecord()
+        {
+            return $"{FirstName},{LastName},{Relationship},{Telephone},{Telephone2}";
+        }
+        public string ToJson()
+        {
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            return js.Serialize(this);
+
+        }
+        public EmergencyContactModel() { }
     }
 }
