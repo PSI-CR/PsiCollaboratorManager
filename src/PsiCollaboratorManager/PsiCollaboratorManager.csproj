@@ -175,7 +175,9 @@
     <Compile Include="Controllers\AnnouncementArtController.cs" />
     <Compile Include="Controllers\CollaboratorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Schedules\ScheduleController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
+    <Compile Include="Controllers\Schedules\WorkingDayController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,6 +196,10 @@
     <Compile Include="Models\UserAccount\LoginModel.cs" />
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\UserAccount\UserAccountModel.cs" />
+    <Compile Include="Models\Schedule\ScheduleDataModel.cs" />
+    <Compile Include="Models\Schedule\ScheduleModel.cs" />
+    <Compile Include="Models\Schedule\WorkingDayDisplayModel.cs" />
+    <Compile Include="Models\Schedule\WorkingDayModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -328,6 +334,9 @@
     <Content Include="Scripts\Lib\Modal.js" />
     <Content Include="Scripts\Lib\Home\BirthdayTodayTable.js" />
     <Content Include="Scripts\Lib\UserAccount\IndexTable.js" />
+    <Content Include="Scripts\Lib\Schedule\IndexTable.js" />
+    <Content Include="Scripts\Lib\Schedule\WorkingDay\Index.js" />
+    <Content Include="Scripts\Lib\Schedule\WorkingDay\IndexTable.js" />
     <Content Include="Scripts\MessiJS\messi.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />

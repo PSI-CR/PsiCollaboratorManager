@@ -8,5 +8,6 @@ namespace PsiCollaborator.Data.Schedule
         void DismissSchedule(int collaboratorId);
         List<ScheduleData> GetAll();
         List<ScheduleBasic> GetAllBasic();
+        List<ScheduleData> GetAllScheduleWorking();
     }
 }

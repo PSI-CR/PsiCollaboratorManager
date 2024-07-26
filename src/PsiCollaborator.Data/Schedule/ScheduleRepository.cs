@@ -30,5 +30,15 @@ namespace PsiCollaborator.Data.Schedule
                 new DbParameter("param_collaboratorid", ParameterDirection.Input, collaboratorId)}
             );
         }
+
+        public List<ScheduleData> GetAllScheduleWorking() 
+        {
+            return ExecuteList<ScheduleData>("select_data_schedule_workingday").ToList();
+        }
+
+        public List<ScheduleData> GetAllDays()
+        {
+            return ExecuteList<ScheduleData>("get_all_schedule_days").ToList();
+        }
     }
 }

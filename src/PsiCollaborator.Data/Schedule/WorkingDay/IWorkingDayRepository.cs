@@ -6,6 +6,6 @@ namespace PsiCollaborator.Data.Schedule.WorkingDay
     {
         int Delete(int WorkingDayId);
         List<WorkingDay> GetAll();
-        void Insert(WorkingDay workingDay);
+        void Insert(IWorkingDay workingDay);
     }
 }

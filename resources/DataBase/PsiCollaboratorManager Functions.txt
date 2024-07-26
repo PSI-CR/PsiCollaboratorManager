@@ -24,7 +24,7 @@ CREATE OR REPLACE FUNCTION public.insert_working_day(
     param_maxdays integer,
     param_maxhours integer,
     param_starttime time without time zone,
-    param_endtime time without time zone,
+    param_endtime time without time zone, 
     param_recordtime timestamp without time zone,
     param_accumulative boolean,
     param_assigned boolean)
@@ -714,7 +714,7 @@ $BODY$;
 
 CREATE OR REPLACE FUNCTION public.select_announcement_art_by_id(
 	param_announcement_art_id integer)
-    RETURNS TABLE(announcementid integer, imageannouncement character varying, begindatepublication timestamp without time zone, enddatepublication timestamp without time zone, description character varying) 
+    RETURNS TABLE(announcementid integer, image character varying, begindatepublication timestamp without time zone, enddatepublication timestamp without time zone, description character varying) 
     LANGUAGE 'plpgsql'
     COST 100
     VOLATILE PARALLEL UNSAFE

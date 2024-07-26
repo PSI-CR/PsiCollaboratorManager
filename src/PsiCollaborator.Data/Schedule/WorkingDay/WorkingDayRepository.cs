@@ -14,7 +14,7 @@ namespace PsiCollaborator.Data.Schedule.WorkingDay
             return ExecuteSql("delete_working_day", new List<DbParameter>() { new DbParameter("param_working_day_id", ParameterDirection.Input, WorkingDayId) });
         }
 
-        public void Insert(WorkingDay workingDay)
+        public void Insert(IWorkingDay workingDay)
         {
             ExecuteSqlMapObject("insert_working_day", workingDay);
         }
