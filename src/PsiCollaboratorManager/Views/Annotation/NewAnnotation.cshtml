@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "New Annotation";
-    Layout = "~/Views/Shared/_basicMedium.cshtml";
+    Layout = "~/Views/Shared/_basicLong.cshtml";
 }
 
 <link href="~/Content/JQGridTheme/jquery-ui.css" rel="stylesheet" />
@@ -12,11 +12,9 @@
 <link href="~/Content/Css/Annotation/NewAnnotation.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
 
-<div id="NewAnnotationContent">
-    <div id="DivTableEmployees" class="fieldset">
-        <table id="jqGrid"></table>
-        <div id="jqGridPager"></div>
-    </div>
+<div id="DivTableCollaborators" class="fieldset">
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
 </div>
 
 <script src="~/Scripts/jqGrid/jquery.min.js"></script>
@@ -27,17 +25,14 @@
 
 <script>
     $grid = $("#jqGrid").jqGrid({
-        url: '@Url.Action("GetData", "Annotation")',
+        url: '@Url.Action("GetCollaborators", "Annotation")',
         mtype: 'GET',
         datatype: 'json',
-        shrinkToFit: true,
         colModel: [
-            {label: 'Id', name: 'CollaboratorId', width: 50, minWidth: 20, editable: false, key: true, hidden: true, align: 'center'},
-            {label: 'Nombre', name: 'FirstName', width: 200, minWidth: 200, editable: false, align: 'center',headerClasses: 'my-column', cellattr: function () { return 'class="my-column"';}},
-            { label: 'Apellidos', name: 'LastName', width: 200, minWidth: 200 },
-            { label: 'Cedula', name: 'DNICollaborator', width: 200, minWidth: 200, hidden: true },
-            { label: 'Operador', name: 'OperatorNumber', align: 'center', width: 200, minWidth: 200 },
-            {label: 'E-mail', name: 'Email', width: 200, minWidth: 200,formatter: 'email'}
+            {label: 'Id', name: 'CollaboratorId', editable: false, key: true, hidden: true, align: 'center'},
+            {label: 'Nombre', name: 'FirstName', editable: false, align: 'center',headerClasses: 'my-column', cellattr: function () { return 'class="my-column"';}},
+            { label: 'Apellidos', name: 'LastName', align: 'center' },
+            { label: 'Operador', name: 'OperatorNumber', align: 'center' }
         ],
 
         onInitGrid: function () {
@@ -67,18 +62,19 @@
         },
 
         loadonce: true,
+        shrinkToFit: true,
         altRows: true,
         pager: '#jqGridPager',
-        rowNum: 20,
+        rowNum: 30,
         rowList: [10, 20, 30, 50],
         viewrecords: true,
         rownumbers: true,
         sortable: true,
-        shrinkToFit: true,
         autowidth: true,
         autoresizeOnLoad: true,
         autoresizeOnResize: true,
         height: '100%',
+        width: '100%',
         multiselect: true,
         onSelectRow: function (a, b, c) {
             if (this.p.selarrrow.length === currids.length) {
@@ -90,7 +86,6 @@
         }
     });
     $(window).on("resize", function () {
-
         $("#jqGrid").jqGrid("setGridWidth", $("#jqGrid").closest(".ui-jqgrid").parent().width());
     });
     $('#jqGrid').navGrid('#jqGridPager',

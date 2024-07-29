@@ -9,11 +9,11 @@ namespace PsiCollaborator.Data.Annotation
     public class Annotation : IAnnotation
     {
         public int AnnotationId { get; set; }
-        public int[] Collaborators { get; set; }
+        public int[] CollaboratorIds { get; set; }
         public int AnnotationTypeId { get; set; }
         public int UserId { get; set; }
         public string Note { get; set; }
-        public DateTime? AnnotationDate { get; set; }
+        public DateTime? Date { get; set; }
         public string FileData { get; set; }
         public string FileName { get; set; }
         public string FileType { get; set; }

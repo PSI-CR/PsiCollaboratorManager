@@ -4,10 +4,10 @@ namespace PsiCollaborator.Data.Annotation
 {
     public interface IAnnotation
     {
-        DateTime? AnnotationDate { get; set; }
+        DateTime? Date { get; set; }
         int AnnotationId { get; set; }
         int AnnotationTypeId { get; set; }
-        int[] Collaborators { get; set; }
+        int[] CollaboratorIds { get; set; }
         string FileData { get; set; }
         string FileName { get; set; }
         string FileType { get; set; }

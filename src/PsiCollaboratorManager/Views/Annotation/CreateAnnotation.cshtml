@@ -1,4 +1,4 @@
-﻿@model PSIEmployeeManagement.Models.Annotations.AnnotationModelDB
+﻿@model PsiCollaboratorManager.Models.Annotation.AnnotationModel
 @{
     ViewBag.Title = "CreateAnnotation";
     Layout = "~/Views/Shared/_basicLong.cshtml";
@@ -28,20 +28,20 @@
     </div>
     <div id="CreateAnnotationAssign" class="fieldset">
         <h4>Asignar Anotación</h4>
-        @Html.LabelFor(model => model.AnnotationTypeModel, htmlAttributes: new { @for = "MessageTypeDropDown" })
+        @Html.LabelFor(model => model.AnnotationTypeModel, htmlAttributes: new { @for = "MessageTypeDropDown", @class="required" })
         @Html.DropDownListFor(model => model.AnnotationTypeModel.AnnotationTypeId, (SelectList)ViewBag.AnnotationTypes, "-- Seleccionar Tipo de Anotación --", new { @class = "form-select", id = "MessageTypeDropDown" })
         <span id="MessageTypeError" style="color: red; display: none;">Debe seleccionar un tipo de anotación</span>
-        @Html.LabelFor(model => model.AnnotationDate, htmlAttributes: new { @for = "MessageDateInput" })
+        @Html.LabelFor(model => model.AnnotationDate, htmlAttributes: new { @for = "MessageDateInput", @class = "required" })
         @Html.TextBoxFor(model => model.AnnotationDate, "{0:yyyy-MM-dd}", new { type = "date", id = "MessageDateInput" })
         <span id="MessageDateError" style="color: red; display: none;">La fecha es requerida</span>
-        @Html.LabelFor(model => model.Note, htmlAttributes: new { @for = "NoteTextArea" })
+        @Html.LabelFor(model => model.Note, htmlAttributes: new { @for = "NoteTextArea", @class = "required" })
         @Html.TextAreaFor(model => model.Note, new { rows = 10, id = "NoteTextArea" })
         <span id="NoteError" style="color: red; display: none;">La nota es requerida</span>
-        @Html.LabelFor(model => model.AttachmentModel.FileData, htmlAttributes: new { @for = "archivoAdjunto" })
-        <input type="file" id="archivoAdjunto" name="archivoAdjunto" class="form-control" accept=".pdf,.doc,.docx,.txt" />
+        @Html.LabelFor(model => model.FileData, htmlAttributes: new { @for = "attachmentFile" })
+        <input type="file" id="attachmentFile" name="attachmentFile" class="form-control" accept=".pdf,.doc,.docx,.txt" />
         <span id="FileError" style="color: red; display: none;">Debe seleccionar un archivo</span>
         <input type="hidden" id="FileBytes" name="File" />
-        @Html.HiddenFor(model => model.AttachmentModel.FileName)
+        @Html.HiddenFor(model => model.FileName)
         @Html.HiddenFor(model => model.UserId)
     </div>
     <div id="CreateAnnotationFooter" class="fieldset">
@@ -68,15 +68,18 @@
 
         if (isMessageTypeValid && isNoteValid && isMessageDateValid) {
             var formData = new FormData($('#CreateAnnotationForm')[0]);
-
+            console.log(formData);
             $.ajax({
                 url: '/Annotation/Create',
                 type: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function () {
-                    window.location.replace('../Annotation/Index');
+                success: function (data) {
+                    if (data != "") {
+                        new Messi(data, { title: 'Error', titleClass: 'anim error', modal: true }).show();
+                    }
+                    else window.location.replace('../Annotation/Index');
                 },
                 error: function (error) {
                     console.log('Error al enviar el formulario:', error);

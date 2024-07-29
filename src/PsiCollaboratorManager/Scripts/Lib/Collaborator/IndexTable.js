@@ -2,7 +2,6 @@
     url: '/Collaborator/GetAllActive',
     mtype: 'GET',
     datatype: 'json',
-    shrinkToFit: false,
     colModel: [
         { label: 'Id', name: 'CollaboratorId', editable: false, key: true, hidden: true},
         { label: 'Nombre', name: 'FirstName', editable: false, align: 'center' },
