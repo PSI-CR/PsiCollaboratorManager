@@ -3,9 +3,12 @@ using PsiCollaborator.Data.Address;
 using PsiCollaborator.Data.BankAccount;
 using PsiCollaborator.Data.Collaborator;
 using PsiCollaborator.Data.PasswordUtilities;
+using PsiCollaborator.Data.Schedule;
+using PsiCollaborator.Data.Schedule.ScheduleDaily;
 using PsiCollaboratorManager.Annotations;
 using PsiCollaboratorManager.Mapping;
 using PsiCollaboratorManager.Models.Collaborator;
+using PsiCollaboratorManager.Models.Schedule;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +24,8 @@ namespace PsiCollaboratorManager.Controllers
         private ICollaboratorRepository _collaboratorRepository;
         private IBankAccountRepository _bankAccountRepository;
         private IAddressRepository _addressRepository;
+        private IScheduleRepository _scheduleRepository;
+        private IScheduleDailyRepository _scheduleDailyRepository;
         private CollaboratorMapper _collaboratorMapper;
         private IMapper _mapper;
         public CollaboratorController()
@@ -28,12 +33,21 @@ namespace PsiCollaboratorManager.Controllers
             _collaboratorRepository = new CollaboratorRepository();
             _bankAccountRepository = new BankAccountRepository();
             _addressRepository = new AddressRepository();
+            _scheduleRepository = new ScheduleRepository();
+            _scheduleDailyRepository = new ScheduleDailyRepository();
+
             _collaboratorMapper = new CollaboratorMapper();
 
             var configuration = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<CollaboratorBase, CollaboratorBaseModel>();
                 cfg.CreateMap<CollaboratorBaseModel, CollaboratorBase>();
+
+                cfg.CreateMap<CollaboratorSchedule, CollaboratorScheduleModel>();
+                cfg.CreateMap<CollaboratorScheduleModel, CollaboratorSchedule>();
+
+                cfg.CreateMap<ScheduleDaily, ScheduleDailyModel>();
+                cfg.CreateMap<ScheduleDailyModel, ScheduleDaily>();
 
                 cfg.CreateMap<Canton, CantonModel>();
                 cfg.CreateMap<CantonModel, Canton>();
@@ -106,6 +120,20 @@ namespace PsiCollaboratorManager.Controllers
             List<RelationshipEnum> relationships = Enum.GetValues(typeof(RelationshipEnum)).Cast<RelationshipEnum>().ToList();
             List<SelectListItem> relationshipsSelect = relationships.Select(x => new SelectListItem() { Value = ((int)x).ToString(), Text = x.ToString() }).ToList();
             ViewData["Relationships"] = relationshipsSelect;
+        }
+        private void setSchedules()
+        {
+            List<ScheduleBasic> schedules = _scheduleRepository.GetAllBasic();
+            List<SelectListItem> schedulesSelect = new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "- Seleccione un Horario -", Selected = true } };
+            schedulesSelect.AddRange(schedules.Select(x => new SelectListItem() { Value = x.ScheduleId.ToString(), Text = x.Name }));
+            ViewData["Schedules"] = schedulesSelect;
+        }
+        private List<SelectListItem> setCollaboratorsWithoutSchedule()
+        {
+            List<CollaboratorOperator> collaborators = _collaboratorRepository.GetWithoutActiveSchedule();
+            List<SelectListItem> collaboratorsSelect = collaborators.Select(x => new SelectListItem() { Value = x.CollaboratorId.ToString(), Text = $"Op #{x.OperatorNumber}: {x.FirstName} {x.LastName}"}).ToList();
+            ViewData["CollaboratorsWithoutSchedule"] = collaboratorsSelect;
+            return collaboratorsSelect;
         }
         private string generateTemporaryPassword()
         {
@@ -239,7 +267,52 @@ namespace PsiCollaboratorManager.Controllers
         public ActionResult AssignSchedule()
         {
             ViewBag.BasicTitle = "Asignar Horario";
+            setSchedules();
+            setCollaboratorsWithoutSchedule();
             return View();
+        }
+        public JsonResult GetCollaboratorsWithSchedule()
+        {
+            List<CollaboratorSchedule> collaborators = _collaboratorRepository.GetCollaboratorSchedules();
+            List<CollaboratorScheduleModel> collaboratorModels = _mapper.Map<List<CollaboratorScheduleModel>>(collaborators);
+            return Json(new { rows = collaboratorModels}, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult GetSchedule(int scheduleId)
+        {
+            List<ScheduleDaily> scheduleDailys = _scheduleDailyRepository.GetByScheduleId(scheduleId);
+            List<ScheduleDailyModel> scheduleDailyModels = _mapper.Map<List<ScheduleDailyModel>>(scheduleDailys);
+            return Json(scheduleDailyModels, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult AssignSchedule(List<int> collaboratorIds, int scheduleId)
+        {
+            try
+            {
+                if (collaboratorIds == null || collaboratorIds.Count == 0) return Json(new { success = false, message = "No se proporcionaron colaboradores para asignar." });
+                if (scheduleId <= 0) return Json(new { success = false, message = "No se seleccionó un horario válido." });
+                foreach (var collaboratorId in collaboratorIds)
+                {
+                    _scheduleRepository.AssignSchedule(scheduleId, collaboratorId);
+                }
+                return Json(new { success = true, message = "Colaboradores asignados correctamente." });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Error al asignar el horario: " + ex.Message });
+            }
+        }
+        public JsonResult DismissSchedule(int collaboratorId)
+        {
+            try
+            {
+                _scheduleRepository.DismissSchedule(collaboratorId);
+                List<SelectListItem> collaboratorModels = setCollaboratorsWithoutSchedule();
+                return Json(new { success = true, message = "Horario desasignado correctamente",  collaborators = collaboratorModels });
+            } 
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Error al desasignar el horario." + ex.Message });
+            }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace PsiCollaborator.Data.Schedule
         }
         public void AssignSchedule(int scheduleid, int collaboratorId)
         {
-            ExecuteSql("Dismiss_schedule", new List<DbParameter>() {
+            ExecuteSql("Assign_schedule", new List<DbParameter>() {
                 new DbParameter("param_scheduleid", ParameterDirection.Input, scheduleid),
                 new DbParameter("param_collaboratorid", ParameterDirection.Input, collaboratorId)}
             );
