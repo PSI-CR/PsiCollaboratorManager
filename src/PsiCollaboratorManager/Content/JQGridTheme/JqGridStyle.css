@@ -51,12 +51,6 @@
         margin-bottom: 5px;
         margin-top: 5px;
     }
-
-    #jqContextMenu ul {
-        width: 200px !important;
-        height: 80px !important;
-    }
-
     .my-column {
         height: 50px; 
     }

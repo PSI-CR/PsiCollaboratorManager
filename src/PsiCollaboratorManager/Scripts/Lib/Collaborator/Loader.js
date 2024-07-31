@@ -41,6 +41,7 @@ async function GetBase64() {
     return base64Image;
 }
 function InsertCollaborator(collaborator) {
+    console.log(collaborator);
     $.ajax({
         url: "/Collaborator/Save",
         type: 'POST',

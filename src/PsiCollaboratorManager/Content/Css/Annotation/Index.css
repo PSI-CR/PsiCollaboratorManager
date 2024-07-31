@@ -1,7 +1,6 @@
 ﻿#AnnotationContent{
     display:flex;
     flex-direction:column;
-    height:100%;
     width:99%;
     padding:10px;
     gap:10px;

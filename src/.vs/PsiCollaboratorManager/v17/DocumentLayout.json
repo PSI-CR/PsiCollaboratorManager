@@ -3,60 +3,36 @@
   "WorkspaceRootPath": "E:\\GitHub\\PsiCollaboratorManager\\src\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\annotation\\createannotation.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\annotation\\createannotation.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\views\\annotation\\createannotation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\annotation\\createannotation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\annotation\\newannotationtable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\annotation\\newannotationtable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\views\\annotation\\newannotation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\annotation\\newannotation.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\assignscheduletable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\assignscheduletable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\content\\css\\collaborator\\assignschedule.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\content\\css\\collaborator\\assignschedule.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\annotation\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\annotation\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\models\\schedule\\scheduledailymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\models\\schedule\\scheduledailymodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaborator.data\\schedule\\schedulerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|solutionrelative:psicollaborator.data\\schedule\\schedulerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaborator.data\\schedule\\scheduledaily\\scheduledailyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|solutionrelative:psicollaborator.data\\schedule\\scheduledaily\\scheduledailyrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\assignschedule.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\assignschedule.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\models\\collaborator\\collaboratorschedulemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\models\\collaborator\\collaboratorschedulemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaborator.data\\collaborator\\collaboratorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{167C297A-8C3C-43AE-B0B4-D22ACB06ADCF}|PsiCollaborator.Data\\PsiCollaborator.Data.csproj|solutionrelative:psicollaborator.data\\collaborator\\collaboratorrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\views\\collaborator\\assignschedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\views\\collaborator\\assignschedule.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\controllers\\collaboratorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\controllers\\collaboratorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\controllers\\collaboratorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\collaboratorfull.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\collaboratorfull.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\loader.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\loader.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\innactivetable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\innactivetable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -66,188 +42,110 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "CollaboratorController.cs",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
-              "RelativeToolTip": "PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
-              "ViewState": "AQIAAIcAAAAAAAAAAAAgwDQBAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-19T20:01:54.565Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NewAnnotation.cshtml",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\Annotation\\NewAnnotation.cshtml",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\Annotation\\NewAnnotation.cshtml",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\Annotation\\NewAnnotation.cshtml",
-              "RelativeToolTip": "PsiCollaboratorManager\\Views\\Annotation\\NewAnnotation.cshtml",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-29T14:32:58.498Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "AssignSchedule.cshtml",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\Collaborator\\AssignSchedule.cshtml",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\Collaborator\\AssignSchedule.cshtml",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\Collaborator\\AssignSchedule.cshtml",
-              "RelativeToolTip": "PsiCollaboratorManager\\Views\\Collaborator\\AssignSchedule.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-29T17:05:13.41Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "CollaboratorRepository.cs",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\Collaborator\\CollaboratorRepository.cs",
-              "RelativeDocumentMoniker": "PsiCollaborator.Data\\Collaborator\\CollaboratorRepository.cs",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\Collaborator\\CollaboratorRepository.cs",
-              "RelativeToolTip": "PsiCollaborator.Data\\Collaborator\\CollaboratorRepository.cs",
-              "ViewState": "AQIAAE0AAAAAAAAAAAAqwGYAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-29T19:57:52.495Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "CollaboratorScheduleModel.cs",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Models\\Collaborator\\CollaboratorScheduleModel.cs",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Models\\Collaborator\\CollaboratorScheduleModel.cs",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Models\\Collaborator\\CollaboratorScheduleModel.cs",
-              "RelativeToolTip": "PsiCollaboratorManager\\Models\\Collaborator\\CollaboratorScheduleModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-29T20:02:48.825Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "AssignSchedule.js",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignSchedule.js",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignSchedule.js",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignSchedule.js",
-              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignSchedule.js",
-              "ViewState": "AQIAAEUAAAAAAAAAAAA3wCMAAABZAAAA",
+              "DocumentIndex": 1,
+              "Title": "IndexTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\IndexTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\IndexTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\IndexTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\IndexTable.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-29T20:18:22.59Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ScheduleDailyRepository.cs",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\Schedule\\ScheduleDaily\\ScheduleDailyRepository.cs",
-              "RelativeDocumentMoniker": "PsiCollaborator.Data\\Schedule\\ScheduleDaily\\ScheduleDailyRepository.cs",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\Schedule\\ScheduleDaily\\ScheduleDailyRepository.cs",
-              "RelativeToolTip": "PsiCollaborator.Data\\Schedule\\ScheduleDaily\\ScheduleDailyRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAA6AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-29T20:23:16.161Z",
+              "WhenOpened": "2024-07-31T18:31:21.326Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "ScheduleRepository.cs",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\Schedule\\ScheduleRepository.cs",
-              "RelativeDocumentMoniker": "PsiCollaborator.Data\\Schedule\\ScheduleRepository.cs",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaborator.Data\\Schedule\\ScheduleRepository.cs",
-              "RelativeToolTip": "PsiCollaborator.Data\\Schedule\\ScheduleRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-29T20:23:26.349Z",
+              "Title": "InnactiveTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\InnactiveTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\InnactiveTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\InnactiveTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\InnactiveTable.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABUAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-07-31T19:32:18.135Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ScheduleDailyModel.cs",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Models\\Schedule\\ScheduleDailyModel.cs",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Models\\Schedule\\ScheduleDailyModel.cs",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Models\\Schedule\\ScheduleDailyModel.cs",
-              "RelativeToolTip": "PsiCollaboratorManager\\Models\\Schedule\\ScheduleDailyModel.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-29T20:30:08.996Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AssignSchedule.css",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Content\\Css\\Collaborator\\AssignSchedule.css",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Content\\Css\\Collaborator\\AssignSchedule.css",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Content\\Css\\Collaborator\\AssignSchedule.css",
-              "RelativeToolTip": "PsiCollaboratorManager\\Content\\Css\\Collaborator\\AssignSchedule.css",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-07-29T20:40:20.612Z",
+              "DocumentIndex": 3,
+              "Title": "IndexTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\IndexTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\IndexTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\IndexTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\IndexTable.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAABkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-07-31T19:59:00.471Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "AssignScheduleTable.js",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignScheduleTable.js",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignScheduleTable.js",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignScheduleTable.js",
-              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignScheduleTable.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEcAAAABAAAA",
+              "Title": "CollaboratorController.cs",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
+              "RelativeToolTip": "PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
+              "ViewState": "AQIAAK8AAAAAAAAAAAAUwMUAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-31T20:17:10.588Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CollaboratorFull.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\CollaboratorFull.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\CollaboratorFull.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\CollaboratorFull.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\CollaboratorFull.js",
+              "ViewState": "AQIAADcAAAAAAAAAAAAgwFMAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-29T21:51:35.716Z",
+              "WhenOpened": "2024-07-31T20:19:33.512Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Loader.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\Loader.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\Loader.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\Loader.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\Loader.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-07-31T20:20:13.251Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "NewAnnotationTable.js",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
-              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAmAAAA",
+              "Title": "AssignScheduleTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignScheduleTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignScheduleTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignScheduleTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignScheduleTable.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-29T22:32:02.986Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CreateAnnotation.cshtml",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\Annotation\\CreateAnnotation.cshtml",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Views\\Annotation\\CreateAnnotation.cshtml",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Views\\Annotation\\CreateAnnotation.cshtml",
-              "RelativeToolTip": "PsiCollaboratorManager\\Views\\Annotation\\CreateAnnotation.cshtml",
-              "ViewState": "AQIAACcAAAAAAAAAAAAAADkAAABEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-29T22:33:38.316Z",
+              "WhenOpened": "2024-07-31T21:04:43.963Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CreateAnnotation.js",
-              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\CreateAnnotation.js",
-              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\CreateAnnotation.js",
-              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\CreateAnnotation.js",
-              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\CreateAnnotation.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAABAAAA",
+              "Title": "NewAnnotationTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-29T22:34:10.073Z",
+              "WhenOpened": "2024-07-31T21:06:13.788Z",
               "EditorCaption": ""
             }
           ]

@@ -6,13 +6,13 @@
         { label: 'Id', name: 'CollaboratorId', editable: false, key: true, hidden: true, align: 'center' },
         { label: 'Nombre', name: 'FirstName', editable: false, align: 'center', headerClasses: 'my-column', cellattr: function () { return 'class="my-column"'; } },
         { label: 'Apellidos', name: 'LastName', align: 'center' },
-        { label: 'Operador', name: 'OperatorNumber', align: 'center' }
+        { label: 'Operador', name: 'OperatorNumber', align: 'center', sorttype: 'number' }
     ],
-
     onInitGrid: function () {
         $("<div class='alert-info-grid'>No Record(s) Found</div>").insertAfter($(this).parent());
     },
     loadComplete: function () {
+        resizeGrid();
         var $this = $(this), p = $this.jqGrid("getGridParam");
         if (p.reccount === 0) {
             $this.hide();
@@ -22,18 +22,6 @@
             $this.parent().siblings(".alert-info-grid").hide();
         }
     },
-    resizeStop: function (newWidth, index) {
-        var colModel = $(this).jqGrid('getGridParam', 'colModel');
-        var column = colModel[index];
-
-        console.log(newWidth);
-        if (column.width < column.minWidth) {
-            $(this).jqGrid('setGridParam', {
-                colModel: colModel
-            }).trigger('resize');
-        }
-    },
-
     loadonce: true,
     shrinkToFit: true,
     altRows: true,
@@ -59,36 +47,24 @@
     }
 });
 $(window).on("resize", function () {
-    $("#jqGrid").jqGrid("setGridWidth", $("#jqGrid").closest(".ui-jqgrid").parent().width());
+    resizeGrid();
 });
-$('#jqGrid').navGrid('#jqGridPager',
-    { edit: false, add: false, del: false, search: true, refresh: true, view: false, position: "left", cloneToTop: true }, { multipleSearch: true, multipleGroup: true });
+function resizeGrid() {
+    $("#jqGrid").jqGrid("setGridWidth", $("#jqGrid").closest(".ui-jqgrid").parent().width());
+}
+$('#jqGrid').navGrid('#jqGridPager', { edit: false, add: false, del: false, search: true, refresh: true, view: false, position: "left", cloneToTop: true }, { multipleSearch: true, multipleGroup: true });
 
-$('#jqGrid').navButtonAdd('#jqGridPager',
-    {
-        buttonicon: "ui-icon-calculator",
-        title: "Column chooser",
-        caption: "Columnas",
-        position: "last",
-        onClickButton: function () {
-            jQuery("#jqGrid").jqGrid('columnChooser', {
-                done: function (numColumn) {
-                    $("#jqGrid").jqGrid('setGridParam', {
-                    }).trigger('resize');
-                }
-            });
-        }
+$('#jqGrid').navButtonAdd('#jqGridPager', { buttonicon: "ui-icon-calculator", title: "Column chooser", caption: "Columnas", position: "last",
+    onClickButton: function () {
+        jQuery("#jqGrid").jqGrid('columnChooser', {
+            done: function (numColumn) {
+                $("#jqGrid").jqGrid('setGridParam', {
+                }).trigger('resize');
+            }
+        });
     }
-);
-$('#jqGrid').navButtonAdd('#jqGridPager',
-    {
-        buttonicon: "ui-icon-plusthick",
-        title: "Nueva Anotación",
-        caption: "Nueva Anotación",
-        position: "last",
-        onClickButton: getSelectedRows
-    }
-);
+});
+$('#jqGrid').navButtonAdd('#jqGridPager', { buttonicon: "ui-icon-plusthick", title: "Nueva Anotación", caption: "Nueva Anotación", position: "last", onClickButton: getSelectedRows } );
 function getSelectedRows() {
     var grid = $("#jqGrid");
     var rowKey = grid.getGridParam("selrow");
@@ -117,10 +93,4 @@ function getSelectedRows() {
         var dictJson = JSON.stringify(lista);
         location.href = '/Annotation/CreateAnnotation?collaboratorsDictJson=' + encodeURIComponent(dictJson);
     }
-}
-function resizeJqGridWidth(grid_id, div_id, width) {
-    $(window).bind('resize', function () {
-        $('#' + grid_id).setGridWidth(width, true);
-        $('#' + grid_id).setGridWidth($('#' + div_id).width(), true);
-    }).trigger('resize');
 }
