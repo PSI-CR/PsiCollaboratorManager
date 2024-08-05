@@ -5,24 +5,27 @@
         { label: 'Id', name: 'CollaboratorId', editable: false, key: true, hidden: true },
         { label: 'Nombre', name: 'FirstName', editable: false, align: 'center' },
         { label: 'Apellidos', name: 'LastName', editable: false, align: 'center' },
-        { label: 'Nacimiento', name: 'DateOfBirth', formatter: 'date', align: 'center', formatoptions: { newformat: 'd/m/Y' },
+        { label: 'Nacimiento', name: 'DateOfBirth', formatter: 'date', align: 'center', sorttype: 'date', formatoptions: { newformat: 'd/m/Y' },
             searchoptions: {
                 dataInit: function (element) {
                     $(element).datepicker({
                         id: 'orderDate_datePicker',
-                        dateFormat: 'yy-mm-dd',
+                        dateFormat: 'dd/mm/yy',
                         maxDate: new Date(2030, 0, 1),
                         showOn: 'focus'
                     });
                 }
             }
-        },
+        }
     ],
+    loadonce:true,
     pager: true,
     shrinkToFit: true,
     autowidth: true,
     autoresizeOnLoad: true,
     autoresizeOnResize: true,
+    sortable: true,
+    altRows: true,
     height: '100%',
     rowNum: 10,
     rowList: [10, 20, 30],

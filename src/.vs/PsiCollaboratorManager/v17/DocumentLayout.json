@@ -3,36 +3,52 @@
   "WorkspaceRootPath": "E:\\GitHub\\PsiCollaboratorManager\\src\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\home\\birthdaytodaytable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\home\\birthdaytodaytable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\home\\birthdaynextweektable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\home\\birthdaynextweektable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\home\\birthdaylastweektable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\home\\birthdaylastweektable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\annotation\\annotationtypetable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\annotation\\annotationtypetable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\innactivetable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\innactivetable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\annotation\\newannotationtable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\annotation\\newannotationtable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\assignscheduletable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\assignscheduletable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\assignscheduletable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\annotation\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\scripts\\lib\\annotation\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\annotation\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\controllers\\collaboratorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\indextable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\controllers\\collaboratorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\controllers\\collaboratorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\collaboratorfull.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\collaboratorfull.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\collaboratorfull.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\loader.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|E:\\GitHub\\PsiCollaboratorManager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\loader.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\loader.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|e:\\github\\psicollaboratormanager\\src\\psicollaboratormanager\\scripts\\lib\\collaborator\\innactivetable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{405D330B-A450-46E0-8E71-E38C667E77DE}|PsiCollaboratorManager\\PsiCollaboratorManager.csproj|solutionrelative:psicollaboratormanager\\scripts\\lib\\collaborator\\innactivetable.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,11 +58,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "IndexTable.js",
               "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\IndexTable.js",
               "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\IndexTable.js",
@@ -54,38 +70,37 @@
               "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\IndexTable.js",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-31T18:31:21.326Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-31T18:31:21.326Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "InnactiveTable.js",
               "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\InnactiveTable.js",
               "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\InnactiveTable.js",
               "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\InnactiveTable.js",
               "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\InnactiveTable.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABUAAAA",
+              "ViewState": "AQIAACQAAAAAAAAAAAAqwA0AAABWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-07-31T19:32:18.135Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "IndexTable.js",
               "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\IndexTable.js",
               "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\IndexTable.js",
               "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\IndexTable.js",
               "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\IndexTable.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAABkAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAABjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-07-31T19:59:00.471Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 9,
               "Title": "CollaboratorController.cs",
               "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
               "RelativeDocumentMoniker": "PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
@@ -93,12 +108,11 @@
               "RelativeToolTip": "PsiCollaboratorManager\\Controllers\\CollaboratorController.cs",
               "ViewState": "AQIAAK8AAAAAAAAAAAAUwMUAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T20:17:10.588Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-31T20:17:10.588Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "CollaboratorFull.js",
               "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\CollaboratorFull.js",
               "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\CollaboratorFull.js",
@@ -106,12 +120,11 @@
               "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\CollaboratorFull.js",
               "ViewState": "AQIAADcAAAAAAAAAAAAgwFMAAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-31T20:19:33.512Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-31T20:19:33.512Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 11,
               "Title": "Loader.js",
               "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\Loader.js",
               "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\Loader.js",
@@ -119,12 +132,11 @@
               "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\Loader.js",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-07-31T20:20:13.251Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-31T20:20:13.251Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "AssignScheduleTable.js",
               "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignScheduleTable.js",
               "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Collaborator\\AssignScheduleTable.js",
@@ -137,15 +149,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "NewAnnotationTable.js",
               "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
               "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
               "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
               "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\NewAnnotationTable.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAABYAAAA",
+              "ViewState": "AQIAADEAAAAAAAAAAAAcwAgAAABYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-07-31T21:06:13.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AnnotationTypeTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\AnnotationTypeTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\AnnotationTypeTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\AnnotationTypeTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Annotation\\AnnotationTypeTable.js",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAqwB8AAAASAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-08-05T13:24:14.558Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BirthdayLastWeekTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayLastWeekTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayLastWeekTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayLastWeekTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayLastWeekTable.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAGAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-08-05T13:35:23.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BirthdayNextWeekTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayNextWeekTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayNextWeekTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayNextWeekTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayNextWeekTable.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-08-05T13:36:34.902Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "BirthdayTodayTable.js",
+              "DocumentMoniker": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayTodayTable.js",
+              "RelativeDocumentMoniker": "PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayTodayTable.js",
+              "ToolTip": "E:\\GitHub\\PsiCollaboratorManager\\src\\PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayTodayTable.js",
+              "RelativeToolTip": "PsiCollaboratorManager\\Scripts\\Lib\\Home\\BirthdayTodayTable.js",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-08-05T13:36:48.713Z",
               "EditorCaption": ""
             }
           ]

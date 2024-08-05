@@ -5,7 +5,7 @@
     colModel: [
         { label: 'Id', name: 'AnnotationTypeId', key: true, hidden: true},
         { label: 'Nombre', name: 'TypeName', align: 'center', headerClasses: 'my-column', cellattr: function () { return 'class="my-column"'; } },
-        { label: 'Porcentaje', name: 'Percentage', align: 'center' },
+        { label: 'Porcentaje', name: 'Percentage', align: 'center', sorttype: 'number' },
         { label: "Visible", name: 'VisibleToCollaborator', align: 'center', formatter: "checkbox", formatoptions: { disabled: true } },
         { label: "Valor en %", name: 'ValueInScore', align: 'center', formatter: "checkbox", formatoptions: { disabled: true } },
     ],
