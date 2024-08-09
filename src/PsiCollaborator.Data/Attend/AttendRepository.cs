@@ -39,12 +39,21 @@ namespace PsiCollaborator.Data.Attend
         public void Update(Attend attendance)
         {
             ExecuteSqlMapObject("update_attend", attendance);
-        }//public Attend SearchAssistancePro(int collaboratorid, DateTime dateTime)
-         //{
-         //    var attends = ExecuteList<Attend>("select_all_attend").ToList();
-         //    var attend = attends.Where(item => { return item.collaboratorid == collaboratorid && item.checkin.Date == dateTime.GetValueOrDefault().Date; }).FirstOrDefault();
-         //    return attend;
-         //}
+        }
+
+        public List<Attend> GetAttendByCollaboratorId(int collaboratorId)
+        {
+            return ExecuteListWithParameters<Attend>("select_collaborator_attendance",
+            new List<DbParameter>() { new DbParameter("param_colaboratorId", ParameterDirection.Input, collaboratorId) }).ToList();
+        }
+
+
+        //public Attend SearchAssistancePro(int collaboratorid, DateTime dateTime)
+        //{
+        //    var attends = ExecuteList<Attend>("select_all_attend").ToList();
+        //    var attend = attends.Where(item => { return item.collaboratorid == collaboratorid && item.checkin.Date == dateTime.GetValueOrDefault().Date; }).FirstOrDefault();
+        //    return attend;
+        //}
 
         //public Attend SearchByCollaboratorIdDate(int collaboratorId, DateTime dateTime)
         //{

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PsiCollaborator.Data.AnnouncementArt;
+using System.Collections.Generic;
 
 namespace PsiCollaborator.Data.Schedule.WorkingDay
 {
@@ -7,5 +8,6 @@ namespace PsiCollaborator.Data.Schedule.WorkingDay
         int Delete(int WorkingDayId);
         List<WorkingDay> GetAll();
         void Insert(IWorkingDay workingDay);
+        WorkingDay GetById(int workingDayId);
     }
 }

@@ -181,14 +181,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\ScheduleMapper.cs" />
     <Compile Include="Models\Annotation\AnnotationTypeModel.cs" />
     <Compile Include="Models\AnnouncementArtModel.cs" />
     <Compile Include="Mapping\CollaboratorMapper.cs" />
     <Compile Include="Mapping\UserAccountMapper.cs" />
+    <Compile Include="Models\Attendance\AttendModel.cs" />
     <Compile Include="Models\Collaborator\CantonModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorBaseModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorFullModel.cs" />
     <Compile Include="Models\Collaborator\DistrictModel.cs" />
+    <Compile Include="Models\Schedule\ScheduleDailyModel.cs" />
+    <Compile Include="Models\Schedule\ScheduleDataModel.cs" />
+    <Compile Include="Models\Schedule\ScheduleDayModel.cs" />
+    <Compile Include="Models\Schedule\ScheduleWorkingDayModel.cs" />
+    <Compile Include="Models\TimeModel.cs" />
     <Compile Include="Models\UserAccount\ChangePasswordModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorBirthdayModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorDetailsModel.cs" />
@@ -196,7 +203,6 @@
     <Compile Include="Models\UserAccount\LoginModel.cs" />
     <Compile Include="Models\MessageModel.cs" />
     <Compile Include="Models\UserAccount\UserAccountModel.cs" />
-    <Compile Include="Models\Schedule\ScheduleDataModel.cs" />
     <Compile Include="Models\Schedule\ScheduleModel.cs" />
     <Compile Include="Models\Schedule\WorkingDayDisplayModel.cs" />
     <Compile Include="Models\Schedule\WorkingDayModel.cs" />
@@ -235,6 +241,7 @@
     <Content Include="Content\Validation.css" />
     <Content Include="Scripts\Camera.js" />
     <Content Include="Scripts\Lib\Annotation\AnnotationTypeTable.js" />
+    <Content Include="Scripts\Lib\CheckSchedule\IndexTableCollaborator.js" />
     <Content Include="Scripts\Lib\Collaborator\CollaboratorFull.js" />
     <Content Include="Scripts\Lib\Collaborator\EmergencyContact\EmergencyContact.js" />
     <Content Include="Scripts\Lib\Collaborator\EmergencyContact\EmergencyContactExtension.js" />
@@ -333,6 +340,12 @@
     <Content Include="Scripts\Lib\Home\BirthdayNextWeekTable.js" />
     <Content Include="Scripts\Lib\Modal.js" />
     <Content Include="Scripts\Lib\Home\BirthdayTodayTable.js" />
+    <Content Include="Scripts\Lib\Schedule\Create.js" />
+    <Content Include="Scripts\Lib\Schedule\Schedule.js" />
+    <Content Include="Scripts\Lib\Schedule\ScheduleDaily.js" />
+    <Content Include="Scripts\Lib\Schedule\ScheduleDailyExtension.js" />
+    <Content Include="Scripts\Lib\Schedule\WorkingDay.js" />
+    <Content Include="Scripts\Lib\Time.js" />
     <Content Include="Scripts\Lib\UserAccount\IndexTable.js" />
     <Content Include="Scripts\Lib\Schedule\IndexTable.js" />
     <Content Include="Scripts\Lib\Schedule\WorkingDay\Index.js" />

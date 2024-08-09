@@ -15,8 +15,8 @@ namespace PsiCollaboratorManager.Models.Schedule
         public int MaxHours { get; set; }        
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }     
-        public string Accumulative { get; set; }
-        public bool Assigned { get; set; }
+        public bool Accumulative { get; set; }
+        public string Assigned { get; set; }
         public DateTime RecordTime { get; set; }    
     }
 }

@@ -1,9 +1,7 @@
-﻿using System;
+﻿using PsiCollaborator.Data.Collaborator;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PsiCollaborator.Data.Schedule
 {
@@ -39,6 +37,19 @@ namespace PsiCollaborator.Data.Schedule
         public List<ScheduleData> GetAllDays()
         {
             return ExecuteList<ScheduleData>("get_all_schedule_days").ToList();
+        }
+
+        public void Save(Schedule schedule)
+        {
+            ExecuteSqlMapObject("save_schedule", schedule);    
+        }
+
+        public Schedule GetById(int scheduleid)
+        {
+            var result = ExecuteSingle<Schedule>("select_schedule_full_by_id", new List<DbParameter>() {
+                new DbParameter("param_scheduleid", ParameterDirection.Input, scheduleid)
+            });
+            return result;
         }
     }
 }

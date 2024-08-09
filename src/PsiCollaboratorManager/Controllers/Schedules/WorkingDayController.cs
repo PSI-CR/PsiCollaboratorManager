@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using PsiCollaborator.Data.Schedule.WorkingDay;
+using PsiCollaboratorManager.Mapping;
 using PsiCollaboratorManager.Models.Schedule;
 
 namespace PsiCollaboratorManager.Controllers
@@ -11,6 +12,7 @@ namespace PsiCollaboratorManager.Controllers
     public class WorkingDayController : Controller
     {
         private IWorkingDayRepository _workingDayRepository;
+        private ScheduleMapper _scheduleMapper;
         private IMapper _mapper;
 
         public WorkingDayController()
@@ -22,6 +24,7 @@ namespace PsiCollaboratorManager.Controllers
             });
 
             _workingDayRepository = new WorkingDayRepository();
+            _scheduleMapper = new ScheduleMapper();
             _mapper = configuration.CreateMapper();
         }
 
@@ -34,19 +37,8 @@ namespace PsiCollaboratorManager.Controllers
         public ActionResult GetAllWorkingDay()
         {
             List<WorkingDay> workingDays = _workingDayRepository.GetAll();
-            var gridData = workingDays.Select(workingDay => new
-            {
-                workingDay.WorkingDayId,
-                workingDay.Name,
-                workingDay.Description,
-                workingDay.MaxDays,
-                workingDay.MaxHours,
-                workingDay.StartTime,
-                workingDay.EndTime,
-                workingDay.RecordTime,
-                Accumulative = workingDay.Accumulative ? "Si" : "No"
-            });
-            return Json(gridData, JsonRequestBehavior.AllowGet);
+            List<WorkingDayDisplayModel> models = workingDays.Select(workingDay => _scheduleMapper.MapDisplay(workingDay)).ToList();
+            return Json(models, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Create()
@@ -58,18 +50,7 @@ namespace PsiCollaboratorManager.Controllers
         [HttpPost]
         public ActionResult Create(WorkingDayModel workingDayModel)
         {
-            var workingDayData = new WorkingDay()
-            {
-                WorkingDayId = workingDayModel.WorkingDayId,
-                Name = workingDayModel.Name,
-                Description = workingDayModel.Description,
-                MaxDays = workingDayModel.MaxDays,
-                MaxHours = workingDayModel.MaxHours,
-                StartTime = workingDayModel.StartTime,
-                EndTime = workingDayModel.EndTime,
-                RecordTime = DateTime.Now,
-                Accumulative = workingDayModel.Accumulative
-            };
+            WorkingDay workingDayData = _scheduleMapper.Map(workingDayModel);
             _workingDayRepository.Insert(workingDayData);
             return RedirectToAction("../WorkingDay/Index");
         }

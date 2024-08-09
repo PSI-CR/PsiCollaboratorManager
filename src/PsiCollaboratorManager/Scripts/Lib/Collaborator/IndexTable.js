@@ -105,6 +105,7 @@ $('#jqGrid').navButtonAdd('#jqGridPager',
         }
     }
 );
+
 $('#jqGrid').navButtonAdd('#jqGridPager',
     {
         buttonicon: "ui-icon-pencil",
@@ -114,6 +115,7 @@ $('#jqGrid').navButtonAdd('#jqGridPager',
         onClickButton: editRow
     }
 );
+
 $('#jqGrid').navButtonAdd('#jqGridPager',
     {
         buttonicon: "ui-icon-plusthick",

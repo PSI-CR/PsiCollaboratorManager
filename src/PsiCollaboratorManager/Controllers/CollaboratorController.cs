@@ -166,6 +166,7 @@ namespace PsiCollaboratorManager.Controllers
             collaboratorModel.Password = generateTemporaryPassword();
             return View(collaboratorModel);
         }
+
         public JsonResult Save(string collaborator)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();

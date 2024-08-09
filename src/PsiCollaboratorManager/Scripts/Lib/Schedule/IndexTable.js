@@ -4,12 +4,12 @@
         mtype: 'GET',
         datatype: 'json',
         shrinkToFit: false,
-        colNames: ['Id', 'Nombre', 'Jornada', 'Descripcion', 'Jornada Acumulativa'],
+        colNames: ['Id', 'Nombre', 'Jornada', 'Descripcion', 'Asignado'],
         colModel: [
             { name: 'ScheduleId', index: 'Id', width: 36, hidden: true, align: 'center' },
-            { name: 'ScheduleName', index: 'Nombre', editable: true, align: 'center', editrules: { required: true }, width: 160 },
+            { name: 'Name', index: 'Nombre', editable: true, align: 'center', editrules: { required: true }, width: 160 },
             { name: 'WorkingDayName', index: 'Jornada', width: 160, editable: true, align: 'center', editrules: { required: true } },
-            { name: 'Description', index: 'Descripción', width: 461, editable: true, align: 'center', editrules: { required: true } },
+            { name: 'WorkingDayDescription', index: 'Descripción', width: 461, editable: true, align: 'center', editrules: { required: true } },
             { name: 'Assigned', index: 'Asignado', width: 166, editable: true, align: 'center', editrules: { required: true } }
         ],
 
@@ -72,29 +72,16 @@
 
     $('#jqGrid').navButtonAdd('#jqGridPager',
         {
-            buttonicon: "ui-icon-calculator",
-            title: "Column chooser",
-            caption: "Columnas",
+            buttonicon: "ui-icon-plusthick",
+            title: "Agregar",
+            caption: "Agregar",
             position: "last",
-            onClickButton: function () {
-                jQuery("#jqGrid").jqGrid('columnChooser', {
-                    done: function (numColumn) {
-                        $("#jqGrid").jqGrid('setGridParam', {}).trigger('resize');
-                    }
-                });
-            }
+            onClickButton: addWorkinDay
         }
     );
 
+    function addWorkinDay() {
+        window.location.href = "/Schedule/Create";
+    }
 
-
-    //$('#jqGrid').navButtonAdd('#jqGridPager',
-    //    {
-    //        buttonicon: "ui-icon-plusthick",
-    //        title: "Add",
-    //        caption: "Agregar",
-    //        position: "last",
-    //        onClickButton: addRow
-    //    }
-    //);
 });

@@ -26,7 +26,7 @@
 .scheduleSectionFlex {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: end;
     gap: 20px;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .formField {
-    width: 80%;
+    width: 100%;
 }
 
 .formFieldHour {
@@ -51,9 +51,9 @@
 }
 
 #ScheduleDaysHoursSection {
-    padding: 20px;
+    padding: 10px;
     display: grid;
-    grid-template-rows: 1fr 40px;
+    grid-template-rows: 1fr 90px;
 }
 
     #ScheduleDaysHoursSection table {

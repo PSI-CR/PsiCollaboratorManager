@@ -40,6 +40,7 @@ async function GetBase64() {
     await promise.then(val => { base64Image = val });
     return base64Image;
 }
+
 function InsertCollaborator(collaborator) {
     $.ajax({
         url: "/Collaborator/Save",

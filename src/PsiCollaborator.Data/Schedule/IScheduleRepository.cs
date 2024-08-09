@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PsiCollaborator.Data.Collaborator;
+using System.Collections.Generic;
 
 namespace PsiCollaborator.Data.Schedule
 {
@@ -9,5 +10,7 @@ namespace PsiCollaborator.Data.Schedule
         List<ScheduleData> GetAll();
         List<ScheduleBasic> GetAllBasic();
         List<ScheduleData> GetAllScheduleWorking();
+        void Save(Schedule scheduleData);
+        Schedule GetById(int scheduleid);
     }
 }

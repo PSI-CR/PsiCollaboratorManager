@@ -1,45 +1,47 @@
-﻿@model PsiCollaboratorManager.Models.Schedule.ScheduleModel
+﻿@model PsiCollaboratorManager.Models.Schedule.ScheduleWorkingDayModel
 @{
     ViewBag.Title = "Edit Schedule";
     Layout = "~/Views/Shared/_basicLong.cshtml";
 }
 <link href="~/Content/Css/Schedule/CreateEdit.css" rel="stylesheet" />
-@using (Html.BeginForm("EditSchedule", "Schedule", FormMethod.Post, new { id = "FormEditSchedule" , @class= "scheduleForm" }))
+
+@using (Html.BeginForm("EditSchedule", "Schedule", FormMethod.Post, new { id = "FormEditSchedule", @class = "scheduleForm" }))
 {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ScheduleId)
+    <input type="hidden" id="hiddenScheduleId" value="@Model.ScheduleId" />
+
     <div id="ScheduleInfoSection" class="fieldset">
-        <h3>Informacion Horario</h3>
+        <h3>Información Horario</h3>
         <div class="formField">
-            @Html.LabelFor(model => model.ScheduleName, htmlAttributes: new { @class = "control-label required" })
-            @Html.TextBoxFor(model => model.ScheduleName, new { @class = "form-control", type = "text", required = "required" })
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label required" })
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control", type = "text", required = "required" })
         </div>
         <div class="formField">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label required" })
-            @Html.TextBoxFor(model => model.Description, new { @class = "form-control", type = "text", required = "required" })
-        </div>
-        <div class="formField">
-            @*<div>@Html.LabelFor(model => model.WorkingDayId, htmlAttributes: new { @class = "control-label required" })</div>
-            <div>@Html.DropDownList("workingDayId", (List<SelectListItem>)ViewBag.WorkingDay, "- Seleccione una jornada -", htmlAttributes: new { required = "required" })</div>*@
-
-            <div>
-                <label class="required">Banco</label>
-                @Html.DropDownListFor(model => model.DayId, ViewBag.Days as List<SelectListItem>, "-Seleccione el día-", new { @class = "form-control", required = "", title = "Favor elija una entidad bancaria." })
-            </div>
-
+            <div>@Html.LabelFor(model => model.WorkingDay.WorkingDayId, htmlAttributes: new { @class = "control-label required" })</div>
+            <div>@Html.DropDownList("WorkingDay.WorkingDayId", (List<SelectListItem>)ViewBag.Working, "-Seleccione una jornada-", htmlAttributes: new { @class = "form-control", required = "required", onchange = "GetWorkingDay(this.value)" })</div>
         </div>
     </div>
     <div id="ScheduleSelectionSection" class="fieldset">
-        <h3>Seleccion Dia/Horas</h3>
-        <div id="ScheduleSelectionSectionFields">
-            @Html.LabelFor(model => model.DayId, htmlAttributes: new { @class = "control-label required" })
-            @Html.DropDownList("DayIdScheduleCreate", (List<SelectListItem>)ViewBag.Days, htmlAttributes: new { @class = "form-control formFieldHour", required = "required" })
-            @Html.LabelFor(model => model.WorkingDayStartTime, htmlAttributes: new { @class = "control-label required" })
-            @Html.TextBoxFor(model => model.WorkingDayStartTime, new { @class = "form-control formFieldHour", placeholder = "Hora Inicial", type = "time", id = "inputHourInicial", value = "00:00", required = "required" })
-            @Html.LabelFor(model => model.WorkingDayEndTime, htmlAttributes: new { @class = "control-label required" })
-            @Html.TextBoxFor(model => model.WorkingDayEndTime, new { @class = "form-control formFieldHour", placeholder = "Hora Final", type = "time", id = "inputHourFinaly", value = "00:00", required = "required" })
-
-            <button type="button" class="btn btn-primary" id="btnAddScheduleEdit" title="Agregar">
-                +
-            </button>
+        <h3>Selección Días/Horas</h3>
+        <div class="scheduleSectionFlex">
+            <div>
+                <label class="control-label required">Día</label>
+                @Html.DropDownList("ScheduleDailyDay", (List<SelectListItem>)ViewData["Days"], htmlAttributes: new { @class = "form-control", required = "", title = "Favor seleccione un día", id = "DayId" })
+            </div>
+            <div>
+                <label class="control-label required">Hora Inicial</label>
+                <input id="inputHourInicial" class="form-control formFieldHour" type="time" />
+            </div>
+            <div>
+                <label class="control-label required">Hora Final</label>
+                <input id="inputHourFinaly" class="form-control formFieldHour" type="time" />
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary" id="btnAddScheduleCreate" title="Agregar" onclick="Extension.Add()">
+                    +
+                </button>
+            </div>
         </div>
     </div>
     <div id="ScheduleDaysHoursSection" class="fieldset">
@@ -56,12 +58,18 @@
             <tbody>
             </tbody>
         </table>
-        <div id="ScheduleDaysHoursSectionTotal">
+
+        <div id="ScheduleFooterSection">
             <h6>Total de horas:</h6>
-            <input type="text" id="totalHoras" class="form-control" readonly />
+            <input type="text" id="totalSum" class="form-control" readonly />
             <input type="hidden" id="tablaHorariosData" name="ListRecords" />
         </div>
+
     </div>
+
+    <input type="hidden" id="hiddenWorkingDayStartTime" name="WorkingDayStartTime" />
+    <input type="hidden" id="hiddenWorkingDayEndTime" name="WorkingDayEndTime" />
+
     <div id="EditScheduleFooter" class="scheduleFooter fieldset">
         <button type="button" onclick="window.location.href='/Schedule/Index/'" class="btn btn-secondary">
             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi-arrow-bar-left" viewBox="0 0 16 16">
@@ -69,7 +77,84 @@
             </svg>
             Regresar
         </button>
-        <input type="submit" value="Guardar" class="btn btn-success">
+        <input type="submit" value="Actualizar" class="btn btn-success">
     </div>
 }
-<script src="~/Scripts/Schedule/ScheduleProcess.js"></script>
+
+<script src="~/Scripts/Lib/Time.js"></script>
+<script src="~/Scripts/Lib/Schedule/Schedule.js"></script>
+<script src="~/Scripts/Lib/Schedule/ScheduleDaily.js"></script>
+<script src="~/Scripts/Lib/Schedule/WorkingDay.js"></script>
+<script src="~/Scripts/Lib/Schedule/ScheduleDailyExtension.js"></script>
+
+<script>
+
+    let scheduleDailyData = @Html.Raw(Json.Encode(Model.ScheduleDailys));
+    let workingDayAnonym = @Html.Raw(Json.Encode(Model.WorkingDay));
+
+    let scheduleDailys = scheduleDailyData.map(data => {
+        return new ScheduleDaily(
+            data.ScheduleDailyId,
+            data.ScheduleDayId,
+            data.ScheduleDayName,
+            new Time(data.BeginTime.Hours, data.BeginTime.Minutes),
+            new Time(data.EndTime.Hours, data.EndTime.Minutes)
+        );
+    });
+
+    let workingDay = new WorkingDay(workingDayAnonym.WorkingDayId, workingDayAnonym.MaxDays, workingDayAnonym.MaxHours, Time.fromJsonDate(workingDayAnonym.StartTime), Time.fromJsonDate(workingDayAnonym.EndTime));
+    let Extension = new ScheduleDailyExtension(scheduleDailys, workingDay);
+
+    let form = document.getElementById("FormEditSchedule");
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        let name = document.querySelector('#Name').value;
+        let workingDayId = document.querySelector('#WorkingDay_WorkingDayId').value;
+        let scheduleId = document.querySelector('#ScheduleId').value;
+        let schedule = new Schedule(scheduleId, name, workingDayId, Extension.ScheduleDailys);
+      
+        if (Extension.ScheduleDailys.length === 0) {
+            new Messi("Debe agregar al menos un día al horario.", { title: 'Error', titleClass: 'anim error', modal: true }).show();
+            return;
+        }  
+        SaveSchedule(schedule);
+    });
+
+    function SaveSchedule(schedule) {
+        $.ajax({
+            url: "/Schedule/Save",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                schedule: JSON.stringify(schedule)
+            },
+            success: (data) => {
+                if (data.success) {
+                    new Messi(data.message || "El horario se editó con éxito.", {
+                        title: 'Horarios Editado con éxito',
+                        titleClass: 'anim success',
+                        modal: true
+                    }).show();
+
+                    setTimeout(() => {
+                        window.location.href = "/Schedule/Index";
+                    }, 2000);
+                } else {
+                    new Messi(data.message || "Hubo un error con la edición del horario.", {
+                        title: 'Error',
+                        titleClass: 'anim error',
+                        modal: true
+                    }).show();
+                }
+            },
+            error: ( ) => {
+                new Messi("Error en la solicitud.",{
+                    title: 'Error',
+                    titleClass: 'anim error',
+                    modal: true
+                }).show();
+            }
+        });
+    }
+
+</script>

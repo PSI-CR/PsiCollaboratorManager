@@ -173,9 +173,11 @@
     <Compile Include="PasswordUtilities\PasswordValidator.cs" />
     <Compile Include="PasswordUtilities\PBKDF2Converter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule\ISchedule.cs" />
     <Compile Include="Schedule\IScheduleBasic.cs" />
     <Compile Include="Schedule\IScheduleData.cs" />
     <Compile Include="Schedule\IScheduleRepository.cs" />
+    <Compile Include="Schedule\Schedule.cs" />
     <Compile Include="Schedule\ScheduleBasic.cs" />
     <Compile Include="Schedule\ScheduleDaily\IScheduleDaily.cs" />
     <Compile Include="Schedule\ScheduleDaily\IScheduleDailyRepository.cs" />

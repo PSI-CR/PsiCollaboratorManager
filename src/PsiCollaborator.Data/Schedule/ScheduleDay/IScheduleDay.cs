@@ -2,7 +2,7 @@
 {
     public interface IScheduleDay
     {
-        string Name { get; set; }
-        int ScheduleDayId { get; set; }
+        int DayId { get; set; }
+        string DayName { get; set; }     
     }
 }

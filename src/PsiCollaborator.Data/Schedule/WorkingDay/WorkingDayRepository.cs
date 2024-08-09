@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PsiCollaborator.Data.Schedule.WorkingDay
 {
@@ -22,6 +19,11 @@ namespace PsiCollaborator.Data.Schedule.WorkingDay
         public List<WorkingDay> GetAll()
         {
             return ExecuteList<WorkingDay>("select_working_day_all").ToList();
+        }
+
+        public WorkingDay GetById(int workingDayId)
+        {
+            return ExecuteSingle<WorkingDay>("select_all_working_day_by_id2", new List<DbParameter>(){ new DbParameter("param_workingdayid", ParameterDirection.Input, workingDayId)});
         }
     }
 }
