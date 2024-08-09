@@ -1,24 +1,4 @@
-﻿/*#CollaboratorContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100%;
-    width: 100%;
-}
-
-#TableCollaboratorContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin: 10px;
-    padding: 10px;
-    height: 100%;
-    width: 99%;
-}
-*/
-
-#TableContainer {
+﻿#TableContainer {
     padding: 10px;
     margin: 10px;
     width: calc(100% - 20px);

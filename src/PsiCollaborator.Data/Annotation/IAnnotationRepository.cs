@@ -5,8 +5,8 @@ namespace PsiCollaborator.Data.Annotation
 {
     public interface IAnnotationRepository
     {
-        IEnumerable<IAnnotationByCollaboratorDetails> GetAll(DateTime? minAnnotationDate, DateTime? maxAnnotationDate, string firstNameFilter, string lastNameFilter, int operatorNumberFilter);
-        IAnnotationByCollaboratorDetails GetAnnotationById(int annotationId);
+        IEnumerable<IAnnotationOverview> GetAll(DateTime? minAnnotationDate, DateTime? maxAnnotationDate, string firstNameFilter, string lastNameFilter, int operatorNumberFilter);
+        IAnnotationDetails GetAnnotationById(int annotationId);
         void Insert(Annotation annotation);
     }
 }

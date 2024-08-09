@@ -101,7 +101,6 @@ namespace PsiCollaborator.Data.Collaborator
             });
             return result;
         }
-
         public int GetHighestOperatorNumber()
         {
             var operatorNum = 0;

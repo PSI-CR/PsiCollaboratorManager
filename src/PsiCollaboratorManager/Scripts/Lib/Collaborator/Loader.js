@@ -42,6 +42,7 @@ async function GetBase64() {
 }
 
 function InsertCollaborator(collaborator) {
+    console.log(collaborator);
     $.ajax({
         url: "/Collaborator/Save",
         type: 'POST',

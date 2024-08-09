@@ -22,11 +22,10 @@
   var defaults = {
     menuStyle: {
       listStyle: 'none',
-      padding: '1px',
+      padding: '5px',
       margin: '0px',
       backgroundColor: '#fff',
-      border: '1px solid #999',
-      width: '100px'
+      border: '1px solid #999'
     },
     itemStyle: {
       margin: '0px',

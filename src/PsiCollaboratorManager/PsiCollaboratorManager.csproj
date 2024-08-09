@@ -171,6 +171,7 @@
     <Compile Include="App_Start\BundleConfig2.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Annotation\AnnotationController.cs" />
     <Compile Include="Controllers\Annotation\AnnotationTypeController.cs" />
     <Compile Include="Controllers\AnnouncementArtController.cs" />
     <Compile Include="Controllers\CollaboratorController.cs" />
@@ -182,6 +183,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Mapping\ScheduleMapper.cs" />
+    <Compile Include="Mapping\AnnotationMapper.cs" />
+    <Compile Include="Models\Annotation\AnnotationDetailsModel.cs" />
+    <Compile Include="Models\Annotation\AnnotationOverviewModel.cs" />
+    <Compile Include="Models\Annotation\AnnotationModel.cs" />
     <Compile Include="Models\Annotation\AnnotationTypeModel.cs" />
     <Compile Include="Models\AnnouncementArtModel.cs" />
     <Compile Include="Mapping\CollaboratorMapper.cs" />
@@ -190,6 +195,8 @@
     <Compile Include="Models\Collaborator\CantonModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorBaseModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorFullModel.cs" />
+    <Compile Include="Models\Collaborator\CollaboratorOperatorModel.cs" />
+    <Compile Include="Models\Collaborator\CollaboratorScheduleModel.cs" />
     <Compile Include="Models\Collaborator\DistrictModel.cs" />
     <Compile Include="Models\Schedule\ScheduleDailyModel.cs" />
     <Compile Include="Models\Schedule\ScheduleDataModel.cs" />
@@ -234,7 +241,7 @@
     <Content Include="Content\Css\AnnouncementArt\Create.css" />
     <Content Include="Content\Css\AnnouncementArt\Edit.css" />
     <Content Include="Content\Css\AnnouncementArt\Index.css" />
-    <Content Include="Content\Css\AssignSchedule\AssignSchedule.css" />
+    <Content Include="Content\Css\Collaborator\AssignSchedule.css" />
     <Content Include="Content\Css\Collaborator\CameraModal.css" />
     <Content Include="Content\Css\Collaborator\CreateEdit.css" />
     <Content Include="Content\Css\Collaborator\DetailsModal.css" />
@@ -242,6 +249,12 @@
     <Content Include="Scripts\Camera.js" />
     <Content Include="Scripts\Lib\Annotation\AnnotationTypeTable.js" />
     <Content Include="Scripts\Lib\CheckSchedule\IndexTableCollaborator.js" />
+    <Content Include="Scripts\Lib\Annotation\CreateAnnotation.js" />
+    <Content Include="Scripts\Lib\Annotation\Index.js" />
+    <Content Include="Scripts\Lib\Annotation\IndexTable.js" />
+    <Content Include="Scripts\Lib\Annotation\NewAnnotationTable.js" />
+    <Content Include="Scripts\Lib\Collaborator\AssignSchedule.js" />
+    <Content Include="Scripts\Lib\Collaborator\AssignScheduleTable.js" />
     <Content Include="Scripts\Lib\Collaborator\CollaboratorFull.js" />
     <Content Include="Scripts\Lib\Collaborator\EmergencyContact\EmergencyContact.js" />
     <Content Include="Scripts\Lib\Collaborator\EmergencyContact\EmergencyContactExtension.js" />
@@ -350,6 +363,7 @@
     <Content Include="Scripts\Lib\Schedule\IndexTable.js" />
     <Content Include="Scripts\Lib\Schedule\WorkingDay\Index.js" />
     <Content Include="Scripts\Lib\Schedule\WorkingDay\IndexTable.js" />
+    <Content Include="Scripts\ListBox.js" />
     <Content Include="Scripts\MessiJS\messi.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />

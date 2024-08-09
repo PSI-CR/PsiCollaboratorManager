@@ -17,7 +17,7 @@ namespace PsiCollaboratorManager.Annotations
                 }
                 else
                 {
-                    filterContext.Result = new RedirectResult("~/LoginUserAccount/Login");
+                    filterContext.Result = new RedirectResult("~/UserAccount/Login");
                     return;
                 }
             }

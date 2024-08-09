@@ -1,24 +1,18 @@
-﻿
-@{
-    ViewBag.Title = "AssignSchedule"; 
+﻿@{
+    ViewBag.Title = "AssignSchedule";
     Layout = "~/Views/Shared/_basicBig.cshtml";
 }
-@*<link href="~/Content/ListBox.css" rel="stylesheet" />*@
-<script src="~/Scripts/AssignSchedule/Functions.js"></script>
 <script src="~/Scripts/ListBox.js"></script>
 <link href="~/Content/JQGridTheme/jquery-ui.css" rel="stylesheet" />
 <link href="~/Content/JQGridTheme/ui.multiselect.css" rel="stylesheet" />
 <link href="~/Content/JQGridTheme/ui.jqgrid.css" rel="stylesheet" />
 <link href="~/Content/JQGridTheme/JqGridStyle.css" rel="stylesheet" />
 
-<link href="~/Content/Css/AssignSchedule/AssignSchedule.css" rel="stylesheet" />
+<link href="~/Content/Css/Collaborator/AssignSchedule.css" rel="stylesheet" />
 
 <div id="AssignScheduleContent">
     <div id="ScheduleSection" class="fieldset">
-        <select class="selectpicker form-select" id="selectSchedule" style="width:auto; display:inline">
-            <option value="">Seleccione un horario</option>
-        </select>
-        <h6 id="tableTitle" style="display: none; font-weight: bold;">Horario no cargado</h6>
+        @Html.DropDownList("Schedules", ViewBag.Schedules as List<SelectListItem>, htmlAttributes: new { id = "selectSchedule" })
         <table id="tableScheduleInfo" class="tableDetail" style="display:none">
             <thead>
                 <tr class="even">
@@ -34,8 +28,7 @@
     <div id="UnassignedCollaboratorList" class="fieldset">
         <div class="container_listbox">
             <div class="select_1">
-                <select id="select1" name="select1[]" class="selectScheduleAssignation" multiple="multiple">
-                </select>
+                @Html.DropDownList("select1[]", ViewBag.CollaboratorsWithoutSchedule as List<SelectListItem>, htmlAttributes: new { id = "select1", @class = "selectScheduleAssignation", @multiple = "multiple" })
             </div>
             <div class="operators">
                 <div class="operator add_all" onclick="add_all('select1','select2',false,'values_selecteds_listbox');"> >> </div>
@@ -49,7 +42,7 @@
             </div>
         </div>
         <button id="btnAssign" class="button buttonSchedule btn btn-success">Asignar</button>
-    </div>    
+    </div>
     <div id="AssignedCollaboratorTable" class="fieldset">
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
@@ -71,224 +64,5 @@
 <script src="~/Scripts/JqGrid/jquery.jqGrid.min.js"></script>
 <script src="~/Scripts/JqGrid/context-menu.js"></script>
 
-<script>
-    $(document).ready(function () {
-
-        InitLoadData();
-
-        $('#btnAssign').on('click', function () {
-
-            var collaboratorIds = $('#select2').find('option').map(function () {
-                return this.value;
-            }).get();
-
-            var scheduleId = $('#selectSchedule').val();
-
-            if (collaboratorIds.length > 0 && scheduleId) {
-
-                AssingCollaborators(collaboratorIds, scheduleId);
-
-            } else
-            {
-                alert('Seleccione al menos un colaborador y un horario antes de asignar.');
-            }
-        });
-
-        $('#selectSchedule').change(function () {
-            var selectedId = $('#selectSchedule').val();
-            if (selectedId == "") {
-                console.log("Clean table");
-                return;
-            }
-            LoadScheduleDetails(selectedId);
-
-        });
-
-        $grid = $("#jqGrid").jqGrid({
-            url: '@Url.Action("GetData", "AssignSchedule", new { collaboratorActive = true})',
-            mtype: 'GET',
-            datatype: 'json',
-            colModel: [
-                {
-                    label: 'IdHistorial_HorarioColaborador',
-                    name: 'CollaboratorScheduleHistoryId',
-                    width: 200,
-                    minWidth: 220,
-                    editable: false,
-                    key: true,
-                    hidden: true,
-                    align: 'center',
-                },
-                {
-                    label: 'Id',
-                    name: 'CollaboratorId',
-                    width: 50,
-                    minWidth: 20,
-                    editable: false,
-                    key: true,
-                    hidden: true,
-                    align: 'center',
-                },
-                {
-                    label: 'Nombre',
-                    name: 'FirstName',
-                    width: 200,
-                    minWidth: 200,
-                    editable: false,
-                    key: true,
-                    align: 'center',
-                    headerClasses: 'my-column', cellattr: function () { return 'class="my-column"'; }
-                },
-                { label: 'Apellidos', name: 'LastName', width: 200, minWidth: 200 },
-                { label: 'Cedula', name: 'DNICollaborator', width: 200, minWidth: 200 },
-                { label: 'Operador', name: 'OperatorNumber', align: 'center', width: 200, minWidth: 200 },
-
-                { label: 'Usuario', name: 'UserName', width: 200, minWidth: 200, hidden:true },
-                {
-                    label: 'Fecha de Asignacion', name: 'AssignDate', align: 'center', width: 250, minWidth: 250, formatter: 'date',
-                    formatoptions: { newformat: 'd/m/Y' },
-                    searchoptions: { sopt: ['eq'] }
-                },
-                {
-                    label: 'Fecha de Desasignacion', name: 'DismissDate', width: 200, align: 'center', minWidth: 200, formatter: 'date',
-                    formatoptions: { newformat: 'd/m/Y' },
-                    searchoptions: { sopt: ['eq'] }
-                },
-                {
-                    label: 'E-mail', name: 'Email', width: 200, minWidth: 200,
-                    formatter: 'email'
-                },
-                { label: 'Horario', name: 'BasicSchedule_Model.ScheduleName', width: 200, minWidth: 200 },
-                { label: 'Horario Id', name: 'BasicSchedule_Model.Scheduleid', hidden: true, width: 200, minWidth: 200 },
-            ],
-
-            onInitGrid: function () {
-                $("<div class='alert-info-grid'>No Record(s) Found</div>").insertAfter($(this).parent());
-            },
-
-            loadComplete: function () {
-                var $this = $(this), p = $this.jqGrid("getGridParam");
-                if (p.reccount === 0) {
-                    $this.hide();
-                    $this.parent().siblings(".alert-info-grid").show();
-                } else {
-                    $this.show();
-                    $this.parent().siblings(".alert-info-grid").hide();
-                }
-                resizeGrid();
-            },
-
-            resizeStop: function (newWidth, index) {
-                var colModel = $(this).jqGrid('getGridParam', 'colModel');
-                var column = colModel[index];
-
-                console.log(newWidth);
-                if (column.width < column.minWidth) {
-                    $(this).jqGrid('setGridParam', {
-                        colModel: colModel
-                    }).trigger('resize');
-                }
-            },
-
-            ondblClickRow: function (rowId) {
-                var rowData = jQuery(this).getRowData(rowId);
-                var id = rowData['CollaboratorId'];
-                getEmployeeDetails(id);
-            },
-
-            loadonce: true,
-            altRows: true,
-            pager: '#jqGridPager',
-            rowNum: 20,
-            rowList: [10, 20, 30, 50],
-            viewrecords: true,
-            rownumbers: true,
-            sortable: true,
-            shrinkToFit: true,
-            autowidth: true,
-            autoresizeOnLoad: true,
-            autoresizeOnResize: true,
-            height: '100%',
-            gridComplete: initGrid
-
-        });
-
-        $(window).on("resize", function () {
-            resizeGrid();
-        });
-        function resizeGrid() {
-            $("#jqGrid").jqGrid("setGridWidth", $("#jqGrid").closest(".ui-jqgrid").parent().width());
-        }
-
-        $('#jqGrid').navGrid('#jqGridPager',
-            { edit: false, add: false, del: false, search: true, refresh: true, view: false, position: "left", cloneToTop: true }, { multipleSearch: true, multipleGroup: true });
-
-
-        $('#jqGrid').navButtonAdd('#jqGridPager',
-            {
-                buttonicon: "ui-icon-calculator",
-                title: "Column chooser",
-                caption: "Columnas",
-                position: "last",
-                onClickButton: function () {
-                    jQuery("#jqGrid").jqGrid('columnChooser', {
-                        done: function (numColumn) {
-                            $("#jqGrid").jqGrid('setGridParam', {
-                            }).trigger('resize');
-                        }
-                    });
-                }
-            });
-
-        $('#jqGrid').navButtonAdd('#jqGridPager',
-            {
-                buttonicon: "ui-icon-pencil",
-                title: "Dismiss",
-                caption: "Quitar Horario",
-                position: "last",
-                onClickButton: dismissSchedule
-            });
-
-    });
-    function resizeJqGridWidth(grid_id, div_id, width) {
-        $(window).bind('resize', function () {
-            $('#' + grid_id).setGridWidth(width, true);
-            $('#' + grid_id).setGridWidth($('#' + div_id).width(), true);
-        }).trigger('resize');
-    }
-
-    function initGrid() {
-        $(".jqgrow", "#jqGrid").contextMenu('contextMenu', {
-            bindings: {
-                'dismiss': function (t) {
-                    dismissSchedule();
-                }
-            },
-            onContextMenu: function (event, menu) {
-                var rowId = $(event.target).parent("tr").attr("id")
-                var grid = $("#jqGrid");
-                grid.setSelection(rowId);
-
-                return true;
-            }
-        });
-    }
-
-    function dismissSchedule() {
-
-        var grid = $("#jqGrid");
-        var rowKey = grid.getGridParam("selrow");
-        if (rowKey) {
-
-            var key = $("#jqGrid").jqGrid('getCell', rowKey, 'CollaboratorScheduleHistoryId');
-            var editUrl = '@Url.Action("DismissSchedule", "AssignSchedule", new { id = "_rowId_" })';
-            editUrl = editUrl.replace("_rowId_", key);
-            var fullUrl = window.location.protocol + '//' + window.location.host + editUrl;
-            window.location.href = fullUrl;
-        }
-        else {
-            alert("No rows are selected");
-        }
-    }
-
-</script>
+<script src="~/Scripts/Lib/Collaborator/AssignSchedule.js"></script>
+<script src="~/Scripts/Lib/Collaborator/AssignScheduleTable.js"></script>

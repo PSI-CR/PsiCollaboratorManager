@@ -25,6 +25,7 @@
 }
 #tableScheduleInfo {
     width: 100%;
+    text-align:center;
 }
 #tableScheduleInfo td {
     padding: 5px;

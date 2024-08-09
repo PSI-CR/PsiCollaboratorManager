@@ -79,7 +79,9 @@
                 case 'bool':
                     return element.checked;
                 case 'date':
-                    return element.value ? new Date(element.value) : null;
+                    console.log(element.value);
+                    console.log(new Date(element.value.split('-').join('/')));
+                    return element.value ? new Date(element.value.split('-').join('/')) : null;
                 default:
                     return element.value || '';
             }
