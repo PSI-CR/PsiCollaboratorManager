@@ -36,7 +36,7 @@ namespace PsiCollaborator.Data.Schedule
 
         public List<ScheduleData> GetAllDays()
         {
-            return ExecuteList<ScheduleData>("get_all_schedule_days").ToList();
+            return ExecuteList<ScheduleData>("select_all_schedule_days").ToList();
         }
 
         public void Save(Schedule schedule)

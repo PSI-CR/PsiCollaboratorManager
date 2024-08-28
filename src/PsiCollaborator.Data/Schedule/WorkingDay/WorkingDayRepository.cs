@@ -23,7 +23,7 @@ namespace PsiCollaborator.Data.Schedule.WorkingDay
 
         public WorkingDay GetById(int workingDayId)
         {
-            return ExecuteSingle<WorkingDay>("select_all_working_day_by_id2", new List<DbParameter>(){ new DbParameter("param_workingdayid", ParameterDirection.Input, workingDayId)});
+            return ExecuteSingle<WorkingDay>("select_all_working_day_by_id", new List<DbParameter>(){ new DbParameter("param_workingdayid", ParameterDirection.Input, workingDayId)});
         }
     }
 }

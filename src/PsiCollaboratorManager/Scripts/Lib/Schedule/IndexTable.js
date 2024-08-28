@@ -45,7 +45,6 @@
             var id = rowData['ScheduleId'];
             window.location.href = '/Schedule/Edit/?scheduleId=' + id;
         },
-
         loadonce: true,
         shrinkToFit: true,
         altRows: true,
@@ -59,7 +58,6 @@
         autoresizeOnLoad: true,
         autoresizeOnResize: true,
         height: '100%'
-
     });
 
     $(window).on("resize", function () {

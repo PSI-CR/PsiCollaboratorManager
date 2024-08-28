@@ -104,17 +104,6 @@ namespace PsiCollaboratorManager.Mapping
             };
         }
 
-        //public Schedule MapScheduleModelToSchedule(ScheduleModel model)
-        //{
-        //    return new Schedule
-        //    {
-        //        ScheduleId = model.ScheduleId,
-        //        Name = model.Name,
-        //        WorkingdayId = model.WorkingDayId,
-        //        ScheduleDailys = model.ScheduleDailys.Select(d => d.ScheduleDayName).ToArray()
-        //    };
-        //}
-
         public Schedule MapScheduleModelToSchedule2(ScheduleModel model)
         {
             if (model == null) return null;
@@ -144,15 +133,10 @@ namespace PsiCollaboratorManager.Mapping
             var scheduleDailys = model.ScheduleDailys?
                 .Select(daily =>
                 {
-
-                    // Usa una fecha base para construir el DateTime
                     DateTime today = DateTime.Today;
-
-                    // Convierte las horas y minutos a DateTime
                     DateTime beginDateTime = new DateTime(today.Year, today.Month, today.Day, daily.BeginTime.Hours, daily.BeginTime.Minutes, 0);
                     DateTime endDateTime = new DateTime(today.Year, today.Month, today.Day, daily.EndTime.Hours, daily.EndTime.Minutes, 0);
 
-                    // Formatea el DateTime a una cadena en formato de timestamp
                     string beginTime = beginDateTime.ToString("yyyy-MM-dd HH:mm:ss");
                     string endTime = endDateTime.ToString("yyyy-MM-dd HH:mm:ss");
 
@@ -256,6 +240,25 @@ namespace PsiCollaboratorManager.Mapping
                 ScheduleDailys = ConvertScheduleDailys(schedule.ScheduleDailys)
             };
             return scheduleModel;
+        }
+
+        public ScheduleDailyModel MapToScheduleDailyModel(ScheduleDaily scheduleDaily)
+        {
+            return new ScheduleDailyModel
+            {
+                ScheduleDailyId = scheduleDaily.ScheduleDailyId,
+                ScheduleDayName = scheduleDaily.ScheduleDayName,
+                BeginTime = new TimeModel
+                {
+                    Hours = scheduleDaily.BeginTime.Hour,
+                    Minutes = scheduleDaily.BeginTime.Minute
+                },
+                EndTime = new TimeModel
+                {
+                    Hours = scheduleDaily.EndTime.Hour,
+                    Minutes = scheduleDaily.EndTime.Minute
+                }
+            };
         }
     }
 }

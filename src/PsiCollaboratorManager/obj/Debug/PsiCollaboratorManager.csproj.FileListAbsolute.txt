@@ -390,6 +390,8 @@ D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\roslyn\
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\roslyn\VBCSCompiler.exe.config
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\Antlr3.Runtime.dll
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\AutoMapper.dll
+D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\EntityFramework.dll
+D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\EntityFramework.SqlServer.dll
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\Microsoft.Bcl.AsyncInterfaces.dll
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\Microsoft.Bcl.HashCode.dll
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
@@ -420,6 +422,8 @@ D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\WebGrea
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\PsiCollaborator.Data.pdb
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\PsiCollaborator.Data.dll.config
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\AutoMapper.xml
+D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\EntityFramework.xml
+D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\EntityFramework.SqlServer.xml
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\Microsoft.Bcl.AsyncInterfaces.xml
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\Microsoft.Bcl.HashCode.xml
 D:\Cristian\GitHub\PsiCollaboratorManager\src\PsiCollaboratorManager\bin\Npgsql.xml

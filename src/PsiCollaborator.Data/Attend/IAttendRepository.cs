@@ -9,7 +9,7 @@ namespace PsiCollaborator.Data.Attend
         int GetByCollaboratorId(int collaboratorid);
         int GetById(int id);
         int Insert(Attend attendance);
-        void Update(Attend attendance);
+        void Update(Attendance attendance);
         List<Attend> GetAttendByCollaboratorId(int collaboratorId);
     }
 }

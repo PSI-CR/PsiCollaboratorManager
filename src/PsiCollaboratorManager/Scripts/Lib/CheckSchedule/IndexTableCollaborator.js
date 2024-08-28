@@ -1,109 +1,97 @@
-﻿$grid = $("#jqGrid").jqGrid({
-    url: '/Schedule/GetCollaborator',
-    mtype: 'GET',
-    datatype: 'json',
-    colModel: [
-        { label: 'Id', name: 'CollaboratorId', key: true, hidden: true },
-        { label: 'Nombre', name: 'FirstName', align: 'center' },
-        { label: 'Apellidos', name: 'LastName', align: 'center' },
-        { label: 'Número Operador', name: 'OperatorNumber', align: 'center' }
-    ],
-    loadonce: true,
-    shrinkToFit: true,
-    altRows: true,
-    pager: '#jqGridPager',
-    rowNum: 30,
-    rowList: [10, 20, 30, 50],
-    viewrecords: true,
-    rownumbers: true,
-    sortable: true,
-    autowidth: true,
-    height: '100%',
-    width: '100%',
-
-    onInitGrid: function () {
-        $("<div class='alert-info-grid'>Sin registros</div>").insertAfter($(this).parent());
-    },
-
-    loadComplete: function () {
-        var $this = $(this), p = $this.jqGrid("getGridParam");
-        if (p.reccount === 0) {
-            $this.hide();
-            $this.parent().siblings(".alert-info-grid").show();
-        } else {
-            $this.show();
-            $this.parent().siblings(".alert-info-grid").hide();
-        }
-    },
-
-    resizeStop: function (newWidth, index) {
-        var colModel = $(this).jqGrid('getGridParam', 'colModel');
-        var column = colModel[index];
-
-        console.log(newWidth);
-        if (column.width < column.minWidth) {
-            $(this).jqGrid('setGridParam', {
-                colModel: colModel
-            }).trigger('resize');
-        }
-    },
-
-    ondblClickRow: function (rowId) {
-        var rowData = jQuery(this).getRowData(rowId);
-        var collaboratorId = rowData['CollaboratorId'];
-        window.location.href = '/Schedule/GetAssistanceByCollaborator/?colaboratorId=' + collaboratorId;
-    },
-
-    error: function (jqXHR, textStatus, errorThrown) {
-        alert("Error al cargar los datos: " + textStatus + " - " + errorThrown);
-    }
-});
-
+﻿$('#SectionHeaderTitle0').text('Lista de Colaboradores');
 $(document).ready(function () {
-  
-    var $grid = $("#jqGrid2").jqGrid({
-        url: '',
+    $("#jqGrid").jqGrid({
+        url: '/Schedule/GetCollaborator',
         mtype: 'GET',
         datatype: 'json',
-        colNames: ['Id', 'Colaborador Id', 'CheckIn', 'CheckOut', 'Estado CheckIn', 'Estado CheckOut', 'Comentario CheckIn', 'Abierto CheckIn', 'Dirección IP', 'Dirección Física'],
         colModel: [
-            { name: 'AttendId', index: 'AttendId', width: 75, align: 'center', key: true },
-            { name: 'CollaboratorId', index: 'CollaboratorId', width: 100, align: 'center' },
-            { name: 'CheckIn', index: 'CheckIn', width: 150, align: 'center' },
-            { name: 'CheckOut', index: 'CheckOut', width: 150, align: 'center' },
-            { name: 'CheckInStatus', index: 'CheckInStatus', width: 100, align: 'center' },
-            { name: 'CheckOutStatus', index: 'CheckOutStatus', width: 100, align: 'center' },
-            { name: 'CommentCheckIn', index: 'CommentCheckIn', width: 200, align: 'center' },
-            { name: 'IsOpenCheckIn', index: 'IsOpenCheckIn', width: 100, align: 'center' },
-            { name: 'IpAddress', index: 'IpAddress', width: 150, align: 'center' },
-            { name: 'PhysicalAddressEquipment', index: 'PhysicalAddressEquipment', width: 200, align: 'center' }
+            { label: 'Id', name: 'CollaboratorId', key: true, hidden: true },
+            { label: 'Nombre', name: 'FirstName', align: 'center' },
+            { label: 'Apellidos', name: 'LastName', align: 'center' },
+            { label: 'Número Operador', name: 'OperatorNumber', align: 'center' }
         ],
-        pager: '#jqGridPager2',
-        rowNum: 10,
-        rowList: [10, 20, 30],
-        sortname: 'AttendId',
-        sortorder: 'asc',
+        loadonce: true,
+        shrinkToFit: true,
+        altRows: true,
+        pager: '#jqGridPager',
+        rowNum: 30,
+        rowList: [10, 20, 30, 50],
         viewrecords: true,
-        gridview: true,
-        autoencode: true,
-        height: 'auto',
+        rownumbers: true,
+        sortable: true,
+        autowidth: true,
+        height: '100%',
         width: '100%',
-        caption: "Asistencia de Colaboradores",
-        loadonce: true
-    });
+        search: true,
+        onInitGrid: function () {
+            $("<div class='alert-info-grid'>Sin registros</div>").insertAfter($(this).parent());
+        },
+        loadComplete: function () {
+            var $this = $(this), p = $this.jqGrid("getGridParam");
+            if (p.reccount === 0) {
+                $this.hide();
+                $this.parent().siblings(".alert-info-grid").show();
+            } else {
+                $this.show();
+                $this.parent().siblings(".alert-info-grid").hide();
+            }
+        },
+        resizeStop: function (newWidth, index) {
+            var colModel = $(this).jqGrid('getGridParam', 'colModel');
+            var column = colModel[index];
 
-    // Configura el paginador para la segunda tabla (jqGrid2)
-    $grid.jqGrid('navGrid', '#jqGridPager2', { edit: false, add: false, del: false });
+            console.log(newWidth);
+            if (column.width < column.minWidth) {
+                $(this).jqGrid('setGridParam', {
+                    colModel: colModel
+                }).trigger('resize');
+            }
+        },
 
-    // Inicializa la primera tabla (jqGrid) y define el evento ondblClickRow
-    $("#jqGrid").jqGrid({
-        ondblClickRow: function (rowId) {
+         ondblClickRow: function (rowId) {
             var rowData = jQuery(this).getRowData(rowId);
             var collaboratorId = rowData['CollaboratorId'];
 
-            // Actualiza la URL de la tabla jqGrid2 con el colaboradorId
-            var newUrl = '/Schedule/GetAssistanceByCollaborator/?colaboratorId=' + collaboratorId;
-            $grid.setGridParam({ url: newUrl, datatype: 'json' }).trigger('reloadGrid');
+            $.ajax({
+                url: '/Schedule/GetAssistanceByCollaborator/',
+                type: 'GET',
+                data: { collaboratorId: collaboratorId },
+                dataType: 'json',
+                success: function (response) {
+                    $("#jqGrid2").jqGrid('clearGridData');
+                    var collaboratorName = 'Sin registros';
+                    var collaboratorPicture = '/Images/DefaultCollaborator.jpg';
+
+                    console.log(response);
+
+                    if (response.success && response.data) {
+                        collaboratorName = response.data.Firstname + ' ' + response.data.Lastname;
+                        collaboratorPicture = response.data.Picture;
+
+                        if (response.data.AttendModels && response.data.AttendModels.length > 0) {
+                            response.data.AttendModels.forEach(function (item) {
+                                item.IsOpenCheckIn = item.IsOpenCheckIn ? 'Sí' : 'No';
+                            });
+
+                            $("#jqGrid2").jqGrid('setGridParam', { data: response.data.AttendModels });
+                            $("#jqGrid2").trigger('reloadGrid');
+                        }
+                    }
+
+                    $('#SectionHeaderTitle').text(collaboratorName);
+                    $('#SectionHeaderPicture').attr('src', collaboratorPicture);
+                },
+                error: function () {
+                    alert('Ocurrió un error al intentar obtener los datos del colaborador.');
+                }
+            });
         }
     });
+
+    $("#jqGrid").jqGrid('filterToolbar', {
+        searchOperators: false,
+        searchOnEnter: false,
+        defaultSearch: "cn"
+    });
+
 });

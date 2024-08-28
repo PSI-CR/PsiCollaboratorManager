@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -47,6 +48,12 @@
   <ItemGroup>
     <Reference Include="AutoMapper, Version=10.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.10.1.1\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -182,6 +189,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapping\AttendanceMapper.cs" />
     <Compile Include="Mapping\ScheduleMapper.cs" />
     <Compile Include="Mapping\AnnotationMapper.cs" />
     <Compile Include="Models\Annotation\AnnotationDetailsModel.cs" />
@@ -192,10 +200,12 @@
     <Compile Include="Mapping\CollaboratorMapper.cs" />
     <Compile Include="Mapping\UserAccountMapper.cs" />
     <Compile Include="Models\Attendance\AttendModel.cs" />
+    <Compile Include="Models\Attendance\CheckInStatusModel.cs" />
     <Compile Include="Models\Collaborator\CantonModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorBaseModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorFullModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorOperatorModel.cs" />
+    <Compile Include="Models\Collaborator\CollaboratorPictureModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorScheduleModel.cs" />
     <Compile Include="Models\Collaborator\DistrictModel.cs" />
     <Compile Include="Models\Schedule\ScheduleDailyModel.cs" />
@@ -245,9 +255,12 @@
     <Content Include="Content\Css\Collaborator\CameraModal.css" />
     <Content Include="Content\Css\Collaborator\CreateEdit.css" />
     <Content Include="Content\Css\Collaborator\DetailsModal.css" />
+    <Content Include="Content\Css\Login\LoginMessage.css" />
     <Content Include="Content\Validation.css" />
+    <Content Include="Images\backgraund metal.jpg" />
     <Content Include="Scripts\Camera.js" />
     <Content Include="Scripts\Lib\Annotation\AnnotationTypeTable.js" />
+    <Content Include="Scripts\Lib\CheckSchedule\IndexTableAttendance.js" />
     <Content Include="Scripts\Lib\CheckSchedule\IndexTableCollaborator.js" />
     <Content Include="Scripts\Lib\Annotation\CreateAnnotation.js" />
     <Content Include="Scripts\Lib\Annotation\Index.js" />
@@ -496,8 +509,11 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
   <Import Project="..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.0\build\System.Text.Json.targets')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

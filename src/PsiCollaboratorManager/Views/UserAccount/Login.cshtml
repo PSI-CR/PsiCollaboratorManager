@@ -12,13 +12,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicio PSI Internacionales S.A.</title>
 
+    <link href="~/Content/Css/Login/LoginMessage.css" rel="stylesheet" />
     <link href="~/Content/Css/UserAccount/Login.css" rel="stylesheet" />
 </head>
+
 <body>
     <div id="LoginGrid">
         <div id="CompanySection">
             <h1>Servicio PSI <br> Internacionales S.A.</h1>
-            <img id="LoginCrown" src="~/Images/CrownWhite.png"/>
+            <img id="LoginCrown" src="~/Images/PsiLogo.png" />
             <h3>PSI Collaborator Manager <br> Version: @ViewData["AppVersion"]</h3>
         </div>
         <div id="LoginFormSection">
@@ -46,12 +48,14 @@
                 <button class="loginButton" type="submit">INGRESAR</button>
             }
         </div>
-        <div id="MessageSection">
+        <div id="MessageSection" class="contenedor-degradado">
             @if (TempData["UserMessage"] != null)
             {
                 var message = (MessageModel)TempData["UserMessage"];
-                <strong>@message.Title</strong>
-                <p>@message.Message</p>
+                <div class="alert @message.CssClassName">
+                    <strong>@message.Title</strong>
+                    <p>@message.Message</p>
+                </div>
             }
         </div>
     </div>

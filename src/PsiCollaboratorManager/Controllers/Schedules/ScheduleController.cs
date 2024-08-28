@@ -5,8 +5,6 @@ using PsiCollaborator.Data.Schedule;
 using PsiCollaborator.Data.Schedule.ScheduleDay;
 using PsiCollaborator.Data.Schedule.WorkingDay;
 using PsiCollaboratorManager.Mapping;
-using PsiCollaboratorManager.Models.Attendance;
-using PsiCollaboratorManager.Models.Collaborator;
 using PsiCollaboratorManager.Models.Schedule;
 using System;
 using System.Collections.Generic;
@@ -24,8 +22,9 @@ namespace PsiCollaboratorManager.Controllers
         private IScheduleDayRepository _scheduleDayRepository;
         private ICollaboratorRepository _collaboratorRepository;
         private IAttendRepository _attendRepository;
-        private ScheduleMapper _scheduleMapper;
         private IMapper _mapper;
+        private ScheduleMapper _scheduleMapper;
+        private AttendanceMapper _attendMapper;
         
         public ScheduleController() 
         {          
@@ -41,6 +40,7 @@ namespace PsiCollaboratorManager.Controllers
             _workingDayRepository = new WorkingDayRepository();
             _collaboratorRepository = new CollaboratorRepository();
             _attendRepository = new AttendRepository();
+            _attendMapper = new AttendanceMapper();
             _mapper = configuration.CreateMapper();
         }
 
@@ -135,55 +135,32 @@ namespace PsiCollaboratorManager.Controllers
             return View();
         }
 
+        //CheckAttendance
         public ActionResult GetCollaborator()
         {
             List<CollaboratorOperator> collaborators = _collaboratorRepository.GetAllOperator();  
             return Json(new { rows = collaborators }, JsonRequestBehavior.AllowGet);
         }
 
-        //public ActionResult GetAssistanceByCollaborator(int colaboratorId)
-        //{
-        //    List<Attend> attendance = _attendRepository.GetAttendByCollaboratorId(colaboratorId); 
-        //    return Json(new { rows = attendance }, JsonRequestBehavior.AllowGet);
-        //}
-
-        public ActionResult GetAssistanceByCollaborator(int colaboratorId)
+        public ActionResult GetAssistanceByCollaborator(int collaboratorId)
         {
-            List<Attend> attendance = _attendRepository.GetAttendByCollaboratorId(colaboratorId);
-            var result = attendance.Select(a => new AttendModel
-            {
-                AttendId = a.AttendId,
-                CollaboratorId = a.CollaboratorId,
-                CheckIn = a.CheckIn,
-                CheckOut = a.CheckOut,
-                CheckInStatus = a.CheckInStatus,
-                CheckOutStatus = a.CheckOutStatus,
-                CommentCheckIn = a.CommentCheckIn,
-                IsOpenCheckIn = a.IsOpenCheckIn,
-                IpAddress = a.IpAddress,
-                PhysicalAddressEquipment = a.PhysicalAddressEquipment,
-  
-                CheckInStatusWork = GetStatusDescription(a.CheckInStatus),  
-                CheckOutStatusWork = GetStatusDescription(a.CheckOutStatus)
-            }).ToList();
-
-            return Json(new { rows = result }, JsonRequestBehavior.AllowGet);
+            CollaboratorPicture collaboratorPictureData = _collaboratorRepository.GetCollaboratorPictureById(collaboratorId);
+            List<Attend> attendance = _attendRepository.GetAttendByCollaboratorId(collaboratorId);
+            var result = _attendMapper.MapToCollaboratorPictureModel(collaboratorPictureData, attendance);
+            return Json(new { success = true, data = result }, JsonRequestBehavior.AllowGet);
         }
 
-        // Método auxiliar para obtener la descripción del estado
-        private string GetStatusDescription(int statusId)
+        public ActionResult EditAssistance(Attendance attendData) 
         {
-            switch (statusId)
+            try
             {
-                case 1:
-                    return "Presente";
-                case 2:
-                    return "Tarde";
-                case 3:
-                    return "Ausente";
-                default:
-                    return "Desconocido";
+                _attendRepository.Update(attendData);
+                return Json(new { success = true, message = "Datos guardados exitosamente" });
+            }catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Error al guardar los datos", error = ex.Message });
             }
-        }
+           
+        }    
     }
 }

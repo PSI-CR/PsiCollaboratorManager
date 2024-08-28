@@ -3,34 +3,42 @@
     ViewBag.Title = "EditAssistanceModal";
     Layout = "~/Views/Shared/_modalSmall.cshtml";
 }
+
 <link href="~/Content/Css/Schedule/EditAssistanceModal.css" rel="stylesheet" />
 
-<div id="EditAssistanceModalContent">
+<link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.1/jquery.timepicker.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.1/jquery.timepicker.min.js"></script>
+
+<!--<div id="EditAssistanceModalContent">
+    <input type="text" class="form-control" id="attendanceid" name="attendanceid" readonly hidden="hidden">
     <div id="EditAssistanceModalDate" class="fieldset editAssistanceModalSection">
         <label for="checkin">Entrada</label>
-        <input type="text" class="form-control" id="checkin" name="checkin">
+        <input type="datetime" class="form-control" id="checkin" name="checkin">
         <label for="checkinstatuswork">Estado entrada</label>
-        <select class="form-control" id="checkinstatuswork" name="checkinstatuswork">
-            <!-- Add options for checkin status -->
-            <option value="1">Hora Extra</option>
-            <option value="2">Tiempo Reposición</option>
-            <option value="3">Llegada temprano</option>
-            <option value="4">Llegada tardía</option>
-            <option value="5">Llegada tardía justificada</option>
-        </select>
-    </div>
-    <div id="EditAssistanceModalState" class="fieldset editAssistanceModalSection">
-        <label for="checkout">Salida</label>
-        <input type="text" class="form-control" id="checkout" name="checkout">
-        <label for="checkoutstatuswork">Estado Salida</label>
-        <select class="form-control" id="checkoutstatuswork" name="checkoutstatuswork">
-            <!-- Add options for checkout status -->
-            <option value="1">Indefinido</option>
-            <option value="2">Hora Extra</option>
-            <option value="3">Tiempo Reposición</option>
-            <option value="4">Llegada temprano</option>
-            <option value="5">Llegada tardía</option>
-            <option value="6">Llegada tardía justificada</option>
+        <select class="form-control" id="checkinstatuswork" name="checkinstatuswork">-->
+<!-- Add options for checkin status -->
+<!--<option value="1">Hora extra</option>
+        <option value="2">Tiempo reposicion</option>
+        <option value="3">Registro temprano</option>
+        <option value="4">Registro tardia</option>
+        <option value="5">Registro tardia justificada</option>
+    </select>
+</div>
+<div id="EditAssistanceModalState" class="fieldset editAssistanceModalSection">
+    <label for="checkout">Salida</label>
+    <input type="text" class="form-control" id="checkout" name="checkout">
+    <label for="checkoutstatuswork">Estado Salida</label>
+    <select class="form-control" id="checkoutstatuswork" name="checkoutstatuswork">-->
+<!-- Add options for checkout status -->
+<!--<option value="1">Indefinido</option>
+            <option value="2">Hora extra</option>
+            <option value="3">Tiempo reposicion</option>
+            <option value="4">Registro temprano</option>
+            <option value="5">Registro tardia</option>
+            <option value="6">Registro tardía justificada</option>
         </select>
     </div>
     <div id="EditAssistanceModalComent" class="fieldset editAssistanceModalSection">
@@ -44,8 +52,65 @@
         </div>
     </div>
     <div id="EditAssistanceModalFooter" class="fieldset">
-        <button type="button" onclick="CloseModal('EditAssistanceModal')" class="btn btn-secondary"> Cancelar </button>
-        <input id="CheckScheduleEditButton" type="button" value="Guardar" class="btn btn-success">
+        <div class="modal-footer">
+            <button type="button" onclick="CloseModal('EditAssistanceModal')" class="btn btn-secondary"> Cancelar </button>
+            <button type="button" id="CheckScheduleEditButton" class="btn btn-success">Guardar</button>
+        </div>
+    </div>
+</div>-->
+
+
+<div id="EditAssistanceModalContent">
+    <input type="text" class="form-control" id="attendanceid" name="attendanceid" readonly hidden="hidden">
+
+    <div id="EditAssistanceModalDate" class="fieldset editAssistanceModalSection">
+        <label for="checkin">Entrada</label>
+        <div class="input-group">
+            <input type="date" class="form-control datepicker" id="checkin-date" name="checkin-date" placeholder="Fecha">
+            <input type="time" class="form-control timepicker" id="checkin-time" name="checkin-time" placeholder="Hora">
+        </div>
+        <label for="checkinstatuswork">Estado entrada</label>
+        <select class="form-control" id="checkinstatuswork" name="checkinstatuswork">
+            <option value="1">Hora extra</option>
+            <option value="2">Tiempo reposicion</option>
+            <option value="3">Registro temprano</option>
+            <option value="4">Registro tardia</option>
+            <option value="5">Registro tardia justificada</option>
+        </select>
+    </div>
+
+    <div id="EditAssistanceModalState" class="fieldset editAssistanceModalSection">
+        <label for="checkout">Salida</label>
+        <div class="input-group">
+            <input type="date" class="form-control datepicker" id="checkout-date" name="checkout-date" placeholder="Fecha">
+            <input type="time" class="form-control timepicker" id="checkout-time" name="checkout-time" placeholder="Hora">
+        </div>
+        <label for="checkoutstatuswork">Estado Salida</label>
+        <select class="form-control" id="checkoutstatuswork" name="checkoutstatuswork">
+            <option value="1">Indefinido</option>
+            <option value="2">Hora extra</option>
+            <option value="3">Tiempo reposicion</option>
+            <option value="4">Registro temprano</option>
+            <option value="5">Registro tardia</option>
+            <option value="6">Registro tardía justificada</option>
+        </select>
+    </div>
+
+    <div id="EditAssistanceModalComent" class="fieldset editAssistanceModalSection">
+        <input type="text" class="form-control" id="collaboratorid" name="collaboratorid" readonly hidden="hidden">
+        <label for="commentcheckin">Comentario</label>
+        <input type="text" class="form-control" id="commentcheckin" name="commentcheckin">
+        <div>
+            <input type="checkbox" class="form-check-input" id="isopencheckin" name="isopencheckin">
+            <label class="form-check-label" for="isopencheckin">Pendiente</label>
+        </div>
+    </div>
+
+    <div id="EditAssistanceModalFooter" class="fieldset">
+        <div class="modal-footer">
+            <button type="button" onclick="CloseModal('EditAssistanceModal')" class="btn btn-secondary">Cancelar</button>
+            <button type="button" id="CheckScheduleEditButton" class="btn btn-success">Guardar</button>
+        </div>
     </div>
 </div>
 

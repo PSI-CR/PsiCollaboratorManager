@@ -1,18 +1,83 @@
-﻿$('#selectSchedule').change(function () {
-    var selectedId = $('#selectSchedule').val();
-    if (selectedId == "0") {
-        document.getElementById("tableScheduleInfo").style.display = "none";
-        return;
+﻿
+$(document).ready(function () {
+    $("#grid").jqGrid({
+        url: '/Collaborator/GetSchedule',
+        datatype: 'json',
+        colModel: [
+            { label: 'Día', name: 'ScheduleDayName', width: 200 },
+            {
+                label: 'Hora Inicio',
+                name: 'BeginTime',
+                width: 150,
+                formatter: function (cellValue) {
+                    return formatTime(cellValue);
+                }
+            },
+            {
+                label: 'Hora Final',
+                name: 'EndTime',
+                width: 150,
+                formatter: function (cellValue) {
+                    return formatTime(cellValue);
+                }
+            }
+        ],
+        viewrecords: true,
+        height: 'auto',
+        rowNum: 1000, 
+        pager: "",
+        jsonReader: {
+            root: 'rows',
+            repeatitems: false
+        },
+        loadError: function (xhr, status, error) {
+            console.error('Error al cargar datos:');
+            console.error('Estado:', status);
+            console.error('Error:', error);
+            console.error('Respuesta del servidor:', xhr.responseText);
+        }
+    });
+
+    function formatTime(timeObj) {
+        if (timeObj && timeObj.Hours !== undefined && timeObj.Minutes !== undefined) {
+            const hours = timeObj.Hours || 0;
+            const minutes = timeObj.Minutes || 0;
+            return `${("0" + hours).slice(-2)}:${("0" + minutes).slice(-2)}`;
+        }
+        return '';
     }
-    LoadSchedule(selectedId);
+
+    $('#selectSchedule').change(function () {
+        var selectedId = $('#selectSchedule').val();
+        if (selectedId == "0") {
+            $('#grid').hide(); 
+            return;
+        }
+        $('#grid').show(); 
+        LoadSchedule(selectedId);
+    });
+
+    function LoadSchedule(selectedId) {
+        $("#grid").jqGrid('setGridParam', {
+            url: '/Collaborator/GetSchedule',
+            datatype: 'json',
+            postData: { scheduleId: selectedId },
+            page: 1 
+        }).trigger('reloadGrid');
+    }
 });
+
 $('#btnAssign').on('click', function () {
     var collaboratorIds = $('#select2').find('option').map(function () {
         return this.value;
     }).get();
     var scheduleId = $('#selectSchedule').val();
     if (collaboratorIds.length > 0 && scheduleId) AssingCollaborators(collaboratorIds, scheduleId);
-    else alert('Seleccione al menos un colaborador y un horario antes de asignar.');
+    else
+        new Messi(
+            'Seleccione al menos un colaborador y un horario antes de asignar.',
+            { title: 'Seleccione un Colaborador', titleClass: 'anim warning'}
+        );    
 });
 
 function DismissSchedule() {
@@ -35,15 +100,31 @@ function DismissSchedule() {
                     result.collaborators.forEach((collaborator, index) => {
                         select.append(new Option(collaborator.Text, collaborator.Value));
                     });
-                    alert(result.message);
+                    new Messi(
+                        result.message,
+                        { title: 'Exito', titleClass: 'anim success' }
+                    );
                 }
-                else alert(result.message);
+                else
+                    new Messi(
+                    result.message,
+                    { title: 'Error', titleClass: 'anim error'}
+                );                    ;
             },
-            error: function (xhr, status, error) { alert(error) }
+            error: function (xhr, status, error)
+            {
+                new Messi(
+                    error,
+                    { title: 'Error', titleClass: 'anim error'}
+                );
+            }
         });
     }
     else {
-        alert("No rows are selected");
+         new Messi(
+            'Favor seleccione una fila de datos.',
+            { title: 'Error', titleClass: 'anim error'}
+        );
     }
 }
 function AssingCollaborators(collaboratorIds, scheduleId) {
@@ -55,54 +136,65 @@ function AssingCollaborators(collaboratorIds, scheduleId) {
         success: function (result) {
             $('#mensaje').text(result.message);
             if (result.success) {
-                alert('Colaboradores asignados correctamente.');
+                new Messi(
+                    'Colaboradores asignados correctamente.',
+                    { title: 'Exito', titleClass: 'anim success' }
+                );
                 $('#select2').empty();
                 RefreshGrid();
             }
-            else alert('Error al asignar colaboradores: ' + result.message);
+            else
+                new Messi(
+                    'Error al asignar colaboradores: ' + result.message,
+                    { title: 'Error', titleClass: 'anim error'}
+                );              
         },
-        error: function (xhr, status, error) { alert('Error al asignar colaboradores: ' + error) }
+        error: function (xhr, status, error) {
+            new Messi(
+                'Error al asignar colaboradores: ' + error,
+                { title: 'Error', titleClass: 'anim error'}
+            )          
+        }
     });
 }
 function RefreshGrid() {
     $("#jqGrid").jqGrid('setGridParam', { datatype: 'json' }).trigger('reloadGrid');
 }
-function LoadSchedule(selectedId) {
-    $.ajax({
-        url: '/Collaborator/GetSchedule',
-        type: 'POST',
-        data: { scheduleId: selectedId },
-        success: function (response) {
-            var tableBody = document.getElementById("tableScheduleInfo");
-            var tableBodyRows = document.getElementById("tableBody");
-            var tableBodyAs = $("tableScheduleInfo");
-            tableBody.style.display = "table";
-            tableBodyAs.empty();
-            tableBodyRows.remove();
-            const formatNumber = n => ("0" + n).slice(-2);
-            var newTableBody = document.createElement("tbody");
-            newTableBody.setAttribute("id", "tableBody");
-            tableBody.appendChild(newTableBody);
-            tableBody = newTableBody;
-            response.forEach((scheduleDaily, i) => {
-                var row = document.createElement("tr");
-                var dayNameCell = document.createElement("td");
-                dayNameCell.textContent = scheduleDaily.ScheduleDayName;
-                row.appendChild(dayNameCell);
-                var beginTimeCell = document.createElement("td");
-                let beginTime = new Date(parseInt(scheduleDaily.BeginTime.match(/\/Date\((\d+)\)\//)[1], 10));
-                let endTime = new Date(parseInt(scheduleDaily.EndTime.match(/\/Date\((\d+)\)\//)[1], 10));
-                beginTimeCell.textContent = beginTime.getHours() + ":" + formatNumber(beginTime.getMinutes());
-                row.appendChild(beginTimeCell);
-                var endTimeCell = document.createElement("td");
-                endTimeCell.textContent = endTime.getHours() + ":" + formatNumber(endTime.getMinutes());
-                row.appendChild(endTimeCell);
-                if (i % 2 != 0) row.classList.add('even');
-                tableBody.appendChild(row);
-            });
-        },
-        error: function (xhr, status, errorData) {
-            console.error(errorData);
+$(document).ready(function () {
+    function loadGrid(selectedId) {
+        $("#grid").jqGrid({
+            url: '/Collaborator/GetSchedule', 
+            type: 'POST',
+            postData: { scheduleId: selectedId },
+            datatype: 'json',
+            colModel: [
+                { label: 'Día', name: 'ScheduleDayName', width: 200 },
+                { label: 'Hora Inicio', name: 'BeginTime', width: 150 },
+                { label: 'Hora Final', name: 'EndTime', width: 150 }
+            ],
+            viewrecords: true,
+            height: 'auto',
+            rowNum: 10,
+            pager: "#pager",
+            jsonReader: {
+                root: function (data) {
+                    return data;
+                },
+                repeatitems: false
+            },
+            loadError: function (xhr, status, error) {
+                console.error('Error:', error);
+            }
+        });
+    }
+
+    $('#selectSchedule').change(function () {
+        var selectedId = $('#selectSchedule').val();
+        if (selectedId == "0") {
+            $('#jqGridContainer').hide();
+            return;
         }
+        $('#jqGridContainer').show();
+        loadGrid(selectedId);
     });
-}
+});

@@ -1,4 +1,5 @@
-﻿#EditAssistanceModalContent {
+﻿
+#EditAssistanceModalContent {
     display: grid;
     grid-template-areas: 'D S'
         'C C'

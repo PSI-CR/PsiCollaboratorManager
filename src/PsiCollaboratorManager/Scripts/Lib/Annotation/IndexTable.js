@@ -1,24 +1,30 @@
-﻿$grid = $("#jqGrid").jqGrid({
+﻿
+$grid = $("#jqGrid").jqGrid({
     url: "/Annotation/GetAll",
     mtype: 'GET',
     datatype: 'json',
     colModel: [
         { label: 'Anotacion Id', name: 'AnnotationId', editable: false, key: true, hidden: true, align: 'center' },
         { label: 'Tipo de anotación', name: 'AnnotationTypeName', editable: false, align: 'center' },
-        { label: 'Fecha', name: 'Date', formatter: 'date', align: 'center', sorttype: 'date', formatoptions: { newformat: 'd/m/Y' },
+        {
+            label: 'Fecha', name: 'Date', formatter: 'date', align: 'center', sorttype: 'date', formatoptions: { newformat: 'd/m/Y' },
             searchoptions: {
+                sopt: ['eq', 'ne', 'lt', 'le', 'gt', 'ge'], 
                 dataInit: function (element) {
                     $(element).datepicker({
                         id: 'orderDate_datePicker',
                         dateFormat: 'dd/mm/yy',
                         maxDate: new Date(2030, 0, 1),
-                        showOn: 'focus'
+                        showOn: 'focus',
+                        onSelect: function () {
+                            $grid[0].triggerToolbar(); 
+                        }
                     });
                 }
             }
         },
-        { label: 'Nombre', name: 'CollaboratorFirstName',editable: false, align: 'center', headerClasses: 'my-column', cellattr: function () { return 'class="my-column"'; } },
-        { label: 'Apellidos', name: 'CollaboratorLastName', align: 'center'},
+        { label: 'Nombre', name: 'CollaboratorFirstName', editable: false, align: 'center', headerClasses: 'my-column', cellattr: function () { return 'class="my-column"'; } },
+        { label: 'Apellidos', name: 'CollaboratorLastName', align: 'center' },
         { label: 'Cédula', name: 'CollaboratorDNICollaborator', align: 'center', sorttype: 'number' },
         { label: 'Operador', name: 'CollaboratorOperatorNumber', align: 'center', sorttype: "number" },
         { label: 'E-mail', name: 'CollaboratorEmail', align: 'center', formatter: 'email' }
@@ -57,6 +63,14 @@
     height: '100%',
     width: '100%'
 });
+
+$grid.jqGrid('filterToolbar', {
+    searchOnEnter: false,
+    defaultSearch: "cn", 
+    stringResult: true,
+    ignoreCase: true
+});
+
 $(window).on("resize", function () {
     resizeGrid();
 });

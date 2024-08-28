@@ -1,48 +1,58 @@
-﻿#AssignScheduleContent{
-    width:100%;
-    height:100%;
-    display:grid;
+﻿#AssignScheduleContent {
+    width: 100%;
+    height: 100%;
+    display: grid;
     grid-template-rows: auto auto 1fr;
     grid-template-columns: 100%;
-    gap:10px;
-    padding:10px;
-    overflow-y:auto;
-    overflow-x:hidden;
+    gap: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-#ScheduleSection{
-    padding:10px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
+
+#ScheduleSection {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    gap: 10px;
+    height: 100%;
 }
+
 #UnassignedCollaboratorList {
     padding: 10px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
+
 #tableScheduleInfo {
     width: 100%;
-    text-align:center;
+    text-align: center;
 }
-#tableScheduleInfo td {
-    padding: 5px;
+
+    #tableScheduleInfo td {
+        padding: 5px;
+    }
+
+    #tableScheduleInfo th {
+        padding: 5px;
+    }
+
+.even {
+    background-color: #cccccc;
 }
-#tableScheduleInfo th {
-    padding: 5px;
-}
-.even{
-    background-color:#cccccc;
-}
-.container_listbox{
-    display:grid;
+
+.container_listbox {
+    display: grid;
     grid-template-columns: 1fr 55px 1fr;
-    gap:10px;
-    width:100%;
-    height:250px;
+    gap: 10px;
+    width: 100%;
+    height: 250px;
 }
+
 .operators {
     display: flex;
     flex-direction: column;
@@ -50,31 +60,40 @@
     align-items: center;
     gap: 10px;
     width: 55px;
-    height:100%;
+    height: 100%;
     padding: 5px;
-    font-size:30px;
-    text-align:center;
+    font-size: 30px;
+    text-align: center;
 }
+
 .operator {
     width: 35px;
     height: 35px;
     background-color: #dddddd;
-    cursor:pointer; 
+    cursor: pointer;
 }
-.operator:hover {
-    background-color: #bbbbbb;
-}
+
+    .operator:hover {
+        background-color: #bbbbbb;
+    }
 
 #select1 {
     width: 100%;
-    height:100%;
+    height: 100%;
 }
+
 #select2 {
     width: 100%;
     height: 100%;
 }
+
 #AssignedCollaboratorTable {
     padding: 10px;
     width: 100%;
     height: 100%;
+}
+
+.centered-dropdown {
+    width: auto; 
+    margin: 0 auto; 
 }

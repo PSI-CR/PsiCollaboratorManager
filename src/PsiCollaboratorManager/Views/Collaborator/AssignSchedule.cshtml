@@ -7,23 +7,23 @@
 <link href="~/Content/JQGridTheme/ui.multiselect.css" rel="stylesheet" />
 <link href="~/Content/JQGridTheme/ui.jqgrid.css" rel="stylesheet" />
 <link href="~/Content/JQGridTheme/JqGridStyle.css" rel="stylesheet" />
-
 <link href="~/Content/Css/Collaborator/AssignSchedule.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script>
+<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+
 
 <div id="AssignScheduleContent">
     <div id="ScheduleSection" class="fieldset">
-        @Html.DropDownList("Schedules", ViewBag.Schedules as List<SelectListItem>, htmlAttributes: new { id = "selectSchedule" })
-        <table id="tableScheduleInfo" class="tableDetail" style="display:none">
-            <thead>
-                <tr class="even">
-                    <th>Día</th>
-                    <th>Hora Inicio</th>
-                    <th>Hora Final</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-            </tbody>
-        </table>
+        @Html.DropDownList("Schedules", ViewBag.Schedules as List<SelectListItem>, htmlAttributes: new { id = "selectSchedule", @class = "form-control centered-dropdown" })
+        <div id="jqGridContainer">
+            <table id="grid"></table>
+            <div id="pager"></div>
+        </div>
+
     </div>
     <div id="UnassignedCollaboratorList" class="fieldset">
         <div class="container_listbox">

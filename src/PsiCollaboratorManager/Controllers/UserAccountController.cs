@@ -99,8 +99,8 @@ namespace PsiCollaboratorManager.Controllers
             IEnumerable<IUserAccount> users = _userAccountRepository.GetAll();
 
             IEnumerable<IUserAccount> repeatedUsers = users.Where(x => x.UserName.ToLower().Contains(userN.ToLower()));
-            if(repeatedUsers.Count() == 0) return userN; //Es unico
-            userN += repeatedUsers.Count(); //agrega un contador para hacerlo unico
+            if(repeatedUsers.Count() == 0) return userN; 
+            userN += repeatedUsers.Count();
             return userN;
         }
 

@@ -1,4 +1,6 @@
-﻿using PsiCollaborator.Data.PasswordUtilities;
+﻿using PsiCollaborator.Data.Address;
+using PsiCollaborator.Data.PasswordUtilities;
+using PsiCollaborator.Data.Schedule.WorkingDay;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -107,6 +109,11 @@ namespace PsiCollaborator.Data.Collaborator
             ExecuteSql("Select_Highest_OperatorNumber", new List<DbParameter>() { new DbParameter("highest_operator_number", ParameterDirection.Output, operatorNum) });
             operatorNum = OutParameters.Count > 0 ? (int)OutParameters[0].Value : 0;
             return operatorNum;
+        }
+
+        public CollaboratorPicture GetCollaboratorPictureById(int collaboratorId)
+        {
+            return ExecuteSingle<CollaboratorPicture>("select_collaborator_picture", new List<DbParameter>() { new DbParameter("param_collaboratorid", ParameterDirection.Input, collaboratorId) });
         }
     }
 }

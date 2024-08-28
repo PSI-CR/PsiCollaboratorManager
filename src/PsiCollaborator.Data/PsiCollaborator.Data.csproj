@@ -118,8 +118,12 @@
     <Compile Include="AnnouncementArt\IAnnouncementArt.cs" />
     <Compile Include="AnnouncementArt\IAnnouncementArtRepository.cs" />
     <Compile Include="Attend\Attend.cs" />
+    <Compile Include="Attend\Attendance.cs" />
     <Compile Include="Attend\AttendRepository.cs" />
+    <Compile Include="Attend\CheckOutStatus.cs" />
+    <Compile Include="Attend\CheckInStatus.cs" />
     <Compile Include="Attend\IAttend.cs" />
+    <Compile Include="Attend\IAttendance.cs" />
     <Compile Include="Attend\IAttendRepository.cs" />
     <Compile Include="BankAccount\Bank.cs" />
     <Compile Include="BankAccount\BankAccountRepository.cs" />
@@ -134,6 +138,7 @@
     <Compile Include="Collaborator\CollaboratorFull.cs" />
     <Compile Include="Collaborator\CollaboratorName.cs" />
     <Compile Include="Collaborator\CollaboratorOperator.cs" />
+    <Compile Include="Collaborator\CollaboratorPicture.cs" />
     <Compile Include="Collaborator\CollaboratorRepository.cs" />
     <Compile Include="Collaborator\CollaboratorSchedule.cs" />
     <Compile Include="Collaborator\CollaboratorUniqueData.cs" />
@@ -144,6 +149,7 @@
     <Compile Include="Collaborator\ICollaboratorFull.cs" />
     <Compile Include="Collaborator\ICollaboratorName.cs" />
     <Compile Include="Collaborator\ICollaboratorOperator.cs" />
+    <Compile Include="Collaborator\ICollaboratorPicture.cs" />
     <Compile Include="Collaborator\ICollaboratorRepository.cs" />
     <Compile Include="Collaborator\ICollaboratorSchedule.cs" />
     <Compile Include="Collaborator\ICollaboratorUniqueData.cs" />

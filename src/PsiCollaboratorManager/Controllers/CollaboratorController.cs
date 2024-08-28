@@ -28,6 +28,8 @@ namespace PsiCollaboratorManager.Controllers
         private IScheduleDailyRepository _scheduleDailyRepository;
         private CollaboratorMapper _collaboratorMapper;
         private IMapper _mapper;
+        private ScheduleMapper _scheduleMapper;
+
         public CollaboratorController()
         {
             _collaboratorRepository = new CollaboratorRepository();
@@ -35,6 +37,7 @@ namespace PsiCollaboratorManager.Controllers
             _addressRepository = new AddressRepository();
             _scheduleRepository = new ScheduleRepository();
             _scheduleDailyRepository = new ScheduleDailyRepository();
+            _scheduleMapper = new ScheduleMapper();
 
             _collaboratorMapper = new CollaboratorMapper();
 
@@ -278,12 +281,15 @@ namespace PsiCollaboratorManager.Controllers
             List<CollaboratorScheduleModel> collaboratorModels = _mapper.Map<List<CollaboratorScheduleModel>>(collaborators);
             return Json(new { rows = collaboratorModels}, JsonRequestBehavior.AllowGet);
         }
+
         public JsonResult GetSchedule(int scheduleId)
         {
             List<ScheduleDaily> scheduleDailys = _scheduleDailyRepository.GetByScheduleId(scheduleId);
-            List<ScheduleDailyModel> scheduleDailyModels = _mapper.Map<List<ScheduleDailyModel>>(scheduleDailys);
+            List<ScheduleDailyModel> scheduleDailyModels = scheduleDailys.Select(scheduleDaily => _scheduleMapper.MapToScheduleDailyModel(scheduleDaily)).ToList();
+
             return Json(scheduleDailyModels, JsonRequestBehavior.AllowGet);
         }
+
         [HttpPost]
         public JsonResult AssignSchedule(List<int> collaboratorIds, int scheduleId)
         {
