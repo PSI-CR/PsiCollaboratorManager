@@ -34,7 +34,7 @@ namespace PsiCollaboratorManager.Mapping
             userAccountFull.FirstName = userAccountModel.FirstName;
             userAccountFull.LastName = userAccountModel.LastName;
             userAccountFull.Email = userAccountModel.Email;
-            userAccountFull.Telephone1 = "";
+            userAccountFull.Telephone1 = "0";
             userAccountFull.NeedPasswordChange = true;
             userAccountFull.IsLockedOut = false;
             userAccountFull.LockOutEndTime = new DateTime();

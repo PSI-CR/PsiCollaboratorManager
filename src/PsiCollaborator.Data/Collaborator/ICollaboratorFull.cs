@@ -39,5 +39,6 @@ namespace PsiCollaborator.Data.Collaborator
         string Telephone2 { get; set; }
 
         void SetDefaultValues();
+        //DateTime PasswordChangedDate { get; set; }
     }
 }

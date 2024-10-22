@@ -111,7 +111,13 @@ function editRow() {
         window.location.href = editUrl;
     }
     else {
-        alert("No hay una fila seleccionada");
+        new Messi("No hay una fila seleccionada",
+            {
+                title: 'Seleccione un colaborador',
+                titleClass: 'anim warning',
+                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+            }
+        );
     }
 }
 function deleteRow() {
@@ -121,7 +127,13 @@ function deleteRow() {
         var idCollaborator = grid.jqGrid('getCell', rowKey, 'CollaboratorId');
         deleteCollaborator(idCollaborator);
     } else {
-        alert("No ha seleccionado ningún colaborador");
+        new Messi("No hay una fila seleccionada",
+            {
+                title: 'Seleccione un colaborador',
+                titleClass: 'anim warning',
+                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+            }
+        );
     }
 }
 function displayDetails() {
@@ -140,14 +152,31 @@ function deleteCollaborator(collaboratorId) {
         data: { collaboratorId: collaboratorId },
         success: function (result) {
             if (result.success) {
-                new Messi("Este colaborador fue eliminado correctamente", { title: 'Success', titleClass: 'anim success', modal: true }).show();
+                new Messi("Este colaborador fue eliminado correctamente",
+                    {
+                        title: 'Success',
+                        titleClass: 'anim success',
+                        modal: true
+                    }).show();
                 location.reload();
             } else {
-                new Messi("Este colaborador tiene otras dependencias, por favor quitarlas para poder eliminar al colaborador", { title: 'Warning', titleClass: 'anim warning', modal: true }).show();
+                new Messi("Este colaborador tiene otras dependencias, por favor quitarlas para poder eliminar al colaborador",
+                    {
+                        title: 'Eliminar dependencias',
+                        titleClass: 'anim warning',
+                        buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+                    }
+                );               
             }
         },
-        error: function (xhr, status, error) {
-            alert("Ocurrió un error al eliminar el empleado");
+        error: function (xhr, status, error) {        
+            new Messi("Ocurrió un error al eliminar el empleado",
+                {
+                    title: 'Error al elimiar',
+                    titleClass: 'anim error',
+                    buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+                }
+            );
         }
     });
 }

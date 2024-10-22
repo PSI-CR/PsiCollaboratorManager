@@ -82,12 +82,15 @@ $('#jqGrid').navButtonAdd('#jqGridPager', { buttonicon: "ui-icon-calculator", ti
         });
     }
 });
+
 $('#jqGrid').navButtonAdd('#jqGridPager',
     { buttonicon: "ui-icon-pencil", title: "Edit", caption: "Editar", position: "last", onClickButton: editRow }
 );
+
 $('#jqGrid').navButtonAdd('#jqGridPager',
     { buttonicon: "ui-icon-plusthick", title: "Add", caption: "Agregar", position: "last", onClickButton: addRow }
 );
+
 function initGrid() {
     $(".jqgrow", "#jqGrid").contextMenu('contextMenu', {
         bindings: {
@@ -103,6 +106,7 @@ function initGrid() {
         }
     });
 }
+
 function addRow() {
     var editUrl = '/Collaborator/Create';
     window.location.href = editUrl;
@@ -117,9 +121,16 @@ function editRow() {
         window.location.href = editUrl;
     }
     else {
-        alert("No hay una fila seleccionada");
+         new Messi('No hay una fila seleccionada',
+            {
+                title: 'Selecione un colaborador',
+                titleClass: 'anim warning',
+                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+            }
+        );
     }
 }
+
 function displayDetails() {
     var grid = $("#jqGrid");
     var rowKey = grid.getGridParam("selrow");

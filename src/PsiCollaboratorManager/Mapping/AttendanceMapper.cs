@@ -20,8 +20,9 @@ namespace PsiCollaboratorManager.Mapping
                 AttendModels = attendance.Select(a => new AttendModel
                 {
                     AttendId = a.AttendanceId,
-                    CheckIn = a.CheckIn.ToString("yyyy/MM/dd HH:mm:ss"),
-                    CheckOut = a.CheckOut?.ToString("yyyy/MM/dd HH:mm:ss"),
+                    CollaboratorId = a.CollaboratorId,
+                    CheckIn = a.CheckIn.ToString("dd/MM/yyyy HH:mm:ss"),
+                    CheckOut = a.CheckOut?.ToString("dd/MM/yyyy HH:mm:ss"),
                     CheckInStatus = a.CheckInStatus,
                     CheckOutStatus = a.CheckOutStatus,
                     CommentCheckIn = a.CommentCheckIn,

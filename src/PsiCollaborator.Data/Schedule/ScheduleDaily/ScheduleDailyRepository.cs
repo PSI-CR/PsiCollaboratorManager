@@ -14,7 +14,13 @@ namespace PsiCollaborator.Data.Schedule.ScheduleDaily
 
         public List<ScheduleDaily> GetByCollaboratorId(int collaboratorId)
         {
-            return ExecuteListWithParameters<ScheduleDaily>("select_schedule_daily_by_scheduleid",
+            return ExecuteListWithParameters<ScheduleDaily>("select_scheduledaily_by_collaboratorid",
+            new List<DbParameter>() { new DbParameter("param_collaboratorid", ParameterDirection.Input, collaboratorId) }).ToList();
+        }
+
+        public List<ScheduleDaily> GetScheduleDailyByCollaboratorId(int collaboratorId)
+        {
+            return ExecuteListWithParameters<ScheduleDaily>("select_schedule_details_by_collaborator",
             new List<DbParameter>() { new DbParameter("param_collaboratorid", ParameterDirection.Input, collaboratorId) }).ToList();
         }
     }

@@ -12,54 +12,6 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.13.1/jquery.timepicker.min.js"></script>
 
-<!--<div id="EditAssistanceModalContent">
-    <input type="text" class="form-control" id="attendanceid" name="attendanceid" readonly hidden="hidden">
-    <div id="EditAssistanceModalDate" class="fieldset editAssistanceModalSection">
-        <label for="checkin">Entrada</label>
-        <input type="datetime" class="form-control" id="checkin" name="checkin">
-        <label for="checkinstatuswork">Estado entrada</label>
-        <select class="form-control" id="checkinstatuswork" name="checkinstatuswork">-->
-<!-- Add options for checkin status -->
-<!--<option value="1">Hora extra</option>
-        <option value="2">Tiempo reposicion</option>
-        <option value="3">Registro temprano</option>
-        <option value="4">Registro tardia</option>
-        <option value="5">Registro tardia justificada</option>
-    </select>
-</div>
-<div id="EditAssistanceModalState" class="fieldset editAssistanceModalSection">
-    <label for="checkout">Salida</label>
-    <input type="text" class="form-control" id="checkout" name="checkout">
-    <label for="checkoutstatuswork">Estado Salida</label>
-    <select class="form-control" id="checkoutstatuswork" name="checkoutstatuswork">-->
-<!-- Add options for checkout status -->
-<!--<option value="1">Indefinido</option>
-            <option value="2">Hora extra</option>
-            <option value="3">Tiempo reposicion</option>
-            <option value="4">Registro temprano</option>
-            <option value="5">Registro tardia</option>
-            <option value="6">Registro tardía justificada</option>
-        </select>
-    </div>
-    <div id="EditAssistanceModalComent" class="fieldset editAssistanceModalSection">
-        <input type="text" class="form-control" id="attendanceid" name="attendanceid" readonly hidden="hidden">
-        <input type="text" class="form-control" id="collaboratorid" name="collaboratorid" readonly hidden="hidden">
-        <label for="commentcheckin">Comentario</label>
-        <input type="text" class="form-control" id="commentcheckin" name="commentcheckin">
-        <div>
-            <input type="checkbox" class="form-check-input" id="isopencheckin" name="isopencheckin">
-            <label class="form-check-label" for="isopencheckin">Pendiente</label>
-        </div>
-    </div>
-    <div id="EditAssistanceModalFooter" class="fieldset">
-        <div class="modal-footer">
-            <button type="button" onclick="CloseModal('EditAssistanceModal')" class="btn btn-secondary"> Cancelar </button>
-            <button type="button" id="CheckScheduleEditButton" class="btn btn-success">Guardar</button>
-        </div>
-    </div>
-</div>-->
-
-
 <div id="EditAssistanceModalContent">
     <input type="text" class="form-control" id="attendanceid" name="attendanceid" readonly hidden="hidden">
 
@@ -107,10 +59,9 @@
     </div>
 
     <div id="EditAssistanceModalFooter" class="fieldset">
-        <div class="modal-footer">
-            <button type="button" onclick="CloseModal('EditAssistanceModal')" class="btn btn-secondary">Cancelar</button>
-            <button type="button" id="CheckScheduleEditButton" class="btn btn-success">Guardar</button>
-        </div>
+        <button type="button" onclick="CloseModal('EditAssistanceModal')" class="btn btn-secondary">Cancelar</button>
+        <button type="button" id="CheckScheduleEditButton" class="btn btn-success">Guardar</button>
     </div>
+
 </div>
 

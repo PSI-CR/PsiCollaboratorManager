@@ -14,15 +14,11 @@ namespace PsiCollaborator.Data.Annotation
             ExecuteSqlMapObject("Insert_Annotation", annotation);
         }
 
-        public IEnumerable<IAnnotationOverview> GetAll(DateTime? minAnnotationDate, DateTime? maxAnnotationDate, string firstNameFilter,
-            string lastNameFilter, int operatorNumberFilter)
+        public IEnumerable<IAnnotationOverview> GetAll(DateTime? minAnnotationDate, DateTime? maxAnnotationDate)
         {
             return ExecuteListWithParameters<AnnotationOverview>("Select_All_Annotations", new List<DbParameter>() {
                 new DbParameter("param_minAnnotationDate", ParameterDirection.Input, minAnnotationDate == null ? DateTime.MinValue : minAnnotationDate ),
-                new DbParameter("param_maxAnnotationDate", ParameterDirection.Input, maxAnnotationDate == null ? DateTime.MaxValue : maxAnnotationDate ),
-                new DbParameter("param_firstNameFilter", ParameterDirection.Input,firstNameFilter == null ? DBNull.Value.ToString() : firstNameFilter ),
-                new DbParameter("param_lastNameFilter", ParameterDirection.Input, lastNameFilter == null ? DBNull.Value.ToString() : lastNameFilter),
-                new DbParameter("param_operatorNumberFilter", ParameterDirection.Input, operatorNumberFilter  == 0 ? -1 : operatorNumberFilter)
+                new DbParameter("param_maxAnnotationDate", ParameterDirection.Input, maxAnnotationDate == null ? DateTime.MaxValue : maxAnnotationDate )         
             });
         }
 

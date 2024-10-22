@@ -4,9 +4,10 @@ namespace PsiCollaborator.Data.Schedule.ScheduleDaily
 {
     public interface IScheduleDaily
     {
-        DateTime BeginTime { get; set; }
-        DateTime EndTime { get; set; }
         int ScheduleDailyId { get; set; }
-        string ScheduleDayName { get; set; }
+        int DayId { get; set; }
+        string DayName { get; set; }
+        DateTime BeginTime { get; set; }
+        DateTime EndTime { get; set; }  
     }
 }

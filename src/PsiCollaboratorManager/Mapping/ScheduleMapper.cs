@@ -113,7 +113,7 @@ namespace PsiCollaboratorManager.Mapping
                 {
                     string beginTime = $"{daily.BeginTime.Hours:D2}:{daily.BeginTime.Minutes:D2}:00";
                     string endTime = $"{daily.EndTime.Hours:D2}:{daily.EndTime.Minutes:D2}:00";
-                    return $"{daily.ScheduleDayName},{beginTime},{endTime}";
+                    return $"{daily.DayName},{beginTime},{endTime}";
                 })
                 .ToArray();
 
@@ -140,7 +140,7 @@ namespace PsiCollaboratorManager.Mapping
                     string beginTime = beginDateTime.ToString("yyyy-MM-dd HH:mm:ss");
                     string endTime = endDateTime.ToString("yyyy-MM-dd HH:mm:ss");
 
-                    return $"{daily.ScheduleDayId},{beginTime},{endTime}";
+                    return $"{daily.DayId},{beginTime},{endTime}";
                 })
                 .ToArray();
 
@@ -183,8 +183,8 @@ namespace PsiCollaboratorManager.Mapping
                         var scheduleDailyModel = new ScheduleDailyModel
                         {
                             ScheduleDailyId = scheduleDailyId,
-                            ScheduleDayId = scheduleDayId, 
-                            ScheduleDayName = scheduleDayName,
+                            DayId = scheduleDayId, 
+                            DayName = scheduleDayName,
                             BeginTime = ConvertToTimeModel(beginDateTime),
                             EndTime = ConvertToTimeModel(endDateTime)
                         };
@@ -247,7 +247,8 @@ namespace PsiCollaboratorManager.Mapping
             return new ScheduleDailyModel
             {
                 ScheduleDailyId = scheduleDaily.ScheduleDailyId,
-                ScheduleDayName = scheduleDaily.ScheduleDayName,
+                DayId = scheduleDaily.DayId,
+                DayName = scheduleDaily.DayName,
                 BeginTime = new TimeModel
                 {
                     Hours = scheduleDaily.BeginTime.Hour,
@@ -258,7 +259,7 @@ namespace PsiCollaboratorManager.Mapping
                     Hours = scheduleDaily.EndTime.Hour,
                     Minutes = scheduleDaily.EndTime.Minute
                 }
-            };
+            }; 
         }
     }
 }

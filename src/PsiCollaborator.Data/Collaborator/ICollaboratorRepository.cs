@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PsiCollaborator.Data.UserAccount;
+using System;
 using System.Collections.Generic;
 
 namespace PsiCollaborator.Data.Collaborator
@@ -10,7 +11,7 @@ namespace PsiCollaborator.Data.Collaborator
         List<CollaboratorName> GetAllName();
         List<CollaboratorOperator> GetAllOperator();
         List<CollaboratorBase> GetByIsActive(bool isActive);
-        ICollaboratorAccount GetCollaboratorAccount(int operatorNumber);
+        CollaboratorAccount GetCollaboratorAccount(int operatorNumber);
         List<CollaboratorSchedule> GetCollaboratorSchedules();
         List<CollaboratorUniqueData> GetCollaboratorUniqueData();
         CollaboratorDetails GetDetailsById(int collaboratorId);
@@ -20,9 +21,10 @@ namespace PsiCollaborator.Data.Collaborator
         List<CollaboratorBirthday> GetTodayBirthday();
         List<CollaboratorOperator> GetWithoutActiveSchedule();
         void Save(CollaboratorFull collaborator);
-        int UpdatePassword(int collaboratorId, string password);
+        int UpdatePassword(int collaboratorId, string password, bool needPasswordChange);
         ILockOut VerifyCollaboratorAccountIsLockedOut(int collaboratorId, int maxInvalidAttempts, TimeSpan invalidAttemptsTime, TimeSpan loginLockOutTime);
         int GetHighestOperatorNumber();
         CollaboratorPicture GetCollaboratorPictureById(int collaboratorId);
+        void Update(CollaboratorAccount collaborator);
     }
 }

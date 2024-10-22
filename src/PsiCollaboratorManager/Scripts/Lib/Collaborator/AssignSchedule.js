@@ -4,7 +4,7 @@ $(document).ready(function () {
         url: '/Collaborator/GetSchedule',
         datatype: 'json',
         colModel: [
-            { label: 'Día', name: 'ScheduleDayName', width: 200 },
+            { label: 'Día', name: 'DayName', width: 200 },
             {
                 label: 'Hora Inicio',
                 name: 'BeginTime',
@@ -30,11 +30,8 @@ $(document).ready(function () {
             root: 'rows',
             repeatitems: false
         },
-        loadError: function (xhr, status, error) {
-            console.error('Error al cargar datos:');
-            console.error('Estado:', status);
+        loadError: function (error) {
             console.error('Error:', error);
-            console.error('Respuesta del servidor:', xhr.responseText);
         }
     });
 
@@ -137,7 +134,7 @@ function AssingCollaborators(collaboratorIds, scheduleId) {
             $('#mensaje').text(result.message);
             if (result.success) {
                 new Messi(
-                    'Colaboradores asignados correctamente.',
+                    'Horarios asignados correctamente.',
                     { title: 'Exito', titleClass: 'anim success' }
                 );
                 $('#select2').empty();
@@ -151,9 +148,9 @@ function AssingCollaborators(collaboratorIds, scheduleId) {
         },
         error: function (xhr, status, error) {
             new Messi(
-                'Error al asignar colaboradores: ' + error,
-                { title: 'Error', titleClass: 'anim error'}
-            )          
+                '.',
+                { title: 'Seleccione un Colaborador', titleClass: 'anim warning' }
+            );           
         }
     });
 }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Newtonsoft.Json;
-using PsiCollaborator.Data.Address;
 using PsiCollaborator.Data.Annotation;
 using PsiCollaborator.Data.Annotation.AnnotationType;
 using PsiCollaborator.Data.Collaborator;
@@ -51,15 +50,15 @@ namespace PsiCollaboratorManager.Controllers.Annotation
         }
         public ActionResult GetAll()
         {
-            IEnumerable<IAnnotationOverview> annotations = _annotationRepository.GetAll(null, null, "","",0);
+            IEnumerable<IAnnotationOverview> annotations = _annotationRepository.GetAll(null, null);
             List<AnnotationOverviewModel> annotationModels = _mapper.Map<List<AnnotationOverviewModel>>(annotations);
             return Json(new {rows = annotationModels}, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult SearchAnnotations(string name, string lastName, int opNumber, DateTime startDate, DateTime endDate)
+        public ActionResult SearchAnnotations( DateTime startDate, DateTime endDate)
         {
             try
             {
-                IEnumerable<IAnnotationOverview> annotations = _annotationRepository.GetAll(startDate, endDate, name, lastName, opNumber);
+                IEnumerable<IAnnotationOverview> annotations = _annotationRepository.GetAll(startDate, endDate);
                 List<AnnotationOverviewModel> annotationModels = _mapper.Map<List<AnnotationOverviewModel>>(annotations);
                 return Json(new { rows = annotationModels }, JsonRequestBehavior.AllowGet);
             }

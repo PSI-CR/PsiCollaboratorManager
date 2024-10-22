@@ -12,7 +12,7 @@ namespace PsiCollaborator.Data.Collaborator
         public int OperatorNumber { get; set; }
         public bool NeedPasswordChange { get; set; }
         public bool IsLockedOut { get; set; }
-        public DateTime LockOutEndTime { get; set; }
+        public DateTime? LockOutEndTime { get; set; }
         public bool IsActive { get; set; }
         public string Password { get; set; }
         public DateTime PasswordChangeDate { get; set; }

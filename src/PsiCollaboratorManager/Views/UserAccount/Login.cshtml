@@ -19,13 +19,13 @@
 <body>
     <div id="LoginGrid">
         <div id="CompanySection">
-            <h1>Servicio PSI <br> Internacionales S.A.</h1>
+            <h2>Servicio PSI <br> Internacionales S.A.</h2>
             <img id="LoginCrown" src="~/Images/PsiLogo.png" />
             <h3>PSI Collaborator Manager <br> Version: @ViewData["AppVersion"]</h3>
         </div>
         <div id="LoginFormSection">
             @using (Html.BeginForm("VerifyUserAccount", "UserAccount", FormMethod.Post, new { enctype = "multipart/form-data", id = "LoginForm" }))
-            {
+             {
                 @Html.AntiForgeryToken()
                 <h2>Iniciar Sesión</h2>
                 <div>
@@ -46,17 +46,17 @@
                     @Html.PasswordFor(model => model.Password, new { placeholder = "Contraseña" })
                 </div>
                 <button class="loginButton" type="submit">INGRESAR</button>
-            }
+             }
         </div>
         <div id="MessageSection" class="contenedor-degradado">
             @if (TempData["UserMessage"] != null)
-            {
+             {
                 var message = (MessageModel)TempData["UserMessage"];
                 <div class="alert @message.CssClassName">
                     <strong>@message.Title</strong>
                     <p>@message.Message</p>
                 </div>
-            }
+             }
         </div>
     </div>
 </body>

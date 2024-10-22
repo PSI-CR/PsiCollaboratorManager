@@ -41,6 +41,7 @@ namespace PsiCollaborator.Data.Collaborator
         public string Note { get; set; }
         public string Picture { get; set; }
         public string[] EmergencyContacts { get; set; }
+        //public DateTime PasswordChangedDate { get; set; }
         public void SetDefaultValues()
         {
             CollaboratorId = CollaboratorId != 0 ? CollaboratorId : 0;

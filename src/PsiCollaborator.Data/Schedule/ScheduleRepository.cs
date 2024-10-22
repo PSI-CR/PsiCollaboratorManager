@@ -51,5 +51,15 @@ namespace PsiCollaborator.Data.Schedule
             });
             return result;
         }
+
+        public List<ScheduleCheckInStatus> GetAllScheduleCheckInStatus()
+        { 
+            return ExecuteList<ScheduleCheckInStatus>("select_schedule_check_in_status_all").ToList();
+        }
+
+        public List<ScheduleCheckOutStatus> GetAllScheduleCheckOutStatus()
+        {
+            return ExecuteList<ScheduleCheckOutStatus>("select_schedule_check_out_status_all").ToList();
+        }
     }
 }

@@ -141,6 +141,8 @@
     <Compile Include="Collaborator\CollaboratorPicture.cs" />
     <Compile Include="Collaborator\CollaboratorRepository.cs" />
     <Compile Include="Collaborator\CollaboratorSchedule.cs" />
+    <Compile Include="Collaborator\CollaboratorScheduleHistory.cs" />
+    <Compile Include="Collaborator\CollaboratorScheduleHistoryRepository.cs" />
     <Compile Include="Collaborator\CollaboratorUniqueData.cs" />
     <Compile Include="Collaborator\ICollaboratorAccount.cs" />
     <Compile Include="Collaborator\ICollaboratorBase.cs" />
@@ -152,6 +154,8 @@
     <Compile Include="Collaborator\ICollaboratorPicture.cs" />
     <Compile Include="Collaborator\ICollaboratorRepository.cs" />
     <Compile Include="Collaborator\ICollaboratorSchedule.cs" />
+    <Compile Include="Collaborator\ICollaboratorScheduleHistory.cs" />
+    <Compile Include="Collaborator\ICollaboratorScheduleHistoryRepository.cs" />
     <Compile Include="Collaborator\ICollaboratorUniqueData.cs" />
     <Compile Include="Collaborator\RelationshipEnum.cs" />
     <Compile Include="Common\LockOut\ILockOut.cs" />
@@ -183,10 +187,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Schedule\ISchedule.cs" />
     <Compile Include="Schedule\IScheduleBasic.cs" />
+    <Compile Include="Schedule\IScheduleCheckInStatus.cs" />
+    <Compile Include="Schedule\IScheduleCheckOutStatus.cs" />
     <Compile Include="Schedule\IScheduleData.cs" />
     <Compile Include="Schedule\IScheduleRepository.cs" />
     <Compile Include="Schedule\Schedule.cs" />
     <Compile Include="Schedule\ScheduleBasic.cs" />
+    <Compile Include="Schedule\ScheduleCheckInStatus.cs" />
+    <Compile Include="Schedule\ScheduleCheckOutStatus.cs" />
     <Compile Include="Schedule\ScheduleDaily\IScheduleDaily.cs" />
     <Compile Include="Schedule\ScheduleDaily\IScheduleDailyRepository.cs" />
     <Compile Include="Schedule\ScheduleDaily\ScheduleDaily.cs" />
@@ -194,8 +202,12 @@
     <Compile Include="Schedule\ScheduleData.cs" />
     <Compile Include="Schedule\ScheduleDay\IScheduleDay.cs" />
     <Compile Include="Schedule\ScheduleDay\IScheduleDayRepository.cs" />
+    <Compile Include="Schedule\ScheduleDay\IScheduleDaysBySchedule.cs" />
+    <Compile Include="Schedule\ScheduleDay\IScheduleDaysByScheduleRepository.cs" />
     <Compile Include="Schedule\ScheduleDay\ScheduleDay.cs" />
     <Compile Include="Schedule\ScheduleDay\ScheduleDayRepository.cs" />
+    <Compile Include="Schedule\ScheduleDay\ScheduleDaysBySchedule.cs" />
+    <Compile Include="Schedule\ScheduleDay\ScheduleDaysByScheduleRepository.cs" />
     <Compile Include="Schedule\ScheduleRepository.cs" />
     <Compile Include="Schedule\WorkingDay\IWorkingDay.cs" />
     <Compile Include="Schedule\WorkingDay\IWorkingDayRepository.cs" />

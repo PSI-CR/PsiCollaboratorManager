@@ -49,6 +49,11 @@ form.addEventListener("submit", async (e) => {
 });
 
 function SaveSchedule(schedule) {
+    let scheduleTemp = schedule.ScheduleDailys.map(item => {
+        item.DayId = item.ScheduleDayId;
+        return item;
+    });
+    schedule.ScheduleDailys = scheduleTemp;
     $.ajax({
         url: "/Schedule/Save",
         type: 'POST',

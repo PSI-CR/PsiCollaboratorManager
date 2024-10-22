@@ -135,12 +135,20 @@ namespace PsiCollaboratorManager.Mapping
                 AddressLine = source.AddressLine
             };
         }
+
         public CollaboratorFull Map(CollaboratorFullModel source)
         {
             if (source == null) return null;
             var emergencyContacts = source.EmergencyContacts?
                 .Select(contact => $"{contact.FirstName},{contact.LastName},{contact.Relationship},{contact.Telephone},{contact.Telephone2}")
                 .ToArray();
+
+            var pictureBase64 = source.Picture;
+            if (!string.IsNullOrEmpty(pictureBase64) && pictureBase64.Contains(","))
+            {
+                pictureBase64 = pictureBase64.Substring(pictureBase64.IndexOf(",") + 1);
+            }
+
             return new CollaboratorFull
             {
                 CollaboratorId = source.CollaboratorId,
@@ -174,10 +182,11 @@ namespace PsiCollaboratorManager.Mapping
                 Diseases = source.Diseases,
                 TakingMedications = source.TakingMedications,
                 Note = source.Note,
-                Picture = source.Picture,
+                Picture = pictureBase64, 
                 EmergencyContacts = emergencyContacts
             };
         }
+
 
         public CollaboratorFullModel Map(CollaboratorFull source)
         {
@@ -203,7 +212,7 @@ namespace PsiCollaboratorManager.Mapping
                 RFIDCode = source.RFIDCode,
                 NeedPasswordChange = source.NeedPasswordChange,
                 IsLockedOut = source.IsLockedOut,
-                LockOutEndTime = source.LockOutEndTime,
+                LockOutEndTime = (DateTime)source.LockOutEndTime,
                 Password = source.Password,
                 CreateUserAccount = source.CreateUserAccount,
                 IsActive = source.IsActive,

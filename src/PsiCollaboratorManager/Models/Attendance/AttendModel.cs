@@ -3,7 +3,8 @@ namespace PsiCollaboratorManager.Models.Attendance
 {
     public class AttendModel
     {
-        public int AttendId { get; set; }    
+        public int AttendId { get; set; }  
+        public int CollaboratorId {  get; set; }
         public string CheckIn { get; set; }
         public string CheckOut { get; set; }
         public int CheckInStatus { get; set; }

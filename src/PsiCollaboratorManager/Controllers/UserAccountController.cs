@@ -119,6 +119,7 @@ namespace PsiCollaboratorManager.Controllers
             if (userAccountModel.RestorePassword)
             {
                 userAccountModel.NeedPasswordChange = true;
+                userAccountModel.Telephone1 = "0";
                 _userAccountRepository.UpdatePassword(userAccountModel.UserAccountId, DEFAULT_PASSWORD, true);
             }
             IUserAccount userAccount = _mapper.Map<IUserAccount>(userAccountModel);
@@ -211,6 +212,7 @@ namespace PsiCollaboratorManager.Controllers
             }
             return View("../UserAccount/Login");
         }
+
         public ActionResult ChangePassword(string userName)
         {
             try
@@ -263,7 +265,6 @@ namespace PsiCollaboratorManager.Controllers
 
             return RedirectToAction("Login", "UserAccount");
         }
-
         private ActionResult validatePasswordAndUpdate(string newPassword, IUserAccountFull userAccount, string viewName)
         {
             string messageError = null;

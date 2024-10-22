@@ -12,5 +12,7 @@ namespace PsiCollaborator.Data.Schedule
         List<ScheduleData> GetAllScheduleWorking();
         void Save(Schedule scheduleData);
         Schedule GetById(int scheduleid);
+        List<ScheduleCheckInStatus> GetAllScheduleCheckInStatus();
+        List<ScheduleCheckOutStatus> GetAllScheduleCheckOutStatus();
     }
 }

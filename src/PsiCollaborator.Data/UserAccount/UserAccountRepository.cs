@@ -43,7 +43,8 @@ namespace PsiCollaborator.Data.UserAccount
         }
         public bool CheckIfPasswordIsRecent(int userAccountId, string password)
         {
-            var lastPasswords = ExecuteListWithParameters<Password>("Select_User_Last_Passwords", new List<DbParameter>() { new DbParameter("param_useraccountid", ParameterDirection.Input, userAccountId) });
+            var lastPasswords = ExecuteListWithParameters<Password>("Select_User_Last_Passwords", new List<DbParameter>() 
+            { new DbParameter("param_useraccountid", ParameterDirection.Input, userAccountId) });
             foreach (var userPassword in lastPasswords)
             {
                 if (PBKDF2Converter.IsValidPassword(password, userPassword.PasswordHash))

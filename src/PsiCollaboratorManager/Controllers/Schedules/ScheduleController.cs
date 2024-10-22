@@ -5,6 +5,7 @@ using PsiCollaborator.Data.Schedule;
 using PsiCollaborator.Data.Schedule.ScheduleDay;
 using PsiCollaborator.Data.Schedule.WorkingDay;
 using PsiCollaboratorManager.Mapping;
+using PsiCollaboratorManager.Models.Attendance;
 using PsiCollaboratorManager.Models.Schedule;
 using System;
 using System.Collections.Generic;
@@ -150,17 +151,22 @@ namespace PsiCollaboratorManager.Controllers
             return Json(new { success = true, data = result }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult EditAssistance(Attendance attendData) 
+        public ActionResult EditAssistance(Attend attendData) 
         {
             try
             {
-                _attendRepository.Update(attendData);
-                return Json(new { success = true, message = "Datos guardados exitosamente" });
+            _attendRepository.Update(attendData);
+                return Json(new { success = true});
             }catch (Exception ex)
             {
                 return Json(new { success = false, message = "Error al guardar los datos", error = ex.Message });
-            }
-           
-        }    
+            }   
+        }
+
+        public ActionResult GetInformationAttendDatesRangeByCollaborator(int collaboratorId, DateTime beginTime, DateTime endTime)
+        {
+            List<Attend> assintance = _attendRepository.GetInformationAttendDatesRangeByCollaborator(collaboratorId, beginTime, endTime);
+            return Json(new { success = true, rows = assintance }, JsonRequestBehavior.AllowGet);
+        }        
     }
 }
