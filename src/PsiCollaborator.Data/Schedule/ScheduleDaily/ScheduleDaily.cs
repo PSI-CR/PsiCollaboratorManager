@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper.Configuration.Annotations;
+using System;
 
 namespace PsiCollaborator.Data.Schedule.ScheduleDaily
 {
@@ -9,5 +10,7 @@ namespace PsiCollaborator.Data.Schedule.ScheduleDaily
         public string DayName { get; set; }
         public DateTime BeginTime { get; set; }
         public DateTime EndTime { get; set; }
+        public string ExtraTime { get; set; }
+        public string PendingTime { get; set; }
     }
 }

@@ -8,7 +8,8 @@ namespace PsiCollaborator.Data.Schedule.WorkingDay
     {
         public int Delete(int WorkingDayId)
         {
-            return ExecuteSql("delete_working_day", new List<DbParameter>() { new DbParameter("param_working_day_id", ParameterDirection.Input, WorkingDayId) });
+            return ExecuteSql("delete_working_day", new List<DbParameter>() 
+            { new DbParameter("param_working_day_id", ParameterDirection.Input, WorkingDayId) });
         }
 
         public void Insert(IWorkingDay workingDay)
@@ -23,7 +24,14 @@ namespace PsiCollaborator.Data.Schedule.WorkingDay
 
         public WorkingDay GetById(int workingDayId)
         {
-            return ExecuteSingle<WorkingDay>("select_all_working_day_by_id", new List<DbParameter>(){ new DbParameter("param_workingdayid", ParameterDirection.Input, workingDayId)});
+            return ExecuteSingle<WorkingDay>("select_all_working_day_by_id", new List<DbParameter>()
+            { new DbParameter("param_workingdayid", ParameterDirection.Input, workingDayId)});
+        }
+
+        public WorkingDay GetByCollaboratorId(int collaboratorId)
+        {
+            return ExecuteSingle<WorkingDay>("select_workingday_by_collaboratorid", new List<DbParameter>()
+            { new DbParameter("param_collaboratorid", ParameterDirection.Input, collaboratorId)});
         }
     }
 }

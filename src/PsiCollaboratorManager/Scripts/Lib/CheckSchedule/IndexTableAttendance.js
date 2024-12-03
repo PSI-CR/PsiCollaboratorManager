@@ -1,655 +1,661 @@
-﻿$(document).ready(function () {
-    $("#jqGrid2").jqGrid({
-        url: '',
-        mtype: 'GET',
-        datatype: 'local',
-        colNames: [
-            'AttendId',
-            'CollaboratorId',
-            'CheckIn',
-            'CheckOut',
-            'ValCheckIn',
-            'Estado CheckIn',
-            'ValCheckOut',
-            'Estado CheckOut',
-            'Comentario CheckIn',
-            'Salida',
-            'Tiempo Total'
-        ],
-        colModel: [
-            { name: 'AttendId', index: 'AttendId', width: 80, align: 'center', hidden: true },
-            { name: 'CollaboratorId', index: 'CollaboratorId', width: 80, align: 'center', hidden: true },
-            { name: 'CheckIn', index: 'CheckIn', width: 190, align: 'center' },
-            { name: 'CheckOut', index: 'CheckOut', width: 190, align: 'center' },
-            { name: 'CheckInStatus', index: 'CheckInStatus', width: 100, align: 'center', hidden: true },
-            { name: 'CheckInStatusWork', index: 'CheckInStatusWork', width: 100, align: 'center' },
-            { name: 'CheckOutStatus', index: 'CheckOutStatus', width: 100, align: 'center', hidden: true },
-            { name: 'CheckOutStatusWork', index: 'CheckOutStatusWork', width: 100, align: 'center' },
-            { name: 'CommentCheckIn', index: 'CommentCheckIn', width: 200, align: 'center', editable: true },
-            { name: 'IsOpenCheckIn', index: 'IsOpenCheckIn', width: 100, align: 'center', editable: true },
-            { name: 'TotalTime', index: 'TotalTime', width: 120, align: 'center' }
-        ],
-        pager: '#jqGridPager2',
-        rowNum: 30,
-        rowList: [30, 40, 50],
-        sortorder: 'asc',
-        viewrecords: true,
-        gridview: true,
-        autoencode: true,
-        autowidth: true,
-        height: 'auto',
-        width: '100%',
-        loadonce: true,
-        toolbar: [true, "top"],
-        loadComplete: function () {
-            var grid = $(this);
-            var rows = grid.jqGrid('getDataIDs');
-            var totalMinutes = 0;
+﻿
+$("#jqGrid2").jqGrid({
+    url: '',
+    mtype: 'GET',
+    datatype: 'local',
+    colNames: [
+        'AttendId', 'CollaboratorId', 'CheckIn', 'CheckOut', 'ValCheckIn', 'Estado CheckIn',
+        'ValCheckOut', 'Estado CheckOut', 'Comentario CheckIn', 'Salida', 'Tiempo Total',
+        'Horas Extra', 'Horas Pendientes'
+    ],
+    colModel: [
+        { name: 'AttendId', index: 'AttendId', width: 80, align: 'center', hidden: true },
+        { name: 'CollaboratorId', index: 'CollaboratorId', width: 80, align: 'center', hidden: true },
+        { name: 'CheckIn', index: 'CheckIn', width: 190, align: 'center', formatter: formatDateTimeWithoutSeconds },
+        { name: 'CheckOut', index: 'CheckOut', width: 190, align: 'center', formatter: formatDateTimeWithoutSeconds },
+        { name: 'CheckInStatus', index: 'CheckInStatus', width: 100, align: 'center', hidden: true },
+        { name: 'CheckInStatusWork', index: 'CheckInStatusWork', width: 100, align: 'center' },
+        { name: 'CheckOutStatus', index: 'CheckOutStatus', width: 100, align: 'center', hidden: true },
+        { name: 'CheckOutStatusWork', index: 'CheckOutStatusWork', width: 100, align: 'center' },
+        { name: 'CommentCheckIn', index: 'CommentCheckIn', width: 200, align: 'center', editable: true },
+        { name: 'IsOpenCheckIn', index: 'IsOpenCheckIn', width: 100, align: 'center', editable: true },
+        { name: 'TotalTime', index: 'TotalTime', width: 120, align: 'center' },
+        { name: 'HorasExtra', index: 'HorasExtra', width: 120, align: 'center' },
+        { name: 'HorasPendientes', index: 'HorasPendientes', width: 120, align: 'center' },
+    ],
+    pager: '#jqGridPager2',
+    rowNum: 30,
+    rowList: [30, 40, 50],
+    sortorder: 'asc',
+    viewrecords: true,
+    gridview: true,
+    autoencode: true,
+    autowidth: true,
+    height: 'auto',
+    width: '100%',
+    loadonce: true,
+    subGrid: true,
 
-            rows.forEach(function (rowId) {
-                var rowData = grid.jqGrid('getRowData', rowId);
+    subGridRowExpanded: function (subgridId, rowId) {
+        var subgridTableId = subgridId + "_t";
+        var rowData = $("#jqGrid2").jqGrid('getRowData', rowId);
 
-                // Obtener CheckIn y CheckOut
-                var checkIn = rowData.CheckIn;
-                var checkOut = rowData.CheckOut;
+        $("#" + subgridId).html("<table id='" + subgridTableId + "' class='scroll'></table>");
 
-                // Función para convertir una fecha en formato 'dd/MM/yyyy HH:mm:ss' a un objeto Date
-                function parseDateTime(dateTimeStr) {
-                    var dateParts = dateTimeStr.split(' ')[0].split('/');
-                    var timeParts = dateTimeStr.split(' ')[1].split(':');
-                    return new Date(
-                        dateParts[2],
-                        dateParts[1] - 1,
-                        dateParts[0],
-                        timeParts[0],
-                        timeParts[1],
-                        timeParts[2]
-                    );
-                }
+        $("#" + subgridTableId).jqGrid({
+            datatype: 'local',
+            colNames: ['CheckIn', 'CheckOut', 'Estado CheckIn', 'Estado CheckOut', 'Comentario'],
+            colModel: [
+                { name: 'CheckIn', index: 'CheckIn', width: 150, formatter: formatDateTimeWithoutSeconds },
+                { name: 'CheckOut', index: 'CheckOut', width: 150, formatter: formatDateTimeWithoutSeconds },
+                { name: 'CheckInStatusWork', index: 'CheckInStatusWork', width: 100 },
+                { name: 'CheckOutStatusWork', index: 'CheckOutStatusWork', width: 100 },
+                { name: 'CommentCheckIn', index: 'CommentCheckIn', width: 200 }
+            ],
+            height: '100%',
+            autowidth: true,
+            rownumbers: true,
+            gridview: true,
+            viewrecords: true
+        });
 
-                // Validar y convertir los formatos de CheckIn y CheckOut
-                var checkInDateTime = checkIn ? parseDateTime(checkIn) : null;
-                var checkOutDateTime = checkOut ? parseDateTime(checkOut) : null;
+        // Filtrar registros para el día correspondiente
+        var dayRecords = [];
+        var rows = $("#jqGrid2").jqGrid('getDataIDs');
+        rows.forEach(function (id) {
+            var data = $("#jqGrid2").jqGrid('getRowData', id);
+            if (data.CheckIn.split(' ')[0] === rowData.CheckIn.split(' ')[0]) {
+                dayRecords.push(data);
+            }
+        });
+        // Agregar los datos filtrados al subgrid
+        for (var i = 0; i < dayRecords.length; i++) {
+            $("#" + subgridTableId).jqGrid('addRowData', i + 1, dayRecords[i]);
+        }
+    },
 
-                if (checkInDateTime && checkOutDateTime && !isNaN(checkInDateTime) && !isNaN(checkOutDateTime)) {
-                    // Calcular la diferencia entre check-in y check-out
-                    var differenceInMilliseconds = checkOutDateTime - checkInDateTime;
-                    var differenceInMinutes = Math.floor(differenceInMilliseconds / (1000 * 60));
-                    var hours = Math.floor(differenceInMinutes / 60);
-                    var minutes = differenceInMinutes % 60;
-                    var totalTime = hours + 'h ' + minutes + 'm';
+    ondblClickRow: function (rowId, iRow, iCol, e) {
+        openEditModal(rowId);
+    },
+    subGridOptions:
+    {
+        plusicon: "ui-icon-triangle-1-e",
+        minusicon: "ui-icon-triangle-1-s",
+        openicon: "ui-icon-arrowreturn-1-e"
+    },
 
-                    // Establecer el valor de la celda TotalTime
-                    grid.jqGrid('setCell', rowId, 'TotalTime', totalTime);
-                    totalMinutes += differenceInMinutes;
-                } else {
-                    // Si no hay CheckIn o CheckOut, establece '0h 0m'
-                    grid.jqGrid('setCell', rowId, 'TotalTime', '0h 0m');
-                }
+    loadComplete: function () {
+        var grid = $(this);
+        var rows = grid.jqGrid('getDataIDs');
+        var groupedByDay = new Map();
+
+        var totalWorkedMinutes = 0;
+        var totalExtraMinutes = 0;
+        var totalMissingMinutes = 0;
+
+        rows.forEach(function (rowId) {
+            var rowData = grid.jqGrid('getRowData', rowId);
+            var checkInDate = rowData.CheckIn.split(' ')[0];
+
+            if (!groupedByDay.has(checkInDate)) {
+                groupedByDay.set(checkInDate, []);
+            }
+            groupedByDay.get(checkInDate).push(rowId);
+        });
+
+        // Promesas globales para todos los días
+        var globalPromises = [];
+
+        groupedByDay.forEach(function (rowIds, date) {
+            let dayTotalWorkedMinutes = 0;
+            let dayTotalExtraMinutes = 0;
+            let dayTotalMissingMinutes = 0;
+
+            let dayPromises = rowIds.map(function (rowId) {
+                return new Promise(function (resolve) {
+                    getScheduleCalculateHoursExtraDaily(rowId, grid)
+                        .then(function (result) {
+                            // Sumar los minutos por día
+                            dayTotalWorkedMinutes += result.totalMinutes;
+                            dayTotalExtraMinutes += result.extraMinutes;
+                            dayTotalMissingMinutes += result.missingMinutes;
+
+                            // Determinar el color según las condiciones para cada registro
+                            if (result.missingMinutes > 0) {
+                                grid.jqGrid('setRowData', rowId, false, { 'background-color': '#ffcccc' }); // Rojo
+                            } else if (result.extraMinutes > 0) {
+                                grid.jqGrid('setRowData', rowId, false, { 'background-color': '#ccffcc' }); // Verde
+                            }
+
+                            resolve();
+                        })
+                        .catch(function (error) {
+                            console.log('Error en el cálculo de horas:', error);
+                            resolve();
+                        });
+                });
             });
 
-            // Cálculo del total de horas
-            var totalHours = Math.floor(totalMinutes / 60);
-            var remainingMinutes = totalMinutes % 60;
-            var totalTimeSum = totalHours + 'h ' + remainingMinutes + 'm';
-            $('#totalTimeTextbox').val(totalTimeSum);
-        }
+            let dayPromise = Promise.all(dayPromises).then(function () {
+                var dateParts = date.split('/');
+                var day = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+                var dayId = (day.getDay() + 6) % 7 + 2;
+
+                // Obtener datos de la primera fila del día
+                if (rowIds.length > 0) {
+                    var firstRowId = rowIds[0];
+                    var firstRowData = grid.jqGrid('getRowData', firstRowId);
+                    var collaboratorId = firstRowData.CollaboratorId;
+
+                    // Llamar la función AJAX con CollaboratorId
+                    consultarHorasExtraPendientes(dayTotalWorkedMinutes, dayId, collaboratorId, firstRowId)
+                        .then(function (response) {
+                            // Actualizar totales en la primera fila
+                            grid.jqGrid('setCell', firstRowId, 'TotalTime', convertirMinutosAHoras(dayTotalWorkedMinutes));
+                            grid.jqGrid('setCell', firstRowId, 'HorasExtra', response.data.ExtraTime); // Actualiza con el resultado del AJAX
+                            grid.jqGrid('setCell', firstRowId, 'HorasPendientes', response.data.PendingTime); // Actualiza con el resultado del AJAX
+
+                            // Determinar el color de la primera fila
+                            if (response.data.PendingTime !== '0h 0m') {
+                                grid.jqGrid('setRowData', firstRowId, false, { 'background-color': '#ffcccc' }); // Rojo
+                            } else if (response.data.ExtraTime !== '0h 0m') {
+                                grid.jqGrid('setRowData', firstRowId, false, { 'background-color': '#ccffcc' }); // Verde
+                            }
+                        })
+                        .catch(function (error) {
+                            console.error('Error al consultar horas extra y pendientes:', error);
+                        });
+                }
+
+                // Ocultar las filas restantes del día
+                rowIds.slice(1).forEach(function (rowId) {
+                    grid.jqGrid('setRowData', rowId, false, { display: 'none' });
+                });
+                // Sumar los totales generales
+                totalWorkedMinutes += dayTotalWorkedMinutes;
+                totalExtraMinutes += dayTotalExtraMinutes;
+                totalMissingMinutes += dayTotalMissingMinutes;
+            });
+            globalPromises.push(dayPromise);
+        });
+
+        Promise.all(globalPromises).then(function () {
+            actualizarTotalesGenerales(grid);
+
+        });
+    }
+});
+
+// Function to update general totals
+function actualizarTotalesGenerales(grid) {
+    // Variables para acumular los minutos
+    let totalWorkedMinutes = 0;
+    let totalExtraMinutes = 0;
+    let totalMissingMinutes = 0;
+
+    // Obtener todas las filas visibles del grid
+    const rows = grid.jqGrid('getDataIDs');
+    rows.forEach(rowId => {
+        const rowData = grid.jqGrid('getRowData', rowId);
+
+        // Convertir los valores de las celdas a minutos
+        totalWorkedMinutes += parseMinutesFromFormattedTime(rowData.TotalTime);
+        totalExtraMinutes += parseMinutesFromFormattedTime(rowData.HorasExtra);
+        totalMissingMinutes += parseMinutesFromFormattedTime(rowData.HorasPendientes);
     });
 
-    $("#filterButton").click(function () {
-        var gridData = $('#jqGrid2').jqGrid('getRowData');
-        if (gridData.length === 0) {
-            new Messi('Por favor seleccione los datos de un colaborador, para filtrar los datos.', {
-                title: 'Error',
-                titleClass: 'anim error',
-                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
-            });
-        }
+    // Actualizar los campos HTML con los totales en formato horas:minutos
+    $('#totalTimeTextbox').val(convertirMinutosAHoras(totalWorkedMinutes));
+    $('#totalExtraTextbox').val(convertirMinutosAHoras(totalExtraMinutes));
+    $('#totalFailTextbox').val(convertirMinutosAHoras(totalMissingMinutes));
+}
 
-        var collaboratorId = gridData[0].CollaboratorId;
-        var beginDate = $('#beginDate').val();
-        var endDate = $('#endDate').val();
-
-        if (!beginDate || !endDate) {
-            new Messi('Por favor ingresa ambas fechas.', {
-                title: 'Selección de fechas',
-                titleClass: 'anim warning',
-                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
-            });
-        }
-
-        var startDateObj = new Date(beginDate);
-        var endDateObj = new Date(endDate);
-
-        if (endDateObj < startDateObj) {
-            new Messi('La fecha final no puede ser anterior a la fecha inicial.', {
-                title: 'Error en las fechas',
-                titleClass: 'anim error',
-                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
-            });
-        }
+function consultarHorasExtraPendientes(totalMinutes, dayId, collaboratorId, rowId) {
+    return new Promise(function (resolve, reject) {
         $.ajax({
-            url: '/Schedule/GetInformationAttendDatesRangeByCollaborator',
-            type: 'GET',
-            data: {
-                CollaboratorId: collaboratorId,
-                BeginTime: beginDate,
-                EndTime: endDate
-            },
+            url: '/CheckSchedule/CalculateSchedule',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                totalMinutes: totalMinutes,
+                dayId: dayId,
+                collaboratorId: collaboratorId
+            }),
             success: function (response) {
-                console.log(response);
                 if (response.success) {
-                    $('#jqGrid2').jqGrid('clearGridData');
-                    var formattedRows = response.rows.map(function (row) {
-                        return {
-                            ...row,
-                            CheckIn: formatDate(row.CheckIn),
-                            CheckOut: formatDate(row.CheckOut),
-                            IsOpenCheckIn: row.IsOpenCheckIn ? 'Sí' : 'No',
-                            CheckInStatusWork: row.LabelCheckInStatus,
-                            CheckOutStatusWork: row.LabelCheckOutStatus
-                        };
-                    });
-
-                    // Cargar los nuevos datos
-                    $('#jqGrid2').jqGrid('setGridParam', {
-                        datatype: 'jsonstring',
-                        datastr: formattedRows
-                    }).trigger('reloadGrid');
+                    resolve(response);
                 } else {
-                    new Messi('Error al filtrar los datos: ' + response.error, { title: 'Error' });
+                    reject('Error al obtener los datos: ' + response.message);
                 }
             },
-            error: function (xhr, status, error) {
-                new Messi('Error al realizar la consulta: ' + error, { title: 'Error' });
+            error: function (error) {
+                reject('Error en la consulta AJAX: ' + error);
             }
         });
     });
+}
 
-    function formatDate(dateString) {
-        var date = new Date(parseInt(dateString.substr(6))); // Convierte el valor de '/Date(...)' a un objeto Date
-        var day = ('0' + date.getDate()).slice(-2); // Asegura dos dígitos para el día
-        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Asegura dos dígitos para el mes
-        var year = date.getFullYear();
-        var hours = ('0' + date.getHours()).slice(-2); // Asegura dos dígitos para las horas
-        var minutes = ('0' + date.getMinutes()).slice(-2); // Asegura dos dígitos para los minutos
-        var seconds = ('0' + date.getSeconds()).slice(-2); // Asegura dos dígitos para los segundos
+//// Función para convertir minutos a formato horas y minutos
+function convertirMinutosAHoras(minutos) {
+    const horas = Math.floor(minutos / 60);
+    const minutosRestantes = minutos % 60;
+    return `${horas}h ${minutosRestantes} m`;
+}
 
-        /* return ${ day } /${month}/${ year } ${ hours }:${ minutes }:${ seconds };*/
-        return day + '/' + month + '/' + year + ' ' + hours + ':' + minutes /*+ ':' + seconds*/;
-    }
+function parseMinutesFromFormattedTime(formattedTime) {
+    if (!formattedTime || formattedTime === '0h 0m') return 0;
+    const [hours, minutes] = formattedTime
+        .replace('h', '')
+        .replace('m', '')
+        .trim()
+        .split(' ')
+        .map(Number);
+    return (hours || 0) * 60 + (minutes || 0);
+}
 
-    $("#jqGrid2").jqGrid('filterToolbar', { searchOperators: false, searchOnEnter: false, defaultSearch: "cn" });
-    $("#jqGrid2").jqGrid('setGridParam', {
-
-        ondblClickRow: function (rowId) {
-            var rowData = $("#jqGrid2").jqGrid('getRowData', rowId);
-
-            var checkInDateTime = rowData.CheckIn;
-            var checkInDate = checkInDateTime.split(' ')[0];
-
-            // Convertir a formato 'YYYY-MM-DD'
-            var dateParts = checkInDate.split('/');
-            var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-            // Obtiene el valor 
-            var checkInTime = checkInDateTime.split(' ')[1];
-
-            var checkOutDateTime = rowData.CheckOut;
-            var checkOutDate = checkOutDateTime.split(' ')[0];
-
-            // Convertir a formato 'YYYY-MM-DD'
-            var dateOutParts = checkOutDate.split('/');
-            var formattedDateOut = dateOutParts[2] + '-' + dateOutParts[1] + '-' + dateOutParts[0];
-
-            // Obtiene el valor 
-            var checkOutTime = checkOutDateTime.split(' ')[1];
-
-            $('#checkin-date').val(formattedDate);
-            $('#checkin-time').val(checkInTime);
-            $('#checkout-date').val(formattedDateOut);
-            $('#checkout-time').val(checkOutTime);
-            $('#checkinstatuswork').val(rowData.CheckInStatus);
-            $('#checkoutstatuswork').val(rowData.CheckOutStatus);
-            $('#commentcheckin').val(rowData.CommentCheckIn);
-            $('#attendanceid').val(rowData.AttendId);
-            $('#collaboratorid').val(rowData.CollaboratorId);
-            $('#isopencheckin').prop('checked', rowData.IsOpenCheckIn === 'Sí');
-            OpenModal('EditAssistanceModal');
-        }
+$("#jqGrid2").jqGrid('filterToolbar',
+    {
+        searchOperators: false,
+        searchOnEnter: false,
+        defaultSearch: "cn"
     });
 
-    $("#jqGrid2").jqGrid('navGrid', '#jqGridPager2', { edit: false, add: false, del: false });
-    $("#CheckScheduleEditButton").click(function () {
-        var checkInDate = $('#checkin-date').val();
-        var checkInTime = $('#checkin-time').val();
-        var checkInDateTime = checkInDate && checkInTime ? checkInDate + 'T' + checkInTime : null;
+// Función para abrir el modal y cargar los datos seleccionados
+function openEditModal(rowId) {
+    var rowData = $("#jqGrid2").jqGrid('getRowData', rowId);
+    setModalFields(rowData);
+    OpenModal('EditAssistanceModal');
+}
 
-        var checkOutDate = $('#checkout-date').val();
-        var checkOutTime = $('#checkout-time').val();
-        var checkOutDateTime = checkOutDate && checkOutTime ? checkOutDate + 'T' + checkOutTime : null;
+// Función para configurar los datos en el modal
+function setModalFields(rowData) {
+    const [formattedDate, checkInTime] = formatDateTime(rowData.CheckIn);
+    const [formattedDateOut, checkOutTime] = formatDateTime(rowData.CheckOut);
 
-        var attendData = {
-            AttendanceId: $('#attendanceid').val(),
-            CollaboratorId: $('#collaboratorid').val(),
-            CheckIn: checkInDateTime,
-            CheckOut: checkOutDateTime,
-            CheckInStatus: $('#checkinstatuswork').val(),
-            CheckOutStatus: $('#checkoutstatuswork').val(),
-            CommentCheckIn: $('#commentcheckin').val(),
-            IsOpenCheckIn: $('#isopencheckin').is(':checked')
-        };
+    $('#checkin-date').val(formattedDate);
+    $('#checkin-time').val(checkInTime);
+    $('#checkout-date').val(formattedDateOut);
+    $('#checkout-time').val(checkOutTime);
+    $('#checkinstatuswork').val(rowData.CheckInStatus);
+    $('#checkoutstatuswork').val(rowData.CheckOutStatus);
+    $('#commentcheckin').val(rowData.CommentCheckIn);
+    $('#attendanceid').val(rowData.AttendId);
+    $('#collaboratorid').val(rowData.CollaboratorId);
+    $('#isopencheckin').prop('checked', rowData.IsOpenCheckIn === 'Sí');
+}
 
+// Función para formatear fecha y hora
+function formatDateTime(dateTime) {
+    const [date, time] = dateTime.split(' ');
+    const [day, month, year] = date.split('/');
+    return [`${year}-${month}-${day}`, time];
+}
+
+// Función para calcular horas extras y faltantes
+function calculateTotalHours(rows, grid) {
+    let totalExtraMinutes = 0;
+    let totalMissingMinutes = 0;
+
+    rows.forEach(rowId => {
+        const { extraMinutes, missingMinutes } = getScheduleCalculateHoursExtraDaily(rowId, grid);
+        totalExtraMinutes += extraMinutes;
+        totalMissingMinutes += missingMinutes;
+    });
+
+    $('#totalExtraHoursTextbox').val(convertirMinutosAHoras(totalExtraMinutes));
+    $('#totalMissingHoursTextbox').val(convertirMinutosAHoras(totalMissingMinutes));
+}
+
+function getScheduleCalculateHoursExtraDaily(rowId, grid) {
+    const rowData = grid.jqGrid('getRowData', rowId);
+    const checkInTime = parseDateTime(rowData.CheckIn);
+    const checkOutTime = parseDateTime(rowData.CheckOut);
+
+    if (!checkInTime || !checkOutTime) {
+        grid.jqGrid('setCell', rowId, 'TotalTime', '0h 0m');
+        grid.jqGrid('setCell', rowId, 'HorasExtra', '0h 0m');
+        grid.jqGrid('setCell', rowId, 'HorasPendientes', '0h 0m');
+        return Promise.resolve({ totalMinutes: 0, extraMinutes: 0, missingMinutes: 0 });
+    }
+
+    return getCollaboratorSchedule(rowData.CollaboratorId)
+        .then(scheduleWithMinutes => {
+            let minutesWorkedForDay = 0;
+
+            scheduleWithMinutes.forEach(schedule => {
+                if (schedule.ScheduleDailyId === checkInTime.getDay()) {
+                    minutesWorkedForDay = schedule.MinutesWorked;
+                }
+            });
+
+            const totalMinutes = calculateMinutesBetween(checkInTime, checkOutTime);
+            const extraMinutes = totalMinutes > minutesWorkedForDay ? totalMinutes - minutesWorkedForDay : 0;
+            const missingMinutes = totalMinutes < minutesWorkedForDay ? minutesWorkedForDay - totalMinutes : 0;
+
+            return { totalMinutes, extraMinutes, missingMinutes };
+        })
+        .catch(error => {
+            console.log('Error:', error);
+            return { totalMinutes: 0, extraMinutes: 0, missingMinutes: 0 };
+        });
+}
+
+
+// Función para convertir minutos a formato horas y minutos
+function convertirMinutosAHoras(minutos) {
+    const horas = Math.floor(minutos / 60);
+    const minutosRestantes = minutos % 60;
+    return `${horas}h ${minutosRestantes} m`;
+}
+
+
+// Función para convertir fecha y hora en formato dd/mm/yyyy hh:mm a un objeto Date
+function parseDateTime(dateTimeStr) {
+    if (!dateTimeStr) return null;
+    const [datePart, timePart] = dateTimeStr.split(' ');
+    if (!datePart || !timePart) {
+        return null;
+    }
+
+    const [day, month, year] = datePart.split('/').map(Number);
+    const [hours, minutes] = timePart.split(':').map(Number);
+
+    if (isNaN(day) || isNaN(month) || isNaN(year) || isNaN(hours) || isNaN(minutes)) {
+        return null;
+    }
+    return new Date(year, month - 1, day, hours, minutes);
+}
+
+// Función para calcular la diferencia en minutos
+function calculateMinutesBetween(startTime, endTime, round = 'down') {
+    const diffInMs = endTime - startTime;
+    const minutes = diffInMs / 60000;
+
+    if (round === 'up') {
+        return Math.ceil(minutes);
+    }
+
+    if (round === 'down') {
+        return Math.floor(minutes);
+    }
+    return Math.round(minutes);
+}
+
+function formatDateTimeWithoutSeconds(cellValue) {
+    if (cellValue) {
+        var dateTimeParts = cellValue.split(' ');
+        var dateParts = dateTimeParts[0].split('/');
+        var timeParts = dateTimeParts[1].split(':');
+        var formattedDate = dateParts[0] + '/' + dateParts[1] + '/' + dateParts[2];
+        var formattedTime = timeParts[0] + ':' + timeParts[1];
+        return formattedDate + ' ' + formattedTime;
+    }
+    return cellValue;
+}
+
+//------------------------------------------------------------------------------------//
+
+function getCollaboratorSchedule(collaboratorId) {
+    return new Promise((resolve, reject) => {
         $.ajax({
-            url: '/Schedule/EditAssistance',
+            url: '/CheckSchedule/GetScheduleDaily',
             type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(attendData),
+            data: { collaboratorId: collaboratorId },
             success: function (response) {
                 if (response.success) {
-                    new Messi(response.message, {
-                        title: 'Éxito',
-                        titleClass: 'anim success',
-                        buttons: [{ id: 0, label: 'Aceptar', val: 'X' }],
-                        callback: function () {
-                            $("#refreshButton").click();
-                        }
-                    });
+                    var schedule = response.data;
+                    var scheduleWithMinutes = calculateWorkMinutes(schedule);
+                    resolve(scheduleWithMinutes);
                 } else {
-                    new Messi(response.message + ': ' + response.error, {
-                        title: 'Error',
-                        titleClass: 'anim error',
-                        buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
-                    });
+                    alert("No se pudo obtener el horario del colaborador.");
+                    reject("Error al obtener el horario");
                 }
             },
             error: function (xhr, status, error) {
-                new Messi('Error al guardar los datos: ' + error, {
+                console.log("Error al obtener el horario: " + error);
+                reject(error);
+            }
+        });
+    });
+}
+
+// Función para calcular los minutos trabajados por cada día
+function calculateWorkMinutes(schedule) {
+    return schedule.map(function (day) {
+        // Convertir las fechas de BeginTime y EndTime a objetos Date
+        var beginTime = new Date(parseInt(day.BeginTime.replace('/Date(', '').replace(')/', '')));
+        var endTime = new Date(parseInt(day.EndTime.replace('/Date(', '').replace(')/', '')));
+        var minutesWorked = (endTime - beginTime) / 60000;
+
+        // Retornar el objeto con el ScheduleDailyId y los minutos calculados
+        return {
+            ScheduleDailyId: day.ScheduleDailyId,
+            DayId: day.DayId,
+            DayName: day.DayName,
+            MinutesWorked: minutesWorked
+        };
+    });
+}
+
+function getDailyTotals(grid) {
+    // Obtener todos los registros del grid
+    const rows = grid.jqGrid('getRowData');
+
+    // Agrupar los registros por fecha (usamos solo la fecha, no la hora)
+    const groupedByDay = {};
+
+    rows.forEach(row => {
+        const checkInTime = parseDateTime(row.CheckIn);
+        if (!checkInTime) return; // Saltar registros con fechas inválidas
+        const dayKey = checkInTime.toISOString().split('T')[0]; // Usamos solo la fecha (YYYY-MM-DD)
+
+        if (!groupedByDay[dayKey]) {
+            groupedByDay[dayKey] = {
+                totalMinutes: 0,
+                extraMinutes: 0,
+                missingMinutes: 0,
+                rowIds: []
+            };
+        }
+
+        // Acumular los totales
+        const totalMinutes = parseMinutesFromFormattedTime(row.TotalTime);
+        const extraMinutes = parseMinutesFromFormattedTime(row.HorasExtra);
+        const missingMinutes = parseMinutesFromFormattedTime(row.HorasPendientes);
+
+        groupedByDay[dayKey].totalMinutes += totalMinutes;
+        groupedByDay[dayKey].extraMinutes += extraMinutes;
+        groupedByDay[dayKey].missingMinutes += missingMinutes;
+        groupedByDay[dayKey].rowIds.push(row.id);
+    });
+
+    // Actualizar el primer registro de cada día con los totales
+    Object.keys(groupedByDay).forEach(dayKey => {
+        const group = groupedByDay[dayKey];
+
+        // Obtener el primer registro del día
+        const firstRowId = group.rowIds[0];
+        grid.jqGrid('setCell', firstRowId, 'TotalTime', convertirMinutosAHoras(group.totalMinutes));
+        grid.jqGrid('setCell', firstRowId, 'HorasExtra', convertirMinutosAHoras(group.extraMinutes));
+        grid.jqGrid('setCell', firstRowId, 'HorasPendientes', convertirMinutosAHoras(group.missingMinutes));
+
+        // Si hay más registros para el mismo día, ocultarlos
+        group.rowIds.slice(1).forEach(rowId => {
+            grid.jqGrid('setRowData', rowId, false, { display: 'none' });
+        });
+    });
+}
+
+/*$("#jqGrid2").jqGrid('navGrid', '#jqGridPager2', { edit: false, add: false, del: false });*/
+$("#CheckScheduleEditButton").click(function () {
+    var checkInDate = $('#checkin-date').val();
+    var checkInTime = $('#checkin-time').val();
+    var checkInDateTime = checkInDate && checkInTime ? checkInDate + 'T' + checkInTime : null;
+    var checkOutDate = $('#checkout-date').val();
+    var checkOutTime = $('#checkout-time').val();
+    var checkOutDateTime = checkOutDate && checkOutTime ? checkOutDate + 'T' + checkOutTime : null;
+
+    var attendData = {
+        AttendanceId: $('#attendanceid').val(),
+        CollaboratorId: $('#collaboratorid').val(),
+        CheckIn: checkInDateTime,
+        CheckOut: checkOutDateTime,
+        CheckInStatus: $('#checkinstatuswork').val(),
+        CheckOutStatus: $('#checkoutstatuswork').val(),
+        CommentCheckIn: $('#commentcheckin').val(),
+        IsOpenCheckIn: $('#isopencheckin').is(':checked')
+    };
+
+    $.ajax({
+        url: '/Schedule/EditAssistance',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(attendData),
+        success: function (response) {
+            if (response.success) {
+                new Messi(response.message, {
+                    title: 'Éxito',
+                    titleClass: 'anim success',
+                    buttons: [{ id: 0, label: 'Aceptar', val: 'X' }],
+                    callback: function () {
+                        $("#refreshTable").click();
+                    }
+                });
+            } else {
+                new Messi(response.message + ': ' + response.error, {
                     title: 'Error',
                     titleClass: 'anim error',
                     buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
                 });
             }
-        });
+        },
+        error: function (xhr, status, error) {
+            new Messi('Error al guardar los datos: ' + error, {
+                title: 'Error',
+                titleClass: 'anim error',
+                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+            });
+        }
     });
+})
 
-    $("#refreshButton").click(function () {
-        var gridData = $('#jqGrid2').jqGrid('getRowData');
-        var collaboratorId = gridData[0].CollaboratorId;
+$("#refreshTable").click(function () {
+    var gridData = $('#jqGrid2').jqGrid('getRowData');
+    var collaboratorId = gridData[0]?.CollaboratorId; // Validar que haya datos
 
-        $.ajax({
-            url: '/Schedule/GetAssistanceByCollaborator/',
-            type: 'GET',
-            data: { collaboratorId: collaboratorId },
-            dataType: 'json',
-            success: function (response) {
-                $("#jqGrid2").jqGrid('clearGridData');
-                var collaboratorName = 'Sin registros';
-                var collaboratorPicture = '/Images/DefaultCollaborator.jpg';
+    $.ajax({
+        url: '/Schedule/GetAssistanceByCollaborator/',
+        type: 'GET',
+        data: { collaboratorId: collaboratorId },
+        dataType: 'json',
+        success: function (response) {
+            $("#jqGrid2").jqGrid('clearGridData');
+            var collaboratorName = 'Sin registros';
+            var collaboratorPicture = '/Images/DefaultCollaborator.jpg';
 
-                console.log(response);
+            console.log(response);
 
-                if (response.success && response.data) {
-                    collaboratorName = response.data.Firstname + ' ' + response.data.Lastname;
-                    collaboratorPicture = response.data.Picture;
+            if (response.success && response.data) {
+                collaboratorName = response.data.Firstname + ' ' + response.data.Lastname;
+                collaboratorPicture = response.data.Picture;
 
-                    if (response.data.AttendModels && response.data.AttendModels.length > 0) {
-                        response.data.AttendModels.forEach(function (item) {
-                            item.IsOpenCheckIn = item.IsOpenCheckIn ? 'Sí' : 'No';
-                        });
+                if (response.data.AttendModels && response.data.AttendModels.length > 0) {
+                    response.data.AttendModels.forEach(function (item) {
+                        item.IsOpenCheckIn = item.IsOpenCheckIn ? 'Sí' : 'No';
+                    });
 
-                        $("#jqGrid2").jqGrid('setGridParam', { data: response.data.AttendModels });
-                        $("#jqGrid2").trigger('reloadGrid');
-                    }
+                    $("#jqGrid2").jqGrid('setGridParam', { data: response.data.AttendModels });
                 }
-                $('#SectionHeaderTitle').text(collaboratorName);
-                $('#SectionHeaderPicture').attr('src', collaboratorPicture);
-            },
-            error: function () {
-                alert('Ocurrió un error al intentar obtener los datos del colaborador.');
             }
-        });
-    });
 
+            // Actualizar encabezado de la sección
+            $('#SectionHeaderTitle').text(collaboratorName);
+            $('#SectionHeaderPicture').attr('src', collaboratorPicture);
+
+            // Ejecutar la recarga del grid y automáticamente activar loadComplete
+            $("#jqGrid2").trigger('reloadGrid');
+        },
+        error: function () {
+            alert('Ocurrió un error al intentar obtener los datos del colaborador.');
+        }
+    });
 });
 
-//$(document).ready(function () {
+$(document).ready(function () {
+    function applyDateFilter() {
+        const beginDate = $("#beginDate").val();
+        const endDate = $("#endDate").val();
 
-//    $("#jqGrid2").jqGrid({
-//        url: '',  // No necesitas url porque lo llenas dinámicamente
-//        mtype: 'GET',
-//        datatype: 'local',
-//        colNames: [
-//            'AttendId',
-//            'CollaboratorId',
-//            'CheckIn',
-//            'CheckOut',
-//            'ValCheckIn',
-//            'Estado CheckIn',
-//            'ValCheckOut',
-//            'Estado CheckOut',
-//            'Comentario CheckIn',
-//            'Salida',
-//            'Tiempo Total',
-//            'Horas Extra',   // Nueva columna para horas extra
-//            'Tiempo Faltante' // Nueva columna para tiempo faltante
-//        ],
-//        colModel: [
-//            { name: 'AttendId', index: 'AttendId', width: 80, align: 'center', hidden: true },
-//            { name: 'CollaboratorId', index: 'CollaboratorId', width: 80, align: 'center', hidden: true },
-//            { name: 'CheckIn', index: 'CheckIn', width: 190, align: 'center' },
-//            { name: 'CheckOut', index: 'CheckOut', width: 190, align: 'center' },
-//            { name: 'CheckInStatus', index: 'CheckInStatus', width: 100, align: 'center', hidden: true },
-//            { name: 'CheckInStatusWork', index: 'CheckInStatusWork', width: 100, align: 'center' },
-//            { name: 'CheckOutStatus', index: 'CheckOutStatus', width: 100, align: 'center', hidden: true },
-//            { name: 'CheckOutStatusWork', index: 'CheckOutStatusWork', width: 100, align: 'center' },
-//            { name: 'CommentCheckIn', index: 'CommentCheckIn', width: 200, align: 'center', editable: true },
-//            { name: 'IsOpenCheckIn', index: 'IsOpenCheckIn', width: 100, align: 'center', editable: true },
-//            { name: 'TotalTime', index: 'TotalTime', width: 120, align: 'center' },
-//            { name: 'ExtraTime', index: 'ExtraTime', width: 120, align: 'center' },  // Columna para horas extra
-//            { name: 'MissingTime', index: 'MissingTime', width: 120, align: 'center' } // Columna para tiempo faltante
-//        ],
-//        pager: '#jqGridPager2',
-//        rowNum: 30,
-//        rowList: [30, 40, 50],
-//        sortorder: 'asc',
-//        viewrecords: true,
-//        gridview: true,
-//        autoencode: true,
-//        autowidth: true,
-//        height: 'auto',
-//        width: '100%',
-//        loadonce: true,
-//        toolbar: [true, "top"],
-//        loadComplete: function () {
-//            var grid = $(this);
-//            var rows = grid.jqGrid('getDataIDs');
-//            var totalMinutes = 0;
+        if (!beginDate && !endDate) {
+            var dialog = new Messi('Por favor, seleccione un rango de fechas para filtrar.',
+                {
+                    title: 'Seleccione fechas',
+                    titleClass: 'anim warning',
+                    buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+                }
+            );
+            return;
+        }
 
-//            rows.forEach(function (rowId) {
-//                var rowData = grid.jqGrid('getRowData', rowId);
+        if (!beginDate || !endDate) {
+            var dialog = new Messi('Por favor, seleccione ambas fechas',
+                {
+                    title: 'Seleccione fechas',
+                    titleClass: 'anim warning',
+                    buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+                }
+            );
+            return;
+        }
 
-//                // Obtener CheckIn y CheckOut
-//                var checkIn = rowData.CheckIn;
-//                var checkOut = rowData.CheckOut;
+        if (new Date(endDate) < new Date(beginDate)) {
+            var dialog = new Messi(
+                "La fecha final no puede ser menor a la fecha inicial. \nPor favor, seleccione fechas válidas.",
+                {
+                    title: "Seleccione fechas",
+                    titleClass: "anim warning",
+                    buttons: [{ id: 0, label: "Cerrar", val: "X" }]
+                }
+            );
+            return;
+        }
 
-//                // Función para convertir una fecha en formato 'dd/MM/yyyy HH:mm:ss' a un objeto Date
-//                function parseDateTime(dateTimeStr) {
-//                    var dateParts = dateTimeStr.split(' ')[0].split('/');
-//                    var timeParts = dateTimeStr.split(' ')[1].split(':');
-//                    return new Date(
-//                        dateParts[2],
-//                        dateParts[1] - 1,
-//                        dateParts[0],
-//                        timeParts[0],
-//                        timeParts[1],
-//                        timeParts[2]
-//                    );
-//                }
+       const formatDate = (date) => {
+    const [year, month, day] = date.split("-");
+    return `${day}-${month}-${year}`;
+};
 
-//                // Validar y convertir los formatos de CheckIn y CheckOut
-//                var checkInDateTime = checkIn ? parseDateTime(checkIn) : null;
-//                var checkOutDateTime = checkOut ? parseDateTime(checkOut) : null;
+        const formattedBeginDate = formatDate(beginDate);
+        const formattedEndDate = formatDate(endDate);
 
-//                if (checkInDateTime && checkOutDateTime && !isNaN(checkInDateTime) && !isNaN(checkOutDateTime)) {
-//                    // Calcular la diferencia entre check-in y check-out
-//                    var differenceInMilliseconds = checkOutDateTime - checkInDateTime;
-//                    var differenceInMinutes = Math.floor(differenceInMilliseconds / (1000 * 60));
-//                    var hours = Math.floor(differenceInMinutes / 60);
-//                    var minutes = differenceInMinutes % 60;
-//                    var totalTime = hours + 'h ' + minutes + 'm';
+        $("#jqGrid2").jqGrid('setGridParam', {
+            postData: {
+                filters: JSON.stringify({
+                    groupOp: "AND",
+                    rules: [
+                        { field: "CheckIn", op: "ge", data: formattedBeginDate },
+                        { field: "CheckIn", op: "le", data: formattedEndDate }
+                    ]
+                })
+            },
+            search: true
+        }).trigger("reloadGrid");
+    }
 
-//                    // Establecer el valor de la celda TotalTime
-//                    grid.jqGrid('setCell', rowId, 'TotalTime', totalTime);
-//                    totalMinutes += differenceInMinutes;
+    // Botón para filtrar
+    $("#filterButton").click(function () {
+        applyDateFilter();
+    });
 
-//                    // Asegúrate de que las variables sean números
-//                    var differenceInMinutes = Number(differenceInMinutes);
-//                    var standardWorkMinutes = Number(standardWorkMinutes);
-
-//                    // Verifica si ambos valores son números y positivos
-//                    if (!isNaN(differenceInMinutes) && !isNaN(standardWorkMinutes)) {
-//                        // Calcula las horas extra solo si el tiempo trabajado excede la jornada laboral estándar
-//                        var extraMinutes = Math.max(0, differenceInMinutes - standardWorkMinutes);
-//                        console.log('Horas extra (en minutos): ', extraMinutes);
-//                    } else {
-//                        console.error('Error: Los valores de differenceInMinutes o standardWorkMinutes no son válidos.');
-//                    }
-
-//                    var extraTime = Math.floor(extraMinutes / 60) + 'h ' + (extraMinutes % 60) + 'm';
-//                    var missingTime = Math.floor(missingMinutes / 60) + 'h ' + (missingMinutes % 60) + 'm';
-
-//                    // Establecer valores para ExtraTime y MissingTime
-//                    grid.jqGrid('setCell', rowId, 'ExtraTime', extraTime);
-//                    grid.jqGrid('setCell', rowId, 'MissingTime', missingTime);
-//                } else {
-//                    // Si no hay CheckIn o CheckOut, establece '0h 0m'
-//                    grid.jqGrid('setCell', rowId, 'TotalTime', '0h 0m');
-//                    grid.jqGrid('setCell', rowId, 'ExtraTime', '0h 0m');
-//                    grid.jqGrid('setCell', rowId, 'MissingTime', '0h 0m');
-//                }
-//            });
-
-//            // Cálculo del total de horas
-//            var totalHours = Math.floor(totalMinutes / 60);
-//            var remainingMinutes = totalMinutes % 60;
-//            var totalTimeSum = totalHours + 'h ' + remainingMinutes + 'm';
-//            $('#totalTimeTextbox').val(totalTimeSum);
-//        }
-//    });
-
-//    $("#filterButton").click(function () {
-//        var gridData = $('#jqGrid2').jqGrid('getRowData');
-//        if (gridData.length === 0) {
-//            new Messi('Por favor seleccione los datos de un colaborador, para filtrar los datos.', {
-//                title: 'Error',
-//                titleClass: 'anim error',
-//                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
-//            });
-//        }
-
-//        var collaboratorId = gridData[0].CollaboratorId;
-//        var beginDate = $('#beginDate').val();
-//        var endDate = $('#endDate').val();
-
-//        if (!beginDate || !endDate) {
-//            new Messi('Por favor ingresa ambas fechas.', {
-//                title: 'Selección de fechas',
-//                titleClass: 'anim warning',
-//                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
-//            });
-//        }
-
-//        var startDateObj = new Date(beginDate);
-//        var endDateObj = new Date(endDate);
-
-//        if (endDateObj < startDateObj) {
-//            new Messi('La fecha final no puede ser anterior a la fecha inicial.', {
-//                title: 'Error en las fechas',
-//                titleClass: 'anim error',
-//                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
-//            });
-//        }
-//        $.ajax({
-//            url: '/Schedule/GetInformationAttendDatesRangeByCollaborator',
-//            type: 'GET',
-//            data: {
-//                CollaboratorId: collaboratorId,
-//                BeginTime: beginDate,
-//                EndTime: endDate
-//            },
-//            success: function (response) {
-//                console.log(response);
-//                if (response.success) {
-//                    $('#jqGrid2').jqGrid('clearGridData');
-//                    var formattedRows = response.rows.map(function (row) {
-//                        return {
-//                            ...row,
-//                            CheckIn: formatDate(row.CheckIn),
-//                            CheckOut: formatDate(row.CheckOut),
-//                            IsOpenCheckIn: row.IsOpenCheckIn ? 'Sí' : 'No',
-//                            CheckInStatusWork: row.LabelCheckInStatus,
-//                            CheckOutStatusWork: row.LabelCheckOutStatus
-//                        };
-//                    });
-
-//                    // Cargar los nuevos datos
-//                    $('#jqGrid2').jqGrid('setGridParam', {
-//                        datatype: 'jsonstring',
-//                        datastr: formattedRows
-//                    }).trigger('reloadGrid');
-//                } else {
-//                    new Messi('Error al filtrar los datos: ' + response.error, { title: 'Error' });
-//                }
-//            },
-//            error: function (xhr, status, error) {
-//                new Messi('Error al realizar la consulta: ' + error, { title: 'Error' });
-//            }
-//        });
-//    });
-
-//    // Función para formatear las fechas
-//    function formatDate(dateString) {
-//        var date = new Date(parseInt(dateString.substr(6))); // Convierte el valor de '/Date(...)' a un objeto Date
-//        var day = ('0' + date.getDate()).slice(-2); // Asegura dos dígitos para el día
-//        var month = ('0' + (date.getMonth() + 1)).slice(-2); // Asegura dos dígitos para el mes
-//        var year = date.getFullYear();
-//        var hours = ('0' + date.getHours()).slice(-2); // Asegura dos dígitos para las horas
-//        var minutes = ('0' + date.getMinutes()).slice(-2); // Asegura dos dígitos para los minutos
-//        var seconds = ('0' + date.getSeconds()).slice(-2); // Asegura dos dígitos para los segundos
-
-//        return ${ day } /${month}/${ year } ${ hours }:${ minutes }:${ seconds };
-//    }
-
-//    $("#jqGrid2").jqGrid('filterToolbar', { searchOperators: false, searchOnEnter: false, defaultSearch: "cn" });
-//    $("#jqGrid2").jqGrid('setGridParam', {
-
-//        ondblClickRow: function (rowId) {
-//            var rowData = $("#jqGrid2").jqGrid('getRowData', rowId);
-
-//            var checkInDateTime = rowData.CheckIn;
-//            var checkInDate = checkInDateTime.split(' ')[0];
-
-//            // Convertir a formato 'YYYY-MM-DD'
-//            var dateParts = checkInDate.split('/');
-//            var formattedDate = dateParts[2] + '-' + dateParts[1] + '-' + dateParts[0];
-
-//            // Obtiene el valor 
-//            var checkInTime = checkInDateTime.split(' ')[1];
-
-//            var checkOutDateTime = rowData.CheckOut;
-//            var checkOutDate = checkOutDateTime.split(' ')[0];
-
-//            // Convertir a formato 'YYYY-MM-DD'
-//            var dateOutParts = checkOutDate.split('/');
-//            var formattedDateOut = dateOutParts[2] + '-' + dateOutParts[1] + '-' + dateOutParts[0];
-
-//            // Obtiene el valor 
-//            var checkOutTime = checkOutDateTime.split(' ')[1];
-
-//            $('#checkin-date').val(formattedDate);
-//            $('#checkin-time').val(checkInTime);
-//            $('#checkout-date').val(formattedDateOut);
-//            $('#checkout-time').val(checkOutTime);
-//            $('#checkinstatuswork').val(rowData.CheckInStatus);
-//            $('#checkoutstatuswork').val(rowData.CheckOutStatus);
-//            $('#commentcheckin').val(rowData.CommentCheckIn);
-//            $('#attendanceid').val(rowData.AttendId);
-//            $('#collaboratorid').val(rowData.CollaboratorId);
-//            $('#isopencheckin').prop('checked', rowData.IsOpenCheckIn === 'Sí');
-//            OpenModal('EditAssistanceModal');
-//        }
-//    });
-
-//    $("#jqGrid2").jqGrid('navGrid', '#jqGridPager2', { edit: false, add: false, del: false });
-//    $("#CheckScheduleEditButton").click(function () {
-//        var checkInDate = $('#checkin-date').val();
-//        var checkInTime = $('#checkin-time').val();
-//        var checkInDateTime = checkInDate && checkInTime ? checkInDate + 'T' + checkInTime : null;
-
-//        var checkOutDate = $('#checkout-date').val();
-//        var checkOutTime = $('#checkout-time').val();
-//        var checkOutDateTime = checkOutDate && checkOutTime ? checkOutDate + 'T' + checkOutTime : null;
-
-//        var attendData = {
-//            AttendanceId: $('#attendanceid').val(),
-//            CollaboratorId: $('#collaboratorid').val(),
-//            CheckIn: checkInDateTime,
-//            CheckOut: checkOutDateTime,
-//            CheckInStatus: $('#checkinstatuswork').val(),
-//            CheckOutStatus: $('#checkoutstatuswork').val(),
-//            CommentCheckIn: $('#commentcheckin').val(),
-//            IsOpenCheckIn: $('#isopencheckin').is(':checked')
-//        };
-
-//        $.ajax({
-//            url: '/Schedule/EditAssistance',
-//            type: 'POST',
-//            contentType: 'application/json',
-//            data: JSON.stringify(attendData),
-//            success: function (response) {
-//                if (response.success) {
-//                    new Messi(response.message, {
-//                        title: 'Éxito',
-//                        titleClass: 'anim success',
-//                        buttons: [{ id: 0, label: 'Aceptar', val: 'X' }],
-//                        callback: function () {
-//                            $("#refreshButton").click();
-//                        }
-//                    });
-//                } else {
-//                    new Messi(response.message + ': ' + response.error, {
-//                        title: 'Error',
-//                        titleClass: 'anim error',
-//                        buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
-//                    });
-//                }
-//            },
-//            error: function (xhr, status, error) {
-//                new Messi('Error al guardar los datos: ' + error, {
-//                    title: 'Error',
-//                    titleClass: 'anim error',
-//                    buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
-//                });
-//            }
-//        });
-//    });
-
-//    $("#refreshButton").click(function () {
-//        var gridData = $('#jqGrid2').jqGrid('getRowData');
-//        var collaboratorId = gridData[0].CollaboratorId;
-
-//        $.ajax({
-//            url: '/Schedule/GetAssistanceByCollaborator/',
-//            type: 'GET',
-//            data: { collaboratorId: collaboratorId },
-//            dataType: 'json',
-//            success: function (response) {
-//                $("#jqGrid2").jqGrid('clearGridData');
-//                var collaboratorName = 'Sin registros';
-//                var collaboratorPicture = '/Images/DefaultCollaborator.jpg';
-
-//                console.log(response);
-
-//                if (response.success && response.data) {
-//                    collaboratorName = response.data.Firstname + ' ' + response.data.Lastname;
-//                    collaboratorPicture = response.data.Picture;
-
-//                    if (response.data.AttendModels && response.data.AttendModels.length > 0) {
-//                        response.data.AttendModels.forEach(function (item) {
-//                            item.IsOpenCheckIn = item.IsOpenCheckIn ? 'Sí' : 'No';
-//                        });
-
-//                        $("#jqGrid2").jqGrid('setGridParam', { data: response.data.AttendModels });
-//                        $("#jqGrid2").trigger('reloadGrid');
-//                    }
-//                }
-//                $('#SectionHeaderTitle').text(collaboratorName);
-//                $('#SectionHeaderPicture').attr('src', collaboratorPicture);
-//            },
-//            error: function () {
-//                alert('Ocurrió un error al intentar obtener los datos del colaborador.');
-//            }
-//        });
-//    });
-//});
+    // Botón para recargar la tabla
+    $("#refreshTable").click(function () {
+        $("#beginDate").val("");
+        $("#endDate").val("");
+        $("#jqGrid2").jqGrid('setGridParam', {
+            postData: {
+                filters: null
+            },
+            search: false
+        }).trigger("reloadGrid");
+    });
+});

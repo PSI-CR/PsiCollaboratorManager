@@ -6,6 +6,6 @@ namespace PsiCollaborator.Data.Schedule.ScheduleDaily
     {
         List<ScheduleDaily> GetByCollaboratorId(int collaboratorId);
         List<ScheduleDaily> GetByScheduleId(int scheduleId);
-        List<ScheduleDaily> GetScheduleDailyByCollaboratorId(int collaboratorId);
+        ScheduleTimeResult GetByScheduleCalculate(int dayId, int collaboratorId, int totalMinutesWorked);
     }
 }

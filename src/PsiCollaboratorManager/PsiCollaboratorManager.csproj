@@ -183,6 +183,7 @@
     <Compile Include="Controllers\AnnouncementArtController.cs" />
     <Compile Include="Controllers\CollaboratorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Schedules\CheckScheduleController.cs" />
     <Compile Include="Controllers\Schedules\ScheduleController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Controllers\Schedules\WorkingDayController.cs" />
@@ -441,6 +442,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CheckSchedule\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Bootstrap\bootstrap.rtl.min.css.map" />

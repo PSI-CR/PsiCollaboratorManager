@@ -18,10 +18,15 @@ namespace PsiCollaborator.Data.Schedule.ScheduleDaily
             new List<DbParameter>() { new DbParameter("param_collaboratorid", ParameterDirection.Input, collaboratorId) }).ToList();
         }
 
-        public List<ScheduleDaily> GetScheduleDailyByCollaboratorId(int collaboratorId)
+        public ScheduleTimeResult GetByScheduleCalculate(int dayId, int totalMinutes, int collaboratorId)
         {
-            return ExecuteListWithParameters<ScheduleDaily>("select_schedule_details_by_collaborator",
-            new List<DbParameter>() { new DbParameter("param_collaboratorid", ParameterDirection.Input, collaboratorId) }).ToList();
+            // Ejecutar la consulta y obtener el resultado
+            var result = ExecuteSingle<ScheduleTimeResult>("calculate_schedule_difference",new List<DbParameter>(){
+            new DbParameter("param_dayId", ParameterDirection.Input, dayId),
+            new DbParameter("param_minutesWorkedDay", ParameterDirection.Input, totalMinutes),
+            new DbParameter("param_collaboratorId", ParameterDirection.Input, collaboratorId)
+                });
+            return result;
         }
     }
 }

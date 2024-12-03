@@ -160,7 +160,6 @@ namespace PsiCollaborator.Data
             return executeSqlMapObject(procedureName, entity, parameters);
         }
 
-
         protected IEnumerable<T> ExecuteList<T>(string procedureName) where T : new()
         {
             if (string.IsNullOrEmpty(procedureName))

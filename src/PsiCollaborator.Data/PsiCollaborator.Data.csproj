@@ -199,6 +199,7 @@
     <Compile Include="Schedule\ScheduleDaily\IScheduleDailyRepository.cs" />
     <Compile Include="Schedule\ScheduleDaily\ScheduleDaily.cs" />
     <Compile Include="Schedule\ScheduleDaily\ScheduleDailyRepository.cs" />
+    <Compile Include="Schedule\ScheduleDaily\ScheduleTimeResult.cs" />
     <Compile Include="Schedule\ScheduleData.cs" />
     <Compile Include="Schedule\ScheduleDay\IScheduleDay.cs" />
     <Compile Include="Schedule\ScheduleDay\IScheduleDayRepository.cs" />

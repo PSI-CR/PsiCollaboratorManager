@@ -9,5 +9,6 @@ namespace PsiCollaborator.Data.Schedule.WorkingDay
         List<WorkingDay> GetAll();
         void Insert(IWorkingDay workingDay);
         WorkingDay GetById(int workingDayId);
+        WorkingDay GetByCollaboratorId(int collaboratorId);
     }
 }
