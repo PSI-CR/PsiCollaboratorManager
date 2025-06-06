@@ -6,3 +6,15 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+.ui-dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: .2em;
+    outline: 0;
+    font-size: 15px!important;
+}
+.element.style {
+    overflow: auto;
+    width: max-content;
+}

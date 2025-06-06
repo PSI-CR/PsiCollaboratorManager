@@ -591,6 +591,39 @@ CREATE TABLE IF NOT EXISTS public.userrole
     CONSTRAINT userrole_pkey PRIMARY KEY (roleid)
 )
 
+CREATE TABLE calendar_event (
+    event_id SERIAL PRIMARY KEY,
+    title TEXT NOT NULL,
+    start TIMESTAMP NOT NULL,
+    "end" TIMESTAMP,
+    all_day BOOLEAN DEFAULT false,
+    description TEXT,
+    color TEXT
+);
+
+CREATE TABLE event_collaborator (
+    event_id INT NOT NULL,
+    collaborator_id INT NOT NULL,
+    PRIMARY KEY (event_id, collaborator_id),
+    FOREIGN KEY (event_id) REFERENCES calendar_event(event_id) ON DELETE CASCADE,
+    FOREIGN KEY (collaborator_id) REFERENCES collaborator(collaboratorid) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS public.event_collaborator
+(
+    event_id integer NOT NULL,
+    collaborator_id integer NOT NULL,
+    CONSTRAINT event_collaborator_pkey PRIMARY KEY (event_id, collaborator_id),
+    CONSTRAINT event_collaborator_collaborator_id_fkey FOREIGN KEY (collaborator_id)
+        REFERENCES public.collaborator (collaboratorid) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE,
+    CONSTRAINT event_collaborator_event_id_fkey FOREIGN KEY (event_id)
+        REFERENCES public.calendar_event (event_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+)
+
 
 ---------------------------------Functions--------------------------------------------------------
 
@@ -2677,6 +2710,146 @@ BEGIN
     END IF;
 END;
 $BODY$;
+
+CREATE OR REPLACE FUNCTION save_calendar_event(
+    param_title TEXT,
+    param_start TIMESTAMP,
+    param_end TIMESTAMP,
+    param_allday BOOLEAN,
+    param_description TEXT,
+    param_color TEXT
+) RETURNS INT AS $$
+DECLARE
+    new_event_id INT;
+BEGIN
+    INSERT INTO calendar_event(title, start, "end", all_day, description, color)
+    VALUES (param_title, param_start, param_end, param_allday, param_description, param_color)
+    RETURNING event_id INTO new_event_id;
+
+    RETURN new_event_id;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION select_all_calendar_events()
+RETURNS TABLE (
+    event_id INT,
+    title TEXT,
+    start TIMESTAMP,
+    "end" TIMESTAMP,
+    all_day BOOLEAN,
+    description TEXT,
+    collaborators TEXT,
+    color TEXT
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        e.event_id,
+        e.title,
+        e.start,
+        e."end",
+        e.all_day,
+        e.description,
+        string_agg(c.firstname || ' ' || c.lastname, ', ') AS collaborators,
+        e.color
+    FROM calendar_event e
+    LEFT JOIN event_collaborator ec ON e.event_id = ec.event_id
+    LEFT JOIN collaborator c ON ec.collaborator_id = c.collaboratorid
+    GROUP BY e.event_id, e.title, e.start, e."end", e.all_day, e.description, e.color;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION select_calendar_event_by_id(
+    param_id INT
+) RETURNS TABLE (
+    event_id INT,
+    title TEXT,
+    start TIMESTAMP,
+    "end" TIMESTAMP,
+    all_day BOOLEAN,
+    description TEXT,
+    collaborators TEXT,
+    color TEXT
+) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT 
+        e.event_id,
+        e.title,
+        e.start,
+        e."end",
+        e.all_day,
+        e.description,
+        string_agg(c.first_name || ' ' || c.last_name, ', ') AS collaborators,
+        e.color
+    FROM calendar_event e
+    LEFT JOIN event_collaborator ec ON e.event_id = ec.event_id
+    LEFT JOIN collaborator c ON ec.collaborator_id = c.collaborator_id
+    WHERE e.event_id = param_id
+    GROUP BY e.event_id, e.title, e.start, e."end", e.all_day, e.description, e.color;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION update_calendar_event(
+    param_event_id INT,
+    param_title TEXT,
+    param_start TIMESTAMP,
+    param_end TIMESTAMP,
+    param_allday BOOLEAN,
+    param_description TEXT,
+    param_color TEXT
+) RETURNS VOID AS $$
+BEGIN
+    UPDATE calendar_event
+    SET title = param_title,
+        start = param_start,
+        "end" = param_end,
+        all_day = param_allday,
+        description = param_description,
+        color = param_color
+    WHERE event_id = param_event_id;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION delete_calendar_event(
+    param_event_id INT
+) RETURNS VOID AS $$
+BEGIN
+    DELETE FROM calendar_event
+    WHERE event_id = param_event_id;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION public.save_colaborador_event(
+	param_event_id integer,
+	param_collaborator_id integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+    INSERT INTO event_collaborator(event_id, collaborator_id)
+    VALUES (param_event_id, param_collaborator_id);
+END;
+$BODY$;
+
+
+CREATE OR REPLACE FUNCTION select_collaborators_by_event_id(param_event_id INT)
+RETURNS TABLE(collaborator_id INT) AS $$
+BEGIN
+    RETURN QUERY
+    SELECT collaborator_id
+    FROM event_collaborator
+    WHERE event_id = param_event_id;
+END;
+$$ LANGUAGE plpgsql;
+
 
 ---------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------

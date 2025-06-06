@@ -51,6 +51,11 @@ namespace PsiCollaboratorManager.Controllers
             return View();
         }
 
+        public ActionResult Calendar()
+        {
+            return View();
+        }
+
         public ActionResult GetAllSchedules()
         {
             try
@@ -167,6 +172,6 @@ namespace PsiCollaboratorManager.Controllers
         {
             List<Attend> assintance = _attendRepository.GetInformationAttendDatesRangeByCollaborator(collaboratorId, beginTime, endTime);
             return Json(new { success = true, rows = assintance }, JsonRequestBehavior.AllowGet);
-        }        
+        }         
     }
 }

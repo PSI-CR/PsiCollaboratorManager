@@ -21,3 +21,9 @@
     flex-wrap:wrap;
     gap:10px;
 }
+.annotationSection h4 {
+    padding-bottom: 46px;
+}
+.ui-jqgrid-bdiv {
+    font-size: small;
+}

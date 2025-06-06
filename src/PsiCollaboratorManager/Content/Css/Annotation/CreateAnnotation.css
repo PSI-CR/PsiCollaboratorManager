@@ -29,16 +29,15 @@
     border:1px hidden black;
     background-color:#eeeeee;
 }
-    .collaboratorButtonClose:hover {
-        background-color: #dddddd;
-    }
+.collaboratorButtonClose:hover {
+    background-color: #dddddd;
+}
 #CreateAnnotationAssign {
     display:flex;
     flex-direction:column;
     gap:5px;
     padding:10px;
 }
-
 #CreateAnnotationFooter {
     display: flex;
     justify-content: space-between;

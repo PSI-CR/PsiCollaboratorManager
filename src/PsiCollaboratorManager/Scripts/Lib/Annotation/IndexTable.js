@@ -78,7 +78,7 @@ function resizeGrid() {
     $("#jqGrid").jqGrid("setGridWidth", $("#jqGrid").closest(".ui-jqgrid").parent().width());
 }
 
-$('#jqGrid').navGrid('#jqGridPager', { edit: false, add: false, del: false, search: true, refresh: true, view: false, position: "left", cloneToTop: true }, { multipleSearch: true, multipleGroup: true } );
+$('#jqGrid').navGrid('#jqGridPager', { edit: false, add: false, del: false, search: false, refresh: true, view: false, position: "left", cloneToTop: true }, { multipleSearch: true, multipleGroup: true });
 
 $('#jqGrid').navButtonAdd('#jqGridPager', { buttonicon: "ui-icon-calculator", title: "Column chooser", caption: "Columnas", position: "last",
     onClickButton: function () {

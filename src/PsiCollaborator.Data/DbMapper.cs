@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Npgsql;
 
 namespace PsiCollaborator.Data
 {
@@ -15,6 +16,8 @@ namespace PsiCollaborator.Data
         private DbCommand _command { get; set; }
         private DbConnection _connection { get; set; }
         protected string UserAccountID { get; set; }
+        private readonly string _connectionString;
+
         private void open()
         {
             try
@@ -228,6 +231,38 @@ namespace PsiCollaborator.Data
             updateOutParameters();
             close();
             return tempObject;
+        }
+        public T ExecuteFunction<T>(string functionName, List<DbParameter> parameters = null, bool useSelectSyntax = false)
+        {
+            using (var connection = DataBaseConfigurator.CreateDbConnection())
+            {
+                using (var command = connection.CreateCommand())
+                {
+                    command.CommandText = functionName;
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            var dbParam = command.CreateParameter();
+                            dbParam.ParameterName = "@" + param.Name.ToLower();
+                            dbParam.Value = param.Value ?? DBNull.Value;
+                            dbParam.Direction = param.Direction;
+                            if (param.DbType != DbType.AnsiString)
+                                dbParam.DbType = param.DbType;
+                            command.Parameters.Add(dbParam);
+                        }
+                    }
+
+                    connection.Open();
+                    var result = command.ExecuteScalar();
+
+                    return result != DBNull.Value
+                        ? (T)Convert.ChangeType(result, typeof(T))
+                        : default;
+                }
+            }
         }
     }
 }

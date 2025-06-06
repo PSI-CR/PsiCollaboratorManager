@@ -97,3 +97,27 @@
     width: auto; 
     margin: 0 auto; 
 }
+.operators {
+    font-size: larger;
+    font-size: medium!important;
+}
+.first {
+    font-size: larger;
+    font-size: medium !important;
+}
+.input-elm {
+    height: 29px;
+    width: 158px !important;
+    padding-left: 15px !important;
+    margin-left: 43px!important;
+}
+.fm-button {
+    width: 85px;
+}
+.ui-widget-content {
+    width: 100%;
+}
+.operators { 
+    width: 141%;
+}
+

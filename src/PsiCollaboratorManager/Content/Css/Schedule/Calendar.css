@@ -1,0 +1,18 @@
+﻿.fc-today {
+    background-color: #30d54e !important;
+    color: white !important;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+#collaboratorsSelect {
+    width: 100%;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    padding: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}

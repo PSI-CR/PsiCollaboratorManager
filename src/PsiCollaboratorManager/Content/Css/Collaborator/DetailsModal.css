@@ -60,3 +60,79 @@
 .emergencyContactsTable{
     width:100%;
 }
+.tab-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    border-radius: 20px;
+    padding: 5px 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+.nav-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: auto;
+}
+.nav li {
+    padding: 12px 20px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.nav li:hover {
+    background-color: #e0e0e0;
+    border-color: #bbb;
+    transform: scale(1.05);
+}
+.nav li.active {
+    background-color: #e04d4d;
+    color: white;
+    border-color: #e04d4d;
+    box-shadow: 0 4px 8px rgba(224 77 77 / 62%);
+    transform: translateY(-4px);
+    font-weight: 600;
+}
+.nav li a {
+    text-decoration: none;
+    color: inherit;
+}
+.tab-content {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 15px;
+}
+.tab-pane {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.tab-pane.active {
+    opacity: 1;
+}
+.nav li {
+    padding: 12px 20px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+.nav li svg, .nav li img {
+    margin-right: 8px;
+}
+.nav li span {
+    vertical-align: middle;
+}
+

@@ -658,4 +658,38 @@ $(document).ready(function () {
             search: false
         }).trigger("reloadGrid");
     });
+    document.getElementById("downloadReport").addEventListener("click", function () {
+        const rows = $("#jqGrid2").jqGrid("getRowData");
+
+        if (!rows || rows.length === 0) {
+            new Messi('No hay datos para descargar. Por favor, seleccione un colaborador.', {
+                title: 'Sin datos',
+                titleClass: 'anim warning',
+                buttons: [{ id: 0, label: 'Cerrar', val: 'X' }]
+            });
+            return;
+        }
+
+        const excludedColumns = ["CheckInStatus", "CheckOutStatus"];
+        const headers = Object.keys(rows[0]).filter(header => !excludedColumns.includes(header));
+        let csv = headers.join(",") + "\n";
+
+        rows.forEach(row => {
+            const line = headers.map(header => `"${(row[header] || "").replace(/"/g, '""')}"`).join(",");
+            csv += line + "\n";
+        });
+
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+
+        const today = new Date().toISOString().split("T")[0];
+        a.download = `reporte_asistencias_${today}.csv`;
+
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
 });

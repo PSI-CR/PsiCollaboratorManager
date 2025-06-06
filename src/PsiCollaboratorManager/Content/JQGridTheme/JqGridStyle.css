@@ -25,9 +25,9 @@
         font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     }
 
-        .ui-jqgrid .ui-jqgrid-pager .ui-pager-control {
-            height: 35px;
-        }
+    .ui-jqgrid .ui-jqgrid-pager .ui-pager-control {
+        height: 35px;
+    }
 
     .ui-state-default, .ui-widget-content .ui-state-default {
         background: #e9ecef;

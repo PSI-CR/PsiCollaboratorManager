@@ -209,6 +209,8 @@
     <Compile Include="Models\Collaborator\CollaboratorPictureModel.cs" />
     <Compile Include="Models\Collaborator\CollaboratorScheduleModel.cs" />
     <Compile Include="Models\Collaborator\DistrictModel.cs" />
+    <Compile Include="Controllers\Schedules\CalendarController.cs" />
+    <Compile Include="Models\Schedule\CalendarModel.cs" />
     <Compile Include="Models\Schedule\ScheduleDailyModel.cs" />
     <Compile Include="Models\Schedule\ScheduleDataModel.cs" />
     <Compile Include="Models\Schedule\ScheduleDayModel.cs" />
@@ -257,6 +259,7 @@
     <Content Include="Content\Css\Collaborator\CreateEdit.css" />
     <Content Include="Content\Css\Collaborator\DetailsModal.css" />
     <Content Include="Content\Css\Login\LoginMessage.css" />
+    <Content Include="Content\Css\Schedule\Calendar.css" />
     <Content Include="Content\Validation.css" />
     <Content Include="Images\backgraund metal.jpg" />
     <Content Include="Scripts\Camera.js" />
@@ -372,6 +375,7 @@
     <Content Include="Scripts\Lib\Schedule\ScheduleDaily.js" />
     <Content Include="Scripts\Lib\Schedule\ScheduleDailyExtension.js" />
     <Content Include="Scripts\Lib\Schedule\WorkingDay.js" />
+    <Content Include="Scripts\Lib\Schedule\WorkingDay\Calendar.js" />
     <Content Include="Scripts\Lib\Time.js" />
     <Content Include="Scripts\Lib\UserAccount\IndexTable.js" />
     <Content Include="Scripts\Lib\Schedule\IndexTable.js" />
@@ -439,9 +443,11 @@
     <Content Include="Views\WorkingDay\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Collaborator\CameraModal.cshtml" />
+    <Content Include="Views\Schedule\Calendar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Calendar\" />
     <Folder Include="Views\CheckSchedule\" />
   </ItemGroup>
   <ItemGroup>

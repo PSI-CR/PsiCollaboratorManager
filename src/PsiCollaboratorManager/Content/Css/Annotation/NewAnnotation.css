@@ -6,3 +6,6 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+.ui-jqdialog {
+    font-size: 15px !important;
+}

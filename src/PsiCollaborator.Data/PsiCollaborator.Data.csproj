@@ -131,6 +131,11 @@
     <Compile Include="BankAccount\IBank.cs" />
     <Compile Include="BankAccount\IBankAccountRepository.cs" />
     <Compile Include="BankAccount\ICurrencyType.cs" />
+    <Compile Include="Calendar\Calendar.cs" />
+    <Compile Include="Calendar\CalendarRepository.cs" />
+    <Compile Include="Calendar\CollaboratorByEvent.cs" />
+    <Compile Include="Calendar\ICalendar.cs" />
+    <Compile Include="Calendar\ICalendarRepository.cs" />
     <Compile Include="Collaborator\CollaboratorAccount.cs" />
     <Compile Include="Collaborator\CollaboratorBase.cs" />
     <Compile Include="Collaborator\CollaboratorBirthday.cs" />

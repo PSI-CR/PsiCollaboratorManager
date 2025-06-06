@@ -1,0 +1,73 @@
+﻿@model PsiCollaboratorManager.Models.Schedule.CalendarModel
+
+@{
+    ViewBag.Title = "Create Schedule";
+    Layout = "~/Views/Shared/_basicLong.cshtml";
+}
+
+<link href="~/Content/Css/Schedule/Calendar.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+
+<script src="~/Scripts/Lib/Schedule/WorkingDay/Calendar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.2.0/dist/fullcalendar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.2.0/locale/es.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex flex-column">
+            <label for="collaboratorsSelect" class="form-label">Seleccionar Colaboradores</label>
+            <select id="collaboratorsSelect" class="selectpicker" multiple data-live-search="true">
+            </select>
+        </div>
+    </div>
+    <div id="calendar"></div>
+</div>
+
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="eventModalLabel">Agregar Evento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="eventForm">
+                    <div class="mb-3">
+                        <label for="eventTitle" class="selectpicker">Título del evento</label>
+                        <input type="text" class="form-control" id="eventTitle" placeholder="Ingrese el título del evento">
+                    </div>
+                    <select id="modalCollaboratorsSelect" class="selectpicker" multiple data-live-search="true">
+                    </select>
+                    <div class="mb-3">
+                        <label for="eventColor" class="form-label">Color del evento</label>
+                        <input type="color" class="form-control" id="eventColor" value="#ff0000">
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventStart" class="form-label">Fecha de inicio</label>
+                        <input type="datetime-local" class="form-control" id="eventStart">
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventEnd" class="form-label">Fecha de finalización</label>
+                        <input type="datetime-local" class="form-control" id="eventEnd">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" id="deleteEventBtn">Eliminar</button>
+                <button type="button" class="btn btn-warning" id="editEventBtn">Modificar</button>
+                <button type="button" class="btn btn-primary" id="saveEventBtn">Guardar Evento</button>
+            </div>
+        </div>
+    </div>
+</div>
